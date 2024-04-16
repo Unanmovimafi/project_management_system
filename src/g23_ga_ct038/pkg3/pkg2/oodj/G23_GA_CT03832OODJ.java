@@ -15,6 +15,7 @@ public class G23_GA_CT03832OODJ {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Hello World!");
     }
     
 }
