@@ -6,10 +6,10 @@ package Project_Management_System;
 
 /**
  *
- * @author zihao
+ * @author User
  */
-public class Test {
+public class Shimmy {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+    System.out.println("Shimmy is the best!");
     }
 }
