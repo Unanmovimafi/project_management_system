@@ -29,35 +29,31 @@ public class ProjectManagerHome extends javax.swing.JFrame {
         PMHBackgroundPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 780));
+        setPreferredSize(new java.awt.Dimension(1500, 780));
 
         PMHBackgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
-        PMHBackgroundPanel.setPreferredSize(new java.awt.Dimension(1080, 780));
+        PMHBackgroundPanel.setPreferredSize(new java.awt.Dimension(1500, 780));
 
         javax.swing.GroupLayout PMHBackgroundPanelLayout = new javax.swing.GroupLayout(PMHBackgroundPanel);
         PMHBackgroundPanel.setLayout(PMHBackgroundPanelLayout);
         PMHBackgroundPanelLayout.setHorizontalGroup(
             PMHBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
         );
         PMHBackgroundPanelLayout.setVerticalGroup(
             PMHBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+            .addGap(0, 780, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PMHBackgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(PMHBackgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PMHBackgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(PMHBackgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
