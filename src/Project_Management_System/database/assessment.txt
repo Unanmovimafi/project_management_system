@@ -1,2 +1,2 @@
-AS00001	Introduction to Networking	Investigation reports	06/01/2025	06/05/2025	Dr. Smith	Prof. Johnson	
-AS00002 Java Programming	CP1	02/06/2025	02/10/2025	Prof. Lee Kang Xin	Dr. Garcia	
+AS00001	INTRODUCTION TO NETWORKING	INVESTIGATION REPORT	06/01/2025	06/05/2025	Dr. Smith	Prof. Johnson	
+AS00002 JAVA PROGRAMMING	CP1	02/06/2025	02/10/2025	Prof. Lee Kang Xin	Dr. Garcia	
