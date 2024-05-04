@@ -10,6 +10,12 @@ package Project_Management_System;
  */
 public class StudentSubmission extends javax.swing.JFrame {
 
+    // Constructor accepting module name parameter
+    public StudentSubmission(String moduleName) {
+        initComponents();
+        ModuleLabel.setText( moduleName); // Set module name to the label
+    }
+    
     /**
      * Creates new form StudentHome
      */
@@ -28,12 +34,12 @@ public class StudentSubmission extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        PSlotBtn = new javax.swing.JButton();
+        ResultBtn = new javax.swing.JButton();
+        ProfileBtn = new javax.swing.JButton();
+        LogoutBtn = new javax.swing.JButton();
+        ModuleLabel = new javax.swing.JLabel();
+        AssessmentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -44,43 +50,43 @@ public class StudentSubmission extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(1, 51, 80));
         jPanel3.setPreferredSize(new java.awt.Dimension(244, 284));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 204));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Presentation Slot");
-        jButton2.setPreferredSize(new java.awt.Dimension(184, 40));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        PSlotBtn.setBackground(new java.awt.Color(255, 255, 204));
+        PSlotBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PSlotBtn.setText("Presentation Slot");
+        PSlotBtn.setPreferredSize(new java.awt.Dimension(184, 40));
+        PSlotBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                PSlotBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 204));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("Result");
-        jButton3.setPreferredSize(new java.awt.Dimension(184, 40));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ResultBtn.setBackground(new java.awt.Color(255, 255, 204));
+        ResultBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ResultBtn.setText("Result");
+        ResultBtn.setPreferredSize(new java.awt.Dimension(184, 40));
+        ResultBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ResultBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 204));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setText("Profile");
-        jButton4.setPreferredSize(new java.awt.Dimension(184, 40));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ProfileBtn.setBackground(new java.awt.Color(255, 255, 204));
+        ProfileBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ProfileBtn.setText("Profile");
+        ProfileBtn.setPreferredSize(new java.awt.Dimension(184, 40));
+        ProfileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ProfileBtnActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 204));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jButton5.setText("Logout");
-        jButton5.setPreferredSize(new java.awt.Dimension(184, 40));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        LogoutBtn.setBackground(new java.awt.Color(255, 255, 204));
+        LogoutBtn.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        LogoutBtn.setText("Logout");
+        LogoutBtn.setPreferredSize(new java.awt.Dimension(184, 40));
+        LogoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                LogoutBtnActionPerformed(evt);
             }
         });
 
@@ -93,44 +99,43 @@ public class StudentSubmission extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ResultBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PSlotBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(268, Short.MAX_VALUE)
+                .addComponent(PSlotBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ResultBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(341, 341, 341)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Student Dashboard");
-        jLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
+        ModuleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        ModuleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        AssessmentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        AssessmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout AssessmentPanelLayout = new javax.swing.GroupLayout(AssessmentPanel);
+        AssessmentPanel.setLayout(AssessmentPanelLayout);
+        AssessmentPanelLayout.setHorizontalGroup(
+            AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1125, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+        AssessmentPanelLayout.setVerticalGroup(
+            AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 787, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -139,23 +144,20 @@ public class StudentSubmission extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(791, 791, 791))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ModuleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
         );
 
@@ -176,21 +178,56 @@ public class StudentSubmission extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void PSlotBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PSlotBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        // Create an instance of StudentPresentationSlot
+        StudentPresentationSlot presentationSlotPage = new StudentPresentationSlot();
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        // Make the StudentPresentationSlot page visible
+        presentationSlotPage.setVisible(true);
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        // Close the current page
+        dispose();
+        
+    }//GEN-LAST:event_PSlotBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void ResultBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResultBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        
+        // Create an instance of StudentCheckResult
+        StudentCheckResult checkResult = new StudentCheckResult();
+
+        // Make the StudentCheckResult page visible
+        checkResult.setVisible(true);
+
+        // Close the current page
+        dispose();
+    }//GEN-LAST:event_ResultBtnActionPerformed
+
+    private void ProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileBtnActionPerformed
+        // TODO add your handling code here:
+        
+        // Create an instance of StudentProfile
+        StudentProfile studentProfile = new StudentProfile();
+
+        // Make the StudentProfile page visible
+        studentProfile.setVisible(true);
+
+        // Close the current page
+        dispose();
+    }//GEN-LAST:event_ProfileBtnActionPerformed
+
+    private void LogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBtnActionPerformed
+        // TODO add your handling code here:
+        
+        // Close the current page
+        dispose();
+
+        // Open the login page
+        Login loginPage = new Login();
+        loginPage.setVisible(true);
+    }//GEN-LAST:event_LogoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,12 +266,12 @@ public class StudentSubmission extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel AssessmentPanel;
+    private javax.swing.JButton LogoutBtn;
+    private javax.swing.JLabel ModuleLabel;
+    private javax.swing.JButton PSlotBtn;
+    private javax.swing.JButton ProfileBtn;
+    private javax.swing.JButton ResultBtn;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
