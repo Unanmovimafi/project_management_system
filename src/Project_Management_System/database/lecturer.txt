@@ -1,1 +1,1 @@
-SB00001	MR LIM	male	password	0123456789	asds Subang	callmehandsome@gmail.com
+LR00001	SELINA LEE	990812018897	PM	FEMALE	MALAYSIA	08/12/1999	+60189874566	lec1	selina99@gmail.com	SELANGOR
