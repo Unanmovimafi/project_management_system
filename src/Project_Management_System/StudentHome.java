@@ -9,7 +9,11 @@ package Project_Management_System;
  * @author Owner
  */
 public class StudentHome extends javax.swing.JFrame {
-
+    
+    private void openStudentSubmissionPage(String moduleName) {
+        StudentSubmission submissionPage = new StudentSubmission(moduleName);
+        submissionPage.setVisible(true);
+    }
     /**
      * Creates new form StudentHome
      */
