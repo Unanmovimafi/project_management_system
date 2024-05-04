@@ -14,16 +14,16 @@ import javax.swing.table.*;
  */
 public class AdminLecturerDetails extends javax.swing.JFrame {
     
-    public void refreshTable(String nameOfProduct) {
+    public void refreshTable(String nameOfLecturer) {
         DefaultTableModel model = (DefaultTableModel)tLecturerList.getModel();
         model.setRowCount(0);
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("database\\lecturer.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
             while ((line = br.readLine()) != null) {
-                String[] record = line.split("  ");
-                if (record[1].toLowerCase().startsWith(nameOfProduct)) {
+                String[] record = line.split("\t");
+                if (record[1].toLowerCase().startsWith(nameOfLecturer)) {
                     //Add the record to Table
                     model.addRow(record);
                     }
