@@ -6,7 +6,7 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -111,10 +111,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="tfDoB" pref="491" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfNationality" max="32767" attributes="0"/>
-                                  <Component id="tfContactNumber" pref="491" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="tfNationality" max="32767" attributes="0"/>
+                              <Component id="tfContactNumber" pref="491" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

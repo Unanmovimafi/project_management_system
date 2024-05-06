@@ -15,9 +15,6 @@ public class AddLecturerDetails extends javax.swing.JFrame {
     
     private AdminHomePage adminHomePage;
     
-    public void setAdminHomePage(AdminHomePage adminHomePage) {
-        this.adminHomePage = adminHomePage;
-    }
     
     private void getNewID(){
         int maximumNumber = 0;
@@ -90,7 +87,7 @@ public class AddLecturerDetails extends javax.swing.JFrame {
         tfIC = new javax.swing.JTextField();
         tfDoB = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -194,9 +191,8 @@ public class AddLecturerDetails extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfDoB, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfNationality)
-                                .addComponent(tfContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)))))
+                            .addComponent(tfNationality)
+                            .addComponent(tfContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))))
                 .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
