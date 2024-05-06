@@ -4,6 +4,10 @@
  */
 package Project_Management_System;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author Owner
@@ -11,9 +15,13 @@ package Project_Management_System;
 public class StudentSubmission extends javax.swing.JFrame {
 
     // Constructor accepting module name parameter
-    public StudentSubmission(String moduleName) {
+    public StudentSubmission(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker) {
         initComponents();
-        ModuleLabel.setText( moduleName); // Set module name to the label
+        // Format the module details into the desired string format
+        String labelText = String.format("%s - %s\n%s\n%s - %s", 
+            moduleCode, moduleName, firstMarker, startDate, endDate);
+        // Set the formatted string to the ModuleLabel
+        ModuleLabel.setText(labelText);
     }
     
     /**
@@ -135,7 +143,7 @@ public class StudentSubmission extends javax.swing.JFrame {
         );
         AssessmentPanelLayout.setVerticalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 787, Short.MAX_VALUE)
+            .addGap(0, 725, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -154,7 +162,7 @@ public class StudentSubmission extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
