@@ -4,16 +4,51 @@
  */
 package Project_Management_System;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author Owner
  */
 public class StudentHome extends javax.swing.JFrame {
     
-    private void openStudentSubmissionPage(String moduleName) {
-        StudentSubmission submissionPage = new StudentSubmission(moduleName);
-        submissionPage.setVisible(true);
+   private void openStudentSubmissionPage(String moduleName) {
+        try (BufferedReader br = new BufferedReader(new FileReader("assessment.txt"))) {
+            String line;
+            // Search for the line containing the module name
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\t"); // Assuming the fields are tab-separated
+                if (parts.length >= 2 && parts[1].equals(moduleName)) { // Check if module name matches
+                    String moduleCode = parts[0];
+                    String moduleType = parts[2];
+                    String startDate = parts[3];
+                    String endDate = parts[4];
+                    String firstMarker = parts[5];
+                    // String secondMarker = parts[6]; // Not used in this format
+
+                    // Open StudentSubmission page with module details
+                    StudentSubmission submissionPage = new StudentSubmission(moduleCode, moduleName, moduleType, startDate, endDate, firstMarker, null);
+                    submissionPage.setVisible(true);
+                    return;
+                }
+            }
+            // If module name not found
+            System.err.println("Module information not found");
+        } catch (IOException e) {
+            System.err.println("Error reading assessment file: " + e.getMessage());
+        }
     }
+   
+    /* private void ModuleHyperlinkActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // Assuming moduleHyperlinkLabel is the JLabel displaying the module hyperlink
+        JLabel label = (JLabel) evt.getSource();
+        String moduleName = label.getText(); // Extract the module name from the hyperlink text
+        openStudentSubmissionPage(moduleName);
+    }
+   */
+
     /**
      * Creates new form StudentHome
      */
