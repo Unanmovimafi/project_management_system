@@ -123,7 +123,7 @@
                   <Component id="pLecturer" alignment="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                  <Component id="pStudent" alignment="0" pref="1886" max="32767" attributes="0"/>
+                  <Component id="pStudent" alignment="0" pref="1885" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -164,7 +164,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="553" max="32767" attributes="0"/>
+                      <EmptySpace pref="552" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -283,7 +283,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel9" alignment="0" pref="1886" max="32767" attributes="0"/>
+                  <Component id="jPanel9" alignment="0" pref="1885" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel11" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
