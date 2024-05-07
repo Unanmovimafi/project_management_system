@@ -15,9 +15,9 @@ public class StudentSubmission extends javax.swing.JFrame {
     public StudentSubmission(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker) {
         initComponents();
         // Format the module details into the desired string format
-        String labelText = String.format("%s - %s\n%s\n%s - %s", 
-            moduleCode, moduleName, firstMarker, startDate, endDate);
-        // Set the formatted string to the ModuleLabel
+        String labelText = String.format("<html><b>%s - %s</b><br><font size='5'>%s <br>%s - %s <br>Lecturer: %s</font></html>", 
+            moduleCode, moduleName, moduleType, startDate, endDate, firstMarker);
+        // Set the formatted string to the JLabel
         ModuleLabel.setText(labelText);
     }
     
@@ -140,7 +140,7 @@ public class StudentSubmission extends javax.swing.JFrame {
         );
         AssessmentPanelLayout.setVerticalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
+            .addGap(0, 563, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -159,7 +159,7 @@ public class StudentSubmission extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -201,7 +201,7 @@ public class StudentSubmission extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Create an instance of StudentCheckResult
-        StudentCheckResult checkResult = new StudentCheckResult();
+        StudentAsmSubmissionResult checkResult = new StudentAsmSubmissionResult();
 
         // Make the StudentCheckResult page visible
         checkResult.setVisible(true);
