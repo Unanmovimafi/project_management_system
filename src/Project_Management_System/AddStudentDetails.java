@@ -4,116 +4,49 @@
  */
 package Project_Management_System;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author User
  */
-public class EditStudentDetails extends javax.swing.JFrame {
+public class AddStudentDetails extends javax.swing.JFrame {
     
-    private String selectedID; 
     private AdminHomePage adminHomePage;
-    int count = -1;
     
-    public void setAdminPageInstance(AdminHomePage adminhomePage) {
-        this.adminHomePage = adminhomePage;
-    }
-    
-    public String[] getStudentRecord(int line_num) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
-            String line;
-            int count = -1;
-            while ((line = reader.readLine()) != null) {
-                String[] lineArray = line.trim().split("\t");
-                count = count + 1;
-                if (count == line_num) {
-                    // reutrn the line of the line_num in text file
-                    return lineArray;
-                }
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        return null; // Patient record not found
-    }
-    
-    
-    public void setRecordData(String ID) {
-        
-        this.selectedID = ID;
-        
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] lineArray = line.split("\t");
-                    count = count + 1;
-                if (selectedID.equals(lineArray[0])) {
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        
-        String[] record = getStudentRecord(count);
-        
-        
-        
-        //Get the value from text field
-        
-        tfID.setText(record[0]);
-        tfName.setText(record[1]);
-        tfIC.setText(record[2]);
-        tfIntakeCode.setText(record[3]);
-        
-        if (record[4].equals("MALE")){
-            rbMale.setSelected(true);
-        }
-        else if (record[4].equals("FEMALE")){
-            rbFemale.setSelected(true);
-        }
-        
-        tfNationality.setText(record[5]);
-        tfDoB.setText(record[6]);
-        tfContactNumber.setText(record[7]);
-        tfPassword.setText(record[8]);
-        tfEmail.setText(record[9]);
-        tfAddress.setText(record[10]);
-    }
-    
-    public List<String> getAllProductRecord() {
+    private void getNewID(){
+        int maximumNumber = 0;
+        String line;
         try {
-            
-            List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                //Read and add all the lines in text file to variable line
-                lines.add(line);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] lineArray = line.split("\t");
+                String numberOfID = lineArray[0].substring(2);
+                int currentNumber = Integer.parseInt(numberOfID);
+                if (currentNumber > maximumNumber) {
+                    //Get the maximum id in text file
+                    maximumNumber = currentNumber;
+                }
             }
-            reader.close();
-            return lines;
-        }
-        catch (Exception e) {
+            //The maximum number plus one to be the id
+            maximumNumber = maximumNumber +1;
+            bufferedReader.close();
+            String newLecturerID = String.format("%05d", maximumNumber);
+            newLecturerID = "TP" + newLecturerID;
+            tfID.setText(newLecturerID);
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        return null;
-    } 
+    }
 
     /**
      * Creates new form EditLecturerDetails
      */
-    public EditStudentDetails() {
+    public AddStudentDetails() {
         initComponents();
+        getNewID();
     }
 
     /**
@@ -143,7 +76,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
         tfAddress = new javax.swing.JTextField();
         rbMale = new javax.swing.JRadioButton();
         rbFemale = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        bSave = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         tfIntakeCode = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -188,11 +121,11 @@ public class EditStudentDetails extends javax.swing.JFrame {
         rbFemale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbFemale.setText("Female");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("SAVE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bSave.setText("SAVE");
+        bSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bSaveActionPerformed(evt);
             }
         });
 
@@ -256,7 +189,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
                                             .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(302, 302, 302)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bSave, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
@@ -279,7 +212,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(tfIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -317,7 +250,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bSave, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
 
@@ -343,7 +276,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfIntakeCodeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
         // less gender
         if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| tfDoB.getText().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfPassword.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
@@ -370,37 +303,33 @@ public class EditStudentDetails extends javax.swing.JFrame {
             String password = tfPassword.getText();
             String email = tfEmail.getText();
             String address = tfAddress.getText();
+            StringBuilder product = new StringBuilder();
             
-            try {
-                List<String> lines = getAllProductRecord();
+             try {
+                 
                 //Write the information to the text file
-                String editedLecturer = newID + "\t" + name + "\t" +IC+ "\t" + intakeCode + "\t" + gender + "\t" + nationality + "\t" +dob + "\t" + contactNumber + "\t" + password + "\t" + email + "\t" + address;
-                
-                lines.set(count, editedLecturer);
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt"));
-                for (String updatedLine : lines) {
-                    writer.write(updatedLine);
-                    writer.newLine();
-                }
-                
+                product.append(newID + "\t" + name + "\t" +IC+ "\t" + intakeCode + "\t" + gender + "\t" + nationality + "\t" +dob + "\t" + contactNumber + "\t" + password + "\t" + email + "\t" + address);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
+                writer.write(product + "\n");
                 writer.close();
 
 
 
+
+
                 } 
-            catch (Exception e) {
+             catch (Exception e) {
                 System.err.println(e.getMessage());
             }
 
-            JOptionPane.showMessageDialog(null, "Successfully Saved!");
+            JOptionPane.showMessageDialog(null, "Successfully Added!");
             this.dispose();
             adminHomePage.refreshStudentTable("","","");
-        }
+        }        
         
         
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,28 +348,30 @@ public class EditStudentDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStudentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditStudentDetails().setVisible(true);
+                new AddStudentDetails().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

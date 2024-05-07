@@ -686,7 +686,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="EditStudentBtn" alignment="1" max="32767" attributes="0"/>
+                              <Component id="bEditStudentr" alignment="1" max="32767" attributes="0"/>
                               <Component id="AddStudentBtn" alignment="1" pref="198" max="32767" attributes="0"/>
                               <Component id="ImportTXTBtn" alignment="1" max="32767" attributes="0"/>
                           </Group>
@@ -702,7 +702,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="AddStudentBtn" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="EditStudentBtn" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="bEditStudentr" min="-2" pref="47" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -727,14 +727,20 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Add New Student"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddStudentBtnActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="EditStudentBtn">
+                <Component class="javax.swing.JButton" name="bEditStudentr">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Edit"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bEditStudentrActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -906,6 +912,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tStudentListMouseReleased"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

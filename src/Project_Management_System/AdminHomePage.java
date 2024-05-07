@@ -122,7 +122,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         ImportTXTBtn = new javax.swing.JButton();
         AddStudentBtn = new javax.swing.JButton();
-        EditStudentBtn = new javax.swing.JButton();
+        bEditStudentr = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         tfStudentID = new javax.swing.JTextField();
         tfStudentName = new javax.swing.JTextField();
@@ -509,9 +509,19 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         AddStudentBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AddStudentBtn.setText("Add New Student");
+        AddStudentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddStudentBtnActionPerformed(evt);
+            }
+        });
 
-        EditStudentBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        EditStudentBtn.setText("Edit");
+        bEditStudentr.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bEditStudentr.setText("Edit");
+        bEditStudentr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditStudentrActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -520,7 +530,7 @@ public class AdminHomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(EditStudentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bEditStudentr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AddStudentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addComponent(ImportTXTBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -533,7 +543,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(AddStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(EditStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bEditStudentr, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -577,6 +587,11 @@ public class AdminHomePage extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tStudentList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tStudentListMouseReleased(evt);
             }
         });
         StudentTableSP.setViewportView(tStudentList);
@@ -711,6 +726,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void bLecturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerActionPerformed
         // TODO add your handling code here:
+        selectionID = "-1";
+        
         pLecturer.setVisible(true);
         refreshLecturerTable("","");
         pHome.setVisible(false);
@@ -727,6 +744,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void bStudentClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudentClearActionPerformed
         // TODO add your handling code here:
+        selectionID = "-1";
+        
         tfIntakeCode.setText("");
         tfStudentID.setText("");
         tfStudentName.setText("");
@@ -735,6 +754,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
         // TODO add your handling code here:
+        selectionID = "-1";
+        
         pHome.setVisible(true);
         pLecturer.setVisible(false);
         pStudent.setVisible(false);
@@ -810,11 +831,46 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void tLecturerListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tLecturerListMouseReleased
         // TODO add your handling code here:
-        int selectedRecord = tLecturerList.getSelectedRow();
-        
         //The id of the select record
         selectionID = tLecturerList.getModel().getValueAt(tLecturerList.getSelectedRow(), 0).toString();
     }//GEN-LAST:event_tLecturerListMouseReleased
+
+    private void AddStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStudentBtnActionPerformed
+        // TODO add your handling code here:
+        AddStudentDetails addStu = new AddStudentDetails();
+        
+        addStu.pack();
+        addStu.setLocationRelativeTo(null);
+        
+        addStu.setVisible(true);
+        
+    }//GEN-LAST:event_AddStudentBtnActionPerformed
+
+    private void tStudentListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tStudentListMouseReleased
+        // TODO add your handling code here:
+        //The id of the select record
+        selectionID = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 0).toString();
+        
+    }//GEN-LAST:event_tStudentListMouseReleased
+
+    private void bEditStudentrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditStudentrActionPerformed
+        // TODO add your handling code here:
+        EditStudentDetails editStu = new EditStudentDetails();
+        if (selectionID == "-1") {
+            //If no selected then notify user to select
+            JOptionPane.showMessageDialog(null, "Please select a product to edit!");
+        }
+        else{
+            
+            //Set and pass record and this page to EditProduct
+            editStu.setAdminPageInstance(this);
+            editStu.setRecordData(selectionID);
+            
+            //Open EditProduct page
+            editStu.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_bEditStudentrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -855,7 +911,6 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddStudentBtn;
-    private javax.swing.JButton EditStudentBtn;
     private javax.swing.JButton ImportTXTBtn;
     private javax.swing.JLabel IntakeCodeLB;
     private javax.swing.JLabel StudentDetailsLabel;
@@ -864,6 +919,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane StudentTableSP;
     private javax.swing.JLabel TotalLB;
     private javax.swing.JTextField TotalStudentTF;
+    private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bHome;
     private javax.swing.JButton bLecturer;
     private javax.swing.JButton bLecturerApply;
