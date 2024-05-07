@@ -15,9 +15,9 @@ public class StudentSubmitFile extends javax.swing.JFrame {
     public StudentSubmitFile(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker) {
         initComponents();
         // Format the module details into the desired string format
-        String labelText = String.format("%s - %s\n%s\n%s - %s", 
-            moduleCode, moduleName, firstMarker, startDate, endDate);
-        // Set the formatted string to the ModuleLabel
+        String labelText = String.format("<html><b>%s - %s</b><br><font size='5'>%s <br>%s - %s <br>Lecturer: %s</font></html>", 
+            moduleCode, moduleName, moduleType, startDate, endDate, firstMarker);
+        // Set the formatted string to the JLabel
         ModuleLabel.setText(labelText);
     }
     
@@ -178,7 +178,7 @@ public class StudentSubmitFile extends javax.swing.JFrame {
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(FileSubmissionLabel)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(467, Short.MAX_VALUE))
+                .addContainerGap(484, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -239,7 +239,7 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Create an instance of StudentCheckResult
-        StudentCheckResult checkResult = new StudentCheckResult();
+        StudentAsmSubmissionResult checkResult = new StudentAsmSubmissionResult();
 
         // Make the StudentCheckResult page visible
         checkResult.setVisible(true);
