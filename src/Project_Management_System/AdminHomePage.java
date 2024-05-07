@@ -5,6 +5,7 @@
 package Project_Management_System;
 
 import java.io.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -334,6 +335,11 @@ public class AdminHomePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tLecturerList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tLecturerListMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tLecturerList);
 
         jLabel6.setText("Lecturer ID:");
@@ -364,6 +370,11 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton8.setText("Edit Lecturer");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton9.setText("Import Lecturer TXT ");
@@ -770,6 +781,41 @@ public class AdminHomePage extends javax.swing.JFrame {
         addLec.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+        EditLecturerDetails eld = new EditLecturerDetails();
+        if (selectionID == "-1") {
+            //If no selected then notify user to select
+            JOptionPane.showMessageDialog(null, "Please select a product to edit!");
+        }
+        else{
+            
+            //Set and pass record and this page to EditProduct
+            eld.setAdminPageInstance(this);
+            eld.setRecordData(selectionID);
+            
+            //Open EditProduct page
+            eld.setVisible(true);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void tLecturerListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tLecturerListMouseReleased
+        // TODO add your handling code here:
+        int selectedRecord = tLecturerList.getSelectedRow();
+        
+        //The id of the select record
+        selectionID = tLecturerList.getModel().getValueAt(tLecturerList.getSelectedRow(), 0).toString();
+    }//GEN-LAST:event_tLecturerListMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -804,6 +850,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
     }
+    
+    private String selectionID = "-1";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddStudentBtn;
