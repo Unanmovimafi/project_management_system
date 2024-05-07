@@ -1,3 +1,0 @@
-SUB00001	AS00001	31/04/2024	src//Project_Management_System//Assesment//Submission//TP00001//Assignment.pdf
-SUB00002	AS00001	31/04/2024	src//Project_Management_System//Assesment//Submission//TP00002//Assignment.pdf
-SUB00003	AS00002	31/04/2024	src//Project_Management_System//Assesment//Submission//TP00003//Assignment.pdf
