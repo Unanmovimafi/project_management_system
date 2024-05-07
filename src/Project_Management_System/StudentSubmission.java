@@ -4,6 +4,17 @@
  */
 package Project_Management_System;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 
 /**
  *
@@ -19,7 +30,14 @@ public class StudentSubmission extends javax.swing.JFrame {
             moduleCode, moduleName, moduleType, startDate, endDate, firstMarker);
         // Set the formatted string to the JLabel
         ModuleLabel.setText(labelText);
+        
+        // Create an instance of AssignmentPanel
+        AssignmentPanel assignmentPanel = new AssignmentPanel(moduleCode);
+        // Add the AssignmentPanel to the frame
+        add(new JScrollPane(assignmentPanel), BorderLayout.CENTER); // Use a JScrollPane to allow scrolling
+        
     }
+
     
     /**
      * Creates new form StudentHome
@@ -44,7 +62,7 @@ public class StudentSubmission extends javax.swing.JFrame {
         ProfileBtn = new javax.swing.JButton();
         LogoutBtn = new javax.swing.JButton();
         ModuleLabel = new javax.swing.JLabel();
-        AssessmentPanel = new javax.swing.JPanel();
+        AssignmentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -129,17 +147,17 @@ public class StudentSubmission extends javax.swing.JFrame {
         ModuleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         ModuleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        AssessmentPanel.setBackground(new java.awt.Color(255, 255, 255));
-        AssessmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        AssignmentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        AssignmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
-        javax.swing.GroupLayout AssessmentPanelLayout = new javax.swing.GroupLayout(AssessmentPanel);
-        AssessmentPanel.setLayout(AssessmentPanelLayout);
-        AssessmentPanelLayout.setHorizontalGroup(
-            AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout AssignmentPanelLayout = new javax.swing.GroupLayout(AssignmentPanel);
+        AssignmentPanel.setLayout(AssignmentPanelLayout);
+        AssignmentPanelLayout.setHorizontalGroup(
+            AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1125, Short.MAX_VALUE)
         );
-        AssessmentPanelLayout.setVerticalGroup(
-            AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        AssignmentPanelLayout.setVerticalGroup(
+            AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 563, Short.MAX_VALUE)
         );
 
@@ -151,7 +169,7 @@ public class StudentSubmission extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AssignmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModuleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
@@ -161,7 +179,7 @@ public class StudentSubmission extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AssignmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         );
@@ -271,7 +289,7 @@ public class StudentSubmission extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AssessmentPanel;
+    private javax.swing.JPanel AssignmentPanel;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JLabel ModuleLabel;
     private javax.swing.JButton PSlotBtn;
