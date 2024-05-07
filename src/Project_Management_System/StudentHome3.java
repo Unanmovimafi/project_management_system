@@ -5,8 +5,11 @@
 package Project_Management_System;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,18 +26,19 @@ import javax.swing.JScrollPane;
 public class StudentHome3 extends javax.swing.JFrame {
     
 private void openStudentSubmissionPage(String moduleName) {
-    try (BufferedReader br = new BufferedReader(new FileReader("assessment.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src/Project_Management_System/database/assessment.txt"))) {
         String line;
         // Search for the line containing the module name
         while ((line = br.readLine()) != null) {
             String[] parts = line.split("\t"); // Assuming the fields are tab-separated
-            if (parts.length >= 2 && parts[1].equals(moduleName)) { // Check if module name matches
+            // Debugging output to check line content
+            System.out.println("Line: " + line);
+            if (parts.length >= 2 && parts[1].trim().equals(moduleName)) { // Check if module name matches
                 String moduleCode = parts[0];
                 String moduleType = parts[2];
                 String startDate = parts[3];
                 String endDate = parts[4];
                 String firstMarker = parts[5];
-                // String secondMarker = parts[6]; // Not used in this format
 
                 // Open StudentSubmission page with module details
                 StudentSubmission submissionPage = new StudentSubmission(moduleCode, moduleName, moduleType, startDate, endDate, firstMarker, null);
@@ -43,7 +47,7 @@ private void openStudentSubmissionPage(String moduleName) {
             }
         }
         // If module name not found
-        System.err.println("Module information not found");
+        System.err.println("Module information not found for module: " + moduleName);
     } catch (IOException e) {
         System.err.println("Error reading assessment file: " + e.getMessage());
     }
@@ -56,7 +60,7 @@ private void openStudentSubmissionPage(String moduleName) {
         initComponents();
          createAssessmentPanels();
     }
-
+ 
  private void createAssessmentPanels() {
     try {
         BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
@@ -79,8 +83,35 @@ private void openStudentSubmissionPage(String moduleName) {
         for (String[] data : assessmentsData) {
             AssessmentBox box = new AssessmentBox(data[0],data[1],data[5]);
             
+            // Add action listener to open submission page when clicked
+            box.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    openStudentSubmissionPage(data[1]);
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    box.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    box.setCursor(Cursor.getDefaultCursor());
+                }
+            });
+            
             assessmentPanel.add(box);
         }
+        
+        // Add mouse listener to the assessment panel itself
+        assessmentPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Open submission page when the assessment panel is clicked
+                openStudentSubmissionPage("Module Name Here"); // Replace "Module Name Here" with the actual module name
+            }
+        });
 
         // Create asmScrollPane with the asmPanel inside
         JScrollPane asmScrollPane = new JScrollPane(assessmentPanel);
@@ -246,7 +277,7 @@ private void openStudentSubmissionPage(String moduleName) {
 
     private void resultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultButtonActionPerformed
         // TODO add your handling code here:
-        new StudentCheckResult().setVisible(true);
+        new StudentAsmSubmissionResult().setVisible(true);
         dispose();
     }//GEN-LAST:event_resultButtonActionPerformed
 
