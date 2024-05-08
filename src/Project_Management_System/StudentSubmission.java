@@ -248,7 +248,7 @@ public class StudentSubmission extends javax.swing.JFrame {
         dispose();
 
         // Open the login page
-        Login loginPage = new Login();
+        LoginPage loginPage = new LoginPage();
         loginPage.setVisible(true);
     }//GEN-LAST:event_LogoutBtnActionPerformed
 
