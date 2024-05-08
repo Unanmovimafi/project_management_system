@@ -7,6 +7,7 @@ package Project_Management_System;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -50,7 +51,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project_Management_System/logo/University_Logo.png"))); // NOI18N
+        jLabel3.setIcon(new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,8 +59,8 @@ public class LoginPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -91,8 +92,8 @@ public class LoginPage extends javax.swing.JFrame {
                         .addComponent(bLogin))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(jLabel3)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,52 +124,53 @@ public class LoginPage extends javax.swing.JFrame {
                 }
             }
             br.close();
-            try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt")); 
-                String line2;
-                while ((line2 = br2.readLine()) != null) {
-                    String[] record2 = line2.split("\t");
-                    if (record2[0].equals(username) && record2[8].equals(password)) {
-                        //Username and password match then proceed to Admin Page
-                        br2.close();
-                        this.dispose();
-                        
-                        AdminHomePage ap = new AdminHomePage();
-
-                        ap.setVisible(true);
-                        ap.pack();
-                        ap.setLocationRelativeTo(null);
-                        return;
-                    }
-                }
-                br2.close();
-                try {BufferedReader br3 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt")); 
-                    String line3;
-                    while ((line3 = br3.readLine()) != null) {
-                        String[] record3 = line3.split("\t");
-                        if (record3[0].equals(username) && record3[8].equals(password)) {
-                            //Username and password match then proceed to Admin Page
-                            br3.close();
-                            this.dispose();
-                            
-                            AdminHomePage ap = new AdminHomePage();
-
-                            ap.setVisible(true);
-                            ap.pack();
-                            ap.setLocationRelativeTo(null);
-                            return;
-                        }
-                    }
-                    br3.close();
-                    JOptionPane.showMessageDialog(null, "Invalid username or password.");
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Invalid username or password.");
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Invalid username or password.");
-            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Invalid username or password.");
         }
+        
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt")); 
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].equals(username) && record[8].equals(password)) {
+                    //Username and password match then proceed to Admin Page
+                    br.close();
+                    this.dispose();
+
+                    AdminHomePage ap = new AdminHomePage();
+
+                    ap.setVisible(true);
+                    ap.pack();
+                    ap.setLocationRelativeTo(null);
+                    return;
+                }
+            }
+            br.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid username or password.");
+        }
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt")); 
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].equals(username) && record[8].equals(password)) {
+                    //Username and password match then proceed to Admin Page
+                    br.close();
+                    this.dispose();
+
+                    AdminHomePage ap = new AdminHomePage();
+
+                    ap.setVisible(true);
+                    ap.pack();
+                    ap.setLocationRelativeTo(null);
+                    return;
+                }
+            }
+            br.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Invalid username or password.");
+            }
+        JOptionPane.showMessageDialog(null, "Invalid username or password.");
     }//GEN-LAST:event_bLoginActionPerformed
 
     /**
