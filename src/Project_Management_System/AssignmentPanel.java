@@ -5,15 +5,17 @@
 package Project_Management_System;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,39 +23,52 @@ import javax.swing.JPanel;
  *
  * @author Owner
  */
-public class AssignmentPanel extends JPanel{
+public class AssignmentPanel extends JPanel {
+    private ActionListener actionListener;
+
     public AssignmentPanel(String moduleCode) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Set layout to vertical BoxLayout
+        setLayout(new GridLayout(0, 1)); // Use a vertical layout with variable rows
 
-        // Fetch assignment names for the given module code
-        List<String> assignmentNames = fetchAssignmentNames(moduleCode);
+        // Fetch assignments for the given module code
+        List<SimpleEntry<String, String>> assignments = fetchAssignments(moduleCode);
 
-        // Add assignment names to the panel
-        for (String assignmentName : assignmentNames) {
-            addAssignment(assignmentName);
+        // Create and add AssignmentBox instances to the panel
+        for (SimpleEntry<String, String> assignment : assignments) {
+            addAssignmentBox(assignment.getKey(), assignment.getValue());
         }
     }
 
-    private List<String> fetchAssignmentNames(String moduleCode) {
-        List<String> assignmentNames = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assesment_assignment.txt"))) {
+    private List<SimpleEntry<String, String>> fetchAssignments(String moduleCode) {
+        List<SimpleEntry<String, String>> assignments = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_assignment.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\t");
-                if (parts.length >= 3 && parts[1].trim().equals(moduleCode)) {
-                    assignmentNames.add(parts[2]);
+                if (parts.length >= 4 && parts[1].trim().equals(moduleCode)) {
+                    assignments.add(new SimpleEntry<>(parts[2], parts[3])); // Add assignment name and description pair
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading assessment_assignment file: " + e.getMessage());
         }
-        return assignmentNames;
+        return assignments;
     }
 
-    private void addAssignment(String assignmentName) {
-        JLabel assignmentLabel = new JLabel(assignmentName);
-        assignmentLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align assignment label to the left
-        add(assignmentLabel); // Add assignment label to the panel
+    private void addAssignmentBox(String assignmentName, String description) {
+
+        // Create an instance of AssignmentBox
+        AssignmentBox assignmentBox = new AssignmentBox(assignmentName, description); 
+        
+        // Add action listener to handle click events
+        assignmentBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle action event here
+                // You can implement what happens when an assignment box is clicked
+            }
+        });
+
+        // Add the AssignmentBox to the panel
+        add(assignmentBox);
     }
-    
 }
