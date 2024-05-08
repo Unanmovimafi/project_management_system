@@ -5,15 +5,8 @@
 package Project_Management_System;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 
 
 /**
@@ -33,10 +26,14 @@ public class StudentSubmission extends javax.swing.JFrame {
         
         // Create and add the AssignmentPanel to the frame
         AssignmentPanel assignmentPanel = new AssignmentPanel(moduleCode);
-        assignmentPanel.setPreferredSize(new Dimension(800, 600)); // Set preferred size
-        add(assignmentPanel, BorderLayout.CENTER);
+        AssignmentPanel.setLayout(new BorderLayout()); // Ensure BorderLayout is set
+        AssignmentPanel.add(assignmentPanel, BorderLayout.CENTER); // Add AssignmentPanel to the center of AssignmentPanel
+        
+        // Set default size of the AssignmentPanel
+        AssignmentPanel.setPreferredSize(new Dimension(900, 400));
         
     }
+    
 
     
     /**
@@ -148,13 +145,12 @@ public class StudentSubmission extends javax.swing.JFrame {
         ModuleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
         AssignmentPanel.setBackground(new java.awt.Color(255, 255, 255));
-        AssignmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
         javax.swing.GroupLayout AssignmentPanelLayout = new javax.swing.GroupLayout(AssignmentPanel);
         AssignmentPanel.setLayout(AssignmentPanelLayout);
         AssignmentPanelLayout.setHorizontalGroup(
             AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1125, Short.MAX_VALUE)
+            .addGap(0, 433, Short.MAX_VALUE)
         );
         AssignmentPanelLayout.setVerticalGroup(
             AssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,9 +164,9 @@ public class StudentSubmission extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AssignmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ModuleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AssignmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
