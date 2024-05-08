@@ -5,6 +5,7 @@
 package Project_Management_System;
 
 import java.io.*;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -65,6 +66,24 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
     }
     
+    private String getNewID(){
+        int count = 1;
+        String line;
+        String newID;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            while ((line = bufferedReader.readLine()) != null) {
+                count = count + 1;
+            }
+            bufferedReader.close();
+            String newLecturerID = String.format("%05d", count);
+            return newID = "LR" + newLecturerID;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+    
     
     
     /**
@@ -115,7 +134,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pStudent = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         StudentDetailsLabel = new javax.swing.JLabel();
@@ -373,11 +392,10 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton9.setText("Import Lecturer TXT ");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Import Lecturer CSV");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -390,19 +408,20 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel4)
-                .addGap(98, 98, 98)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(95, 95, 95)
+                .addComponent(jButton1)
+                .addGap(56, 56, 56)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,9 +612,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(ImportTXTBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(AddStudentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                        .addComponent(bEditStudentr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(AddStudentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(bEditStudentr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 15, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -735,10 +753,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         pStudent.setVisible(false);
     }//GEN-LAST:event_bLecturerActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void ImportTXTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportTXTBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ImportTXTBtnActionPerformed
@@ -873,6 +887,39 @@ public class AdminHomePage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bEditStudentrActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        if (file != null){
+            String filePath = file.getAbsolutePath();
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line2;
+
+                while ((line2 = br.readLine()) != null){
+                    String[] values = line2.split(",");
+                    String newID = getNewID();
+                    try {
+                    StringBuilder product = new StringBuilder();
+                    String password = newID + "@" + values[5];
+                    //Write the information to the text file
+                    product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt", true));
+                    writer.write(product + "\n");
+                    writer.close();
+                    } 
+                     catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }
+            catch (Exception e) {
+                 e.getMessage();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -928,13 +975,13 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bStudent;
     private javax.swing.JButton bStudentApply;
     private javax.swing.JButton bStudentClear;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
