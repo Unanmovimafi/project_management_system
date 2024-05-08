@@ -92,8 +92,6 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
-        AdminHomePage ap = new AdminHomePage();
-        
         //Get the value from text field
         String username = tfUsername.getText();
         String password = pfPassword.getText();
@@ -102,11 +100,13 @@ public class LoginPage extends javax.swing.JFrame {
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\admin.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
-                String[] record = line.split(",");
+                String[] record = line.split("\t");
                 if (record[0].equals(username) && record[1].equals(password)) {
                     //Username and password match then proceed to Admin Page
                     br.close();
                     this.dispose();
+                    
+                    AdminHomePage ap = new AdminHomePage();
                     
                     ap.setVisible(true);
                     ap.pack();
@@ -115,14 +115,52 @@ public class LoginPage extends javax.swing.JFrame {
                 }
             }
             br.close();
-            JOptionPane.showMessageDialog(null, "Invalid username or password.");
-            
+            try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt")); 
+                String line2;
+                while ((line2 = br2.readLine()) != null) {
+                    String[] record2 = line2.split("\t");
+                    if (record2[0].equals(username) && record2[8].equals(password)) {
+                        //Username and password match then proceed to Admin Page
+                        br2.close();
+                        this.dispose();
+                        
+                        AdminHomePage ap = new AdminHomePage();
+
+                        ap.setVisible(true);
+                        ap.pack();
+                        ap.setLocationRelativeTo(null);
+                        return;
+                    }
+                }
+                br2.close();
+                try {BufferedReader br3 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt")); 
+                    String line3;
+                    while ((line3 = br3.readLine()) != null) {
+                        String[] record3 = line3.split("\t");
+                        if (record3[0].equals(username) && record3[8].equals(password)) {
+                            //Username and password match then proceed to Admin Page
+                            br3.close();
+                            this.dispose();
+                            
+                            AdminHomePage ap = new AdminHomePage();
+
+                            ap.setVisible(true);
+                            ap.pack();
+                            ap.setLocationRelativeTo(null);
+                            return;
+                        }
+                    }
+                    br3.close();
+                    JOptionPane.showMessageDialog(null, "Invalid username or password.");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Invalid username or password.");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Invalid username or password.");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Invalid username or password.");
         }
-        
-        
-        
     }//GEN-LAST:event_bLoginActionPerformed
 
     /**
