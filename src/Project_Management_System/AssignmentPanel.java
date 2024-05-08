@@ -5,13 +5,10 @@
 package Project_Management_System;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -22,38 +19,36 @@ import javax.swing.JPanel;
  * @author Owner
  */
 public class AssignmentPanel extends JPanel{
+    // Constructor accepting module code parameter
     public AssignmentPanel(String moduleCode) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Set layout to vertical BoxLayout
-
-        // Fetch assignment names for the given module code
-        List<String> assignmentNames = fetchAssignmentNames(moduleCode);
-
-        // Add assignment names to the panel
-        for (String assignmentName : assignmentNames) {
-            addAssignment(assignmentName);
-        }
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Vertical layout
+        displayAssignments(moduleCode);
     }
 
-    private List<String> fetchAssignmentNames(String moduleCode) {
-        List<String> assignmentNames = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assesment_assignment.txt"))) {
+    // Method to display assignments related to the module code
+    private void displayAssignments(String moduleCode) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/Project_Management_System/database/assesment_assignment.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\t");
-                if (parts.length >= 3 && parts[1].trim().equals(moduleCode)) {
-                    assignmentNames.add(parts[2]);
+                if (parts.length >= 3 && parts[0].trim().equals(moduleCode)) { // Check if module code matches
+                    String assignmentName = parts[2];
+                    add(createAssignmentBox(assignmentName)); // Add assignment box to the panel
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading assessment_assignment file: " + e.getMessage());
         }
-        return assignmentNames;
     }
 
-    private void addAssignment(String assignmentName) {
-        JLabel assignmentLabel = new JLabel(assignmentName);
-        assignmentLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align assignment label to the left
-        add(assignmentLabel); // Add assignment label to the panel
+    // Method to create an assignment box
+    private JPanel createAssignmentBox(String assignmentName) {
+        JPanel box = new JPanel();
+        box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        box.setPreferredSize(new Dimension(200, 50)); // Set preferred size as needed
+        JLabel label = new JLabel(assignmentName);
+        box.add(label);
+        return box;
     }
     
 }
