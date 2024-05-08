@@ -31,10 +31,10 @@ public class StudentSubmission extends javax.swing.JFrame {
         // Set the formatted string to the JLabel
         ModuleLabel.setText(labelText);
         
-        // Create and add the AssignmentPanel to the frame
+        // Create an instance of AssignmentPanel
         AssignmentPanel assignmentPanel = new AssignmentPanel(moduleCode);
-        assignmentPanel.setPreferredSize(new Dimension(800, 600)); // Set preferred size
-        add(assignmentPanel, BorderLayout.CENTER);
+        // Add the AssignmentPanel to the frame
+        add(new JScrollPane(assignmentPanel), BorderLayout.CENTER); // Use a JScrollPane to allow scrolling
         
     }
 
