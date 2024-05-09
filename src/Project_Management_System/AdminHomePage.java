@@ -66,7 +66,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
     }
     
-    private String getNewID(){
+    private String getLecNewID(){
         int count = 1;
         String line;
         String newID;
@@ -84,7 +84,23 @@ public class AdminHomePage extends javax.swing.JFrame {
         return null;
     }
     
-    
+    private String getStuNewID(){
+        int count = 1;
+        String line;
+        String newID;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            while ((line = bufferedReader.readLine()) != null) {
+                count = count + 1;
+            }
+            bufferedReader.close();
+            String newLecturerID = String.format("%05d", count);
+            return newID = "TP" + newLecturerID;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
     
     /**
      * Creates new form AdminHomePage
@@ -152,9 +168,9 @@ public class AdminHomePage extends javax.swing.JFrame {
         TotalLB = new javax.swing.JLabel();
         tfIntakeCode = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
-        ImportTXTBtn = new javax.swing.JButton();
         AddStudentBtn = new javax.swing.JButton();
         bEditStudentr = new javax.swing.JButton();
+        bImportStudent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1500, 780));
@@ -580,14 +596,6 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(249, 244, 202));
 
-        ImportTXTBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ImportTXTBtn.setText("Import TXT");
-        ImportTXTBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ImportTXTBtnActionPerformed(evt);
-            }
-        });
-
         AddStudentBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AddStudentBtn.setText("Add New Student");
         AddStudentBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -604,28 +612,36 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        bImportStudent.setText("Import Student CSV");
+        bImportStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bImportStudentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(ImportTXTBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(AddStudentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(bEditStudentr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(AddStudentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                        .addComponent(bEditStudentr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bImportStudent))
                 .addGap(0, 15, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(ImportTXTBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(37, 37, 37)
+                .addComponent(bImportStudent)
+                .addGap(38, 38, 38)
                 .addComponent(AddStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bEditStudentr, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -752,10 +768,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         pHome.setVisible(false);
         pStudent.setVisible(false);
     }//GEN-LAST:event_bLecturerActionPerformed
-
-    private void ImportTXTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportTXTBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ImportTXTBtnActionPerformed
 
     private void bStudentClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudentClearActionPerformed
         // TODO add your handling code here:
@@ -899,7 +911,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
                 while ((line2 = br.readLine()) != null){
                     String[] values = line2.split(",");
-                    String newID = getNewID();
+                    String newID = getLecNewID();
                     try {
                     StringBuilder product = new StringBuilder();
                     String password = newID + "@" + values[5];
@@ -919,6 +931,39 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bImportLecturerActionPerformed
+
+    private void bImportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bImportStudentActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        if (file != null){
+            String filePath = file.getAbsolutePath();
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line2;
+
+                while ((line2 = br.readLine()) != null){
+                    String[] values = line2.split(",");
+                    String newID = getStuNewID();
+                    try {
+                    StringBuilder product = new StringBuilder();
+                    String password = newID + "@" + values[5];
+                    //Write the information to the text file
+                    product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
+                    writer.write(product + "\n");
+                    writer.close();
+                    }
+                     catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }
+            catch (Exception e) {
+                 e.getMessage();
+            }
+        }
+    }//GEN-LAST:event_bImportStudentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -959,7 +1004,6 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddStudentBtn;
-    private javax.swing.JButton ImportTXTBtn;
     private javax.swing.JLabel IntakeCodeLB;
     private javax.swing.JLabel StudentDetailsLabel;
     private javax.swing.JLabel StudentIDLB;
@@ -970,6 +1014,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bHome;
     private javax.swing.JButton bImportLecturer;
+    private javax.swing.JButton bImportStudent;
     private javax.swing.JButton bLecturer;
     private javax.swing.JButton bLecturerApply;
     private javax.swing.JButton bLecturerClear;
