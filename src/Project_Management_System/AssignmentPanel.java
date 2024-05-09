@@ -4,8 +4,6 @@
  */
 package Project_Management_System;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,9 +13,8 @@ import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -70,5 +67,11 @@ public class AssignmentPanel extends JPanel {
 
         // Add the AssignmentBox to the panel
         add(assignmentBox);
+    }
+    
+    public JScrollPane createScrollPane() {
+        JScrollPane scrollPane = new JScrollPane(this); // Create JScrollPane with this AssignmentPanel
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); // Show vertical scroll bar always
+        return scrollPane;
     }
 }
