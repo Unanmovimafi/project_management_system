@@ -910,11 +910,14 @@ public class AdminHomePage extends javax.swing.JFrame {
                 String line2;
 
                 while ((line2 = br.readLine()) != null){
-                    String[] values = line2.split(",");
+                    String[] values = line2.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                     String newID = getLecNewID();
                     try {
                     StringBuilder product = new StringBuilder();
                     String password = newID + "@" + values[5];
+                    
+                    values[9] = values[9].replaceAll("^\"|\"$", "");
+                    
                     //Write the information to the text file
                     product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
                     BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt", true));
@@ -925,11 +928,15 @@ public class AdminHomePage extends javax.swing.JFrame {
                         System.err.println(e.getMessage());
                     }
                 }
+                JOptionPane.showMessageDialog(null, "Successfully Import!");
             }
             catch (Exception e) {
-                 e.getMessage();
+                e.getMessage();
+                JOptionPane.showMessageDialog(null, "Invalid File or Format Wrong in CSV File!");
             }
         }
+        refreshLecturerTable("","");
+        
     }//GEN-LAST:event_bImportLecturerActionPerformed
 
     private void bImportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bImportStudentActionPerformed
@@ -943,26 +950,33 @@ public class AdminHomePage extends javax.swing.JFrame {
                 String line2;
 
                 while ((line2 = br.readLine()) != null){
-                    String[] values = line2.split(",");
+                    String[] values = line2.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                     String newID = getStuNewID();
                     try {
                     StringBuilder product = new StringBuilder();
                     String password = newID + "@" + values[5];
+                    
+                    values[9] = values[9].replaceAll("^\"|\"$", "");
+                    
                     //Write the information to the text file
                     product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
                     BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
                     writer.write(product + "\n");
                     writer.close();
                     }
+                    
                      catch (Exception e) {
                         System.err.println(e.getMessage());
                     }
                 }
+                JOptionPane.showMessageDialog(null, "Successfully Import!");
             }
             catch (Exception e) {
-                 e.getMessage();
+                e.getMessage();
+                JOptionPane.showMessageDialog(null, "Invalid File or Format Wrong in CSV File!");
             }
         }
+        refreshStudentTable("","","");
     }//GEN-LAST:event_bImportStudentActionPerformed
 
     /**
