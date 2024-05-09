@@ -50,6 +50,10 @@ public class AssignmentPanel extends JPanel {
         }
         return assignments;
     }
+    
+    public void addActionListener(ActionListener listener) {
+        actionListener = listener;
+    }
 
     private void addAssignmentBox(String assignmentName, String description) {
 
@@ -60,8 +64,10 @@ public class AssignmentPanel extends JPanel {
         assignmentBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Handle action event here
-                // You can implement what happens when an assignment box is clicked
+                // When an assignment box is clicked, trigger the action listener
+                if (actionListener != null) {
+                    actionListener.actionPerformed(new ActionEvent(assignmentBox, ActionEvent.ACTION_PERFORMED, assignmentName));
+                }
             }
         });
 
