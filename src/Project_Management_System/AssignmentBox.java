@@ -6,10 +6,13 @@ package Project_Management_System;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -43,7 +46,19 @@ public class AssignmentBox extends JPanel {
         add(nameLabel);
         add(desLabel);
 
-        // Add action listener to handle click events
+        // Add mouse listener to change cursor when hovering
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
+        
         addActionListener(e -> {
             if (actionListener != null) {
                 actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, assignmentName));
@@ -51,6 +66,10 @@ public class AssignmentBox extends JPanel {
         });
     }
 
+    public String getAssignmentName() {
+        return assignmentName;
+    }
+    
     public void addActionListener(ActionListener listener) {
         actionListener = listener;
     }

@@ -4,6 +4,8 @@
  */
 package Project_Management_System;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +35,26 @@ public class AssignmentPanel extends JPanel {
         for (SimpleEntry<String, String> assignment : assignments) {
             addAssignmentBox(assignment.getKey(), assignment.getValue());
         }
+        
+        // Add action listener to AssignmentBox instances
+        addActionListenerToAssignmentBoxes();
+    }
+
+private void addActionListenerToAssignmentBoxes() {
+        // Add action listener to AssignmentBox instances
+        for (Component component : getComponents()) {
+            if (component instanceof AssignmentBox) {
+                ((AssignmentBox) component).addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // When an assignment box is clicked, trigger the action listener
+                        if (actionListener != null) {
+                            actionListener.actionPerformed(e);
+                        }
+                    }
+                });
+            }
+        }
     }
 
     private List<SimpleEntry<String, String>> fetchAssignments(String moduleCode) {
@@ -58,7 +80,9 @@ public class AssignmentPanel extends JPanel {
     private void addAssignmentBox(String assignmentName, String description) {
 
         // Create an instance of AssignmentBox
-        AssignmentBox assignmentBox = new AssignmentBox(assignmentName, description); 
+        AssignmentBox assignmentBox = new AssignmentBox(assignmentName, description);
+       
+        
         
         // Add action listener to handle click events
         assignmentBox.addActionListener(new ActionListener() {

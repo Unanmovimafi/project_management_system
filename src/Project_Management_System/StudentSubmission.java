@@ -5,6 +5,7 @@
 package Project_Management_System;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,16 +37,17 @@ public class StudentSubmission extends javax.swing.JFrame {
         
         // Set default size of the AssignmentPanel
         AssignmentPanel.setPreferredSize(new Dimension(900, 400));
-        
+       
+
         // Add action listener to each assignment box
         assignmentPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the assignment name from the event
-                String assignmentName = e.getActionCommand();
-                
-                // Open the StudentSubmitFile page with the selected assignment details
-                StudentSubmitFile submitFilePage = new StudentSubmitFile(assignmentName, "description"); // Pass the assignment name and a dummy description
+                // Get the assignment name from the clicked AssignmentBox
+                String assignmentName = ((AssignmentBox)e.getSource()).getAssignmentName();
+                System.out.println("Clicked Assignment Name: " + assignmentName);
+                // Open the StudentSubmitFile frame with the assignment name
+                StudentSubmitFile submitFilePage = new StudentSubmitFile(moduleCode, moduleName, moduleType, startDate, endDate, firstMarker, secondMarker, assignmentName); 
                 submitFilePage.setVisible(true);
             }
         });

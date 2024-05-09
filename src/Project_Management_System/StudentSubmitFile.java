@@ -4,6 +4,8 @@
  */
 package Project_Management_System;
 
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -11,14 +13,18 @@ package Project_Management_System;
  */
 public class StudentSubmitFile extends javax.swing.JFrame {
 
-    // Constructor accepting assignment details
-    public StudentSubmitFile(String assignmentName, String description) {
+    // Constructor accepting module and assignment details
+    public StudentSubmitFile(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker, String assignmentName) {
         initComponents();
-        // Format the assignment details into the desired string format
-        String labelText = String.format("<html><b>%s</b><br><font size='5'>Description: %s</font></html>", 
-            assignmentName, description);
+        // Format the module details into the desired string format
+        String labelText = String.format("<html><b>%s - %s</b><br><font size='5'>%s <br>%s - %s <br>Lecturer: %s</font></html>", 
+            moduleCode, moduleName, moduleType, startDate, endDate, firstMarker);
         // Set the formatted string to the JLabel
-        ModuleLabel.setText(labelText);
+        moduleLabel.setText(labelText);
+        
+        // Set the assignment name to a JLabel
+        JLabel assignmentLabel = new JLabel(assignmentName);
+        AssignmentLabel.add(assignmentLabel);
     }
     
     /**
@@ -51,7 +57,8 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         UploadBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        ModuleLabel1 = new javax.swing.JLabel();
+        AssignmentLabel = new javax.swing.JLabel();
+        moduleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -122,7 +129,7 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PSlotBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(ResultBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,13 +176,15 @@ public class StudentSubmitFile extends javax.swing.JFrame {
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 997, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(FileSubmissionLabel)
                         .addGap(29, 29, 29)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 997, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AssignmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
                 .addGap(485, 485, 485)
@@ -187,24 +196,26 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         AssessmentPanelLayout.setVerticalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(Description)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AssignmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(Description)
-                        .addGap(26, 26, 26)
+                        .addGap(27, 27, 27)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(77, 77, 77)
                         .addComponent(FileSubmissionLabel)))
-                .addGap(27, 27, 27)
+                .addGap(155, 155, 155)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
-        ModuleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
+        moduleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        moduleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -212,15 +223,12 @@ public class StudentSubmitFile extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -229,11 +237,11 @@ public class StudentSubmitFile extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                    .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -344,11 +352,11 @@ public class StudentSubmitFile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AssessmentPanel;
+    private javax.swing.JLabel AssignmentLabel;
     private javax.swing.JLabel Description;
     private javax.swing.JLabel FileSubmissionLabel;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JLabel ModuleLabel;
-    private javax.swing.JLabel ModuleLabel1;
     private javax.swing.JButton PSlotBtn;
     private javax.swing.JButton ProfileBtn;
     private javax.swing.JButton ResultBtn;
@@ -358,5 +366,6 @@ public class StudentSubmitFile extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel moduleLabel;
     // End of variables declaration//GEN-END:variables
 }
