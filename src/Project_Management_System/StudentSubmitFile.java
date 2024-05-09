@@ -11,12 +11,12 @@ package Project_Management_System;
  */
 public class StudentSubmitFile extends javax.swing.JFrame {
 
-    // Constructor accepting module name parameter
-    public StudentSubmitFile(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker) {
+    // Constructor accepting assignment details
+    public StudentSubmitFile(String assignmentName, String description) {
         initComponents();
-        // Format the module details into the desired string format
-        String labelText = String.format("<html><b>%s - %s</b><br><font size='5'>%s <br>%s - %s <br>Lecturer: %s</font></html>", 
-            moduleCode, moduleName, moduleType, startDate, endDate, firstMarker);
+        // Format the assignment details into the desired string format
+        String labelText = String.format("<html><b>%s</b><br><font size='5'>Description: %s</font></html>", 
+            assignmentName, description);
         // Set the formatted string to the JLabel
         ModuleLabel.setText(labelText);
     }
