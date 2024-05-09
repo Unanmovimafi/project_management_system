@@ -6,6 +6,7 @@ package Project_Management_System;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import javax.swing.JScrollPane;
 
 
 
@@ -26,12 +27,13 @@ public class StudentSubmission extends javax.swing.JFrame {
         
         // Create and add the AssignmentPanel to the frame
         AssignmentPanel assignmentPanel = new AssignmentPanel(moduleCode);
-        AssignmentPanel.setLayout(new BorderLayout()); // Ensure BorderLayout is set
-        AssignmentPanel.add(assignmentPanel, BorderLayout.CENTER); // Add AssignmentPanel to the center of AssignmentPanel
+  
+        JScrollPane scrollPane = assignmentPanel.createScrollPane(); // Create the scroll pane
+        AssignmentPanel.setLayout(new BorderLayout()); 
+        AssignmentPanel.add(scrollPane, BorderLayout.CENTER);
         
         // Set default size of the AssignmentPanel
         AssignmentPanel.setPreferredSize(new Dimension(900, 400));
-        
     }
     
 
