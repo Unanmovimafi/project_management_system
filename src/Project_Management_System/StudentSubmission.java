@@ -29,7 +29,7 @@ public class StudentSubmission extends javax.swing.JFrame {
         ModuleLabel.setText(labelText);
         
         // Create and add the AssignmentPanel to the frame
-        AssignmentPanel assignmentPanel = new AssignmentPanel(moduleCode);
+        AssignmentPanel assignmentPanel = new AssignmentPanel(moduleCode, 900);
   
         JScrollPane scrollPane = assignmentPanel.createScrollPane(); // Create the scroll pane
         AssignmentPanel.setLayout(new BorderLayout()); 
@@ -38,16 +38,14 @@ public class StudentSubmission extends javax.swing.JFrame {
         // Set default size of the AssignmentPanel
         AssignmentPanel.setPreferredSize(new Dimension(900, 400));
        
-
         // Add action listener to each assignment box
         assignmentPanel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the assignment name from the clicked AssignmentBox
                 String assignmentName = ((AssignmentBox)e.getSource()).getAssignmentName();
-                System.out.println("Clicked Assignment Name: " + assignmentName);
                 // Open the StudentSubmitFile frame with the assignment name
-                StudentSubmitFile submitFilePage = new StudentSubmitFile(moduleCode, moduleName, moduleType, startDate, endDate, firstMarker, secondMarker, assignmentName); 
+                StudentSubmitFile submitFilePage = new StudentSubmitFile(moduleCode, moduleName, moduleType, startDate, endDate, firstMarker, secondMarker, assignmentName);
                 submitFilePage.setVisible(true);
             }
         });

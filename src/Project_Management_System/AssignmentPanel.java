@@ -25,7 +25,7 @@ import javax.swing.JScrollPane;
 public class AssignmentPanel extends JPanel {
     private ActionListener actionListener;
 
-    public AssignmentPanel(String moduleCode) {
+    public AssignmentPanel(String moduleCode, int panelWidth) {
         setLayout(new GridLayout(0, 1)); // Use a vertical layout with variable rows
 
         // Fetch assignments for the given module code
@@ -33,28 +33,9 @@ public class AssignmentPanel extends JPanel {
 
         // Create and add AssignmentBox instances to the panel
         for (SimpleEntry<String, String> assignment : assignments) {
-            addAssignmentBox(assignment.getKey(), assignment.getValue());
+            addAssignmentBox(assignment.getKey(), assignment.getValue(), panelWidth);
         }
         
-        // Add action listener to AssignmentBox instances
-        addActionListenerToAssignmentBoxes();
-    }
-
-private void addActionListenerToAssignmentBoxes() {
-        // Add action listener to AssignmentBox instances
-        for (Component component : getComponents()) {
-            if (component instanceof AssignmentBox) {
-                ((AssignmentBox) component).addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // When an assignment box is clicked, trigger the action listener
-                        if (actionListener != null) {
-                            actionListener.actionPerformed(e);
-                        }
-                    }
-                });
-            }
-        }
     }
 
     private List<SimpleEntry<String, String>> fetchAssignments(String moduleCode) {
@@ -64,7 +45,8 @@ private void addActionListenerToAssignmentBoxes() {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\t");
                 if (parts.length >= 4 && parts[1].trim().equals(moduleCode)) {
-                    assignments.add(new SimpleEntry<>(parts[2], parts[3])); // Add assignment name and description pair
+                    String assignmentInfo = parts[2] + "\n" + parts[3];
+                    assignments.add(new SimpleEntry<>(assignmentInfo, ""));
                 }
             }
         } catch (IOException e) {
@@ -77,10 +59,10 @@ private void addActionListenerToAssignmentBoxes() {
         actionListener = listener;
     }
 
-    private void addAssignmentBox(String assignmentName, String description) {
+    private void addAssignmentBox(String assignmentName, String description, int panelWidth) {
 
         // Create an instance of AssignmentBox
-        AssignmentBox assignmentBox = new AssignmentBox(assignmentName, description);
+        AssignmentBox assignmentBox = new AssignmentBox(assignmentName, description, panelWidth);
        
         
         
