@@ -41,6 +41,7 @@ public class LoginPage2 extends javax.swing.JFrame {
         pfPassword = new javax.swing.JPasswordField();
         bLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +53,7 @@ public class LoginPage2 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("People University");
+        jLabel4.setText("People University © 2024");
         jLabel4.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -85,7 +86,6 @@ public class LoginPage2 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Password:");
 
-        bLogin.setBackground(new java.awt.Color(255, 255, 204));
         bLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bLogin.setText("Login");
         bLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +98,13 @@ public class LoginPage2 extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(24, 34, 63));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("LOGIN");
+
+        jCheckBox1.setText("Show Password");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -114,8 +121,8 @@ public class LoginPage2 extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(pfPassword))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(pfPassword)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 222, Short.MAX_VALUE)
@@ -135,7 +142,9 @@ public class LoginPage2 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox1)
+                .addGap(24, 24, 24)
                 .addComponent(bLogin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -232,6 +241,16 @@ public class LoginPage2 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Invalid username or password.");
     }//GEN-LAST:event_bLoginActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+            if(jCheckBox1.isSelected()){
+            pfPassword.setEchoChar((char)0);
+        }
+        else {
+           pfPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,6 +289,7 @@ public class LoginPage2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
