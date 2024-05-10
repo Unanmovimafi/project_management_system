@@ -45,8 +45,7 @@ public class AssignmentPanel extends JPanel {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\t");
                 if (parts.length >= 4 && parts[1].trim().equals(moduleCode)) {
-                    String assignmentInfo = parts[2] + "\n" + parts[3];
-                    assignments.add(new SimpleEntry<>(assignmentInfo, ""));
+                    assignments.add(new SimpleEntry<>(parts[2], parts[3]));
                 }
             }
         } catch (IOException e) {
@@ -64,8 +63,6 @@ public class AssignmentPanel extends JPanel {
         // Create an instance of AssignmentBox
         AssignmentBox assignmentBox = new AssignmentBox(assignmentName, description, panelWidth);
        
-        
-        
         // Add action listener to handle click events
         assignmentBox.addActionListener(new ActionListener() {
             @Override
@@ -79,6 +76,7 @@ public class AssignmentPanel extends JPanel {
 
         // Add the AssignmentBox to the panel
         add(assignmentBox);
+
     }
     
     public JScrollPane createScrollPane() {

@@ -32,6 +32,7 @@ public class AssignmentBox extends JPanel {
         this.description = description;
 
          // Set a fixed size for the AssignmentBox panel
+         
         setLayout(new GridLayout(2, 1)); 
         setPreferredSize(new Dimension(panelWidth, 100));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -44,6 +45,10 @@ public class AssignmentBox extends JPanel {
         nameLabel.setHorizontalAlignment(JLabel.LEFT);
         desLabel.setHorizontalAlignment(JLabel.LEFT);
 
+        // Set labels' color
+        nameLabel.setForeground(Color.BLACK);
+        desLabel.setForeground(Color.BLACK);
+        
         // Add label to the panel with defined constraints
         add(nameLabel);
         add(desLabel);
