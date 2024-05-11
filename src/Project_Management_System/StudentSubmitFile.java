@@ -4,7 +4,23 @@
  */
 package Project_Management_System;
 
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 
 
 /**
@@ -12,10 +28,14 @@ import javax.swing.JLabel;
  * @author Owner
  */
 public class StudentSubmitFile extends javax.swing.JFrame {
-
-    // Constructor accepting module and assignment details
+    
+    ButtonGroup buttonGroup = new ButtonGroup();
+    
     public StudentSubmitFile(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker, String assignmentName) {
         initComponents();
+        
+        FilePanel.setLayout(new BoxLayout(FilePanel, BoxLayout.Y_AXIS));
+        
         // Format the module details into the desired string format
         String labelText = String.format("<html><b>%s - %s</b><br><font size='5'>%s <br>%s - %s <br>Lecturer: %s</font></html>", 
             moduleCode, moduleName, moduleType, startDate, endDate, firstMarker);
@@ -23,10 +43,10 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         moduleLabel.setText(labelText);
         
         // Set the assignment name to a JLabel
-        JLabel assignmentLabel = new JLabel(assignmentName);
-        AssignmentLabel.add(assignmentLabel);
+        AssignmentLabel.setText(assignmentName);
+        AssignmentLabel.setFont(new Font(AssignmentLabel.getFont().getName(), AssignmentLabel.getFont().getStyle() | Font.BOLD,20)); 
     }
-    
+
     /**
      * Creates new form StudentHome
      */
@@ -53,10 +73,11 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         AssessmentPanel = new javax.swing.JPanel();
         Description = new javax.swing.JLabel();
         FileSubmissionLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        FilePanel = new javax.swing.JPanel();
         UploadBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        filePathLabel = new javax.swing.JLabel();
+        SubmitFileBtn = new javax.swing.JButton();
+        ClearBtn = new javax.swing.JButton();
         AssignmentLabel = new javax.swing.JLabel();
         moduleLabel = new javax.swing.JLabel();
 
@@ -150,48 +171,71 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         FileSubmissionLabel.setText("File Submission:");
 
         UploadBtn.setText("Upload a File");
+        UploadBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UploadBtnActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UploadBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout FilePanelLayout = new javax.swing.GroupLayout(FilePanel);
+        FilePanel.setLayout(FilePanelLayout);
+        FilePanelLayout.setHorizontalGroup(
+            FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FilePanelLayout.createSequentialGroup()
+                .addGroup(FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FilePanelLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(FilePanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(filePathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+        FilePanelLayout.setVerticalGroup(
+            FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FilePanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(UploadBtn)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(filePathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
-        jButton1.setText("UPLOAD");
+        SubmitFileBtn.setText("SUBMIT");
+        SubmitFileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitFileBtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("CLEAR");
+        ClearBtn.setText("CLEAR");
+        ClearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AssessmentPanelLayout = new javax.swing.GroupLayout(AssessmentPanel);
         AssessmentPanel.setLayout(AssessmentPanelLayout);
         AssessmentPanelLayout.setHorizontalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addComponent(FileSubmissionLabel)
-                        .addGap(29, 29, 29)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 997, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AssignmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(FilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Description, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
+                        .addComponent(AssignmentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
                 .addGap(485, 485, 485)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SubmitFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(410, Short.MAX_VALUE))
         );
         AssessmentPanelLayout.setVerticalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,15 +246,15 @@ public class StudentSubmitFile extends javax.swing.JFrame {
                 .addComponent(AssignmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(FilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(67, 67, 67)
                         .addComponent(FileSubmissionLabel)))
-                .addGap(155, 155, 155)
+                .addGap(30, 30, 30)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SubmitFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(181, Short.MAX_VALUE))
         );
 
@@ -241,7 +285,7 @@ public class StudentSubmitFile extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,6 +355,78 @@ public class StudentSubmitFile extends javax.swing.JFrame {
         LoginPage loginPage = new LoginPage();
         loginPage.setVisible(true);
     }//GEN-LAST:event_LogoutBtnActionPerformed
+    
+    private void UploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadBtnActionPerformed
+        // Create a file chooser
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Show open dialog
+        int result = fileChooser.showOpenDialog(this);
+
+        // Check if the user selected a file
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // Get the selected file
+            File selectedFile = fileChooser.getSelectedFile();
+
+            // Create a JPanel to hold file name and checkbox
+            JPanel fileEntryPanel = new JPanel();
+            fileEntryPanel.setLayout(new BorderLayout());
+
+            // Create a JLabel for the file name
+            JLabel fileNameLabel = new JLabel(selectedFile.getName());
+            fileNameLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            fileNameLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    String newName = JOptionPane.showInputDialog("Enter new name:");
+                    if (newName != null && !newName.isEmpty()) {
+                        fileNameLabel.setText(newName);
+                    }
+                }
+            });
+
+            // Create a JCheckBox for selection
+            JCheckBox fileCheckBox = new JCheckBox();
+            fileCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            // Add components to the file entry panel
+            fileEntryPanel.add(fileNameLabel, BorderLayout.CENTER);
+            fileEntryPanel.add(fileCheckBox, BorderLayout.WEST);
+
+            // Add the file entry panel to the file panel
+            FilePanel.add(fileEntryPanel);
+            FilePanel.revalidate();
+            FilePanel.repaint();
+        }
+        
+    }//GEN-LAST:event_UploadBtnActionPerformed
+
+    private void SubmitFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitFileBtnActionPerformed
+
+        
+    }//GEN-LAST:event_SubmitFileBtnActionPerformed
+
+    private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
+        // Get the selected radio button from the button group
+        ButtonModel selectedModel = buttonGroup.getSelection();
+
+        // Check if a radio button is selected
+        if (selectedModel != null) {
+            // Get the file path from the action command of the selected radio button
+            String filePath = selectedModel.getActionCommand();
+
+            // Create a File object
+            File file = new File(filePath);
+
+            // Delete the file
+            if (file.delete()) {
+                System.out.println("File deleted successfully");
+            } else {
+                System.out.println("Failed to delete the file");
+            }
+        }
+        
+    }//GEN-LAST:event_ClearBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,17 +469,18 @@ public class StudentSubmitFile extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AssessmentPanel;
     private javax.swing.JLabel AssignmentLabel;
+    private javax.swing.JButton ClearBtn;
     private javax.swing.JLabel Description;
+    private javax.swing.JPanel FilePanel;
     private javax.swing.JLabel FileSubmissionLabel;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JLabel ModuleLabel;
     private javax.swing.JButton PSlotBtn;
     private javax.swing.JButton ProfileBtn;
     private javax.swing.JButton ResultBtn;
+    private javax.swing.JButton SubmitFileBtn;
     private javax.swing.JButton UploadBtn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel filePathLabel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel moduleLabel;
