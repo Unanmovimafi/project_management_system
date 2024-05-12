@@ -4,13 +4,11 @@
  */
 package Project_Management_System;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 /**
  *
  * @author Owner
@@ -22,6 +20,77 @@ public class StudentOverallResult extends javax.swing.JFrame {
      */
     public StudentOverallResult() {
         initComponents();
+        displayResults();
+    }
+    private void displayResults() {
+    ResultsPanel.setLayout(new GridLayout(0, 1)); // Set layout for vertical arrangement of data
+
+    // Read student.txt file and populate studentNameMap
+    String studentFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\G23_GA_CT038-3-2-OODJ\\src\\Project_Management_System\\database\\student.txt";
+    String assignmentFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\G23_GA_CT038-3-2-OODJ\\src\\Project_Management_System\\database\\assignment_studentSubmission.txt";
+    String line;
+    try (BufferedReader br = new BufferedReader(new FileReader(studentFilePath))) {
+        while ((line = br.readLine()) != null) {
+            String[] studentParts = line.split("\t");
+            if (studentParts.length >= 2) {
+                String studentID = studentParts[0];
+                String studentName = studentParts[1];
+
+                // Create an instance of ContentBoxStudentOverallResult
+                ContentBoxStudentOverallResult contentBox = new ContentBoxStudentOverallResult(studentID, studentName, assignmentFilePath);
+                
+                // Add the content box to the ResultsPanel
+                ResultsPanel.add(contentBox);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+    
+    private void displayAssignmentResults(String filePath, String studentID) throws IOException {
+        String line;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
+                String[] assignmentParts = line.split("\t");
+                if (assignmentParts.length >= 4 && assignmentParts[1].equals(studentID)) {
+                    String subjectID = assignmentParts[0];  // Corrected index for Subject ID
+                    int marks1 = Integer.parseInt(assignmentParts[2]);
+                    int marks2 = Integer.parseInt(assignmentParts[3]);
+                    double average = (marks1 + marks2) / 2.0;
+                    String grade = calculateGrade(average);
+                
+                    JLabel resultLabel = new JLabel("Subject ID: " + subjectID + ", Average Marks: " + average + ", Grade: " + grade);
+                    ResultsPanel.add(resultLabel);
+                }
+            }
+        }
+    }
+    
+    private String calculateGrade(double average) {
+                if (average >= 80) {
+            return "A+";
+        } else if (average >= 75) {
+            return "A";
+        } else if (average >= 70) {
+            return "B+";
+        } else if (average >= 65) {
+            return "B";
+        } else if (average >= 60) {
+            return "C+";
+        } else if (average >= 55) {
+            return "C";
+        } else if (average >= 50) {
+            return "C-";
+        } else if (average >= 40) {
+            return "D";
+        } else if (average >= 30) {
+            return "F+";
+        } else if (average >= 20) {
+            return "F";
+        } else {
+            return "F-";
+        }
     }
 
     /**
@@ -38,11 +107,11 @@ public class StudentOverallResult extends javax.swing.JFrame {
         PresentationSlotButton = new javax.swing.JButton();
         ResultButton = new javax.swing.JButton();
         ProfileButton = new javax.swing.JButton();
-        ModuleLabel = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        ResultLabel = new javax.swing.JLabel();
+        ResultsPanel = new javax.swing.JPanel();
+        SearchBackgroundPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         SearchTextField = new javax.swing.JTextField();
-        ResultsPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -107,37 +176,9 @@ public class StudentOverallResult extends javax.swing.JFrame {
                 .addGap(393, 393, 393))
         );
 
-        ModuleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        ModuleLabel.setText("Result");
-        ModuleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
-
-        jPanel4.setBackground(new java.awt.Color(1, 51, 80));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Search:");
-
-        SearchTextField.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(743, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(544, 544, 544))
-        );
+        ResultLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        ResultLabel.setText("Result");
+        ResultLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
         javax.swing.GroupLayout ResultsPanelLayout = new javax.swing.GroupLayout(ResultsPanel);
         ResultsPanel.setLayout(ResultsPanelLayout);
@@ -150,6 +191,34 @@ public class StudentOverallResult extends javax.swing.JFrame {
             .addGap(0, 565, Short.MAX_VALUE)
         );
 
+        SearchBackgroundPanel.setBackground(new java.awt.Color(1, 51, 80));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Search:");
+
+        SearchTextField.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout SearchBackgroundPanelLayout = new javax.swing.GroupLayout(SearchBackgroundPanel);
+        SearchBackgroundPanel.setLayout(SearchBackgroundPanelLayout);
+        SearchBackgroundPanelLayout.setHorizontalGroup(
+            SearchBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SearchBackgroundPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(743, Short.MAX_VALUE))
+        );
+        SearchBackgroundPanelLayout.setVerticalGroup(
+            SearchBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchBackgroundPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(SearchBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(SearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(544, 544, 544))
+        );
+
         javax.swing.GroupLayout MainPanelYellowLayout = new javax.swing.GroupLayout(MainPanelYellow);
         MainPanelYellow.setLayout(MainPanelYellowLayout);
         MainPanelYellowLayout.setHorizontalGroup(
@@ -159,21 +228,21 @@ public class StudentOverallResult extends javax.swing.JFrame {
                 .addGroup(MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MainPanelYellowLayout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(ModuleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ResultLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(MainPanelYellowLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ResultsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(SearchBackgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         MainPanelYellowLayout.setVerticalGroup(
             MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelYellowLayout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SearchBackgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ResultsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -248,14 +317,15 @@ public class StudentOverallResult extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanelYellow;
-    private javax.swing.JLabel ModuleLabel;
     private javax.swing.JButton PresentationSlotButton;
     private javax.swing.JButton ProfileButton;
     private javax.swing.JButton ResultButton;
+    private javax.swing.JLabel ResultLabel;
     private javax.swing.JPanel ResultsPanel;
+    private javax.swing.JPanel SearchBackgroundPanel;
     private javax.swing.JTextField SearchTextField;
     private javax.swing.JPanel SidePanelBlue;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }
+
