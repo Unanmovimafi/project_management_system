@@ -16,7 +16,8 @@ import java.io.IOException;
  *
  * @author User
  */
-public class ContentBoxStudentOverallResult extends JPanel{
+
+public class ContentBoxStudentOverallResult extends JPanel {
     private String subID;
     private String studentID;
     private String studentName;
@@ -25,8 +26,8 @@ public class ContentBoxStudentOverallResult extends JPanel{
     private double average;
     private String grade;
     private ActionListener actionListener;
-    
-      public ContentBoxStudentOverallResult(String subID, String studentID, String assignmentFilePath) {
+
+    public ContentBoxStudentOverallResult(String subID, String studentID, String assignmentFilePath) {
         this.subID = subID;
         this.studentID = studentID;
 
@@ -48,7 +49,7 @@ public class ContentBoxStudentOverallResult extends JPanel{
 
         // Create labels for assessment details with newline characters ("\n")
         JLabel idLabel = new JLabel("Subject ID: " + subID);
-        JLabel nameLabel = new JLabel("Student Name: " + studentName);
+        JLabel nameLabel = new JLabel("Student Name: " + studentName); // Set student name
         JLabel marksLabel = new JLabel("Average Marks: " + average);
         JLabel gradeLabel = new JLabel("Grade: " + grade);
 
@@ -69,10 +70,29 @@ public class ContentBoxStudentOverallResult extends JPanel{
             if (actionListener != null) {
                 actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, subID));
             }
-    });
-}
+        });
+    }
+
+    private String fetchStudentName(String studentID) {
+        String studentName = "";
+        String filePath = "src\\Project_Management_System\\database\\student.txt"; // Adjust file path as needed
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\t");
+                if (parts.length > 1 && parts[0].equals(studentID)) {
+                    studentName = parts[1]; // Student name is in the second part
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return studentName;
+    }
+
     private void fetchAssignmentData(String subID, String studentID) {
-        String filePath = "assignment_studentSubmission.txt"; // Adjust file path as needed
+        String filePath = "src\\Project_Management_System\\database\\assignment_studentSubmission.txt"; // Adjust file path as needed
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -87,6 +107,7 @@ public class ContentBoxStudentOverallResult extends JPanel{
             e.printStackTrace();
         }
     }
+
     private String calculateGrade(double average) {
         if (average >= 80) {
             return "A+";
@@ -113,24 +134,6 @@ public class ContentBoxStudentOverallResult extends JPanel{
         }
     }
 
-    private String fetchStudentName(String studentID) {
-    String studentName = "";
-    String filePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\G23_GA_CT038-3-2-OODJ\\src\\Project_Management_System\\database\\student.txt"; // Adjust file path as needed
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split("\t");
-            if (parts.length > 1 && parts[0].equals(studentID)) {
-                studentName = parts[1]; // Student name is in the second part
-                break;
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return studentName;
-}
-        
     public void addActionListener(ActionListener listener) {
         actionListener = listener;
     }
