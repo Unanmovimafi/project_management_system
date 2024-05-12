@@ -5,6 +5,7 @@
 package Project_Management_System;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Font;
@@ -28,8 +29,6 @@ import javax.swing.JPanel;
  * @author Owner
  */
 public class StudentSubmitFile extends javax.swing.JFrame {
-    
-    ButtonGroup buttonGroup = new ButtonGroup();
     
     public StudentSubmitFile(String moduleCode, String moduleName, String moduleType, String startDate, String endDate, String firstMarker, String secondMarker, String assignmentName) {
         initComponents();
@@ -407,22 +406,34 @@ public class StudentSubmitFile extends javax.swing.JFrame {
     }//GEN-LAST:event_SubmitFileBtnActionPerformed
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
-        // Get the selected radio button from the button group
-        ButtonModel selectedModel = buttonGroup.getSelection();
+        // Iterate over all components in FilePanel to find the selected checkbox
+        for (Component component : FilePanel.getComponents()) {
+            if (component instanceof JPanel) {
+                JPanel fileEntryPanel = (JPanel) component;
+                Component[] components = fileEntryPanel.getComponents();
+                if (components.length == 2 && components[0] instanceof JCheckBox) {
+                    JCheckBox checkBox = (JCheckBox) components[0];
+                    if (checkBox.isSelected()) {
+                        // Get the file path from the action command of the checkbox
+                        String filePath = checkBox.getActionCommand();
 
-        // Check if a radio button is selected
-        if (selectedModel != null) {
-            // Get the file path from the action command of the selected radio button
-            String filePath = selectedModel.getActionCommand();
+                        // Create a File object
+                        File file = new File(filePath);
 
-            // Create a File object
-            File file = new File(filePath);
-
-            // Delete the file
-            if (file.delete()) {
-                System.out.println("File deleted successfully");
-            } else {
-                System.out.println("Failed to delete the file");
+                        // Delete the file
+                        if (file.delete()) {
+                            System.out.println("File deleted successfully");
+                            // Remove the file entry panel from the FilePanel
+                            FilePanel.remove(fileEntryPanel);
+                            FilePanel.revalidate();
+                            FilePanel.repaint();
+                        } else {
+                            System.out.println("Failed to delete the file");
+                            System.out.println("File path: " + filePath);
+                        }
+                        break; // Exit loop after deleting the file
+                    }
+                }
             }
         }
         
