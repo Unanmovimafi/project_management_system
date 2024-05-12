@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -23,6 +24,13 @@ import javax.swing.JScrollPane;
  * @author Owner
  */
 public class StudentHome extends javax.swing.JFrame {
+    
+    private String ID;
+    
+    public void setID(String ID) {
+        this.ID = ID;
+        createAssessmentPanels();
+    }
     
 private void createAssignmentPanels(String assessmentID) {
         String line;
@@ -86,67 +94,75 @@ private void createAssignmentPanels(String assessmentID) {
  
     private void createAssessmentPanels() {
         String line;
+        String line2;
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
-                
-                javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-                javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
-                
-                jLabel1.setText(record[0]);
-                jLabel2.setText(record[1]);
-                
-                jPanel1.setLayout(jPanel1Layout);
-                jPanel1Layout.setHorizontalGroup(
-                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addContainerGap(100, Short.MAX_VALUE))
-                );
-                jPanel1Layout.setVerticalGroup(
-                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
-        
-        jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
-                
-                jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                    // TODO add your handling code here:
-                    System.out.println(record[0]);
-                    createAssignmentPanels(record[0]);
-                    
-                    pInsideAssessment.setVisible(true);
-                    jPanel2.setVisible(false);
-                    ModuleLabel.setText(record[1]);
-                    
+                try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt")); 
+                    while ((line2 = br2.readLine()) != null) {
+                        String[] record2 = line2.split("\t");
+                        System.out.println(ID);
+                        if (ID.equals(record2[1]) && record2[0].equals(record[0])){
+                            System.out.println("succ");
+                            javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                            javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                            javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+
+                            jLabel1.setText(record[0]);
+                            jLabel2.setText(record[1]);
+
+                            jPanel1.setLayout(jPanel1Layout);
+                            jPanel1Layout.setHorizontalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                    .addContainerGap(100, Short.MAX_VALUE))
+                            );
+                            jPanel1Layout.setVerticalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel2)
+                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            );
+
+                            jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+
+                            jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                                public void mouseReleased(java.awt.event.MouseEvent evt) {
+                                    // TODO add your handling code here:
+                                    System.out.println(record[0]);
+                                    createAssignmentPanels(record[0]);
+
+                                    pInsideAssessment.setVisible(true);
+                                    jPanel2.setVisible(false);
+                                    ModuleLabel.setText(record[1]);
+                                    }
+                            });
+
+                            pAssessment.add(jPanel1);}
                     }
-                });
-                
-                
-                pAssessment.add(jPanel1);
+                }catch (Exception e) {
+                    e.getMessage();
+                }
             }
-            jScrollPane1.setViewportView(pAssessment);
         } catch (Exception e) {
         e.getMessage();
-    }
+        }
+        
+        jScrollPane1.setViewportView(pAssessment);
     }
     /**
      * Creates new form StudentHome
      */
     public StudentHome() {
         initComponents();
-         createAssessmentPanels();
     }
     /**
      * This method is called from within the constructor to initialize the form.

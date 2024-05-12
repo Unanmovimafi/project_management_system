@@ -226,11 +226,13 @@ public class LoginPage extends javax.swing.JFrame {
                     br.close();
                     this.dispose();
 
-                    AdminHomePage ap = new AdminHomePage();
-
-                    ap.setVisible(true);
-                    ap.pack();
-                    ap.setLocationRelativeTo(null);
+                    StudentHome shp = new StudentHome();
+                    
+                    shp.setID(username);
+                    
+                    shp.setVisible(true);
+                    shp.pack();
+                    shp.setLocationRelativeTo(null);
                     return;
                 }
             }
