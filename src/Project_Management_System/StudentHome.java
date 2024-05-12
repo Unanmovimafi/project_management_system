@@ -75,10 +75,13 @@ private void createAssignmentPanels(String assessmentID) {
                 jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseReleased(java.awt.event.MouseEvent evt) {
                     // TODO add your handling code here:
+                    AssignmentLabel.setText(record[2]);
+                    Description.setText(record[3]);
                     
+                    pAssignmentSubmission.setVisible(true);
                     
-                    
-                    
+                    pInsideAssessment.setVisible(false);
+                    pDashboard.setVisible(false);
                     }
                 });
                 
@@ -141,8 +144,10 @@ private void createAssignmentPanels(String assessmentID) {
                                     createAssignmentPanels(record[0]);
 
                                     pInsideAssessment.setVisible(true);
-                                    jPanel2.setVisible(false);
+                                    pDashboard.setVisible(false);
+                                    pAssignmentSubmission.setVisible(false);
                                     ModuleLabel.setText(record[1]);
+                                    moduleLabel.setText(record[1]);
                                     }
                             });
 
@@ -163,6 +168,9 @@ private void createAssignmentPanels(String assessmentID) {
      */
     public StudentHome() {
         initComponents();
+        pDashboard.setVisible(true);
+        pInsideAssessment.setVisible(false);
+        pAssignmentSubmission.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,7 +186,7 @@ private void createAssignmentPanels(String assessmentID) {
         resultButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        pDashboard = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pAssessment = new javax.swing.JPanel();
@@ -186,7 +194,7 @@ private void createAssignmentPanels(String assessmentID) {
         ModuleLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pAssignment = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        pAssignmentSubmission = new javax.swing.JPanel();
         AssessmentPanel = new javax.swing.JPanel();
         Description = new javax.swing.JLabel();
         FileSubmissionLabel = new javax.swing.JLabel();
@@ -258,8 +266,8 @@ private void createAssignmentPanels(String assessmentID) {
                 .addGap(393, 393, 393))
         );
 
-        jPanel2.setBackground(new java.awt.Color(252, 247, 204));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1500, 780));
+        pDashboard.setBackground(new java.awt.Color(252, 247, 204));
+        pDashboard.setPreferredSize(new java.awt.Dimension(1500, 780));
 
         mainTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         mainTitleLabel.setText("Student Dashboard");
@@ -268,20 +276,20 @@ private void createAssignmentPanels(String assessmentID) {
         pAssessment.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(pAssessment);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pDashboardLayout = new javax.swing.GroupLayout(pDashboard);
+        pDashboard.setLayout(pDashboardLayout);
+        pDashboardLayout.setHorizontalGroup(
+            pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDashboardLayout.createSequentialGroup()
                 .addContainerGap(122, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(736, 736, 736))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pDashboardLayout.setVerticalGroup(
+            pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pDashboardLayout.createSequentialGroup()
                 .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,8 +329,8 @@ private void createAssignmentPanels(String assessmentID) {
                 .addContainerGap(158, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(252, 247, 204));
-        jPanel3.setPreferredSize(new java.awt.Dimension(1500, 780));
+        pAssignmentSubmission.setBackground(new java.awt.Color(252, 247, 204));
+        pAssignmentSubmission.setPreferredSize(new java.awt.Dimension(1500, 780));
 
         AssessmentPanel.setBackground(new java.awt.Color(255, 255, 255));
         AssessmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -421,20 +429,20 @@ private void createAssignmentPanels(String assessmentID) {
         moduleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         moduleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pAssignmentSubmissionLayout = new javax.swing.GroupLayout(pAssignmentSubmission);
+        pAssignmentSubmission.setLayout(pAssignmentSubmissionLayout);
+        pAssignmentSubmissionLayout.setHorizontalGroup(
+            pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
                 .addGap(294, 294, 294)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1151, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pAssignmentSubmissionLayout.setVerticalGroup(
+            pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -448,7 +456,7 @@ private void createAssignmentPanels(String assessmentID) {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -458,14 +466,14 @@ private void createAssignmentPanels(String assessmentID) {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -475,7 +483,7 @@ private void createAssignmentPanels(String assessmentID) {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(45, 45, 45)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(46, Short.MAX_VALUE)))
         );
 
@@ -592,14 +600,14 @@ private void createAssignmentPanels(String assessmentID) {
     private javax.swing.JButton UploadBtn;
     private javax.swing.JLabel filePathLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel moduleLabel;
     private javax.swing.JPanel pAssessment;
     private javax.swing.JPanel pAssignment;
+    private javax.swing.JPanel pAssignmentSubmission;
+    private javax.swing.JPanel pDashboard;
     private javax.swing.JPanel pInsideAssessment;
     private javax.swing.JButton presentationButton;
     private javax.swing.JButton profileButton;
