@@ -502,48 +502,7 @@ private void createAssignmentPanels(String assessmentID) {
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void UploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadBtnActionPerformed
-        // Create a file chooser
-        JFileChooser fileChooser = new JFileChooser();
-
-        // Show open dialog
-        int result = fileChooser.showOpenDialog(this);
-
-        // Check if the user selected a file
-        if (result == JFileChooser.APPROVE_OPTION) {
-            // Get the selected file
-            File selectedFile = fileChooser.getSelectedFile();
-
-            // Create a JPanel to hold file name and checkbox
-            JPanel fileEntryPanel = new JPanel();
-            fileEntryPanel.setLayout(new BorderLayout());
-
-            // Create a JLabel for the file name
-            JLabel fileNameLabel = new JLabel(selectedFile.getName());
-            fileNameLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            fileNameLabel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    String newName = JOptionPane.showInputDialog("Enter new name:");
-                    if (newName != null && !newName.isEmpty()) {
-                        fileNameLabel.setText(newName);
-                    }
-                }
-            });
-
-            // Create a JCheckBox for selection
-            JCheckBox fileCheckBox = new JCheckBox();
-            fileCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-            // Add components to the file entry panel
-            fileEntryPanel.add(fileNameLabel, BorderLayout.CENTER);
-            fileEntryPanel.add(fileCheckBox, BorderLayout.WEST);
-
-            // Add the file entry panel to the file panel
-            FilePanel.add(fileEntryPanel);
-            FilePanel.revalidate();
-            FilePanel.repaint();
-        }
-
+        
     }//GEN-LAST:event_UploadBtnActionPerformed
 
     private void SubmitFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitFileBtnActionPerformed
@@ -552,35 +511,6 @@ private void createAssignmentPanels(String assessmentID) {
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
         // Iterate over all components in FilePanel to find the selected checkbox
-        for (Component component : FilePanel.getComponents()) {
-            if (component instanceof JPanel) {
-                JPanel fileEntryPanel = (JPanel) component;
-                Component[] components = fileEntryPanel.getComponents();
-                if (components.length == 2 && components[0] instanceof JCheckBox) {
-                    JCheckBox checkBox = (JCheckBox) components[0];
-                    if (checkBox.isSelected()) {
-                        // Get the file path from the action command of the checkbox
-                        String filePath = checkBox.getActionCommand();
-
-                        // Create a File object
-                        File file = new File(filePath);
-
-                        // Delete the file
-                        if (file.delete()) {
-                            System.out.println("File deleted successfully");
-                            // Remove the file entry panel from the FilePanel
-                            FilePanel.remove(fileEntryPanel);
-                            FilePanel.revalidate();
-                            FilePanel.repaint();
-                        } else {
-                            System.out.println("Failed to delete the file");
-                            System.out.println("File path: " + filePath);
-                        }
-                        break; // Exit loop after deleting the file
-                    }
-                }
-            }
-        }
 
     }//GEN-LAST:event_ClearBtnActionPerformed
 
