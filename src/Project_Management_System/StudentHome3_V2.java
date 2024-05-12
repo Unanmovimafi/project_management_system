@@ -31,38 +31,12 @@ public class StudentHome3_V2 extends javax.swing.JFrame {
     }
  
     private void createAssessmentPanels() {
-        String line;
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
-            while ((line = br.readLine()) != null) {
-                String[] record = line.split("\t");
-                System.out.println(record[0]);
-                
-                javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-                javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
-                
-                jLabel1.setText(record[0]);
-                jLabel2.setText(record[1]);
-                
-                jPanel1Layout.setHorizontalGroup(
-                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(214, 214, 214)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(242, 242, 242)
-                                .addComponent(jLabel2)))
-                        .addContainerGap(268, Short.MAX_VALUE))
-                );
-                pAssessment.add(jPanel1);
-            }
-            jScrollPane1.setViewportView(pAssessment);
-        } catch (Exception e) {
-        e.getMessage();
-    }
+
+
+
+
+
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,7 +57,6 @@ public class StudentHome3_V2 extends javax.swing.JFrame {
         profileButton = new javax.swing.JButton();
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        pAssessment = new javax.swing.JPanel();
 
         jLabel1.setText("Code");
 
@@ -178,9 +151,6 @@ public class StudentHome3_V2 extends javax.swing.JFrame {
         mainTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         mainTitleLabel.setText("Student Dashboard");
         mainTitleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
-
-        pAssessment.setLayout(new java.awt.GridLayout(0, 1));
-        jScrollPane1.setViewportView(pAssessment);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -289,7 +259,6 @@ public class StudentHome3_V2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mainTitleLabel;
-    private javax.swing.JPanel pAssessment;
     private javax.swing.JButton presentationButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JButton resultButton;
