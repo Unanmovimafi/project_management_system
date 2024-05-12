@@ -4,11 +4,16 @@
  */
 package Project_Management_System;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Owner
@@ -18,84 +23,132 @@ public class StudentOverallResult extends javax.swing.JFrame {
     /**
      * Creates new form StudentHome
      */
+    private Map<String, String> assessmentData = new HashMap<>();
+    private Map<String, String[]> subjectToAssessmentMap = new HashMap<>();
     
     public StudentOverallResult() {
         initComponents();
+         loadData();
         displayResults();
+        
+    
     }
     
-    private void displayResults() {
-    ResultsPanel.setLayout(new GridLayout(0, 1)); // Set layout for vertical arrangement of data
-
-    // Read student.txt file and populate studentNameMap
-    String studentFilePath = "src/Project_Management_System/database/student.txt";
-    String assignmentFilePath = "src/Project_Management_System/database/assignment_studentSubmission.txt";
-    String line;
-    try (BufferedReader br = new BufferedReader(new FileReader(studentFilePath))) {
+  private void loadData() {
+    // Load data from assignment_studentSubmission.txt
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"))) {
+        String line;
         while ((line = br.readLine()) != null) {
-            String[] studentParts = line.split("\t");
-            if (studentParts.length >= 2) {
-                String studentID = studentParts[0];
-                String studentName = studentParts[1];
-
-                // Create an instance of ContentBoxStudentOverallResult
-                ContentBoxStudentOverallResult contentBox = new ContentBoxStudentOverallResult(studentID, studentName, assignmentFilePath);
-                
-                // Add the content box to the ResultsPanel
-                ResultsPanel.add(contentBox);
+            String[] parts = line.split("\t");
+            String subjectId = parts[0];
+            String studentId = parts[1];
+            int mark1 = Integer.parseInt(parts[3]);
+            int mark2 = Integer.parseInt(parts[4]);
+            double average = (mark1 + mark2) / 2.0;
+            String[] assessmentInfo = subjectToAssessmentMap.get(subjectId);
+            if (assessmentInfo != null) { // Check if assessmentInfo is not null
+                String assessmentId = assessmentInfo[1]; // Get assessment ID
+                assessmentData.put(studentId + "_" + assessmentId, Double.toString(average));
+            } else {
+                // Handle case where subjectId is not found in subjectToAssessmentMap
+                System.err.println("Subject ID not found: " + subjectId);
             }
         }
     } catch (IOException e) {
         e.printStackTrace();
     }
+
+    // Load subject to assessment mapping from assessment_assignment.txt
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_assignment.txt"))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split("\t");
+            String subjectId = parts[0];
+            String assessmentId = parts[1];
+            subjectToAssessmentMap.putIfAbsent(subjectId, new String[2]);
+            subjectToAssessmentMap.get(subjectId)[1] = assessmentId;
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+    
+    private void displayResults() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(subjectToAssessmentMap.size(), 5));
+
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        for (Map.Entry<String, String[]> entry : subjectToAssessmentMap.entrySet()) {
+            String subjectId = entry.getKey();
+            String[] assessmentInfo = entry.getValue();
+            String assessmentId = assessmentInfo[1];
+            String assessmentName = getAssessmentName(assessmentId);
+            double average = calculateAverage(subjectId, assessmentId);
+            String grade = calculateGrade(average);
+
+            JLabel labelSubjectId = new JLabel(subjectId);
+            JLabel labelAssessmentId = new JLabel(assessmentId);
+            JLabel labelAssessmentName = new JLabel(assessmentName);
+            JLabel labelAverage = new JLabel(df.format(average));
+            JLabel labelGrade = new JLabel(grade);
+
+            panel.add(labelSubjectId);
+            panel.add(labelAssessmentId);
+            panel.add(labelAssessmentName);
+            panel.add(labelAverage);
+            panel.add(labelGrade);
+        }
+
+        ResultScrollPane.setViewportView(panel);
     }
     
-    
-    
-    private void displayAssignmentResults(String filePath, String studentID) throws IOException {
-        String line;
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"))) {
-            while ((line = br.readLine()) != null) {
-                String[] assignmentParts = line.split("\t");
-                if (assignmentParts.length >= 4 && assignmentParts[1].equals(studentID)) {
-                    String subjectID = assignmentParts[0];  // Corrected index for Subject ID
-                    int marks1 = Integer.parseInt(assignmentParts[2]);
-                    int marks2 = Integer.parseInt(assignmentParts[3]);
-                    double average = (marks1 + marks2) / 2.0;
-                    String grade = calculateGrade(average);
-                
-                    JLabel resultLabel = new JLabel("Subject ID: " + subjectID + ", Average Marks: " + average + ", Grade: " + grade);
-                    ResultsPanel.add(resultLabel);
-                }
+    private String getAssessmentName(String assessmentId) {
+        // Implement logic to retrieve assessment name from assessment_assignment.txt based on assessmentId
+        return "Assessment Name"; // Placeholder
+    }
+
+    private double calculateAverage(String subjectId, String assessmentId) {
+        double total = 0.0;
+        int count = 0;
+
+        for (Map.Entry<String, String> entry : assessmentData.entrySet()) {
+            String key = entry.getKey();
+            if (key.endsWith("_" + assessmentId)) {
+                total += Double.parseDouble(entry.getValue());
+                count++;
             }
         }
+
+        return count == 0 ? 0.0 : total / count;
     }
-    
+
     private String calculateGrade(double average) {
-                if (average >= 80) {
-            return "A+";
-        } else if (average >= 75) {
-            return "A";
-        } else if (average >= 70) {
-            return "B+";
-        } else if (average >= 65) {
-            return "B";
-        } else if (average >= 60) {
-            return "C+";
-        } else if (average >= 55) {
-            return "C";
-        } else if (average >= 50) {
-            return "C-";
-        } else if (average >= 40) {
-            return "D";
-        } else if (average >= 30) {
-            return "F+";
-        } else if (average >= 20) {
-            return "F";
-        } else {
-            return "F-";
-        }
+    if (average >= 80) {
+        return "A+";
+    } else if (average >= 75) {
+        return "A";
+    } else if (average >= 70) {
+        return "B+";
+    } else if (average >= 65) {
+        return "B";
+    } else if (average >= 60) {
+        return "C+";
+    } else if (average >= 55) {
+        return "C";
+    } else if (average >= 50) {
+        return "C-";
+    } else if (average >= 40) {
+        return "D";
+    } else if (average >= 30) {
+        return "F+";
+    } else if (average >= 20) {
+        return "F";
+    } else {
+        return "F-";
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,6 +166,7 @@ public class StudentOverallResult extends javax.swing.JFrame {
         ProfileButton = new javax.swing.JButton();
         ResultLabel = new javax.swing.JLabel();
         ResultsPanel = new javax.swing.JPanel();
+        ResultScrollPane = new javax.swing.JScrollPane();
         SearchBackgroundPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         SearchTextField = new javax.swing.JTextField();
@@ -184,15 +238,17 @@ public class StudentOverallResult extends javax.swing.JFrame {
         ResultLabel.setText("Result");
         ResultLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
+        ResultsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout ResultsPanelLayout = new javax.swing.GroupLayout(ResultsPanel);
         ResultsPanel.setLayout(ResultsPanelLayout);
         ResultsPanelLayout.setHorizontalGroup(
             ResultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(ResultScrollPane)
         );
         ResultsPanelLayout.setVerticalGroup(
             ResultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addComponent(ResultScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
 
         SearchBackgroundPanel.setBackground(new java.awt.Color(1, 51, 80));
@@ -229,26 +285,22 @@ public class StudentOverallResult extends javax.swing.JFrame {
             MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelYellowLayout.createSequentialGroup()
                 .addComponent(SidePanelBlue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MainPanelYellowLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(ResultLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1249, Short.MAX_VALUE))
-                    .addGroup(MainPanelYellowLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ResultsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SearchBackgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(ResultsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SearchBackgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         MainPanelYellowLayout.setVerticalGroup(
             MainPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelYellowLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(54, 54, 54)
                 .addComponent(ResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SearchBackgroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(ResultsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(SidePanelBlue, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
@@ -311,6 +363,18 @@ public class StudentOverallResult extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -318,7 +382,7 @@ public class StudentOverallResult extends javax.swing.JFrame {
                 new StudentOverallResult().setVisible(true);
             }
         });
-    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanelYellow;
@@ -326,11 +390,14 @@ public class StudentOverallResult extends javax.swing.JFrame {
     private javax.swing.JButton ProfileButton;
     private javax.swing.JButton ResultButton;
     private javax.swing.JLabel ResultLabel;
+    private javax.swing.JScrollPane ResultScrollPane;
     private javax.swing.JPanel ResultsPanel;
     private javax.swing.JPanel SearchBackgroundPanel;
     private javax.swing.JTextField SearchTextField;
     private javax.swing.JPanel SidePanelBlue;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+   
 }
 
