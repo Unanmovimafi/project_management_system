@@ -141,6 +141,7 @@ private void createAssignmentPanels(String assessmentID) {
                     
                     pInsideAssessment.setVisible(false);
                     pDashboard.setVisible(false);
+                    pAssignmentSubmission.setVisible(false);
                     }
                 });
                 
@@ -202,6 +203,7 @@ private void createAssignmentPanels(String assessmentID) {
                                     pInsideAssessment.setVisible(true);
                                     pDashboard.setVisible(false);
                                     pAssignmentSubmission.setVisible(false);
+                                    pSubmittedAssign.setVisible(false);
                                     assessmentID = record[0];
                                     ModuleLabel.setText(record[1]);
                                     moduleLabel.setText(record[1]);
@@ -229,6 +231,7 @@ private void createAssignmentPanels(String assessmentID) {
         pDashboard.setVisible(true);
         pInsideAssessment.setVisible(false);
         pAssignmentSubmission.setVisible(false);
+        pSubmittedAssign.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -819,8 +822,8 @@ private void createAssignmentPanels(String assessmentID) {
             String FileName = filePath.substring(filePath.lastIndexOf("\\")+1);
             
             lFileName.setText(FileName);
-            File destinationDir = new File ("src/Project_Management_System/storage/" + assessmentID +"/"+ assignID + "/" +ID);
-            destinationFile = new File ("src/Project_Management_System/storage/" + assessmentID +"/"+ assignID + "/" +ID + "/" +FileName);
+            File destinationDir = new File ("src\\Project_Management_System\\storage\\" + assessmentID +"\\"+ assignID + "\\" +ID);
+            destinationFile = new File ("src\\Project_Management_System\\storage\\" + assessmentID +"\\"+ assignID + "\\" +ID + "\\" +FileName);
             
                 if (!destinationDir.exists()){
                     destinationDir.mkdirs();
@@ -830,29 +833,49 @@ private void createAssignmentPanels(String assessmentID) {
 
     private void bSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveFileActionPerformed
         // TODO add your handling code here:
-        //less submitted file validation
-        if (sourceFile != null) {
-            try {
-                //Write the information to the text file
-                String submitFile = assignID + "\t" + ID +"\t" + destinationFile;
-
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assignment_studentSubmission.txt", true));
-                writer.write(submitFile + "\n");
-                writer.close();
-                } 
-            catch (Exception e) {
-                System.err.println(e.getMessage());
+        boolean gotRecord = false;
+        String line2;
+        
+        int row = -1;
+        try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt")); 
+            while ((line2 = br2.readLine()) != null) {
+                String[] record2 = line2.split("\t");
+                row = row + 1;
+                if (record2[0].equals(assignID) && record2[1].equals(ID)) {
+                    gotRecord = true;
+                    break;
+                }
             }
-            try {
-                //Copy the file to folder
-                Files.copy(sourceFile.toPath(), destinationFile.toPath());
-                } 
-            catch (Exception e) {
-               System.err.println(e.getMessage());
-            }
+        } catch (Exception e) {
+            e.getMessage();
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Please select at least submit a file");
+        
+        if (gotRecord){
+            JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
+        } else{
+            if (sourceFile != null) {
+                try {
+                    //Write the information to the text file
+                    String submitFile = assignID + "\t" + ID +"\t" + destinationFile;
+
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assignment_studentSubmission.txt", true));
+                    writer.write(submitFile + "\n");
+                    writer.close();
+                    } 
+                catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+                try {
+                    //Copy the file to folder
+                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+                    } 
+                catch (Exception e) {
+                   System.err.println(e.getMessage());
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please at least select a file");
+            }
         }
         
     }//GEN-LAST:event_bSaveFileActionPerformed
@@ -864,6 +887,8 @@ private void createAssignmentPanels(String assessmentID) {
         destinationFile = null;
         String oldFilePath = null;
         String line2;
+        boolean gotRecord = false;
+        
         int row = -1;
         try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt")); 
             while ((line2 = br2.readLine()) != null) {
@@ -871,28 +896,63 @@ private void createAssignmentPanels(String assessmentID) {
                 row = row + 1;
                 if (record2[0].equals(assignID) && record2[1].equals(ID)) {
                     oldFilePath = record2[2];
-                    continue;
+                    gotRecord = true;
+                    break;
                 }
             }
         } catch (Exception e) {
             e.getMessage();
         }
-        System.out.println(oldFilePath);
-//        try {
-//                 //Delete the old file
-//                File oldFile = new File (oldFilePath);
-//                oldFile.delete();
-//                
-//            } catch (Exception e) {
-//                 System.out.println(e.getMessage());
-//
-//            }
         
+        if (gotRecord){
+            List<String> lines = getAllStudentSubmitRecord();
+
+            int currentIndex = -1;
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"));
+                for (String updatedLine : lines) {
+                    currentIndex++;
+                    //skip the speific record
+                    if (currentIndex == row) {
+                        continue;
+                    }
+                    else {
+                        System.out.println(updatedLine);
+                        //rewrite other line to file
+                        writer.write(updatedLine);
+                        writer.newLine();
+                    }
+                }
+                writer.close();
+                }
+            catch (Exception e) {
+               e.getMessage();
+            }
+
+                bRemoveSub.setVisible(false);
+
+            System.out.println(oldFilePath);
+            try {
+                //Delete the old file
+               File oldFile = new File (oldFilePath);
+               oldFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        else{
+            bRemoveSub.setVisible(false);
+        }
+            
     }//GEN-LAST:event_bRemoveSubActionPerformed
 
     private void bSubmitSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitSubmissionActionPerformed
         // TODO add your handling code here:
         pAssignmentSubmission.setVisible(true);
+        pInsideAssessment.setVisible(false);
+        pSubmittedAssign.setVisible(false);
+        pDashboard.setVisible(false);
+        
     }//GEN-LAST:event_bSubmitSubmissionActionPerformed
 
     private void bCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelActionPerformed
