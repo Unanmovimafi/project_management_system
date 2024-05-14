@@ -7,6 +7,7 @@ package Project_Management_System;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -67,6 +68,7 @@ public class StudentHome extends javax.swing.JFrame {
 private void createAssignmentPanels(String assessmentID) {
     pAssignment.removeAll();
         String line;
+        int count = 0;
         
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_assignment.txt")); 
             while ((line = br.readLine()) != null) {
@@ -102,6 +104,7 @@ private void createAssignmentPanels(String assessmentID) {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
         
+                jPanel1.setPreferredSize(new Dimension(550, 50));
                 jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
                 jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 
@@ -151,15 +154,15 @@ private void createAssignmentPanels(String assessmentID) {
                     }
                 });
                 
-                
+                count = count + 1;
                 pAssignment.add(jPanel1);
             }
-            jScrollPane2.setViewportView(pAssignment);
             }
         } catch (Exception e) {
         e.getMessage();
     }
-        
+        pAssignment.setPreferredSize(new Dimension(350, count*55));
+        jScrollPane2.setViewportView(pAssignment);
         pAssignment.revalidate();
         pAssignment.repaint();  
     }
@@ -170,6 +173,7 @@ private void createAssignmentPanels(String assessmentID) {
         
         String line;
         String line2;
+        int count = 0;
         
                 try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt")); 
                     while ((line2 = br2.readLine()) != null) {
@@ -207,6 +211,7 @@ private void createAssignmentPanels(String assessmentID) {
                                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             );
 
+                            jPanel1.setPreferredSize(new Dimension(450, 50));
                             jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
                             jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -226,6 +231,7 @@ private void createAssignmentPanels(String assessmentID) {
                                     }
                             });
                             pAssessment.add(jPanel1);
+                            count = count + 1;
                             break;
                         }
                     }
@@ -237,7 +243,7 @@ private void createAssignmentPanels(String assessmentID) {
         } catch (Exception e) {
         e.getMessage();
         }
-        
+        pAssessment.setPreferredSize(new Dimension(350, count*55));
         jScrollPane1.setViewportView(pAssessment);
         
         
@@ -373,7 +379,6 @@ private void createAssignmentPanels(String assessmentID) {
         mainTitleLabel.setText("Student Dashboard");
         mainTitleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        pAssessment.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(pAssessment);
 
         javax.swing.GroupLayout pDashboardLayout = new javax.swing.GroupLayout(pDashboard);
@@ -402,7 +407,6 @@ private void createAssignmentPanels(String assessmentID) {
         ModuleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         ModuleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        pAssignment.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane2.setViewportView(pAssignment);
 
         bBackInsideAssessment.setText("Back");
