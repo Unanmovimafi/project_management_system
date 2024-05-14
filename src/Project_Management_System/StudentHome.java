@@ -38,6 +38,8 @@ public class StudentHome extends javax.swing.JFrame {
     private File sourceFile;
     private File destinationFile;
     
+    private int rowOfAssignmentStudentSubmission = -1;
+    
     public void setID(String ID) {
         this.ID = ID;
         createAssessmentPanels();
@@ -63,6 +65,7 @@ public class StudentHome extends javax.swing.JFrame {
     } 
     
 private void createAssignmentPanels(String assessmentID) {
+    pAssignment.removeAll();
         String line;
         
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_assignment.txt")); 
@@ -100,6 +103,7 @@ private void createAssignmentPanels(String assessmentID) {
                 );
         
                 jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 
                 jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -118,9 +122,11 @@ private void createAssignmentPanels(String assessmentID) {
                     try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt")); 
                         while ((line2 = br2.readLine()) != null) {
                             String[] record2 = line2.split("\t");
+                            rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
                             if (record2[0].equals(assignID) && record2[1].equals(ID) && !record2[2].equals("")) {
                                 submittedFile = record2[2];
                                 isSubmittedFile = true;
+                                break;
                             }
                         }
                         
@@ -132,13 +138,13 @@ private void createAssignmentPanels(String assessmentID) {
                         String FileName = submittedFile.substring(submittedFile.lastIndexOf("\\")+1);
                         lSubmissionStatus.setText("Submitted");
                         lSubmittedFile.setText(submittedFile);
-                        lFileName.setText(submittedFile);
                     } else {
                         lSubmissionStatus.setText("Not Submitted");
+                        lSubmittedFile.setText("");
+                        rowOfAssignmentStudentSubmission = - 1;
                     }
                     
                     pSubmittedAssign.setVisible(true);
-                    
                     pInsideAssessment.setVisible(false);
                     pDashboard.setVisible(false);
                     pAssignmentSubmission.setVisible(false);
@@ -153,11 +159,18 @@ private void createAssignmentPanels(String assessmentID) {
         } catch (Exception e) {
         e.getMessage();
     }
+        
+        pAssignment.revalidate();
+        pAssignment.repaint();  
     }
  
     private void createAssessmentPanels() {
+        
+        pAssessment.removeAll();
+        
         String line;
         String line2;
+        
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
@@ -165,6 +178,7 @@ private void createAssignmentPanels(String assessmentID) {
                     while ((line2 = br2.readLine()) != null) {
                         String[] record2 = line2.split("\t");
                         if (ID.equals(record2[1]) && record2[0].equals(record[0])){
+                            System.out.println(record[1]);
                             javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
                             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                             javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
@@ -194,6 +208,7 @@ private void createAssignmentPanels(String assessmentID) {
                             );
 
                             jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                            jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
                             jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                                 public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -210,18 +225,23 @@ private void createAssignmentPanels(String assessmentID) {
                                     ModuleLabel1.setText(record[1]);
                                     }
                             });
-
-                            pAssessment.add(jPanel1);}
+                            pAssessment.add(jPanel1);
+                        }
                     }
                 }catch (Exception e) {
                     e.getMessage();
                 }
             }
+            
         } catch (Exception e) {
         e.getMessage();
         }
         
         jScrollPane1.setViewportView(pAssessment);
+        
+        
+        pAssessment.revalidate();
+        pAssessment.repaint();  
     }
     /**
      * Creates new form StudentHome
@@ -255,9 +275,9 @@ private void createAssignmentPanels(String assessmentID) {
         ModuleLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pAssignment = new javax.swing.JPanel();
+        bBackInsideAssessment = new javax.swing.JButton();
         pAssignmentSubmission = new javax.swing.JPanel();
         AssessmentPanel = new javax.swing.JPanel();
-        Description = new javax.swing.JLabel();
         FileSubmissionLabel = new javax.swing.JLabel();
         FilePanel = new javax.swing.JPanel();
         UploadBtn = new javax.swing.JButton();
@@ -265,8 +285,8 @@ private void createAssignmentPanels(String assessmentID) {
         lFileName = new javax.swing.JLabel();
         bSaveFile = new javax.swing.JButton();
         bRemoveSub = new javax.swing.JButton();
-        AssignmentLabel = new javax.swing.JLabel();
         moduleLabel = new javax.swing.JLabel();
+        bBackAssignmentSubmission = new javax.swing.JButton();
         pSubmittedAssign = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -282,6 +302,8 @@ private void createAssignmentPanels(String assessmentID) {
         jPanel6 = new javax.swing.JPanel();
         lSubmissionStatus = new javax.swing.JLabel();
         ModuleLabel1 = new javax.swing.JLabel();
+        AssignmentLabel = new javax.swing.JLabel();
+        Description = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -382,25 +404,34 @@ private void createAssignmentPanels(String assessmentID) {
         pAssignment.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane2.setViewportView(pAssignment);
 
+        bBackInsideAssessment.setText("Back");
+        bBackInsideAssessment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBackInsideAssessmentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pInsideAssessmentLayout = new javax.swing.GroupLayout(pInsideAssessment);
         pInsideAssessment.setLayout(pInsideAssessmentLayout);
         pInsideAssessmentLayout.setHorizontalGroup(
             pInsideAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pInsideAssessmentLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(pInsideAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pInsideAssessmentLayout.createSequentialGroup()
-                        .addGap(315, 315, 315)
+                        .addComponent(bBackInsideAssessment)
+                        .addGap(223, 223, 223)
                         .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pInsideAssessmentLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pInsideAssessmentLayout.setVerticalGroup(
             pInsideAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pInsideAssessmentLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pInsideAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ModuleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bBackInsideAssessment))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(158, Short.MAX_VALUE))
@@ -475,14 +506,9 @@ private void createAssignmentPanels(String assessmentID) {
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addComponent(FileSubmissionLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(FilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Description, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
-                        .addComponent(AssignmentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(FileSubmissionLabel)
+                .addGap(18, 18, 18)
+                .addComponent(FilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
                 .addGap(485, 485, 485)
@@ -494,16 +520,12 @@ private void createAssignmentPanels(String assessmentID) {
         AssessmentPanelLayout.setVerticalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(Description)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AssignmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(103, 103, 103)
                         .addComponent(FilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
+                        .addGap(152, 152, 152)
                         .addComponent(FileSubmissionLabel)))
                 .addGap(30, 30, 30)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -515,6 +537,13 @@ private void createAssignmentPanels(String assessmentID) {
         moduleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         moduleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
+        bBackAssignmentSubmission.setText("Back");
+        bBackAssignmentSubmission.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBackAssignmentSubmissionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pAssignmentSubmissionLayout = new javax.swing.GroupLayout(pAssignmentSubmission);
         pAssignmentSubmission.setLayout(pAssignmentSubmissionLayout);
         pAssignmentSubmissionLayout.setHorizontalGroup(
@@ -522,16 +551,25 @@ private void createAssignmentPanels(String assessmentID) {
             .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
                 .addGap(294, 294, 294)
                 .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
+                        .addComponent(bBackAssignmentSubmission)
+                        .addGap(274, 274, 274)
+                        .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pAssignmentSubmissionLayout.setVerticalGroup(
             pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAssignmentSubmissionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(bBackAssignmentSubmission)
+                        .addGap(7, 7, 7)))
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -665,7 +703,9 @@ private void createAssignmentPanels(String assessmentID) {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -703,6 +743,10 @@ private void createAssignmentPanels(String assessmentID) {
         ModuleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
 
+        AssignmentLabel.setText("jLabel4");
+
+        Description.setText("jLabel4");
+
         javax.swing.GroupLayout pSubmittedAssignLayout = new javax.swing.GroupLayout(pSubmittedAssign);
         pSubmittedAssign.setLayout(pSubmittedAssignLayout);
         pSubmittedAssignLayout.setHorizontalGroup(
@@ -711,19 +755,28 @@ private void createAssignmentPanels(String assessmentID) {
                 .addGap(315, 315, 315)
                 .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(AssignmentLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ModuleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pSubmittedAssignLayout.createSequentialGroup()
+                        .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Description)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pSubmittedAssignLayout.setVerticalGroup(
             pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pSubmittedAssignLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AssignmentLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Description)
+                .addGap(8, 8, 8)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -813,6 +866,10 @@ private void createAssignmentPanels(String assessmentID) {
 
     private void UploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadBtnActionPerformed
         // TODO add your handling code here:
+        if (rowOfAssignmentStudentSubmission != -1){
+            JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
+        }
+        else{
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file=chooser.getSelectedFile();
@@ -828,35 +885,19 @@ private void createAssignmentPanels(String assessmentID) {
                 if (!destinationDir.exists()){
                     destinationDir.mkdirs();
                 }
-        }
+        }}
     }//GEN-LAST:event_UploadBtnActionPerformed
 
     private void bSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveFileActionPerformed
         // TODO add your handling code here:
-        boolean gotRecord = false;
-        String line2;
-        
-        int row = -1;
-        try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt")); 
-            while ((line2 = br2.readLine()) != null) {
-                String[] record2 = line2.split("\t");
-                row = row + 1;
-                if (record2[0].equals(assignID) && record2[1].equals(ID)) {
-                    gotRecord = true;
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        
-        if (gotRecord){
+        if (rowOfAssignmentStudentSubmission != -1){
             JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
         } else{
             if (sourceFile != null) {
+                String submitFile = "";
                 try {
                     //Write the information to the text file
-                    String submitFile = assignID + "\t" + ID +"\t" + destinationFile;
+                    submitFile = assignID + "\t" + ID +"\t" + destinationFile;
 
                     BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assignment_studentSubmission.txt", true));
                     writer.write(submitFile + "\n");
@@ -865,13 +906,39 @@ private void createAssignmentPanels(String assessmentID) {
                 catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
+                
+                rowOfAssignmentStudentSubmission = -1;
+                
                 try {
-                    //Copy the file to folder
-                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+                    String line;
+
+                    BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"));
+                    while ((line = reader.readLine()) != null) {
+                        rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
+                    }
+                    reader.close();
                     } 
                 catch (Exception e) {
-                   System.err.println(e.getMessage());
+                    System.err.println(e.getMessage());
                 }
+                
+//                try {
+//                    //Copy the file to folder
+//                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+//                    } 
+//                catch (Exception e) {
+//                   System.err.println(e.getMessage());
+//                }
+
+            lSubmissionStatus.setText("Submitted");
+            lSubmittedFile.setText(submitFile);
+            lFileName.setText(submitFile);
+
+            pSubmittedAssign.setVisible(true);
+            pInsideAssessment.setVisible(false);
+            pDashboard.setVisible(false);
+            pAssignmentSubmission.setVisible(false);
+
             }
             else{
                 JOptionPane.showMessageDialog(null, "Please at least select a file");
@@ -887,24 +954,10 @@ private void createAssignmentPanels(String assessmentID) {
         destinationFile = null;
         String oldFilePath = null;
         String line2;
-        boolean gotRecord = false;
         
-        int row = -1;
-        try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt")); 
-            while ((line2 = br2.readLine()) != null) {
-                String[] record2 = line2.split("\t");
-                row = row + 1;
-                if (record2[0].equals(assignID) && record2[1].equals(ID)) {
-                    oldFilePath = record2[2];
-                    gotRecord = true;
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        }
+        System.out.println(rowOfAssignmentStudentSubmission);
         
-        if (gotRecord){
+        if (rowOfAssignmentStudentSubmission != -1){
             List<String> lines = getAllStudentSubmitRecord();
 
             int currentIndex = -1;
@@ -913,11 +966,10 @@ private void createAssignmentPanels(String assessmentID) {
                 for (String updatedLine : lines) {
                     currentIndex++;
                     //skip the speific record
-                    if (currentIndex == row) {
+                    if (currentIndex == rowOfAssignmentStudentSubmission) {
                         continue;
                     }
                     else {
-                        System.out.println(updatedLine);
                         //rewrite other line to file
                         writer.write(updatedLine);
                         writer.newLine();
@@ -929,25 +981,37 @@ private void createAssignmentPanels(String assessmentID) {
                e.getMessage();
             }
 
-                bRemoveSub.setVisible(false);
+//            try {
+//                //Delete the old file
+//               File oldFile = new File (oldFilePath);
+//               oldFile.delete();
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+            
+            rowOfAssignmentStudentSubmission = -1;
+            
+            lSubmissionStatus.setText("Not Submitted");
+            lSubmittedFile.setText("");
 
-            System.out.println(oldFilePath);
-            try {
-                //Delete the old file
-               File oldFile = new File (oldFilePath);
-               oldFile.delete();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            pSubmittedAssign.setVisible(true);
+            pInsideAssessment.setVisible(false);
+            pDashboard.setVisible(false);
+            pAssignmentSubmission.setVisible(false);
+            
         }
         else{
-            bRemoveSub.setVisible(false);
+            JOptionPane.showMessageDialog(null, "There is no file to be remove.");
         }
             
     }//GEN-LAST:event_bRemoveSubActionPerformed
 
     private void bSubmitSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitSubmissionActionPerformed
         // TODO add your handling code here:
+        
+        lSubmissionStatus.setText("Submitted");
+        lFileName.setText(lSubmittedFile.getText());
+        
         pAssignmentSubmission.setVisible(true);
         pInsideAssessment.setVisible(false);
         pSubmittedAssign.setVisible(false);
@@ -957,7 +1021,30 @@ private void createAssignmentPanels(String assessmentID) {
 
     private void bCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelActionPerformed
         // TODO add your handling code here:
+        
+        rowOfAssignmentStudentSubmission = -1;
+        
+        pInsideAssessment.setVisible(true);
+        pAssignmentSubmission.setVisible(false);
+        pSubmittedAssign.setVisible(false);
+        pDashboard.setVisible(false);
     }//GEN-LAST:event_bCancelActionPerformed
+
+    private void bBackAssignmentSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackAssignmentSubmissionActionPerformed
+        // TODO add your handling code here:
+        pSubmittedAssign.setVisible(true);
+        pInsideAssessment.setVisible(false);
+        pAssignmentSubmission.setVisible(false);
+        pDashboard.setVisible(false);
+    }//GEN-LAST:event_bBackAssignmentSubmissionActionPerformed
+
+    private void bBackInsideAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackInsideAssessmentActionPerformed
+        // TODO add your handling code here:
+        pDashboard.setVisible(true);
+        pInsideAssessment.setVisible(false);
+        pAssignmentSubmission.setVisible(false);
+        pSubmittedAssign.setVisible(false);
+    }//GEN-LAST:event_bBackInsideAssessmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1019,6 +1106,8 @@ private void createAssignmentPanels(String assessmentID) {
     private javax.swing.JLabel ModuleLabel;
     private javax.swing.JLabel ModuleLabel1;
     private javax.swing.JButton UploadBtn;
+    private javax.swing.JButton bBackAssignmentSubmission;
+    private javax.swing.JButton bBackInsideAssessment;
     private javax.swing.JButton bCancel;
     private javax.swing.JButton bRemoveSub;
     private javax.swing.JButton bSaveFile;
