@@ -171,12 +171,12 @@ private void createAssignmentPanels(String assessmentID) {
         String line;
         String line2;
         
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
-            while ((line = br.readLine()) != null) {
-                String[] record = line.split("\t");
                 try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt")); 
                     while ((line2 = br2.readLine()) != null) {
                         String[] record2 = line2.split("\t");
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
                         if (ID.equals(record2[1]) && record2[0].equals(record[0])){
                             System.out.println(record[1]);
                             javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
@@ -226,6 +226,7 @@ private void createAssignmentPanels(String assessmentID) {
                                     }
                             });
                             pAssessment.add(jPanel1);
+                            break;
                         }
                     }
                 }catch (Exception e) {
@@ -922,13 +923,13 @@ private void createAssignmentPanels(String assessmentID) {
                     System.err.println(e.getMessage());
                 }
                 
-//                try {
-//                    //Copy the file to folder
-//                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
-//                    } 
-//                catch (Exception e) {
-//                   System.err.println(e.getMessage());
-//                }
+                try {
+                    //Copy the file to folder
+                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+                    } 
+                catch (Exception e) {
+                   System.err.println(e.getMessage());
+                }
 
             lSubmissionStatus.setText("Submitted");
             lSubmittedFile.setText(submitFile);
@@ -981,13 +982,13 @@ private void createAssignmentPanels(String assessmentID) {
                e.getMessage();
             }
 
-//            try {
-//                //Delete the old file
-//               File oldFile = new File (oldFilePath);
-//               oldFile.delete();
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
+            try {
+                //Delete the old file
+               File oldFile = new File (oldFilePath);
+               oldFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             
             rowOfAssignmentStudentSubmission = -1;
             
@@ -1009,7 +1010,6 @@ private void createAssignmentPanels(String assessmentID) {
     private void bSubmitSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitSubmissionActionPerformed
         // TODO add your handling code here:
         
-        lSubmissionStatus.setText("Submitted");
         lFileName.setText(lSubmittedFile.getText());
         
         pAssignmentSubmission.setVisible(true);
