@@ -35,9 +35,9 @@ public class StudentHome extends javax.swing.JFrame {
     
     private String ID;
     private String assessmentID;
-    private String assignID;
     private File sourceFile;
     private File destinationFile;
+    private String strDesFile;
     
     private int rowOfAssignmentStudentSubmission = -1;
     
@@ -46,89 +46,34 @@ public class StudentHome extends javax.swing.JFrame {
         createAssessmentPanels();
     }
     
-    public List<String> getAllStudentSubmitRecord() {
-        try {
-            
-            List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                //Read and add all the lines in text file to variable line
-                lines.add(line);
-            }
-            reader.close();
-            return lines;
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
-    } 
-    
-private void createAssignmentPanels(String assessmentID) {
-    pAssignment.removeAll();
-        String line;
-        int count = 0;
+    public void refreshSubmissionPanel(String IDOfAssessment) {
+        String line2;
+        boolean isSubmittedFile = false;
+        String submittedFile = "";
         
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_assignment.txt")); 
-            while ((line = br.readLine()) != null) {
-                String[] record = line.split("\t");
-                
-                if(record[1].equals(assessmentID)){
-                
-                javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-                javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
-                
-                jLabel1.setText(record[2]);
-                jLabel2.setText(record[3]);
-                
-                jPanel1.setLayout(jPanel1Layout);
-                jPanel1Layout.setHorizontalGroup(
-                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addContainerGap(100, Short.MAX_VALUE))
-                );
-                jPanel1Layout.setVerticalGroup(
-                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
-        
-                jPanel1.setPreferredSize(new Dimension(550, 50));
-                jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
-                jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                
-                jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                    // TODO add your handling code here:
-                    AssignmentLabel.setText(record[2]);
-                    assignID = record[0];
-                    
-                    Description.setText(record[3]);
-                    
-                    String line2;
-                    boolean isSubmittedFile = false;
-                    
-                    String submittedFile = "";
-                    
-                    
-                    try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt")); 
+        try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt")); 
                         while ((line2 = br2.readLine()) != null) {
                             String[] record2 = line2.split("\t");
                             rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
-                            if (record2[0].equals(assignID) && record2[1].equals(ID) && !record2[2].equals("")) {
+                            if (record2[0].equals(assessmentID) && record2[1].equals(ID) && !record2[2].equals("")) {
                                 submittedFile = record2[2];
                                 isSubmittedFile = true;
+                                break;
+                            }
+                        }
+                        
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+        
+        String line;
+        String[] assessInfo = new String[8];
+                
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
+                        while ((line = br.readLine()) != null) {
+                            String[] record = line.split("\t");
+                            if (record[0].equals(assessmentID)) {
+                                assessInfo = record;
                                 break;
                             }
                         }
@@ -141,32 +86,21 @@ private void createAssignmentPanels(String assessmentID) {
                         String FileName = submittedFile.substring(submittedFile.lastIndexOf("\\")+1);
                         lSubmissionStatus.setText("Submitted");
                         lSubmittedFile.setText(submittedFile);
+                        
+                        lFileName.setText(submittedFile);
                     } else {
                         lSubmissionStatus.setText("Not Submitted");
                         lSubmittedFile.setText("");
+                        lFileName.setText(submittedFile);
                         rowOfAssignmentStudentSubmission = - 1;
                     }
-                    
-                    pSubmittedAssign.setVisible(true);
-                    pInsideAssessment.setVisible(false);
-                    pDashboard.setVisible(false);
-                    pAssignmentSubmission.setVisible(false);
-                    }
-                });
-                
-                count = count + 1;
-                pAssignment.add(jPanel1);
-            }
-            }
-        } catch (Exception e) {
-        e.getMessage();
+                    AssignmentLabel.setText(assessInfo[1]);
+                    moduleLabel.setText(assessInfo[1]);
+                    Description.setText(assessInfo[3]);
+        
+        
     }
-        pAssignment.setPreferredSize(new Dimension(350, count*55));
-        jScrollPane2.setViewportView(pAssignment);
-        pAssignment.revalidate();
-        pAssignment.repaint();  
-    }
- 
+    
     private void createAssessmentPanels() {
         
         pAssessment.removeAll();
@@ -182,7 +116,6 @@ private void createAssignmentPanels(String assessmentID) {
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                         if (ID.equals(record2[1]) && record2[0].equals(record[0])){
-                            System.out.println(record[1]);
                             javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
                             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                             javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
@@ -218,14 +151,13 @@ private void createAssignmentPanels(String assessmentID) {
                             jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                                 public void mouseReleased(java.awt.event.MouseEvent evt) {
                                     // TODO add your handling code here:
-                                    createAssignmentPanels(record[0]);
-
-                                    pInsideAssessment.setVisible(true);
+                                    refreshSubmissionPanel(record[0]);
+                                    assessmentID = record[0];
+                                    
+                                    pSubmittedAssign.setVisible(true);
                                     pDashboard.setVisible(false);
                                     pAssignmentSubmission.setVisible(false);
-                                    pSubmittedAssign.setVisible(false);
-                                    assessmentID = record[0];
-                                    ModuleLabel.setText(record[1]);
+                                    
                                     moduleLabel.setText(record[1]);
                                     ModuleLabel1.setText(record[1]);
                                     }
@@ -256,9 +188,9 @@ private void createAssignmentPanels(String assessmentID) {
     public StudentHome() {
         initComponents();
         pDashboard.setVisible(true);
-        pInsideAssessment.setVisible(false);
         pAssignmentSubmission.setVisible(false);
         pSubmittedAssign.setVisible(false);
+        pInsideAssessment.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -884,8 +816,9 @@ private void createAssignmentPanels(String assessmentID) {
             String FileName = filePath.substring(filePath.lastIndexOf("\\")+1);
             
             lFileName.setText(FileName);
-            File destinationDir = new File ("src\\Project_Management_System\\storage\\" + assessmentID +"\\"+ assignID + "\\" +ID);
-            destinationFile = new File ("src\\Project_Management_System\\storage\\" + assessmentID +"\\"+ assignID + "\\" +ID + "\\" +FileName);
+            File destinationDir = new File ("src\\Project_Management_System\\storage\\" + assessmentID + "\\" +ID);
+            strDesFile = "src\\Project_Management_System\\storage\\" + assessmentID +"\\" +ID + "\\" +FileName;
+            destinationFile = new File (strDesFile);
             
                 if (!destinationDir.exists()){
                     destinationDir.mkdirs();
@@ -898,49 +831,62 @@ private void createAssignmentPanels(String assessmentID) {
         if (rowOfAssignmentStudentSubmission != -1){
             JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
         } else{
+            
+            String[] oldRecord = new String[5];
+            
+            List<String> lines = new ArrayList<>();
+            try {
+            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                rowOfAssignmentStudentSubmission= rowOfAssignmentStudentSubmission + 1;
+                String[] record = line.split("\t");
+                //Read and add all the lines in text file to variable line
+                lines.add(line);
+                if (record[0].equals(assessmentID) && record[1].equals(ID)) {
+                        oldRecord = line.split("\t");
+                        break;
+                    }
+            }
+                
+                System.out.println(Arrays.toString(oldRecord));
+            
+            reader.close();
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+            
+            oldRecord[2] = strDesFile;
+            String newRecord =  String.join("\t", oldRecord);
+            lines.set(rowOfAssignmentStudentSubmission, newRecord);
+            
+            
             if (sourceFile != null) {
-                String submitFile = "";
                 try {
                     //Write the information to the text file
-                    submitFile = assignID + "\t" + ID +"\t" + destinationFile;
-
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assignment_studentSubmission.txt", true));
-                    writer.write(submitFile + "\n");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+                    for (String line : lines){
+                        
+                        writer.write(line);
+                    }
                     writer.close();
                     } 
                 catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
                 
-                rowOfAssignmentStudentSubmission = -1;
+//                try {
+//                    //Copy the file to folder
+//                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+//                    } 
+//                catch (Exception e) {
+//                   System.err.println(e.getMessage());
+//                }
                 
-                try {
-                    String line;
-
-                    BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"));
-                    while ((line = reader.readLine()) != null) {
-                        rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
-                    }
-                    reader.close();
-                    } 
-                catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-                
-                try {
-                    //Copy the file to folder
-                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
-                    } 
-                catch (Exception e) {
-                   System.err.println(e.getMessage());
-                }
-
-            lSubmissionStatus.setText("Submitted");
-            lSubmittedFile.setText(submitFile);
-            lFileName.setText(submitFile);
+                    refreshSubmissionPanel(assessmentID);
 
             pSubmittedAssign.setVisible(true);
-            pInsideAssessment.setVisible(false);
             pDashboard.setVisible(false);
             pAssignmentSubmission.setVisible(false);
 
@@ -960,25 +906,47 @@ private void createAssignmentPanels(String assessmentID) {
         String oldFilePath = null;
         String line2;
         
-        System.out.println(rowOfAssignmentStudentSubmission);
         
         if (rowOfAssignmentStudentSubmission != -1){
-            List<String> lines = getAllStudentSubmitRecord();
+            
+            
+            List<String> lines = new ArrayList<>();
+            String[] oldRecord = new String[5];
+            
+            try {
+                
+            int currentIndex = -1;
+            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            String line;
+            
+            while ((line = reader.readLine()) != null) {
+                currentIndex++;
+                //Read and add all the lines in text file to variable line
+                lines.add(line);
+                    //skip the speific record
+                    if (currentIndex == rowOfAssignmentStudentSubmission) {
+                        oldRecord = line.split("\t");
+                        oldFilePath = line.split("\t")[2];
+                    }
+            }
+            reader.close();
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+            
+            oldRecord[2] = "";
+            String newRecord = String.join("\t", oldRecord);
+            lines.set(rowOfAssignmentStudentSubmission, newRecord);
 
             int currentIndex = -1;
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assignment_studentSubmission.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
                 for (String updatedLine : lines) {
-                    currentIndex++;
-                    //skip the speific record
-                    if (currentIndex == rowOfAssignmentStudentSubmission) {
-                        continue;
-                    }
-                    else {
-                        //rewrite other line to file
-                        writer.write(updatedLine);
-                        writer.newLine();
-                    }
+                    //rewrite other line to file
+                    writer.write(updatedLine);
+                    writer.newLine();
+                    
                 }
                 writer.close();
                 }
@@ -996,11 +964,9 @@ private void createAssignmentPanels(String assessmentID) {
             
             rowOfAssignmentStudentSubmission = -1;
             
-            lSubmissionStatus.setText("Not Submitted");
-            lSubmittedFile.setText("");
-
+            refreshSubmissionPanel(assessmentID);
+            
             pSubmittedAssign.setVisible(true);
-            pInsideAssessment.setVisible(false);
             pDashboard.setVisible(false);
             pAssignmentSubmission.setVisible(false);
             
@@ -1017,7 +983,6 @@ private void createAssignmentPanels(String assessmentID) {
         lFileName.setText(lSubmittedFile.getText());
         
         pAssignmentSubmission.setVisible(true);
-        pInsideAssessment.setVisible(false);
         pSubmittedAssign.setVisible(false);
         pDashboard.setVisible(false);
         
@@ -1028,26 +993,24 @@ private void createAssignmentPanels(String assessmentID) {
         
         rowOfAssignmentStudentSubmission = -1;
         
-        pInsideAssessment.setVisible(true);
+        
+        pDashboard.setVisible(true);
         pAssignmentSubmission.setVisible(false);
         pSubmittedAssign.setVisible(false);
-        pDashboard.setVisible(false);
     }//GEN-LAST:event_bCancelActionPerformed
 
     private void bBackAssignmentSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackAssignmentSubmissionActionPerformed
         // TODO add your handling code here:
+        sourceFile = null;
+        destinationFile = null;
+        
         pSubmittedAssign.setVisible(true);
-        pInsideAssessment.setVisible(false);
         pAssignmentSubmission.setVisible(false);
         pDashboard.setVisible(false);
     }//GEN-LAST:event_bBackAssignmentSubmissionActionPerformed
 
     private void bBackInsideAssessmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackInsideAssessmentActionPerformed
         // TODO add your handling code here:
-        pDashboard.setVisible(true);
-        pInsideAssessment.setVisible(false);
-        pAssignmentSubmission.setVisible(false);
-        pSubmittedAssign.setVisible(false);
     }//GEN-LAST:event_bBackInsideAssessmentActionPerformed
 
     /**
