@@ -13,6 +13,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,6 +28,103 @@ public class StudentHome extends javax.swing.JFrame {
     private String strDesFile;
     
     private int rowOfAssignmentStudentSubmission = -1;
+    
+    private String calculateGrade(int mark) {
+        if (mark >= 80) {
+            return "(A+)";
+        } else if (mark >= 75) {
+            return "(A)";
+        } else if (mark >= 70) {
+            return "(B+)";
+        } else if (mark >= 65) {
+            return "(B)";
+        } else if (mark >= 60) {
+            return "(C+)";
+        } else if (mark >= 55) {
+            return "(C)";
+        } else if (mark >= 50) {
+            return "(C-)";
+        } else if (mark >= 40) {
+            return "(D)";
+        } else if (mark >= 30) {
+            return "(F+)";
+        } else if (mark >= 20) {
+            return "(F)";
+        } else {
+            return "(F-)";
+        }
+    }
+        
+    public void refreshResult() {
+        DefaultTableModel model = (DefaultTableModel)tResult.getModel();
+        model.setRowCount(0);
+        
+         try {
+            BufferedReader assessmentStudentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+
+            String assessmentStudentLine, assessmentLine;
+
+           while ((assessmentStudentLine = assessmentStudentReader.readLine()) != null) {
+            String[] assessmentStudentRecord = assessmentStudentLine.split("\t");
+
+            // Find assessment details
+            String assessmentName = "";
+            while ((assessmentLine = assessmentReader.readLine()) != null) {
+                String[] assessmentRecord = assessmentLine.split("\t");
+                if (assessmentRecord[0].equals(assessmentStudentRecord[0])) {
+                    assessmentName = assessmentRecord[1];
+                    break;
+                }
+            }
+            
+            String strAverage;
+            
+            String firstMark;
+            String gradeA;
+            try {
+            firstMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[3]));
+            gradeA = calculateGrade(Integer.parseInt(firstMark));
+            }catch (Exception e) {
+                firstMark = "NA";
+                gradeA = "";
+            }
+            
+            String secondMark;
+            String gradeB;
+            
+            try {
+            secondMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[4]));
+            gradeB = calculateGrade(Integer.parseInt(secondMark));
+            }catch (Exception e) {
+                secondMark= "NA";
+                gradeB = "";
+            }
+            
+            
+            String average;
+            String gradeC;
+            
+            try {
+                average = Integer.toString((Integer.parseInt(firstMark) + Integer.parseInt(secondMark)) / 2);
+                gradeC = calculateGrade(Integer.parseInt(average));
+            }catch (Exception e) {
+                average = "NA";
+                gradeC = "";
+            }
+            
+            model.addRow(new Object[]{assessmentStudentRecord[0], assessmentName, firstMark + gradeA, secondMark+gradeB, average + gradeC});
+        }
+
+        assessmentStudentReader.close();
+        assessmentReader.close();
+    } catch (Exception e) {
+        e.printStackTrace(); // Print stack trace for any exceptions
+    }
+    }
+    
+        
+    
     
     public void setID(String ID) {
         this.ID = ID;
@@ -190,6 +288,9 @@ public class StudentHome extends javax.swing.JFrame {
         resultButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        pResult = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tResult = new javax.swing.JTable();
         pDashboard = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -272,13 +373,58 @@ public class StudentHome extends javax.swing.JFrame {
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(393, 393, 393))
+        );
+
+        tResult.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Assesment Code", "Assesment Name", "First Mark", "Second Mark", "Average Mark"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tResult);
+
+        javax.swing.GroupLayout pResultLayout = new javax.swing.GroupLayout(pResult);
+        pResult.setLayout(pResultLayout);
+        pResultLayout.setHorizontalGroup(
+            pResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pResultLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1146, Short.MAX_VALUE))
+        );
+        pResultLayout.setVerticalGroup(
+            pResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pResultLayout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         pDashboard.setBackground(new java.awt.Color(252, 247, 204));
@@ -307,7 +453,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         pAssignmentSubmission.setBackground(new java.awt.Color(252, 247, 204));
@@ -425,7 +571,7 @@ public class StudentHome extends javax.swing.JFrame {
                         .addComponent(bBackAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         pAssignmentSubmissionLayout.setVerticalGroup(
             pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,12 +759,12 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ModuleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         pSubmittedAssignLayout.setVerticalGroup(
             pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(106, 106, 106)
                 .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -639,19 +785,26 @@ public class StudentHome extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(pSubmittedAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
-                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE))
+                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(pSubmittedAssign, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                    .addComponent(pSubmittedAssign, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(pResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -667,7 +820,7 @@ public class StudentHome extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+            .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -683,7 +836,12 @@ public class StudentHome extends javax.swing.JFrame {
 
     private void resultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
+        refreshResult();
+        
+        pResult.setVisible(true);
+        pDashboard.setVisible(false);
+        pAssignmentSubmission.setVisible(false);
+        pSubmittedAssign.setVisible(false);
     }//GEN-LAST:event_resultButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
@@ -968,6 +1126,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lFileName;
     private javax.swing.JLabel lSubmissionStatus;
     private javax.swing.JLabel lSubmittedFile;
@@ -976,10 +1135,12 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel pAssessment;
     private javax.swing.JPanel pAssignmentSubmission;
     private javax.swing.JPanel pDashboard;
+    private javax.swing.JPanel pResult;
     private javax.swing.JPanel pSubmittedAssign;
     private javax.swing.JButton presentationButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JButton resultButton;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JTable tResult;
     // End of variables declaration//GEN-END:variables
 }
