@@ -137,8 +137,8 @@ public class StudentHome extends javax.swing.JFrame {
                             jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                                 public void mouseReleased(java.awt.event.MouseEvent evt) {
                                     // TODO add your handling code here:
-                                    refreshSubmissionPanel(record[0]);
                                     assessmentID = record[0];
+                                    refreshSubmissionPanel(record[0]);
                                     
                                     pSubmittedAssign.setVisible(true);
                                     pDashboard.setVisible(false);
