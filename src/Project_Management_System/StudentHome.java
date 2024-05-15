@@ -82,7 +82,6 @@ public class StudentHome extends javax.swing.JFrame {
                         lFileName.setText(submittedFile);
                         rowOfAssignmentStudentSubmission = - 1;
                     }
-//                    AssignmentLabel.setText(assessInfo[1]);
                     moduleLabel.setText(assessInfo[1]);
                     Description.setText(assessInfo[3]);
     }
