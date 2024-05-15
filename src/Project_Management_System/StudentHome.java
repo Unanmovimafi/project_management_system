@@ -82,7 +82,7 @@ public class StudentHome extends javax.swing.JFrame {
                         lFileName.setText(submittedFile);
                         rowOfAssignmentStudentSubmission = - 1;
                     }
-                    AssignmentLabel.setText(assessInfo[1]);
+//                    AssignmentLabel.setText(assessInfo[1]);
                     moduleLabel.setText(assessInfo[1]);
                     Description.setText(assessInfo[3]);
     }
@@ -200,7 +200,6 @@ public class StudentHome extends javax.swing.JFrame {
         FileSubmissionLabel = new javax.swing.JLabel();
         FilePanel = new javax.swing.JPanel();
         UploadBtn = new javax.swing.JButton();
-        filePathLabel = new javax.swing.JLabel();
         lFileName = new javax.swing.JLabel();
         bSaveFile = new javax.swing.JButton();
         bRemoveSub = new javax.swing.JButton();
@@ -218,11 +217,10 @@ public class StudentHome extends javax.swing.JFrame {
         FileSubmissionLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        Description = new javax.swing.JLabel();
+        DescriptionTitle = new javax.swing.JLabel();
         lSubmissionStatus = new javax.swing.JLabel();
         ModuleLabel1 = new javax.swing.JLabel();
-        AssignmentLabel = new javax.swing.JLabel();
-        Description = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -319,9 +317,10 @@ public class StudentHome extends javax.swing.JFrame {
         AssessmentPanel.setBackground(new java.awt.Color(255, 255, 255));
         AssessmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
-        FileSubmissionLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        FileSubmissionLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         FileSubmissionLabel.setText("File Submission:");
 
+        UploadBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         UploadBtn.setText("Upload a File");
         UploadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +328,7 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
+        lFileName.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lFileName.setText("jLabel1");
 
         javax.swing.GroupLayout FilePanelLayout = new javax.swing.GroupLayout(FilePanel);
@@ -336,32 +336,23 @@ public class StudentHome extends javax.swing.JFrame {
         FilePanelLayout.setHorizontalGroup(
             FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FilePanelLayout.createSequentialGroup()
-                .addGroup(FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FilePanelLayout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FilePanelLayout.createSequentialGroup()
-                        .addGap(338, 338, 338)
-                        .addComponent(lFileName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filePathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         FilePanelLayout.setVerticalGroup(
             FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FilePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(UploadBtn)
-                .addGroup(FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FilePanelLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(filePathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FilePanelLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(lFileName)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(lFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
+        bSaveFile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bSaveFile.setText("Save");
         bSaveFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +360,7 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
+        bRemoveSub.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bRemoveSub.setText("Remove");
         bRemoveSub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,9 +373,9 @@ public class StudentHome extends javax.swing.JFrame {
         AssessmentPanelLayout.setHorizontalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(31, 31, 31)
                 .addComponent(FileSubmissionLabel)
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addComponent(FilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
@@ -401,18 +393,20 @@ public class StudentHome extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addComponent(FilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addGap(156, 156, 156)
                         .addComponent(FileSubmissionLabel)))
                 .addGap(30, 30, 30)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSaveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bRemoveSub, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         moduleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        moduleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         moduleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
+        bBackAssignmentSubmission.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bBackAssignmentSubmission.setText("Back");
         bBackAssignmentSubmission.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,27 +419,23 @@ public class StudentHome extends javax.swing.JFrame {
         pAssignmentSubmissionLayout.setHorizontalGroup(
             pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                .addGap(294, 294, 294)
-                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(19, 19, 19)
+                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                        .addComponent(bBackAssignmentSubmission)
-                        .addGap(274, 274, 274)
-                        .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(bBackAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         pAssignmentSubmissionLayout.setVerticalGroup(
             pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAssignmentSubmissionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bBackAssignmentSubmission)
-                        .addGap(7, 7, 7)))
+                .addGap(23, 23, 23)
+                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bBackAssignmentSubmission))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -461,6 +451,7 @@ public class StudentHome extends javax.swing.JFrame {
 
         filePanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        lSubmittedFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lSubmittedFile.setText("jLabel4");
 
         javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
@@ -468,16 +459,16 @@ public class StudentHome extends javax.swing.JFrame {
         filePanelLayout.setHorizontalGroup(
             filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filePanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(lSubmittedFile)
-                .addContainerGap(782, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lSubmittedFile, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         filePanelLayout.setVerticalGroup(
             filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filePanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(27, 27, 27)
                 .addComponent(lSubmittedFile)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -488,9 +479,9 @@ public class StudentHome extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -540,24 +531,14 @@ public class StudentHome extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Submission Status:");
 
-        lSubmissionStatus.setText("jLabel4");
+        Description.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Description.setText("jLabel4");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(lSubmissionStatus)
-                .addContainerGap(162, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lSubmissionStatus)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        DescriptionTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DescriptionTitle.setText("Description:");
+
+        lSubmissionStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lSubmissionStatus.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -566,93 +547,83 @@ public class StudentHome extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(375, 375, 375)
-                        .addComponent(bSubmitSubmission)
-                        .addGap(51, 51, 51)
-                        .addComponent(bCancel))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(55, 55, 55)
                         .addComponent(FileSubmissionLabel1)
-                        .addGap(37, 37, 37)
+                        .addGap(30, 30, 30)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Description)
+                                    .addComponent(lSubmissionStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(DescriptionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(376, 376, 376)
+                        .addComponent(bSubmitSubmission)
+                        .addGap(46, 46, 46)
+                        .addComponent(bCancel))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DescriptionTitle)
+                    .addComponent(Description))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lSubmissionStatus))
+                .addGap(46, 46, 46)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSubmitSubmission)
                     .addComponent(bCancel))
-                .addGap(37, 37, 37)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(FileSubmissionLabel1)
-                        .addGap(16, 16, 16)))
-                .addGap(65, 65, 65))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(FileSubmissionLabel1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33))
         );
 
         ModuleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        ModuleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
-
-        AssignmentLabel.setText("jLabel4");
-
-        Description.setText("jLabel4");
 
         javax.swing.GroupLayout pSubmittedAssignLayout = new javax.swing.GroupLayout(pSubmittedAssign);
         pSubmittedAssign.setLayout(pSubmittedAssignLayout);
         pSubmittedAssignLayout.setHorizontalGroup(
             pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                .addGap(315, 315, 315)
-                .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                        .addComponent(AssignmentLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ModuleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                        .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Description)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(28, 28, 28)
+                .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         pSubmittedAssignLayout.setVerticalGroup(
             pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AssignmentLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Description)
-                .addGap(8, 8, 8)
+                .addGap(22, 22, 22)
+                .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -660,14 +631,10 @@ public class StudentHome extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -678,13 +645,10 @@ public class StudentHome extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(45, 45, 45)
-                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(46, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -729,178 +693,6 @@ public class StudentHome extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_profileButtonActionPerformed
 
-    private void UploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadBtnActionPerformed
-        // TODO add your handling code here:
-        if (rowOfAssignmentStudentSubmission != -1){
-            JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
-        }
-        else{
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File file=chooser.getSelectedFile();
-        if (file != null){
-            String filePath = file.getAbsolutePath();
-            sourceFile = new File(filePath);
-            String FileName = filePath.substring(filePath.lastIndexOf("\\")+1);
-            
-            lFileName.setText(FileName);
-            File destinationDir = new File ("src\\Project_Management_System\\storage\\" + assessmentID + "\\" +ID);
-            strDesFile = "src\\Project_Management_System\\storage\\" + assessmentID +"\\" +ID + "\\" +FileName;
-            destinationFile = new File (strDesFile);
-            
-                if (!destinationDir.exists()){
-                    destinationDir.mkdirs();
-                }
-        }}
-    }//GEN-LAST:event_UploadBtnActionPerformed
-
-    private void bSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveFileActionPerformed
-        // TODO add your handling code here:
-        if (rowOfAssignmentStudentSubmission != -1){
-            JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
-        } else{
-
-            if (sourceFile != null) {
-            String newRecord = "";
-            
-            List<String> lines = new ArrayList<>();
-            try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                rowOfAssignmentStudentSubmission= rowOfAssignmentStudentSubmission + 1;
-                String[] record = line.split("\t");
-                //Read and add all the lines in text file to variable line
-                lines.add(line);
-                if (record[0].equals(assessmentID) && record[1].equals(ID)) {
-                        String[] oldRecord = line.split("\t");
-                        oldRecord[2] = strDesFile;
-                        newRecord = oldRecord[0] + "\t" +oldRecord[1] +"\t" + oldRecord[2] +"\t" + oldRecord[3] + "\t" +oldRecord[4];
-                        break;
-                    }
-            }
-                
-            
-            reader.close();
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-            
-            lines.set(rowOfAssignmentStudentSubmission, newRecord);
-            
-            
-                try {
-                    //Write the information to the text file
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
-                    for (String line : lines){
-                        
-                        writer.write(line);
-                    }
-                    writer.close();
-                    } 
-                catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-                
-                try {
-                    //Copy the file to folder
-                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
-                    } 
-                catch (Exception e) {
-                   System.err.println(e.getMessage());
-                }
-                
-                    refreshSubmissionPanel(assessmentID);
-
-            pSubmittedAssign.setVisible(true);
-            pDashboard.setVisible(false);
-            pAssignmentSubmission.setVisible(false);
-
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Please at least select a file");
-            }
-        }
-        
-    }//GEN-LAST:event_bSaveFileActionPerformed
-
-    private void bRemoveSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveSubActionPerformed
-        // TODO add your handling code here:
-        String oldFilePath = null;
-        
-        
-        if (sourceFile != null) {
-            lFileName.setText("");
-            sourceFile = null;
-            destinationFile = null;
-            }
-            else{
-                if (rowOfAssignmentStudentSubmission != -1){
-
-
-
-                    List<String> lines = new ArrayList<>();
-                    String newRecord = "";
-
-                    try {
-
-                    BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
-                    String line;
-
-                    while ((line = reader.readLine()) != null) {
-                        String[] record = line.split("\t");
-                        //Read and add all the lines in text file to variable line
-                        lines.add(line);
-                            //skip the speific record
-                            if (record[0].equals(assessmentID) && record[1].equals(ID)) {
-                                String[] oldRecord = record;
-                                newRecord = oldRecord[0] +"\t" + oldRecord[1] + "\t" +"NA" +"\t" + oldRecord[3] +"\t" + oldRecord[4];
-                                oldFilePath = line.split("\t")[2];
-                            }
-                    }
-                    reader.close();
-                }
-                catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-                    lines.set(rowOfAssignmentStudentSubmission, newRecord);
-
-                    try {
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
-                        for (String updatedLine : lines) {
-                            //rewrite other line to file
-                            writer.write(updatedLine);
-                            writer.newLine();
-
-                        }
-                        writer.close();
-                        }
-                    catch (Exception e) {
-                       e.getMessage();
-                    }
-
-                    try {
-                        //Delete the old file
-                       File oldFile = new File (oldFilePath);
-                       oldFile.delete();
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                    
-                    refreshSubmissionPanel(assessmentID);
-            
-            pSubmittedAssign.setVisible(true);
-            pDashboard.setVisible(false);
-            pAssignmentSubmission.setVisible(false);
-
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "There is no file to be remove.");
-                }
-        }
-    }//GEN-LAST:event_bRemoveSubActionPerformed
-
     private void bSubmitSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitSubmissionActionPerformed
         // TODO add your handling code here:
         sourceFile = null;
@@ -929,13 +721,180 @@ public class StudentHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         sourceFile = null;
         destinationFile = null;
-        
+
         refreshSubmissionPanel(assessmentID);
-        
+
         pSubmittedAssign.setVisible(true);
         pAssignmentSubmission.setVisible(false);
         pDashboard.setVisible(false);
     }//GEN-LAST:event_bBackAssignmentSubmissionActionPerformed
+
+    private void bRemoveSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveSubActionPerformed
+        // TODO add your handling code here:
+        String oldFilePath = null;
+
+        if (sourceFile != null) {
+            lFileName.setText("");
+            sourceFile = null;
+            destinationFile = null;
+        }
+        else{
+            if (rowOfAssignmentStudentSubmission != -1){
+
+                List<String> lines = new ArrayList<>();
+                String newRecord = "";
+
+                try {
+
+                    BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        String[] record = line.split("\t");
+                        //Read and add all the lines in text file to variable line
+                        lines.add(line);
+                        //skip the speific record
+                        if (record[0].equals(assessmentID) && record[1].equals(ID)) {
+                            String[] oldRecord = record;
+                            newRecord = oldRecord[0] +"\t" + oldRecord[1] + "\t" +"NA" +"\t" + oldRecord[3] +"\t" + oldRecord[4];
+                            oldFilePath = line.split("\t")[2];
+                        }
+                    }
+                    reader.close();
+                }
+                catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+                lines.set(rowOfAssignmentStudentSubmission, newRecord);
+
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+                    for (String updatedLine : lines) {
+                        //rewrite other line to file
+                        writer.write(updatedLine);
+                        writer.newLine();
+
+                    }
+                    writer.close();
+                }
+                catch (Exception e) {
+                    e.getMessage();
+                }
+
+                try {
+                    //Delete the old file
+                    File oldFile = new File (oldFilePath);
+                    oldFile.delete();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                refreshSubmissionPanel(assessmentID);
+
+                pSubmittedAssign.setVisible(true);
+                pDashboard.setVisible(false);
+                pAssignmentSubmission.setVisible(false);
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "There is no file to be remove.");
+            }
+        }
+    }//GEN-LAST:event_bRemoveSubActionPerformed
+
+    private void bSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveFileActionPerformed
+        // TODO add your handling code here:
+        if (rowOfAssignmentStudentSubmission != -1){
+            JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
+        } else{
+
+            if (sourceFile != null) {
+                String newRecord = "";
+
+                List<String> lines = new ArrayList<>();
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        rowOfAssignmentStudentSubmission= rowOfAssignmentStudentSubmission + 1;
+                        String[] record = line.split("\t");
+                        //Read and add all the lines in text file to variable line
+                        lines.add(line);
+                        if (record[0].equals(assessmentID) && record[1].equals(ID)) {
+                            String[] oldRecord = line.split("\t");
+                            oldRecord[2] = strDesFile;
+                            newRecord = oldRecord[0] + "\t" +oldRecord[1] +"\t" + oldRecord[2] +"\t" + oldRecord[3] + "\t" +oldRecord[4];
+                            break;
+                        }
+                    }
+
+                    reader.close();
+                }
+                catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+
+                lines.set(rowOfAssignmentStudentSubmission, newRecord);
+
+                try {
+                    //Write the information to the text file
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+                    for (String line : lines){
+
+                        writer.write(line);
+                    }
+                    writer.close();
+                }
+                catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+
+                try {
+                    //Copy the file to folder
+                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+                }
+                catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+
+                refreshSubmissionPanel(assessmentID);
+
+                pSubmittedAssign.setVisible(true);
+                pDashboard.setVisible(false);
+                pAssignmentSubmission.setVisible(false);
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please at least select a file");
+            }
+        }
+
+    }//GEN-LAST:event_bSaveFileActionPerformed
+
+    private void UploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadBtnActionPerformed
+        // TODO add your handling code here:
+        if (rowOfAssignmentStudentSubmission != -1){
+            JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
+        }
+        else{
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File file=chooser.getSelectedFile();
+            if (file != null){
+                String filePath = file.getAbsolutePath();
+                sourceFile = new File(filePath);
+                String FileName = filePath.substring(filePath.lastIndexOf("\\")+1);
+
+                    lFileName.setText(FileName);
+                    File destinationDir = new File ("src\\Project_Management_System\\storage\\" + assessmentID + "\\" +ID);
+                        strDesFile = "src\\Project_Management_System\\storage\\" + assessmentID +"\\" +ID + "\\" +FileName;
+                        destinationFile = new File (strDesFile);
+
+                        if (!destinationDir.exists()){
+                            destinationDir.mkdirs();
+                        }
+                    }}
+    }//GEN-LAST:event_UploadBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -989,8 +948,8 @@ public class StudentHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AssessmentPanel;
-    private javax.swing.JLabel AssignmentLabel;
     private javax.swing.JLabel Description;
+    private javax.swing.JLabel DescriptionTitle;
     private javax.swing.JPanel FilePanel;
     private javax.swing.JLabel FileSubmissionLabel;
     private javax.swing.JLabel FileSubmissionLabel1;
@@ -1002,7 +961,6 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JButton bSaveFile;
     private javax.swing.JButton bSubmitSubmission;
     private javax.swing.JPanel filePanel;
-    private javax.swing.JLabel filePathLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1010,7 +968,6 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lFileName;
     private javax.swing.JLabel lSubmissionStatus;
