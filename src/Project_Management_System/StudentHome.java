@@ -832,6 +832,8 @@ public class StudentHome extends javax.swing.JFrame {
         
         if (sourceFile != null) {
             lFileName.setText("");
+            sourceFile = null;
+            destinationFile = null;
             }
             else{
                 if (rowOfAssignmentStudentSubmission != -1){
@@ -897,16 +899,12 @@ public class StudentHome extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "There is no file to be remove.");
                 }
         }
-        
-        
-            sourceFile = null;
-            destinationFile = null;
-        
-            
     }//GEN-LAST:event_bRemoveSubActionPerformed
 
     private void bSubmitSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitSubmissionActionPerformed
         // TODO add your handling code here:
+        sourceFile = null;
+        destinationFile = null;
         
         lFileName.setText(lSubmittedFile.getText());
         
