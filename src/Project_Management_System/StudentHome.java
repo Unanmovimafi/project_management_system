@@ -26,8 +26,29 @@ public class StudentHome extends javax.swing.JFrame {
     private File sourceFile;
     private File destinationFile;
     private String strDesFile;
+    private String[] studentRecord = new String[11];
+    private int rowOfStudentRecord = -1;
     
     private int rowOfAssignmentStudentSubmission = -1;
+    
+    public List<String> getAllStudentRecord() {
+        try {
+            
+            List<String> lines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                //Read and add all the lines in text file to variable line
+                lines.add(line);
+            }
+            reader.close();
+            return lines;
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    } 
     
     private String calculateGrade(int mark) {
         if (mark >= 80) {
@@ -273,6 +294,7 @@ public class StudentHome extends javax.swing.JFrame {
         pDashboard.setVisible(true);
         pAssignmentSubmission.setVisible(false);
         pSubmittedAssign.setVisible(false);
+        pProfile.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -287,6 +309,7 @@ public class StudentHome extends javax.swing.JFrame {
         presentationButton = new javax.swing.JButton();
         resultButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
+        bDashboard = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         pResult = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -321,6 +344,35 @@ public class StudentHome extends javax.swing.JFrame {
         DescriptionTitle = new javax.swing.JLabel();
         lSubmissionStatus = new javax.swing.JLabel();
         ModuleLabel1 = new javax.swing.JLabel();
+        pProfile = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        tfID = new javax.swing.JTextField();
+        tfName = new javax.swing.JTextField();
+        tfContactNumber = new javax.swing.JTextField();
+        tfOldPassword = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
+        tfAddress = new javax.swing.JTextField();
+        rbMale = new javax.swing.JRadioButton();
+        rbFemale = new javax.swing.JRadioButton();
+        bChangePassword = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        tfIntakeCode = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        tfNationality = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        tfIC = new javax.swing.JTextField();
+        tfDoB = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        tfNewPassword = new javax.swing.JTextField();
+        tfConfirmPassword = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -358,22 +410,36 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
+        bDashboard.setText("Dashboard");
+        bDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDashboardActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(bDashboard)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bDashboard)
+                .addGap(39, 39, 39)
                 .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -771,6 +837,209 @@ public class StudentHome extends javax.swing.JFrame {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
+        pProfile.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("ID:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Name:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Contact Number:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Gender:");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Address:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Email:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setText("Nationality:");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setText("Old Password:");
+
+        tfID.setEditable(false);
+
+        tfName.setEditable(false);
+
+        tfContactNumber.setEditable(false);
+
+        tfEmail.setEditable(false);
+
+        tfAddress.setEditable(false);
+
+        rbMale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbMale.setText("Male");
+
+        rbFemale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbFemale.setText("Female");
+
+        bChangePassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bChangePassword.setText("Change Password");
+        bChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bChangePasswordActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setText("Intake Code:");
+
+        tfIntakeCode.setEditable(false);
+        tfIntakeCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfIntakeCodeActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setText("DOB:");
+
+        tfNationality.setEditable(false);
+
+        jLabel14.setText("IC/Passport No.:");
+
+        tfIC.setEditable(false);
+
+        tfDoB.setEditable(false);
+
+        jLabel15.setText("New Password:");
+
+        jLabel16.setText("Confirm Password:");
+
+        javax.swing.GroupLayout pProfileLayout = new javax.swing.GroupLayout(pProfile);
+        pProfile.setLayout(pProfileLayout);
+        pProfileLayout.setHorizontalGroup(
+            pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pProfileLayout.createSequentialGroup()
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pProfileLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pProfileLayout.createSequentialGroup()
+                                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(jLabel16))
+                                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pProfileLayout.createSequentialGroup()
+                                            .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pProfileLayout.createSequentialGroup()
+                                                    .addGap(22, 22, 22)
+                                                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                                                        .addGroup(pProfileLayout.createSequentialGroup()
+                                                            .addComponent(rbMale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(rbFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(tfIntakeCode)
+                                                        .addComponent(tfIC)))
+                                                .addGroup(pProfileLayout.createSequentialGroup()
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(pProfileLayout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(tfOldPassword)
+                                                        .addComponent(tfNewPassword)
+                                                        .addComponent(tfConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))))
+                                            .addGap(5, 5, 5)))))))
+                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pProfileLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pProfileLayout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pProfileLayout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(bChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(673, Short.MAX_VALUE))
+        );
+        pProfileLayout.setVerticalGroup(
+            pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pProfileLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(tfIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfIntakeCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(34, 34, 34)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(rbMale)
+                    .addComponent(rbFemale))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(tfOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(tfNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(tfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addComponent(bChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -787,6 +1056,10 @@ public class StudentHome extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(pProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 1357, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,6 +1079,8 @@ public class StudentHome extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(pResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -839,15 +1114,54 @@ public class StudentHome extends javax.swing.JFrame {
         refreshResult();
         
         pResult.setVisible(true);
+        
         pDashboard.setVisible(false);
         pAssignmentSubmission.setVisible(false);
         pSubmittedAssign.setVisible(false);
+        pProfile.setVisible(false);
     }//GEN-LAST:event_resultButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // TODO add your handling code here:
-        new StudentProfile().setVisible(true);
-        dispose();
+        pProfile.setVisible(true);
+        
+        pResult.setVisible(false);
+        pDashboard.setVisible(false);
+        pAssignmentSubmission.setVisible(false);
+        pSubmittedAssign.setVisible(false);
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                studentRecord = line.split("\t");
+                rowOfStudentRecord ++;
+                if (studentRecord[0].equals(ID)) {
+                    // reutrn the line of the line_num in text file
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        
+        tfID.setText(studentRecord[0]);
+        tfName.setText(studentRecord[1]);
+        tfIC.setText(studentRecord[2]);
+        tfIntakeCode.setText(studentRecord[3]);
+        
+        if (studentRecord[4].equals("MALE")){
+            rbMale.setSelected(true);
+        }
+        else if (studentRecord[4].equals("FEMALE")){
+            rbFemale.setSelected(true);
+        }
+        
+        tfNationality.setText(studentRecord[5]);
+        tfDoB.setText(studentRecord[6]);
+        tfContactNumber.setText(studentRecord[7]);
+        
+        tfEmail.setText(studentRecord[9]);
+        tfAddress.setText(studentRecord[10]);
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void bSubmitSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitSubmissionActionPerformed
@@ -876,14 +1190,14 @@ public class StudentHome extends javax.swing.JFrame {
 
     private void bBackAssignmentSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackAssignmentSubmissionActionPerformed
         // TODO add your handling code here:
-        sourceFile = null;
-        destinationFile = null;
 
         refreshSubmissionPanel(assessmentID);
 
         pSubmittedAssign.setVisible(true);
         pAssignmentSubmission.setVisible(false);
         pDashboard.setVisible(false);
+        pResult.setVisible(false);
+        pProfile.setVisible(false);
     }//GEN-LAST:event_bBackAssignmentSubmissionActionPerformed
 
     private void bRemoveSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveSubActionPerformed
@@ -1053,6 +1367,63 @@ public class StudentHome extends javax.swing.JFrame {
                     }}
     }//GEN-LAST:event_UploadBtnActionPerformed
 
+    private void bDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDashboardActionPerformed
+        // TODO add your handling code here:
+        pDashboard.setVisible(true);
+        
+        pAssignmentSubmission.setVisible(false);
+        pSubmittedAssign.setVisible(false);
+        pResult.setVisible(false);
+        pProfile.setVisible(false);
+        
+    }//GEN-LAST:event_bDashboardActionPerformed
+
+    private void tfIntakeCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIntakeCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfIntakeCodeActionPerformed
+
+    private void bChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bChangePasswordActionPerformed
+        // TODO add your handling code here:
+        if (tfOldPassword.getText().isEmpty()|| tfNewPassword.getText().isEmpty()|| tfConfirmPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter all fields.");
+        }
+
+        else if(tfOldPassword.getText().equals(studentRecord[8]) && (tfNewPassword.getText().equals(tfConfirmPassword.getText()))){
+            //Get the value from each text field
+            studentRecord[8] = tfNewPassword.getText();
+
+            try {
+                List<String> lines = getAllStudentRecord();
+                //Write the information to the text file
+                String editedStudent = String.join("\t", studentRecord);
+
+                lines.set(rowOfStudentRecord, editedStudent);
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt"));
+                for (String updatedLine : lines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+
+                writer.close();
+
+            }
+            catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            JOptionPane.showMessageDialog(null, "Successfully Saved!");
+            pDashboard.setVisible(true);
+        
+            pAssignmentSubmission.setVisible(false);
+            pSubmittedAssign.setVisible(false);
+            pResult.setVisible(false);
+            pProfile.setVisible(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Password Wrong!");
+        }
+    }//GEN-LAST:event_bChangePasswordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1114,13 +1485,28 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JButton UploadBtn;
     private javax.swing.JButton bBackAssignmentSubmission;
     private javax.swing.JButton bCancel;
+    private javax.swing.JButton bChangePassword;
+    private javax.swing.JButton bDashboard;
     private javax.swing.JButton bRemoveSub;
     private javax.swing.JButton bSaveFile;
     private javax.swing.JButton bSubmitSubmission;
     private javax.swing.JPanel filePanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1135,12 +1521,27 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel pAssessment;
     private javax.swing.JPanel pAssignmentSubmission;
     private javax.swing.JPanel pDashboard;
+    private javax.swing.JPanel pProfile;
     private javax.swing.JPanel pResult;
     private javax.swing.JPanel pSubmittedAssign;
     private javax.swing.JButton presentationButton;
     private javax.swing.JButton profileButton;
+    private javax.swing.JRadioButton rbFemale;
+    private javax.swing.JRadioButton rbMale;
     private javax.swing.JButton resultButton;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTable tResult;
+    private javax.swing.JTextField tfAddress;
+    private javax.swing.JTextField tfConfirmPassword;
+    private javax.swing.JTextField tfContactNumber;
+    private javax.swing.JTextField tfDoB;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfIC;
+    private javax.swing.JTextField tfID;
+    private javax.swing.JTextField tfIntakeCode;
+    private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfNationality;
+    private javax.swing.JTextField tfNewPassword;
+    private javax.swing.JTextField tfOldPassword;
     // End of variables declaration//GEN-END:variables
 }
