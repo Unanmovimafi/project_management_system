@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="resizable" type="boolean" value="false"/>
@@ -366,7 +370,7 @@
                           <Component id="moduleLabel" max="32767" attributes="0"/>
                           <Component id="AssessmentPanel" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="311" max="32767" attributes="0"/>
+                      <EmptySpace pref="137" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -887,7 +891,6 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel11" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
                                                   <Component id="jLabel7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                                                   <Component id="jLabel10" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                                                   <Component id="jLabel9" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
@@ -901,10 +904,6 @@
                                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="tfAddress" min="-2" pref="491" max="-2" attributes="0"/>
-                                              </Group>
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
@@ -925,16 +924,17 @@
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Component id="tfNationality" min="-2" pref="491" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="tfOldPassword" max="32767" attributes="0"/>
-                                                              <Component id="tfNewPassword" max="32767" attributes="0"/>
-                                                              <Component id="tfConfirmPassword" pref="491" max="32767" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
                                                   </Group>
                                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="tfAddress" alignment="1" min="-2" pref="491" max="-2" attributes="0"/>
+                                                      <Component id="tfOldPassword" alignment="1" min="-2" pref="491" max="-2" attributes="0"/>
+                                                      <Component id="tfNewPassword" alignment="1" min="-2" pref="491" max="-2" attributes="0"/>
+                                                      <Component id="tfConfirmPassword" alignment="1" min="-2" pref="491" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -947,8 +947,16 @@
                                   <Component id="tfDoB" min="-2" pref="497" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel11" min="-2" pref="113" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="tfContactNumber" min="-2" pref="491" max="-2" attributes="0"/>
                               </Group>
@@ -1132,6 +1140,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbMale">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroup1"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
@@ -1140,6 +1151,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbFemale">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroup1"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>

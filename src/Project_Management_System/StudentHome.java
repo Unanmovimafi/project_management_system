@@ -305,6 +305,7 @@ public class StudentHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         sidePanel = new javax.swing.JPanel();
         presentationButton = new javax.swing.JButton();
         resultButton = new javax.swing.JButton();
@@ -641,7 +642,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         pAssignmentSubmissionLayout.setVerticalGroup(
             pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -875,9 +876,11 @@ public class StudentHome extends javax.swing.JFrame {
 
         tfAddress.setEditable(false);
 
+        buttonGroup1.add(rbMale);
         rbMale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbMale.setText("Male");
 
+        buttonGroup1.add(rbFemale);
         rbFemale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbFemale.setText("Female");
 
@@ -929,7 +932,6 @@ public class StudentHome extends javax.swing.JFrame {
                                 .addGroup(pProfileLayout.createSequentialGroup()
                                     .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -941,9 +943,6 @@ public class StudentHome extends javax.swing.JFrame {
                                             .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addComponent(jLabel16))
                                     .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(pProfileLayout.createSequentialGroup()
                                             .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(pProfileLayout.createSequentialGroup()
@@ -959,21 +958,27 @@ public class StudentHome extends javax.swing.JFrame {
                                                         .addComponent(tfIC)))
                                                 .addGroup(pProfileLayout.createSequentialGroup()
                                                     .addGap(18, 18, 18)
-                                                    .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(pProfileLayout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(tfOldPassword)
-                                                        .addComponent(tfNewPassword)
-                                                        .addComponent(tfConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))))
-                                            .addGap(5, 5, 5)))))))
+                                                    .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(5, 5, 5))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tfOldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tfNewPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tfConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(pProfileLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pProfileLayout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jLabel6)
+                            .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pProfileLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pProfileLayout.createSequentialGroup()
+                                    .addGap(39, 39, 39)
+                                    .addComponent(jLabel6)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pProfileLayout.createSequentialGroup()
@@ -1492,6 +1497,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JButton bRemoveSub;
     private javax.swing.JButton bSaveFile;
     private javax.swing.JButton bSubmitSubmission;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel filePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
