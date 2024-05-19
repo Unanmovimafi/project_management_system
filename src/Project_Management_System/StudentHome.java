@@ -326,8 +326,8 @@ public class StudentHome extends javax.swing.JFrame {
         lFileName = new javax.swing.JLabel();
         bSaveFile = new javax.swing.JButton();
         bRemoveSub = new javax.swing.JButton();
-        moduleLabel = new javax.swing.JLabel();
         bBackAssignmentSubmission = new javax.swing.JButton();
+        moduleLabel = new javax.swing.JLabel();
         pSubmittedAssign = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -410,6 +410,8 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
+        bDashboard.setBackground(new java.awt.Color(255, 255, 204));
+        bDashboard.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bDashboard.setText("Dashboard");
         bDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,24 +424,20 @@ public class StudentHome extends javax.swing.JFrame {
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(sidePanelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(sidePanelLayout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(bDashboard)))
+                .addGap(17, 17, 17)
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(resultButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(presentationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bDashboard)
-                .addGap(39, 39, 39)
+                .addComponent(bDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -516,10 +514,11 @@ public class StudentHome extends javax.swing.JFrame {
         pDashboardLayout.setVerticalGroup(
             pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pDashboardLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pAssignmentSubmission.setBackground(new java.awt.Color(252, 247, 204));
@@ -547,11 +546,13 @@ public class StudentHome extends javax.swing.JFrame {
         FilePanelLayout.setHorizontalGroup(
             FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FilePanelLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(105, 105, 105)
+                .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FilePanelLayout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(lFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         FilePanelLayout.setVerticalGroup(
             FilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,22 +580,34 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
+        bBackAssignmentSubmission.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bBackAssignmentSubmission.setText("Back");
+        bBackAssignmentSubmission.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBackAssignmentSubmissionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AssessmentPanelLayout = new javax.swing.GroupLayout(AssessmentPanel);
         AssessmentPanel.setLayout(AssessmentPanelLayout);
         AssessmentPanelLayout.setHorizontalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(FileSubmissionLabel)
-                .addGap(40, 40, 40)
-                .addComponent(FilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(75, Short.MAX_VALUE))
-            .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                .addGap(485, 485, 485)
-                .addComponent(bSaveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(bRemoveSub, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(FileSubmissionLabel)
+                        .addGap(40, 40, 40)
+                        .addComponent(FilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
+                        .addGap(485, 485, 485)
+                        .addComponent(bSaveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(bRemoveSub, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(AssessmentPanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(bBackAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         AssessmentPanelLayout.setVerticalGroup(
             AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -604,7 +617,9 @@ public class StudentHome extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addComponent(FilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AssessmentPanelLayout.createSequentialGroup()
-                        .addGap(156, 156, 156)
+                        .addGap(15, 15, 15)
+                        .addComponent(bBackAssignmentSubmission)
+                        .addGap(118, 118, 118)
                         .addComponent(FileSubmissionLabel)))
                 .addGap(30, 30, 30)
                 .addGroup(AssessmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -617,14 +632,6 @@ public class StudentHome extends javax.swing.JFrame {
         moduleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         moduleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        bBackAssignmentSubmission.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bBackAssignmentSubmission.setText("Back");
-        bBackAssignmentSubmission.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBackAssignmentSubmissionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pAssignmentSubmissionLayout = new javax.swing.GroupLayout(pAssignmentSubmission);
         pAssignmentSubmission.setLayout(pAssignmentSubmissionLayout);
         pAssignmentSubmissionLayout.setHorizontalGroup(
@@ -632,21 +639,16 @@ public class StudentHome extends javax.swing.JFrame {
             .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                        .addComponent(bBackAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                    .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         pAssignmentSubmissionLayout.setVerticalGroup(
             pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bBackAssignmentSubmission))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
+                .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -830,11 +832,11 @@ public class StudentHome extends javax.swing.JFrame {
         pSubmittedAssignLayout.setVerticalGroup(
             pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pSubmittedAssignLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(28, 28, 28)
                 .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pProfile.setBackground(new java.awt.Color(255, 255, 255));
