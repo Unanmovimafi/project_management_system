@@ -205,11 +205,11 @@ public class LoginPage extends javax.swing.JFrame {
                     br.close();
                     this.dispose();
 
-                    AdminHomePage ap = new AdminHomePage();
+                    LecturerHomePage lhp = new LecturerHomePage();
 
-                    ap.setVisible(true);
-                    ap.pack();
-                    ap.setLocationRelativeTo(null);
+                    lhp.setVisible(true);
+                    lhp.pack();
+                    lhp.setLocationRelativeTo(null);
                     return;
                 }
             }
