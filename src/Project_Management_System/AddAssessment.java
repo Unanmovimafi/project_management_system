@@ -122,7 +122,6 @@ public class AddAssessment extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfID = new javax.swing.JTextField();
-        tfType = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         tfSupervisor = new javax.swing.JTextField();
         tfSecondMarker = new javax.swing.JTextField();
@@ -134,6 +133,7 @@ public class AddAssessment extends javax.swing.JFrame {
         tfSearchSecondMarker = new javax.swing.JTextField();
         tfSupervisorName = new javax.swing.JTextField();
         tfSecondMarkerName = new javax.swing.JTextField();
+        cbType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -242,6 +242,8 @@ public class AddAssessment extends javax.swing.JFrame {
 
         tfSecondMarkerName.setEditable(false);
 
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INTERNSHIP", "INVESTIGATION REPORTS", "CP1", "CP2", "RMCP", "FYP" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -268,7 +270,6 @@ public class AddAssessment extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -278,7 +279,8 @@ public class AddAssessment extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                                    .addComponent(tfSupervisorName)))))
+                                    .addComponent(tfSupervisorName)))
+                            .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(284, 284, 284)
                         .addComponent(bSave)))
@@ -312,8 +314,8 @@ public class AddAssessment extends javax.swing.JFrame {
                             .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,7 +331,6 @@ public class AddAssessment extends javax.swing.JFrame {
                         .addGap(9, 9, 9)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(tfSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,9 +342,8 @@ public class AddAssessment extends javax.swing.JFrame {
                             .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addComponent(bSave)
-                        .addContainerGap(71, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94))))
         );
@@ -364,7 +364,7 @@ public class AddAssessment extends javax.swing.JFrame {
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
-        if (tfID.getText().isEmpty() ||tfName.getText().isEmpty() || tfType.getText().isEmpty()|| tfDescription.getText().isEmpty()|| tfDueDate.getText().isEmpty()|| tfSupervisor.getText().isEmpty()|| tfSecondMarker.getText().isEmpty()) {
+        if (tfID.getText().isEmpty() ||tfName.getText().isEmpty() || tfDescription.getText().isEmpty()|| tfDueDate.getText().isEmpty()|| tfSupervisor.getText().isEmpty()|| tfSecondMarker.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         }
         
@@ -372,7 +372,7 @@ public class AddAssessment extends javax.swing.JFrame {
             //Get the value from each text field
             String newID = tfID.getText();
             String name = tfName.getText();
-            String type = tfType.getText();
+            String type = cbType.getSelectedItem().toString();
             String description = tfDescription.getText();
             String dueDate = tfDueDate.getText();
             String supervisor = tfSupervisor.getText();
@@ -383,7 +383,7 @@ public class AddAssessment extends javax.swing.JFrame {
             try {
                  
                 //Write the information to the text file
-                record.append(newID + "\t" + name + "\t" +type+ "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
+                record.append(newID + "\t" + name + "\t" + type+ "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
                 writer.write(record + "\n");
@@ -467,6 +467,7 @@ public class AddAssessment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -489,6 +490,5 @@ public class AddAssessment extends javax.swing.JFrame {
     private javax.swing.JTextField tfSecondMarkerName;
     private javax.swing.JTextField tfSupervisor;
     private javax.swing.JTextField tfSupervisorName;
-    private javax.swing.JTextField tfType;
     // End of variables declaration//GEN-END:variables
 }
