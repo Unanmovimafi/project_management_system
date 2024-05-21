@@ -261,6 +261,8 @@ public class StudentHome extends javax.swing.JFrame {
                                     pSubmittedAssign.setVisible(true);
                                     pDashboard.setVisible(false);
                                     pAssignmentSubmission.setVisible(false);
+                                    pProfile.setVisible(false);
+                                    pResult.setVisible(false);
                                     
                                     moduleLabel.setText(record[1]);
                                     ModuleLabel1.setText(record[1]);
@@ -295,6 +297,7 @@ public class StudentHome extends javax.swing.JFrame {
         pAssignmentSubmission.setVisible(false);
         pSubmittedAssign.setVisible(false);
         pProfile.setVisible(false);
+        pResult.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1175,6 +1178,8 @@ public class StudentHome extends javax.swing.JFrame {
         pAssignmentSubmission.setVisible(true);
         pSubmittedAssign.setVisible(false);
         pDashboard.setVisible(false);
+        pProfile.setVisible(false);
+        pResult.setVisible(false);
         
     }//GEN-LAST:event_bSubmitSubmissionActionPerformed
 
@@ -1187,6 +1192,8 @@ public class StudentHome extends javax.swing.JFrame {
         pDashboard.setVisible(true);
         pAssignmentSubmission.setVisible(false);
         pSubmittedAssign.setVisible(false);
+        pProfile.setVisible(false);
+        pResult.setVisible(false);
     }//GEN-LAST:event_bCancelActionPerformed
 
     private void bBackAssignmentSubmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackAssignmentSubmissionActionPerformed
@@ -1266,6 +1273,8 @@ public class StudentHome extends javax.swing.JFrame {
                 pSubmittedAssign.setVisible(true);
                 pDashboard.setVisible(false);
                 pAssignmentSubmission.setVisible(false);
+                pProfile.setVisible(false);
+                pResult.setVisible(false);
 
             }
             else{
@@ -1334,6 +1343,8 @@ public class StudentHome extends javax.swing.JFrame {
                 pSubmittedAssign.setVisible(true);
                 pDashboard.setVisible(false);
                 pAssignmentSubmission.setVisible(false);
+                pProfile.setVisible(false);
+                pResult.setVisible(false);
 
             }
             else{
