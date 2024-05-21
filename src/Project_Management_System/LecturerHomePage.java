@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
  * @author Owner
  */
 public class LecturerHomePage extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form StudentHome
      */
@@ -34,14 +34,40 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jPanel2.setVisible(false);
         pInsideAssessment.setVisible(false);
         
-        // Read lecture ID from lecturer.txt
-        String lectureId = readLectureIdFromFile("src\\Project_Management_System\\database\\lecturer.txt");
-        
-        // Update TotalSuperviseeLabel with the count of supervisees
-        int totalSupervisees = countSupervisees("src\\Project_Management_System\\database\\lecturer_supervisee.txt", lectureId);
+        String lectureIdToCount = getLectureIdFromLogin(); // Specify the lecture ID you want to count supervisees for
+        int totalSupervisees = countSupervisees(lectureIdToCount);
         TotalSuperviseeLabel.setText("Total Supervisees: " + totalSupervisees);
     }
     
+        private String getLectureIdFromLogin() {
+            // Your logic to get the lecture ID from the login input
+            // For now, I'll return a placeholder value
+            return "LR00001";
+        }
+        
+    
+        public int countSupervisees(String lectureIdToCount) {
+            int superviseeCount = 0;
+
+            try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer_supervisee.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\t");
+                    if (parts.length >= 2) {
+                        String lecturerId = parts[0].trim();
+
+                        if (lecturerId.equalsIgnoreCase(lectureIdToCount)) {
+                            superviseeCount++;
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading the file: " + e.getMessage());
+            }
+
+            System.out.println("Lecturer ID: " + lectureIdToCount);
+            return superviseeCount;
+        }
     private void createAssignmentPanels(String assessmentID) {
         String line;
         
@@ -137,32 +163,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         } catch (Exception e) {
         e.getMessage();
     }
-    }
-    
-    private String readLectureIdFromFile(String filePath) {
-        String lectureId = "";
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            lectureId = br.readLine(); // Assuming the lecture ID is on the first line of the file
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lectureId;
-    }
-    
-    private int countSupervisees(String filePath, String lectureId) {
-        int count = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("\t");
-                if (parts.length > 0 && parts[0].equals(lectureId)) {
-                    count++;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return count;
     }
 
     /**
