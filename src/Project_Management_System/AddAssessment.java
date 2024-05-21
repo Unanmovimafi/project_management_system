@@ -12,110 +12,92 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author User
  */
 public class AddAssessment extends javax.swing.JFrame {
-    private String selectedID; 
-    private AdminHomePage adminHomePage;
-    int count = -1;
     
-    public void setAdminPageInstance(AdminHomePage adminhomePage) {
-        this.adminHomePage = adminhomePage;
-    }
+    private AddAssessment addAssessment;
     
-    public String[] getLecturerRecord(int line_num) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
-            String line;
-            int count = -1;
-            while ((line = reader.readLine()) != null) {
-                String[] lineArray = line.trim().split("\t");
-                count = count + 1;
-                if (count == line_num) {
-                    // reutrn the line of the line_num in text file
-                    return lineArray;
+    public void refreshSupervisorListTable(String IDOrNameOfLecturer) {
+        DefaultTableModel model = (DefaultTableModel)tSupervisorList.getModel();
+        model.setRowCount(0);
+        String line;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
+                    String [] newRecord = new String[2];
+                    //Skip IC, Password, Address
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
                 }
-            }
+            br.close();
         } catch (Exception e) {
             e.getMessage();
         }
-        return null; // Patient record not found
     }
     
     
-    public void setRecordData(String ID) {
+    public void refreshSecondMarkerListTable(String IDOrNameOfLecturer) {
+        DefaultTableModel model = (DefaultTableModel)tSecondMarkerList.getModel();
+        model.setRowCount(0);
+        String line;
         
-        this.selectedID = ID;
-        
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] lineArray = line.split("\t");
-                    count = count + 1;
-                if (selectedID.equals(lineArray[0])) {
-                    break;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
+                    String [] newRecord = new String[2];
+                    //Skip IC, Password, Address
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
                 }
-            }
+            br.close();
         } catch (Exception e) {
             e.getMessage();
         }
-        
-        String[] record = getLecturerRecord(count);
-        
-        
-        
-        
-//        //Get the value from text field
-//        
-//        tfID.setText(record[0]);
-//        tfName.setText(record[1]);
-//        tfIC.setText(record[2]);
-//        if (record[3].equals("PM")){
-//            cbRole.setSelected(true);
-//        }
-//        
-//        if (record[4].equals("MALE")){
-//            rbMale.setSelected(true);
-//        }
-//        else if (record[4].equals("FEMALE")){
-//            rbFemale.setSelected(true);
-//        }
-//        
-//        tfNationality.setText(record[5]);
-//        tfDoB.setText(record[6]);
-//        tfContactNumber.setText(record[7]);
-//        tfPassword.setText(record[8]);
-//        tfEmail.setText(record[9]);
-//        tfAddress.setText(record[10]);
     }
     
-//    public List<String> getAllProductRecord() {
-//        try {
-//            
-//            List<String> lines = new ArrayList<>();
-//            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                //Read and add all the lines in text file to variable line
-//                lines.add(line);
-//            }
-//            reader.close();
-//            return lines;
-//        }
-//        catch (Exception e) {
-//            System.err.println(e.getMessage());
-//        }
-//        return null;
-//    } 
+    private void getNewID(){
+        int count = 1;
+        String line;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+
+            while ((line = bufferedReader.readLine()) != null) {
+                count = count +1;
+            }
+            bufferedReader.close();
+            String newAssessmentID = String.format("%05d", count);
+            newAssessmentID = "AS" + newAssessmentID;
+            tfID.setText(newAssessmentID);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    
+    
 
     /**
      * Creates new form EditLecturerDetails
      */
     public AddAssessment() {
         initComponents();
+        getNewID();
+        refreshSupervisorListTable("");
+        refreshSecondMarkerListTable("");
     }
 
     /**
@@ -133,19 +115,25 @@ public class AddAssessment extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        tfID = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
-        tfContactNumber = new javax.swing.JTextField();
-        tfPassword = new javax.swing.JTextField();
+        tfDescription = new javax.swing.JTextField();
+        tfDueDate = new javax.swing.JTextField();
         bSave = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tfID1 = new javax.swing.JTextField();
-        tfID2 = new javax.swing.JTextField();
+        tfID = new javax.swing.JTextField();
+        tfType = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tfPassword1 = new javax.swing.JTextField();
-        tfPassword2 = new javax.swing.JTextField();
+        tfSupervisor = new javax.swing.JTextField();
+        tfSecondMarker = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tSupervisorList = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tSecondMarkerList = new javax.swing.JTable();
+        tfSearchSupervisor = new javax.swing.JTextField();
+        tfSearchSecondMarker = new javax.swing.JTextField();
+        tfSupervisorName = new javax.swing.JTextField();
+        tfSecondMarkerName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -158,7 +146,7 @@ public class AddAssessment extends javax.swing.JFrame {
         jLabel2.setText("Description:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("End Date:");
+        jLabel3.setText("Due Date:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Second Marker:");
@@ -171,17 +159,88 @@ public class AddAssessment extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Start Date:");
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("ID:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Type:");
 
+        tfID.setEditable(false);
+
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("First Marker:");
+        jLabel9.setText("Supervisor:");
+
+        tfSupervisor.setEditable(false);
+
+        tfSecondMarker.setEditable(false);
+
+        tSupervisorList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tSupervisorList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tSupervisorListMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tSupervisorList);
+
+        tSecondMarkerList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tSecondMarkerList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tSecondMarkerListMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tSecondMarkerList);
+
+        tfSearchSupervisor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchSupervisorKeyReleased(evt);
+            }
+        });
+
+        tfSearchSecondMarker.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchSecondMarkerKeyReleased(evt);
+            }
+        });
+
+        tfSupervisorName.setEditable(false);
+
+        tfSecondMarkerName.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,22 +263,38 @@ public class AddAssessment extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3))
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfID1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfID2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tfSecondMarker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                    .addComponent(tfSupervisor, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                                    .addComponent(tfSupervisorName)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(284, 284, 284)
                         .addComponent(bSave)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(tfSearchSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(tfSearchSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,38 +302,50 @@ public class AddAssessment extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(tfID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSearchSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfID2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(44, 44, 44)
-                .addComponent(bSave)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfSearchSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(tfSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSupervisorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addComponent(bSave)
+                        .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,68 +363,68 @@ public class AddAssessment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
-//        // TODO add your handling code here:
-//        // less gender
-//        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| tfDoB.getText().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfPassword.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Please enter all fields.");
-//        }
-//        
-//        else {
-//            //Get the value from each text field
-//            String newID = tfID.getText();
-//            String name = tfName.getText();
-//            String IC = tfIC.getText();
-//            String role = "";
-//            if (cbRole.isSelected()){
-//                role = "PM";
-//            }else{
-//                role = "LEC";
-//            }
-//            String gender = "";
-//            if (rbMale.isSelected()){
-//                gender = "MALE";
-//            } else if(rbFemale.isSelected()){
-//                gender = "FEMALE";
-//            }
-//            //role
-//            //gender
-//            String nationality = tfNationality.getText();
-//            String dob = tfDoB.getText();
-//            String contactNumber = tfContactNumber.getText();
-//            String password = tfPassword.getText();
-//            String email = tfEmail.getText();
-//            String address = tfAddress.getText();
-//            
-//            try {
-//                List<String> lines = getAllProductRecord();
-//                //Write the information to the text file
-//                String editedLecturer = newID + "\t" + name + "\t" +IC+ "\t" + role + "\t" + gender + "\t" + nationality + "\t" +dob + "\t" + contactNumber + "\t" + password + "\t" + email + "\t" + address;
-//                
-//                lines.set(count, editedLecturer);
-//                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt"));
-//                for (String updatedLine : lines) {
-//                    writer.write(updatedLine);
-//                    writer.newLine();
-//                }
-//                
-//                writer.close();
-//
-//
-//
-//                } 
-//            catch (Exception e) {
-//                System.err.println(e.getMessage());
-//            }
-//
-//            JOptionPane.showMessageDialog(null, "Successfully Added!");
-//            this.dispose();
-//            adminHomePage.refreshLecturerTable("","");
-//        }
-//        
-//        
+        // TODO add your handling code here:
+        if (tfID.getText().isEmpty() ||tfName.getText().isEmpty() || tfType.getText().isEmpty()|| tfDescription.getText().isEmpty()|| tfDueDate.getText().isEmpty()|| tfSupervisor.getText().isEmpty()|| tfSecondMarker.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter all fields.");
+        }
         
-        
+        else {
+            //Get the value from each text field
+            String newID = tfID.getText();
+            String name = tfName.getText();
+            String type = tfType.getText();
+            String description = tfDescription.getText();
+            String dueDate = tfDueDate.getText();
+            String supervisor = tfSupervisor.getText();
+            String secondMarker = tfSecondMarker.getText();
+            
+            StringBuilder record = new StringBuilder();
+            
+            try {
+                 
+                //Write the information to the text file
+                record.append(newID + "\t" + name + "\t" +type+ "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
+                writer.write(record + "\n");
+                writer.close();
+                } 
+             catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            JOptionPane.showMessageDialog(null, "Successfully Added!");
+            this.dispose();
+        }
     }//GEN-LAST:event_bSaveActionPerformed
+
+    private void tfSearchSupervisorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchSupervisorKeyReleased
+        // TODO add your handling code here:
+        String nameID = tfSearchSupervisor.getText().toLowerCase();
+        refreshSupervisorListTable(nameID);
+    }//GEN-LAST:event_tfSearchSupervisorKeyReleased
+
+    private void tfSearchSecondMarkerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchSecondMarkerKeyReleased
+        // TODO add your handling code here:
+        String nameID = tfSearchSecondMarker.getText().toLowerCase();
+        refreshSecondMarkerListTable(nameID);
+    }//GEN-LAST:event_tfSearchSecondMarkerKeyReleased
+
+    private void tSupervisorListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tSupervisorListMouseReleased
+        // TODO add your handling code here:
+        String selectionID = tSupervisorList.getModel().getValueAt(tSupervisorList.getSelectedRow(), 0).toString();
+        String selectionName = tSupervisorList.getModel().getValueAt(tSupervisorList.getSelectedRow(), 1).toString();
+        tfSupervisor.setText(selectionID);
+        tfSupervisorName.setText(selectionName);
+    }//GEN-LAST:event_tSupervisorListMouseReleased
+
+    private void tSecondMarkerListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tSecondMarkerListMouseReleased
+        // TODO add your handling code here:
+        String selectionID = tSecondMarkerList.getModel().getValueAt(tSecondMarkerList.getSelectedRow(), 0).toString();
+        String selectionName = tSecondMarkerList.getModel().getValueAt(tSecondMarkerList.getSelectedRow(), 1).toString();
+        tfSecondMarker.setText(selectionID);
+        tfSecondMarkerName.setText(selectionName);
+    }//GEN-LAST:event_tSecondMarkerListMouseReleased
 
     /**
      * @param args the command line arguments
@@ -383,19 +470,25 @@ public class AddAssessment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField tfContactNumber;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tSecondMarkerList;
+    private javax.swing.JTable tSupervisorList;
+    private javax.swing.JTextField tfDescription;
+    private javax.swing.JTextField tfDueDate;
     private javax.swing.JTextField tfID;
-    private javax.swing.JTextField tfID1;
-    private javax.swing.JTextField tfID2;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfPassword;
-    private javax.swing.JTextField tfPassword1;
-    private javax.swing.JTextField tfPassword2;
+    private javax.swing.JTextField tfSearchSecondMarker;
+    private javax.swing.JTextField tfSearchSupervisor;
+    private javax.swing.JTextField tfSecondMarker;
+    private javax.swing.JTextField tfSecondMarkerName;
+    private javax.swing.JTextField tfSupervisor;
+    private javax.swing.JTextField tfSupervisorName;
+    private javax.swing.JTextField tfType;
     // End of variables declaration//GEN-END:variables
 }
