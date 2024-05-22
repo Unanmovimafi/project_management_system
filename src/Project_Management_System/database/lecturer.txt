@@ -1,4 +1,2 @@
 LR00001	SELINA L	990812018897	PM	FEMALE	MALAYSIA	08/12/1999	+60189874566	lec1	selina99@gmail.com	SELANGOR
-LR00002	KHOO ER P	1234567890	LEC	FEMALE	Malaysian	12/12/1221	+60123456789	lec2	asdsadkjh@gmail.com	asdasdasdsia, assdfds, asdas
-LR00003	ASDSAD	1456789	PM	MALE	DASDADAS	23/21/2323	+123456789	DASDSADSA	ASDSA@gmail.com	fgfdgdf,dfjsdfjsd,fdgfdgfd,selangor,malaysia.
-LR00004	aaa	12356	PM	FEMALE	fsdfsdfsd	12/12/1232	+60123456789	sadasdasdsad	asdsd@dfsd.com	weerw,fdsf,selangor,malaysia
+LR00002	KHOO ER PEI	1234567890	LEC	FEMALE	Malaysian	12/12/1221	+60123456789	lec2	asdsadkjh@gmail.com	asdasdasdsia, assdfds, asdas
