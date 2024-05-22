@@ -210,7 +210,10 @@ public class LoginPage extends javax.swing.JFrame {
                     br.close();
                     this.dispose();
                     
-                    LecturerHomePage lhp = new LecturerHomePage(username);
+                    LecturerSuperviseeList lhp = new LecturerSuperviseeList();
+                    
+                    lhp.setID(username);
+                    
                     lhp.setVisible(true);
                     lhp.pack();
                     lhp.setLocationRelativeTo(null);

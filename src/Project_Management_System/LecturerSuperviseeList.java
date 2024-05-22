@@ -4,7 +4,12 @@
  */
 package Project_Management_System;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.io.*;
+import java.nio.file.Files;
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +19,200 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class LecturerSuperviseeList extends javax.swing.JFrame {
+    private String ID;
+    private String assessmentID;
+    private String destFile;
+    
+    
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+    
+    private void refreshStudentListTable(String assessmentID){
+        DefaultTableModel model = (DefaultTableModel)studentTable.getModel();
+        model.setRowCount(0);
+        
+        String line;
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                
+                String studentID = record[1];
+                String studentLine;
+                String studentName = "";
+                String intake = "";
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                while ((studentLine = studentReader.readLine()) != null) {
+                    String[] studentRecord = studentLine.split("\t");
+                    if (studentRecord[0].equals(studentID)) {
+                        studentName = studentRecord[1];
+                        intake = studentRecord[3];
+                        break;
+                    }
+                }
+
+                if (assessmentID.equals(record[0])){
+                    model.addRow(new Object[]{intake, studentID, studentName});
+                }
+            
+            }
+        }catch (Exception e) {
+            e.getMessage();
+        }
+        
+        
+        
+    }
+    
+    private void createSupervisorAssessmentPanels() {
+        
+        pSupervisorAssessment.removeAll();
+        
+        String line;
+        String line2;
+        int count = 0;
+        
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                        if (ID.equals(record[5])){
+                            javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                            javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                            javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+
+                            jLabel1.setText(record[0]);
+                            jLabel2.setText(record[1]);
+
+                            jPanel1.setLayout(jPanel1Layout);
+                            jPanel1Layout.setHorizontalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                    .addContainerGap(100, Short.MAX_VALUE))
+                            );
+                            jPanel1Layout.setVerticalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel2)
+                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            );
+
+                            jPanel1.setPreferredSize(new Dimension(450, 50));
+                            jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                            jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                            jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                                public void mouseReleased(java.awt.event.MouseEvent evt) {
+                                    // TODO add your handling code here:
+                                    assessmentID = record[0];
+                                    refreshStudentListTable(record[0]);
+                                    pStudentSubmittedAssessment.setVisible(true);
+                                    pDashboard.setVisible(false);
+                                    pSupervisee.setVisible(false);
+                                    pAssignment.setVisible(false);
+                                    
+                                    ModuleLabel1.setText(record[1]);
+                                    Description.setText(record[3]);
+                                    }
+                            });
+                            pSupervisorAssessment.add(jPanel1);
+                            count = count + 1;
+                            break;
+                        }
+                    }
+                }catch (Exception e) {
+                    e.getMessage();
+                }
+        pSupervisorAssessment.setPreferredSize(new Dimension(350, count*55));
+        jScrollPane1.setViewportView(pSupervisorAssessment);
+        
+        
+        pSupervisorAssessment.revalidate();
+        pSupervisorAssessment.repaint();  
+    }
+    
+    private void createSecondMarkerAssessmentPanels() {
+        
+        pSecondMarkerAssessment.removeAll();
+        
+        String line;
+        String line2;
+        int count = 0;
+        
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                        if (ID.equals(record[6])){
+                            javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                            javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                            javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+
+                            jLabel1.setText(record[0]);
+                            jLabel2.setText(record[1]);
+
+                            jPanel1.setLayout(jPanel1Layout);
+                            jPanel1Layout.setHorizontalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                    .addContainerGap(100, Short.MAX_VALUE))
+                            );
+                            jPanel1Layout.setVerticalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel2)
+                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            );
+
+                            jPanel1.setPreferredSize(new Dimension(450, 50));
+                            jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                            jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                            jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                                public void mouseReleased(java.awt.event.MouseEvent evt) {
+                                    // TODO add your handling code here:
+                                    assessmentID = record[0];
+                                    
+                                    refreshStudentListTable(record[0]);
+                                    pStudentSubmittedAssessment.setVisible(true);
+                                    pDashboard.setVisible(false);
+                                    pSupervisee.setVisible(false);
+                                    pAssignment.setVisible(false);
+                                    
+                                    ModuleLabel1.setText(record[1]);
+                                    Description.setText(record[3]);
+                                    }
+                            });
+                            pSecondMarkerAssessment.add(jPanel1);
+                            count = count + 1;
+                            break;
+                        }
+                    }
+                }catch (Exception e) {
+                    e.getMessage();
+                }
+        pSecondMarkerAssessment.setPreferredSize(new Dimension(350, count*55));
+        jScrollPane2.setViewportView(pSecondMarkerAssessment);
+        
+        
+        pSecondMarkerAssessment.revalidate();
+        pSecondMarkerAssessment.repaint();  
+    }
+    
 
     public void refreshSupverviseeTable() {
         DefaultTableModel model = (DefaultTableModel)tLSuperviseeList.getModel();
@@ -21,7 +220,6 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         
          try {
             BufferedReader assessmentStudentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
-            BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
 
             String assessmentStudentLine, assessmentLine;
 
@@ -33,43 +231,42 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             // Find student details
             String studentName = "";
             String intake = "";
+            
             BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            
             String studentLine;
             while ((studentLine = studentReader.readLine()) != null) {
                 String[] studentRecord = studentLine.split("\t");
                 if (studentRecord[0].equalsIgnoreCase(studentID)) {
                     studentName = studentRecord[1];
-                    intake = studentRecord[2];
+                    intake = studentRecord[3];
                     break;
                 }
             }
-            studentReader.close();
 
             // Find assessment details
             String assessmentType = "";
             String assessmentName = "";
+            String assessmentSupervisorID = "";
+            String assessmentSecondMarkerID = "";
             while ((assessmentLine = assessmentReader.readLine()) != null) {
                 String[] assessmentRecord = assessmentLine.split("\t");
                 if (assessmentRecord[0].equalsIgnoreCase(assessmentID)) {
-                    assessmentType = assessmentRecord[2];
                     assessmentName = assessmentRecord[1];
+                    assessmentType = assessmentRecord[2];
+                    assessmentSupervisorID = assessmentRecord[5];
+                    assessmentSecondMarkerID = assessmentRecord[6];
                     break;
                 }
             }
-
-            // Debugging: Print values
-            System.out.println("Intake: " + intake);
-            System.out.println("Student ID: " + studentID);
-            System.out.println("Student Name: " + studentName);
-            System.out.println("Assessment ID: " + assessmentID);
-            System.out.println("Assessment Type: " + assessmentType);
-            System.out.println("Assessment Name: " + assessmentName);
-
-            model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
+            
+            if (assessmentSupervisorID.equals(ID) || assessmentSecondMarkerID.equals(ID)){
+                model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
+            }
         }
 
         assessmentStudentReader.close();
-        assessmentReader.close();
     } catch (Exception e) {
         e.printStackTrace(); // Print stack trace for any exceptions
     }
@@ -91,11 +288,13 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        AssignmentSideButton = new javax.swing.JButton();
-        SuperviseeSideButton = new javax.swing.JButton();
-        HomeSideButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        pDashboard = new javax.swing.JPanel();
+        mainTitleLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pSupervisorAssessment = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pSecondMarkerAssessment = new javax.swing.JPanel();
         pHome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -138,56 +337,73 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         tfIntakeCode = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         bEditStudentr = new javax.swing.JButton();
+        pStudentSubmittedAssessment = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        filePanel = new javax.swing.JPanel();
+        lSubmittedFile = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        downloadButton = new javax.swing.JButton();
+        feedbackLabel = new javax.swing.JLabel();
+        Description = new javax.swing.JLabel();
+        DescriptionTitle = new javax.swing.JLabel();
+        feedbackTextfield = new javax.swing.JTextField();
+        markLabel = new javax.swing.JLabel();
+        markTextfield = new javax.swing.JTextField();
+        gradeButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        ModuleLabel1 = new javax.swing.JLabel();
+        studentScrollPane = new javax.swing.JScrollPane();
+        studentTable = new javax.swing.JTable();
+        searchLabel = new javax.swing.JLabel();
+        searchTextfield = new javax.swing.JTextField();
+        lStudentID = new javax.swing.JLabel();
+        lStudentName = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        AssignmentSideButton = new javax.swing.JButton();
+        SuperviseeSideButton = new javax.swing.JButton();
+        HomeSideButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
 
-        jPanel2.setBackground(new java.awt.Color(0, 50, 79));
+        pDashboard.setBackground(new java.awt.Color(252, 247, 204));
+        pDashboard.setPreferredSize(new java.awt.Dimension(1500, 780));
 
-        AssignmentSideButton.setText("ASSIGNMENT");
-        AssignmentSideButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AssignmentSideButtonActionPerformed(evt);
-            }
-        });
+        mainTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        mainTitleLabel.setText("Reports Marking");
+        mainTitleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        SuperviseeSideButton.setText("SUPERVISEE");
-        SuperviseeSideButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SuperviseeSideButtonActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(pSupervisorAssessment);
 
-        HomeSideButton.setText("HOME");
-        HomeSideButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HomeSideButtonActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(pSecondMarkerAssessment);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AssignmentSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(HomeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
-                .addGap(17, 17, 17))
+        javax.swing.GroupLayout pDashboardLayout = new javax.swing.GroupLayout(pDashboard);
+        pDashboard.setLayout(pDashboardLayout);
+        pDashboardLayout.setHorizontalGroup(
+            pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pDashboardLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pDashboardLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(907, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(HomeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(AssignmentSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        pDashboardLayout.setVerticalGroup(
+            pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pDashboardLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pHome.setBackground(new java.awt.Color(252, 247, 204));
@@ -259,7 +475,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                         .addGroup(pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(799, Short.MAX_VALUE))
+                .addContainerGap(838, Short.MAX_VALUE))
         );
         pHomeLayout.setVerticalGroup(
             pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +486,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         pSupervisee.setBackground(new java.awt.Color(255, 255, 255));
@@ -290,7 +506,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 607, Short.MAX_VALUE))
+                .addGap(0, 649, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +613,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(394, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -445,11 +661,11 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pSupervisee.setLayout(pSuperviseeLayout);
         pSuperviseeLayout.setHorizontalGroup(
             pSuperviseeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 1886, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 1925, Short.MAX_VALUE)
             .addGroup(pSuperviseeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(603, Short.MAX_VALUE))
+                .addContainerGap(642, Short.MAX_VALUE))
         );
         pSuperviseeLayout.setVerticalGroup(
             pSuperviseeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,7 +789,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(157, 157, 157)
                 .addComponent(bEditStudentr, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(476, Short.MAX_VALUE))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -609,12 +825,12 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                     .addComponent(StudentTableSP, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(643, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addComponent(IntakeCodeLB)
@@ -654,6 +870,242 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pStudentSubmittedAssessment.setBackground(new java.awt.Color(252, 247, 204));
+        pStudentSubmittedAssessment.setPreferredSize(new java.awt.Dimension(1500, 780));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Assessment Submission");
+
+        jPanel7.setBackground(new java.awt.Color(204, 204, 204));
+
+        filePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        lSubmittedFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lSubmittedFile.setText("jLabel4");
+
+        javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
+        filePanel.setLayout(filePanelLayout);
+        filePanelLayout.setHorizontalGroup(
+            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lSubmittedFile, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        filePanelLayout.setVerticalGroup(
+            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filePanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lSubmittedFile)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("File Submission");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel7)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        downloadButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        downloadButton.setText("Download Submission File");
+        downloadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downloadButtonActionPerformed(evt);
+            }
+        });
+
+        feedbackLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        feedbackLabel.setText("Feedback:");
+
+        Description.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Description.setText("jLabel4");
+
+        DescriptionTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DescriptionTitle.setText("Description:");
+
+        markLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        markLabel.setText("Mark:");
+
+        gradeButton.setText("Grade");
+
+        cancelButton.setText("Cancel");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(DescriptionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(Description))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(downloadButton)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(markLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(feedbackLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(feedbackTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(markTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(452, 452, 452)
+                        .addComponent(gradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(cancelButton))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DescriptionTitle)
+                    .addComponent(Description))
+                .addGap(35, 35, 35)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(downloadButton)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(feedbackTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(feedbackLabel))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(markLabel)
+                    .addComponent(markTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gradeButton)
+                    .addComponent(cancelButton))
+                .addGap(54, 54, 54))
+        );
+
+        ModuleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        ModuleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
+
+        studentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Intake", "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        studentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                studentTableMouseReleased(evt);
+            }
+        });
+        studentScrollPane.setViewportView(studentTable);
+
+        searchLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchLabel.setText("Search:");
+
+        lStudentID.setText("jLabel8");
+
+        lStudentName.setText("jLabel9");
+
+        javax.swing.GroupLayout pStudentSubmittedAssessmentLayout = new javax.swing.GroupLayout(pStudentSubmittedAssessment);
+        pStudentSubmittedAssessment.setLayout(pStudentSubmittedAssessmentLayout);
+        pStudentSubmittedAssessmentLayout.setHorizontalGroup(
+            pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                                .addGap(240, 240, 240)
+                                .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lStudentName)
+                                    .addComponent(lStudentID))))
+                        .addGap(69, 69, 69)
+                        .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(studentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                                .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)))))
+                .addContainerGap(357, Short.MAX_VALUE))
+        );
+        pStudentSubmittedAssessmentLayout.setVerticalGroup(
+            pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchLabel)
+                            .addComponent(searchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(studentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(lStudentID)
+                        .addGap(18, 18, 18)
+                        .addComponent(lStudentName)))
+                .addGap(40, 40, 40)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -662,7 +1114,13 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pSupervisee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, 1886, Short.MAX_VALUE))
+                .addComponent(pAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, 1925, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 1919, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 1925, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,7 +1128,71 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pSupervisee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(0, 50, 79));
+
+        AssignmentSideButton.setText("ASSIGNMENT");
+        AssignmentSideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AssignmentSideButtonActionPerformed(evt);
+            }
+        });
+
+        SuperviseeSideButton.setText("SUPERVISEE");
+        SuperviseeSideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SuperviseeSideButtonActionPerformed(evt);
+            }
+        });
+
+        HomeSideButton.setText("HOME");
+        HomeSideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomeSideButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Reports Marking");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AssignmentSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(HomeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+                .addGap(17, 17, 17))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(HomeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jButton1)
+                .addGap(77, 77, 77)
+                .addComponent(AssignmentSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(556, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -679,13 +1201,18 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1934, 1934, 1934))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(210, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -723,7 +1250,6 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private void AssignmentSideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignmentSideButtonActionPerformed
          //TODO add your handling code here:
         pAssignment.setVisible(true);
-        refreshSupverviseeTable();
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
     }//GEN-LAST:event_AssignmentSideButtonActionPerformed
@@ -820,6 +1346,76 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 //        
     }//GEN-LAST:event_bEditStudentrActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        createSupervisorAssessmentPanels();
+        createSecondMarkerAssessmentPanels();
+        pDashboard.setVisible(true);
+        
+        pAssignment.setVisible(false);
+        pSupervisee.setVisible(false);
+        pHome.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadButtonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        String stuSubmiteedFileName = destFile.substring(destFile.lastIndexOf("\\"));
+        String filePath = file.getAbsolutePath() + stuSubmiteedFileName;
+        
+        System.out.println(destFile);
+        
+        
+        
+        try {
+                Files.copy(new File(destFile).toPath(), new File(filePath).toPath());
+
+            } catch (Exception e) {
+                e.getMessage();
+            }
+            
+    }//GEN-LAST:event_downloadButtonActionPerformed
+
+    private void studentTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentTableMouseReleased
+        // TODO add your handling code here:
+        String selectionID = studentTable.getModel().getValueAt(studentTable.getSelectedRow(), 1).toString();
+        String line;
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                String studentLine;
+                String studentName = "";
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                while ((studentLine = studentReader.readLine()) != null) {
+                    String[] studentRecord = studentLine.split("\t");
+                    if (studentRecord[0].equals(record[1])) {
+                        studentName = studentRecord[1];
+                        break;
+                    }
+                }
+
+                if (assessmentID.equals(record[0]) && selectionID.equals(record[1])){
+                    lStudentID.setText(record[1]);
+                    lStudentName.setText(studentName);
+                    lSubmittedFile.setText(record[2]);
+                    feedbackTextfield.setText(record[6]);
+                    markTextfield.setText(record[5]);
+                    destFile = record[2];
+                }
+            
+            }
+        }catch (Exception e) {
+            e.getMessage();
+        }
+        
+        
+        
+    }//GEN-LAST:event_studentTableMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -860,8 +1456,11 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AssignmentSideButton;
+    private javax.swing.JLabel Description;
+    private javax.swing.JLabel DescriptionTitle;
     private javax.swing.JButton HomeSideButton;
     private javax.swing.JLabel IntakeCodeLB;
+    private javax.swing.JLabel ModuleLabel1;
     private javax.swing.JLabel StudentDetailsLabel;
     private javax.swing.JLabel StudentIDLB;
     private javax.swing.JLabel StudentNameLB;
@@ -874,6 +1473,13 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JButton bLecturerClear;
     private javax.swing.JButton bStudentApply;
     private javax.swing.JButton bStudentClear;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton downloadButton;
+    private javax.swing.JLabel feedbackLabel;
+    private javax.swing.JTextField feedbackTextfield;
+    private javax.swing.JPanel filePanel;
+    private javax.swing.JButton gradeButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -881,10 +1487,12 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
@@ -894,10 +1502,28 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lStudentID;
+    private javax.swing.JLabel lStudentName;
+    private javax.swing.JLabel lSubmittedFile;
+    private javax.swing.JLabel mainTitleLabel;
+    private javax.swing.JLabel markLabel;
+    private javax.swing.JTextField markTextfield;
     private javax.swing.JPanel pAssignment;
+    private javax.swing.JPanel pDashboard;
     private javax.swing.JPanel pHome;
+    private javax.swing.JPanel pSecondMarkerAssessment;
+    private javax.swing.JPanel pStudentSubmittedAssessment;
     private javax.swing.JPanel pSupervisee;
+    private javax.swing.JPanel pSupervisorAssessment;
+    private javax.swing.JLabel searchLabel;
+    private javax.swing.JTextField searchTextfield;
+    private javax.swing.JScrollPane studentScrollPane;
+    private javax.swing.JTable studentTable;
     private javax.swing.JTable tLSuperviseeList;
     private javax.swing.JTable tStudentList;
     private javax.swing.JScrollPane tSuperviseeScrollPane2;
