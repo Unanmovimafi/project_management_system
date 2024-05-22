@@ -537,11 +537,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel6" min="-2" pref="390" max="-2" attributes="0"/>
-                                  <Component id="TotalPresentationLabel3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="TotalPresentationLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" pref="390" max="-2" attributes="0"/>
+                                  <Component id="UpPresentationLB" alignment="0" pref="390" max="32767" attributes="0"/>
+                                  <Component id="TotalUngradedLB" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="34" max="32767" attributes="0"/>
                           </Group>
@@ -553,12 +552,10 @@
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="TotalPresentationLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="UpPresentationLB" min="-2" pref="127" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TotalPresentationLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" pref="62" max="-2" attributes="0"/>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <Component id="TotalUngradedLB" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="38" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -572,21 +569,19 @@
                         <Property name="text" type="java.lang.String" value="Upcoming Presentation:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="TotalPresentationLabel3">
+                    <Component class="javax.swing.JLabel" name="TotalUngradedLB">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Submitted Report:"/>
+                        <Property name="text" type="java.lang.String" value="Total Ungraded Reports:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel5">
+                    <Component class="javax.swing.JLabel" name="UpPresentationLB">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel5"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel6">
-                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="jLabel5"/>
                       </Properties>
                     </Component>
@@ -614,8 +609,8 @@
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="TotalSuperviseeLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="TotalPresentationLabel1" alignment="0" pref="420" max="32767" attributes="0"/>
-                                  <Component id="TotalAssessmentLabel1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TotalPresentationLabel" alignment="0" pref="420" max="32767" attributes="0"/>
+                                  <Component id="TotalAssessmentLabel" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -625,23 +620,23 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="TotalPresentationLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TotalPresentationLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="TotalSuperviseeLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Component id="TotalAssessmentLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TotalAssessmentLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="67" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="TotalPresentationLabel1">
+                    <Component class="javax.swing.JLabel" name="TotalPresentationLabel">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Total Presentation Request:"/>
+                        <Property name="text" type="java.lang.String" value="Total Pending Presentation Requests:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="TotalSuperviseeLabel">
@@ -652,7 +647,7 @@
                         <Property name="text" type="java.lang.String" value="Total Supervisees:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="TotalAssessmentLabel1">
+                    <Component class="javax.swing.JLabel" name="TotalAssessmentLabel">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="1"/>

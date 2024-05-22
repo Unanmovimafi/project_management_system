@@ -11,7 +11,13 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -40,41 +46,279 @@ public class LecturerHomePage extends javax.swing.JFrame {
         lecturerId = getLectureIdFromLogin();
         int totalSupervisees = countSupervisees(lecturerId);
         TotalSuperviseeLabel.setText("Total Supervisees: " + totalSupervisees);
+        
+        int totalAssessments = countAssessments(lecturerId);
+        TotalAssessmentLabel.setText("Total Assessments: " + totalAssessments);
+        
+        int totalPendingRequests = countPendingRequests(lecturerId);
+        TotalPresentationLabel.setText("Total Pending Presentation Requests: " + totalPendingRequests);
+    
+        int totalUngraded = countUngraded(lecturerId);
+        TotalUngradedLB.setText("Total Ungraded Reports: " + totalUngraded);
+        
+        displayUpcomingAcceptedPresentations();
     } 
     private String getLectureIdFromLogin() {
         return lecturerId;
     }
     
     public int countSupervisees(String lectureIdToCount) {
+        Map<String, String> assessmentToLecturerMap = new HashMap<>();
         int superviseeCount = 0;
-        String filePath = "src/Project_Management_System/database/lecturer_supervisee.txt";
-        
-        System.out.println("Reading from file: " + filePath);
+
+        // Read assessment.txt and create a map of assessmentId to lecturerId
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 6) {
+                    String assessmentId = record[0].trim();
+                    String lecturerId = record[5].trim();
+                    assessmentToLecturerMap.put(assessmentId, lecturerId);
+                } else {
+                    System.out.println("Invalid line format in assessment.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+
+        // Read assessment_student.txt and count the supervisees for the given lecturerId
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 1) {
+                    String assessmentId = record[0].trim();
+                    if (assessmentToLecturerMap.getOrDefault(assessmentId, "").equalsIgnoreCase(lectureIdToCount)) {
+                        superviseeCount++;
+                    }
+                } else {
+                    System.out.println("Invalid line format in assessment_student.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment_student.txt: " + e.getMessage());
+        }
+
+        return superviseeCount;
+
+    }
+    
+    private void displayUpcomingAcceptedPresentations() {
+        List<PresentationInfo> acceptedPresentations = new ArrayList<>();
+        Map<String, String> studentNames = new HashMap<>();
+        Map<String, String> assessmentNames = new HashMap<>();
+        String assessmentStudentFilePath = "src\\Project_Management_System\\database\\assessment_student.txt";
+        String studentFilePath = "src\\Project_Management_System\\database\\student.txt";
+        String assessmentFilePath = "src\\Project_Management_System\\database\\assessment.txt";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        // Read student.txt and create a map of studentId to studentName
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 2) {
+                    String studentId = record[0].trim();
+                    String studentName = record[1].trim();
+                    studentNames.put(studentId, studentName);
+                } else {
+                    System.out.println("Invalid line format in student.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading student.txt: " + e.getMessage());
+        }
+
+        // Read assessment.txt and create a map of assessmentId to assessmentName
+        try (BufferedReader reader = new BufferedReader(new FileReader(assessmentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 2) {
+                    String assessmentId = record[0].trim();
+                    String assessmentName = record[1].trim();
+                    assessmentNames.put(assessmentId, assessmentName);
+                } else {
+                    System.out.println("Invalid line format in assessment.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+
+        // Read assessment_student.txt and extract relevant records
+        try (BufferedReader reader = new BufferedReader(new FileReader(assessmentStudentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 11) {
+                    String assessmentId = record[0].trim();
+                    String studentId = record[1].trim();
+                    String dateStr = record[8].trim();
+                    String timeStr = record[9].trim();
+                    String status = record[10].trim();
+
+                    if (status.equalsIgnoreCase("ACCEPTED") && !dateStr.equals("NA") && !timeStr.equals("NA")) {
+                        String dateTimeStr = dateStr + " " + timeStr;
+                        LocalDateTime presentationDateTime = LocalDateTime.parse(dateTimeStr, dateFormatter);
+                        acceptedPresentations.add(new PresentationInfo(assessmentId, studentId, presentationDateTime, studentNames.get(studentId), assessmentNames.get(assessmentId)));
+                    }
+                } else {
+                    System.out.println("Invalid line format in assessment_student.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment_student.txt: " + e.getMessage());
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        acceptedPresentations.removeIf(presentation -> presentation.getPresentationDateTime().isBefore(now));
+
+        acceptedPresentations.sort(Comparator.comparing(PresentationInfo::getPresentationDateTime));
+
+        StringBuilder upcomingPresentations = new StringBuilder("<html>");
+        for (int i = 0; i < Math.min(3, acceptedPresentations.size()); i++) {
+            PresentationInfo info = acceptedPresentations.get(i);
+            upcomingPresentations.append(info.getStudentId())
+                                 .append(" ")
+                                 .append(info.getStudentName())
+                                 .append(" ")
+                                 .append(info.getAssessmentId())
+                                 .append(" ")
+                                 .append(info.getAssessmentName())
+                                 .append(" ")
+                                 .append(info.getPresentationDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                                 .append(" ")
+                                 .append(info.getPresentationDateTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")))
+                                 .append("<br>");
+        }
+        upcomingPresentations.append("</html>");
+
+        UpPresentationLB.setText(upcomingPresentations.toString());
+    }
+
+    public int countUngraded(String lectureIdToCount) {
+        int ungradedCount = 0;
+        String assessmentStudentFilePath = "src\\Project_Management_System\\database\\assessment_student.txt";
+        String assessmentFilePath = "src\\Project_Management_System\\database\\assessment.txt";
+
+        Map<String, String> firstMarkerMap = new HashMap<>();
+        Map<String, String> secondMarkerMap = new HashMap<>();
+
+        // Read assessment.txt and map assessmentId to markers
+        try (BufferedReader reader = new BufferedReader(new FileReader(assessmentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 7) {
+                    String assessmentId = record[0].trim();
+                    String firstMarker = record[5].trim();
+                    String secondMarker = record[6].trim();
+                    firstMarkerMap.put(assessmentId, firstMarker);
+                    secondMarkerMap.put(assessmentId, secondMarker);
+                } else {
+                    System.out.println("Invalid line format in assessment.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+
+        // Read assessment_student.txt and count ungraded marks
+        try (BufferedReader reader = new BufferedReader(new FileReader(assessmentStudentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 8) {
+                    String assessmentId = record[0].trim();
+                    String firstMarkerMark = record[5].trim();
+                    String secondMarkerMark = record[7].trim();
+
+                    if (firstMarkerMap.get(assessmentId).equals(lectureIdToCount) && "NA".equalsIgnoreCase(firstMarkerMark)) {
+                        ungradedCount++;
+                    }
+
+                    if (secondMarkerMap.get(assessmentId).equals(lectureIdToCount) && "NA".equalsIgnoreCase(secondMarkerMark)) {
+                        ungradedCount++;
+                    }
+                } else {
+                    System.out.println("Invalid line format in assessment_student.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment_student.txt: " + e.getMessage());
+        }
+
+        return ungradedCount;
+    }
+    
+    public int countAssessments(String lectureIdToCount) {
+        int assessmentCount = 0;
+        String filePath = "src\\Project_Management_System\\database\\assessment.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println("Reading line: " + line);
-                String[] record = line.split("\\s+");  // Split by whitespace (spaces or tabs)
-                if (record.length >= 4) {
-                    String lecturerId = record[0].trim();
-                    String status = record[3].trim();
-                    System.out.println("Parsed Lecturer ID: " + lecturerId + ", Status: " + status);
-                    if (lecturerId.equalsIgnoreCase(lectureIdToCount) && (status.equalsIgnoreCase("CONFIRMED") || status.equalsIgnoreCase("CONFRIMED"))) {
-                        superviseeCount++;
+                String[] record = line.split("\t");
+                if (record.length >= 6) {
+                    String lecturerId = record[5].trim();
+                    if (lecturerId.equalsIgnoreCase(lectureIdToCount)) {
+                        assessmentCount++;
                     }
                 } else {
-                    System.out.println("Invalid line format: " + line);
+                    System.out.println("Invalid line format in assessment.txt: " + line);
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading the file: " + e.getMessage());
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+        return assessmentCount;
+    }
+    
+    public int countPendingRequests(String lectureIdToCount) {
+        Map<String, String> assessmentToLecturerMap = new HashMap<>();
+        int pendingRequestCount = 0;
+
+        // Read assessment.txt and create a map of assessmentId to lecturerId
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 6) {
+                    String assessmentId = record[0].trim();
+                    String lecturerId = record[5].trim();
+                    assessmentToLecturerMap.put(assessmentId, lecturerId);
+                } else {
+                    System.out.println("Invalid line format in assessment.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
         }
 
-        System.out.println("Total supervisees for Lecturer ID " + lectureIdToCount + " with status CONFIRMED: " + superviseeCount);
-        return superviseeCount;
+        // Read assessment_student.txt and count the pending requests for the given lecturerId
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 11) {
+                    String assessmentId = record[0].trim();
+                    String status = record[10].trim();
+                    if (assessmentToLecturerMap.getOrDefault(assessmentId, "").equalsIgnoreCase(lectureIdToCount) && status.equalsIgnoreCase("PENDING")) {
+                        pendingRequestCount++;
+                    }
+                } else {
+                    System.out.println("Invalid line format in assessment_student.txt: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment_student.txt: " + e.getMessage());
+        }
+
+        return pendingRequestCount;
     }
-        
         
     private void createAssignmentPanels(String assessmentID) {
         String line;
@@ -173,6 +417,42 @@ public class LecturerHomePage extends javax.swing.JFrame {
     }
     }
 
+    class PresentationInfo {
+        private String assessmentId;
+        private String studentId;
+        private LocalDateTime presentationDateTime;
+        private String studentName;
+        private String assessmentName;
+
+        public PresentationInfo(String assessmentId, String studentId, LocalDateTime presentationDateTime, String studentName, String assessmentName) {
+            this.assessmentId = assessmentId;
+            this.studentId = studentId;
+            this.presentationDateTime = presentationDateTime;
+            this.studentName = studentName;
+            this.assessmentName = assessmentName;
+        }
+
+        public String getAssessmentId() {
+            return assessmentId;
+        }
+
+        public String getStudentId() {
+            return studentId;
+        }
+
+        public LocalDateTime getPresentationDateTime() {
+            return presentationDateTime;
+        }
+
+        public String getStudentName() {
+            return studentName;
+        }
+
+        public String getAssessmentName() {
+            return assessmentName;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,13 +490,12 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         TotalPresentationLabel2 = new javax.swing.JLabel();
-        TotalPresentationLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        TotalUngradedLB = new javax.swing.JLabel();
+        UpPresentationLB = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        TotalPresentationLabel1 = new javax.swing.JLabel();
+        TotalPresentationLabel = new javax.swing.JLabel();
         TotalSuperviseeLabel = new javax.swing.JLabel();
-        TotalAssessmentLabel1 = new javax.swing.JLabel();
+        TotalAssessmentLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Code");
 
@@ -413,12 +692,11 @@ public class LecturerHomePage extends javax.swing.JFrame {
         TotalPresentationLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         TotalPresentationLabel2.setText("Upcoming Presentation:");
 
-        TotalPresentationLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        TotalPresentationLabel3.setText("Submitted Report:");
+        TotalUngradedLB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalUngradedLB.setText("Total Ungraded Reports:");
 
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setText("jLabel5");
+        UpPresentationLB.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        UpPresentationLB.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -426,11 +704,10 @@ public class LecturerHomePage extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TotalPresentationLabel3)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TotalPresentationLabel2)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpPresentationLB, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                    .addComponent(TotalUngradedLB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -439,26 +716,24 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(TotalPresentationLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UpPresentationLB, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TotalPresentationLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(TotalUngradedLB)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
 
-        TotalPresentationLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        TotalPresentationLabel1.setText("Total Presentation Request:");
+        TotalPresentationLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalPresentationLabel.setText("Total Pending Presentation Requests:");
 
         TotalSuperviseeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         TotalSuperviseeLabel.setText("Total Supervisees:");
 
-        TotalAssessmentLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        TotalAssessmentLabel1.setText("Total Assessment:");
+        TotalAssessmentLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalAssessmentLabel.setText("Total Assessment:");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -468,19 +743,19 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TotalSuperviseeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TotalPresentationLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addComponent(TotalAssessmentLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(TotalPresentationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addComponent(TotalAssessmentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(TotalPresentationLabel1)
+                .addComponent(TotalPresentationLabel)
                 .addGap(44, 44, 44)
                 .addComponent(TotalSuperviseeLabel)
                 .addGap(48, 48, 48)
-                .addComponent(TotalAssessmentLabel1)
+                .addComponent(TotalAssessmentLabel)
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -659,11 +934,12 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ModuleLabel;
-    private javax.swing.JLabel TotalAssessmentLabel1;
-    private javax.swing.JLabel TotalPresentationLabel1;
+    private javax.swing.JLabel TotalAssessmentLabel;
+    private javax.swing.JLabel TotalPresentationLabel;
     private javax.swing.JLabel TotalPresentationLabel2;
-    private javax.swing.JLabel TotalPresentationLabel3;
     private javax.swing.JLabel TotalSuperviseeLabel;
+    private javax.swing.JLabel TotalUngradedLB;
+    private javax.swing.JLabel UpPresentationLB;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -672,8 +948,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
