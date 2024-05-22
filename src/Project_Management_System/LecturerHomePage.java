@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,27 +25,25 @@ import javax.swing.JScrollPane;
  */
 public class LecturerHomePage extends javax.swing.JFrame {
    
+    private String lecturerId;
     /**
      * Creates new form StudentHome
      */
-    public LecturerHomePage() {
+    public LecturerHomePage(String lecturerId) {
+        this.lecturerId = lecturerId;
         initComponents();
         createAssessmentPanels();
         pHome.setVisible(true);
         jPanel2.setVisible(false);
         pInsideAssessment.setVisible(false);
         
-        String lectureIdToCount = getLectureIdFromLogin(); // Specify the lecture ID you want to count supervisees for
-        int totalSupervisees = countSupervisees(lectureIdToCount);
+        lecturerId = getLectureIdFromLogin();
+        int totalSupervisees = countSupervisees(lecturerId);
         TotalSuperviseeLabel.setText("Total Supervisees: " + totalSupervisees);
+    } 
+    private String getLectureIdFromLogin() {
+        return lecturerId;
     }
-    
-        private String getLectureIdFromLogin() {
-            // Your logic to get the lecture ID from the login input
-            // For now, I'll return a placeholder value
-            return "LR00001";
-        }
-        
     
     public int countSupervisees(String lectureIdToCount) {
         int superviseeCount = 0;
@@ -56,10 +55,10 @@ public class LecturerHomePage extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println("Reading line: " + line);
-                String[] parts = line.split("\\s+");  // Split by whitespace (spaces or tabs)
-                if (parts.length >= 4) {
-                    String lecturerId = parts[0].trim();
-                    String status = parts[3].trim();
+                String[] record = line.split("\\s+");  // Split by whitespace (spaces or tabs)
+                if (record.length >= 4) {
+                    String lecturerId = record[0].trim();
+                    String status = record[3].trim();
                     System.out.println("Parsed Lecturer ID: " + lecturerId + ", Status: " + status);
                     if (lecturerId.equalsIgnoreCase(lectureIdToCount) && (status.equalsIgnoreCase("CONFIRMED") || status.equalsIgnoreCase("CONFRIMED"))) {
                         superviseeCount++;
@@ -652,7 +651,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LecturerHomePage().setVisible(true);
+                String lecturerId = "lectureId";
+                new LecturerHomePage(lecturerId).setVisible(true);
             }
         });
     }

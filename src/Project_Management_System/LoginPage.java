@@ -207,12 +207,10 @@ public class LoginPage extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].equals(username) && record[8].equals(password)) {
-                    //Username and password match then proceed to Admin Page
                     br.close();
                     this.dispose();
-
-                    LecturerHomePage lhp = new LecturerHomePage();
-
+                    
+                    LecturerHomePage lhp = new LecturerHomePage(username);
                     lhp.setVisible(true);
                     lhp.pack();
                     lhp.setLocationRelativeTo(null);
@@ -223,6 +221,7 @@ public class LoginPage extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Invalid username or password.");
         }
+        
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
