@@ -46,28 +46,37 @@ public class LecturerHomePage extends javax.swing.JFrame {
         }
         
     
-        public int countSupervisees(String lectureIdToCount) {
-            int superviseeCount = 0;
+    public int countSupervisees(String lectureIdToCount) {
+        int superviseeCount = 0;
+        String filePath = "src/Project_Management_System/database/lecturer_supervisee.txt";
+        
+        System.out.println("Reading from file: " + filePath);
 
-            try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer_supervisee.txt"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\t");
-                    if (parts.length >= 2) {
-                        String lecturerId = parts[0].trim();
-
-                        if (lecturerId.equalsIgnoreCase(lectureIdToCount)) {
-                            superviseeCount++;
-                        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println("Reading line: " + line);
+                String[] parts = line.split("\\s+");  // Split by whitespace (spaces or tabs)
+                if (parts.length >= 4) {
+                    String lecturerId = parts[0].trim();
+                    String status = parts[3].trim();
+                    System.out.println("Parsed Lecturer ID: " + lecturerId + ", Status: " + status);
+                    if (lecturerId.equalsIgnoreCase(lectureIdToCount) && (status.equalsIgnoreCase("CONFIRMED") || status.equalsIgnoreCase("CONFRIMED"))) {
+                        superviseeCount++;
                     }
+                } else {
+                    System.out.println("Invalid line format: " + line);
                 }
-            } catch (IOException e) {
-                System.err.println("Error reading the file: " + e.getMessage());
             }
-
-            System.out.println("Lecturer ID: " + lectureIdToCount);
-            return superviseeCount;
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
         }
+
+        System.out.println("Total supervisees for Lecturer ID " + lectureIdToCount + " with status CONFIRMED: " + superviseeCount);
+        return superviseeCount;
+    }
+        
+        
     private void createAssignmentPanels(String assessmentID) {
         String line;
         
