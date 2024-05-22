@@ -11,8 +11,10 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -21,6 +23,31 @@ import javax.swing.table.DefaultTableModel;
 public class AddAssessment extends javax.swing.JFrame {
     
     private AddAssessment addAssessment;
+    
+    public void refreshStudentTable(String IDNameInCoOfStudent) {
+        DefaultTableModel model = (DefaultTableModel)tStudentList.getModel();
+        model.setRowCount(0);
+        String line;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                
+                if (record[0].toLowerCase().startsWith(IDNameInCoOfStudent) || record[1].toLowerCase().startsWith(IDNameInCoOfStudent)|| record[3].toLowerCase().startsWith(IDNameInCoOfStudent)) {
+                    String [] newRecord = new String[3];
+                    //Skip IC, Password, Address
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    System.arraycopy(record, 3, newRecord, 2, 1);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
+                }
+            br.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
     
     public void refreshSupervisorListTable(String IDOrNameOfLecturer) {
         DefaultTableModel model = (DefaultTableModel)tSupervisorList.getModel();
@@ -98,6 +125,7 @@ public class AddAssessment extends javax.swing.JFrame {
         getNewID();
         refreshSupervisorListTable("");
         refreshSecondMarkerListTable("");
+        refreshStudentTable("");
     }
 
     /**
@@ -134,6 +162,13 @@ public class AddAssessment extends javax.swing.JFrame {
         tfSupervisorName = new javax.swing.JTextField();
         tfSecondMarkerName = new javax.swing.JTextField();
         cbType = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tStudentList = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tAddedStudent = new javax.swing.JTable();
+        bAddStudent = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        tfSearchStudent = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -244,6 +279,65 @@ public class AddAssessment extends javax.swing.JFrame {
 
         cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INTERNSHIP", "INVESTIGATION REPORTS", "CP1", "CP2", "RMCP", "FYP" }));
 
+        tStudentList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Intake Code"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tStudentList);
+
+        tAddedStudent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Intake Code"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tAddedStudent);
+
+        bAddStudent.setText("Add<");
+        bAddStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAddStudentActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Remove>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tfSearchStudent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchStudentKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -253,49 +347,60 @@ public class AddAssessment extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(30, 30, 30))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(tfSecondMarker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                            .addComponent(tfSupervisor, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                                            .addComponent(tfSupervisorName)))
+                                    .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfSecondMarker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                                    .addComponent(tfSupervisor, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                                    .addComponent(tfSupervisorName)))
-                            .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(284, 284, 284)
-                        .addComponent(bSave)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                                .addGap(44, 44, 44)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bAddStudent)
+                                    .addComponent(jButton1))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(tfSearchSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(tfSearchSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfSearchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(tfSearchSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(tfSearchSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(242, 242, 242)
+                        .addComponent(bSave)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -340,12 +445,24 @@ public class AddAssessment extends javax.swing.JFrame {
                             .addComponent(tfSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bAddStudent)
+                                    .addComponent(tfSearchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(bSave)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94))))
+                        .addGap(84, 84, 84)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -356,7 +473,9 @@ public class AddAssessment extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -378,15 +497,34 @@ public class AddAssessment extends javax.swing.JFrame {
             String supervisor = tfSupervisor.getText();
             String secondMarker = tfSecondMarker.getText();
             
-            StringBuilder record = new StringBuilder();
             
             try {
                  
+            StringBuilder record = new StringBuilder();
                 //Write the information to the text file
                 record.append(newID + "\t" + name + "\t" + type+ "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
                 writer.write(record + "\n");
+                writer.close();
+                } 
+             catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+            
+             try {
+                 
+                 BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt", true));
+                 System.out.println(tAddedStudent.getRowCount());
+                 for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
+                     
+                StringBuilder record = new StringBuilder();
+                    //Write the information to the text file
+                    record.append(newID + "\t" + tAddedStudent.getValueAt(row, 0) + "\t" 
+                            + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" 
+                            + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" + "NA");
+                    writer.write(record + "\n");
+                }
                 writer.close();
                 } 
              catch (Exception e) {
@@ -414,17 +552,80 @@ public class AddAssessment extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selectionID = tSupervisorList.getModel().getValueAt(tSupervisorList.getSelectedRow(), 0).toString();
         String selectionName = tSupervisorList.getModel().getValueAt(tSupervisorList.getSelectedRow(), 1).toString();
-        tfSupervisor.setText(selectionID);
-        tfSupervisorName.setText(selectionName);
+        
+        if (tfSecondMarker.getText().equals(selectionID))
+        {
+            JOptionPane.showMessageDialog(null, "Supervisor and Second Marker cannot be the same person!");
+        } else {
+            tfSupervisor.setText(selectionID);
+            tfSupervisorName.setText(selectionName);
+        }
     }//GEN-LAST:event_tSupervisorListMouseReleased
 
     private void tSecondMarkerListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tSecondMarkerListMouseReleased
         // TODO add your handling code here:
         String selectionID = tSecondMarkerList.getModel().getValueAt(tSecondMarkerList.getSelectedRow(), 0).toString();
         String selectionName = tSecondMarkerList.getModel().getValueAt(tSecondMarkerList.getSelectedRow(), 1).toString();
+        
+        if (tfSupervisor.getText().equals(selectionID))
+        {
+            JOptionPane.showMessageDialog(null, "Supervisor and Second Marker cannot be the same person!");
+        } else {
         tfSecondMarker.setText(selectionID);
         tfSecondMarkerName.setText(selectionName);
+        }
     }//GEN-LAST:event_tSecondMarkerListMouseReleased
+
+    private void tfSearchStudentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchStudentKeyReleased
+        // TODO add your handling code here:
+        refreshStudentTable(tfSearchStudent.getText().toLowerCase());
+    }//GEN-LAST:event_tfSearchStudentKeyReleased
+
+    private void bAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddStudentActionPerformed
+        // TODO add your handling code here:
+        if (tStudentList.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "No Selected Student");
+        }
+        else {
+            String selectionID = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 0).toString();
+            String selectionName = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 1).toString();
+            String intakeCode = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 2).toString();
+            String[] studentRecord = new String[]{selectionID, selectionName, intakeCode};
+        
+            TableModel dataModel = tAddedStudent.getModel();
+            boolean isDuplicated = false;
+
+            for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
+                if(studentRecord[0].equals(dataModel.getValueAt(row, 0))){
+                    isDuplicated = true;
+                    break;
+                }
+            }
+            
+            if(isDuplicated) {
+            JOptionPane.showMessageDialog(null, "This student already be added");
+            }
+            else{
+                DefaultTableModel model = (DefaultTableModel)tAddedStudent.getModel();
+                model.addRow(studentRecord);
+                studentRecord = null;
+            }
+        }
+    }//GEN-LAST:event_bAddStudentActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tAddedStudent.getModel();
+        int[] rows = tAddedStudent.getSelectedRows();
+        if (rows.length > 0){
+            for (int i = 0; i < rows.length; i++) {
+                model.removeRow(rows[i] - i);
+            }
+        }
+        else{
+                JOptionPane.showMessageDialog(null, "No student be selected to removed!");
+                }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,9 +666,11 @@ public class AddAssessment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAddStudent;
     private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbType;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -478,13 +681,18 @@ public class AddAssessment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable tAddedStudent;
     private javax.swing.JTable tSecondMarkerList;
+    private javax.swing.JTable tStudentList;
     private javax.swing.JTable tSupervisorList;
     private javax.swing.JTextField tfDescription;
     private javax.swing.JTextField tfDueDate;
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfSearchSecondMarker;
+    private javax.swing.JTextField tfSearchStudent;
     private javax.swing.JTextField tfSearchSupervisor;
     private javax.swing.JTextField tfSecondMarker;
     private javax.swing.JTextField tfSecondMarkerName;
