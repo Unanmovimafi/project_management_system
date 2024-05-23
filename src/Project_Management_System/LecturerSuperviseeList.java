@@ -9,6 +9,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -20,13 +22,35 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LecturerSuperviseeList extends javax.swing.JFrame {
     private String ID;
-    private String assessmentID;
+    private String[] assessmentRecord;
+    private String[] assessmentStudentRecord;
     private String destFile;
+    private int count = -1;
     
     
     public void setID(String ID) {
         this.ID = ID;
     }
+    
+        public List<String> getAllAssessStuRecord() {
+        try {
+            
+            List<String> lines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                //Read and add all the lines in text file to variable line
+                lines.add(line);
+            }
+            reader.close();
+            return lines;
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    } 
+
     
     private void refreshStudentListTable(String assessmentID){
         DefaultTableModel model = (DefaultTableModel)studentTable.getModel();
@@ -111,7 +135,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                             jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                                 public void mouseReleased(java.awt.event.MouseEvent evt) {
                                     // TODO add your handling code here:
-                                    assessmentID = record[0];
+                                    assessmentRecord = record;
                                     refreshStudentListTable(record[0]);
                                     pStudentSubmittedAssessment.setVisible(true);
                                     pDashboard.setVisible(false);
@@ -185,7 +209,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                             jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
                                 public void mouseReleased(java.awt.event.MouseEvent evt) {
                                     // TODO add your handling code here:
-                                    assessmentID = record[0];
+                                    assessmentRecord = record;
                                     
                                     refreshStudentListTable(record[0]);
                                     pStudentSubmittedAssessment.setVisible(true);
@@ -353,6 +377,10 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         markTextfield = new javax.swing.JTextField();
         gradeButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        tfSecondFB = new javax.swing.JTextField();
+        tfSecondMark = new javax.swing.JTextField();
         ModuleLabel1 = new javax.swing.JLabel();
         studentScrollPane = new javax.swing.JScrollPane();
         studentTable = new javax.swing.JTable();
@@ -951,8 +979,21 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         markLabel.setText("Mark:");
 
         gradeButton.setText("Grade");
+        gradeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gradeButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
+
+        jLabel8.setText("jLabel8");
+
+        jLabel9.setText("jLabel9");
+
+        tfSecondFB.setText("jTextField1");
+
+        tfSecondMark.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -967,18 +1008,13 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                         .addComponent(Description))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(downloadButton)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(feedbackTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(downloadButton))
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(markLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(feedbackLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(feedbackTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(markTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(452, 452, 452)
                         .addComponent(gradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -986,31 +1022,55 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                         .addComponent(cancelButton))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(markLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(feedbackLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSecondMark, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSecondFB, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(markTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DescriptionTitle)
-                    .addComponent(Description))
-                .addGap(35, 35, 35)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(downloadButton)
-                .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(feedbackTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(feedbackLabel))
-                .addGap(39, 39, 39)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DescriptionTitle)
+                            .addComponent(Description))
+                        .addGap(35, 35, 35)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(downloadButton))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(feedbackLabel)
+                            .addComponent(feedbackTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(markLabel)
                     .addComponent(markTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(tfSecondFB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tfSecondMark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gradeButton)
                     .addComponent(cancelButton))
@@ -1386,25 +1446,43 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         String line;
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
+                count = count + 1;
                 String[] record = line.split("\t");
-                String studentLine;
+                String assstudentLine;
                 String studentName = "";
-                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
-                while ((studentLine = studentReader.readLine()) != null) {
-                    String[] studentRecord = studentLine.split("\t");
-                    if (studentRecord[0].equals(record[1])) {
-                        studentName = studentRecord[1];
+                BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+                while ((assstudentLine = assessmentReader.readLine()) != null) {
+                    String[] assstudentRecord = assstudentLine.split("\t");
+                    if (assstudentRecord[0].equals(record[0])) {
+                        if (assstudentRecord[5].equals(ID)){
+                            feedbackTextfield.setEditable(true);
+                            markTextfield.setEditable(true);
+                            tfSecondFB.setEditable(false);
+                            tfSecondMark.setEditable(false);
+                            
+                        }else if (assstudentRecord[6].equals(ID)){
+                            feedbackTextfield.setEditable(false);
+                            markTextfield.setEditable(false);
+                            tfSecondFB.setEditable(true);
+                            tfSecondMark.setEditable(true);
+                        }
                         break;
                     }
                 }
 
-                if (assessmentID.equals(record[0]) && selectionID.equals(record[1])){
+                if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])){
                     lStudentID.setText(record[1]);
                     lStudentName.setText(studentName);
                     lSubmittedFile.setText(record[2]);
+                    destFile = record[2];
                     feedbackTextfield.setText(record[6]);
                     markTextfield.setText(record[5]);
-                    destFile = record[2];
+                    
+                    tfSecondFB.setText(record[8]);
+                    tfSecondMark.setText(record[7]);
+                    
+                    assessmentStudentRecord = record;
+                    break;
                 }
             
             }
@@ -1415,6 +1493,36 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_studentTableMouseReleased
+
+    private void gradeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeButtonActionPerformed
+        // TODO add your handling code here:
+        assessmentStudentRecord[5] = markTextfield.getText();
+        assessmentStudentRecord[6] = feedbackTextfield.getText();
+         assessmentStudentRecord[7] = tfSecondMark.getText();
+         assessmentStudentRecord[8] = tfSecondFB.getText();
+        
+        
+        try {
+                List<String> lines = getAllAssessStuRecord();
+                //Write the information to the text file
+                String strAssStuRecord =  String.join("\t", assessmentStudentRecord);
+                lines.set(count, strAssStuRecord);
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+                for (String updatedLine : lines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+                
+                writer.close();
+
+
+
+                } 
+            catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        
+    }//GEN-LAST:event_gradeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1493,6 +1601,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
@@ -1530,6 +1640,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JTextField tfIntakeCode;
     private javax.swing.JTextField tfLecturerID;
     private javax.swing.JTextField tfLecturerName;
+    private javax.swing.JTextField tfSecondFB;
+    private javax.swing.JTextField tfSecondMark;
     private javax.swing.JTextField tfStudentID;
     private javax.swing.JTextField tfStudentName;
     // End of variables declaration//GEN-END:variables
