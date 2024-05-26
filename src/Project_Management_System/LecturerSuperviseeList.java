@@ -226,7 +226,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                             assessmentRecord = record;
                             refreshStudentListTable(record[0]);
                             pStudentSubmittedAssessment.setVisible(true);
-                            pDashboard.setVisible(false);
+                            pReportsMarking.setVisible(false);
                             pSupervisee.setVisible(false);
                             pAssignment.setVisible(false);
                             pHome.setVisible(false);
@@ -302,7 +302,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 
                             refreshStudentListTable(record[0]);
                             pStudentSubmittedAssessment.setVisible(true);
-                            pDashboard.setVisible(false);
+                            pReportsMarking.setVisible(false);
                             pSupervisee.setVisible(false);
                             pAssignment.setVisible(false);
                             pHome.setVisible(false);
@@ -389,7 +389,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         initComponents();
         pHome.setVisible(true);
         
-        pDashboard.setVisible(false);
+        pReportsMarking.setVisible(false);
         pSupervisee.setVisible(false);
         pAssignment.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
@@ -405,7 +405,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel5 = new javax.swing.JPanel();
-        pDashboard = new javax.swing.JPanel();
+        pReportsMarking = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pSupervisorAssessment = new javax.swing.JPanel();
@@ -472,6 +472,11 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         searchTextfield = new javax.swing.JTextField();
         lStudentID = new javax.swing.JLabel();
         lStudentName = new javax.swing.JLabel();
+        lStudentPresentationDate = new javax.swing.JLabel();
+        lPresentationTime = new javax.swing.JLabel();
+        bAcceptPresentation = new javax.swing.JButton();
+        bRejectPresentation = new javax.swing.JButton();
+        lStudentPresentationStatus = new javax.swing.JLabel();
         pHome = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -499,8 +504,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
 
-        pDashboard.setBackground(new java.awt.Color(252, 247, 204));
-        pDashboard.setPreferredSize(new java.awt.Dimension(1500, 780));
+        pReportsMarking.setBackground(new java.awt.Color(252, 247, 204));
+        pReportsMarking.setPreferredSize(new java.awt.Dimension(1500, 780));
 
         mainTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         mainTitleLabel.setText("Reports Marking");
@@ -510,27 +515,27 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(pSecondMarkerAssessment);
 
-        javax.swing.GroupLayout pDashboardLayout = new javax.swing.GroupLayout(pDashboard);
-        pDashboard.setLayout(pDashboardLayout);
-        pDashboardLayout.setHorizontalGroup(
-            pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pDashboardLayout.createSequentialGroup()
+        javax.swing.GroupLayout pReportsMarkingLayout = new javax.swing.GroupLayout(pReportsMarking);
+        pReportsMarking.setLayout(pReportsMarkingLayout);
+        pReportsMarkingLayout.setHorizontalGroup(
+            pReportsMarkingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pReportsMarkingLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pDashboardLayout.createSequentialGroup()
+                .addGroup(pReportsMarkingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pReportsMarkingLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(907, Short.MAX_VALUE))
         );
-        pDashboardLayout.setVerticalGroup(
-            pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pDashboardLayout.createSequentialGroup()
+        pReportsMarkingLayout.setVerticalGroup(
+            pReportsMarkingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pReportsMarkingLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pReportsMarkingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap(88, Short.MAX_VALUE))
@@ -1055,7 +1060,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                             .addComponent(tfSecondMark, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfSecondFB, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(markTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1137,6 +1142,26 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 
         lStudentName.setText("jLabel9");
 
+        lStudentPresentationDate.setText("jLabel15");
+
+        lPresentationTime.setText("jLabel16");
+
+        bAcceptPresentation.setText("Accept");
+        bAcceptPresentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAcceptPresentationActionPerformed(evt);
+            }
+        });
+
+        bRejectPresentation.setText("Reject");
+        bRejectPresentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRejectPresentationActionPerformed(evt);
+            }
+        });
+
+        lStudentPresentationStatus.setText("jLabel15");
+
         javax.swing.GroupLayout pStudentSubmittedAssessmentLayout = new javax.swing.GroupLayout(pStudentSubmittedAssessment);
         pStudentSubmittedAssessment.setLayout(pStudentSubmittedAssessmentLayout);
         pStudentSubmittedAssessmentLayout.setHorizontalGroup(
@@ -1144,7 +1169,24 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                                    .addGap(92, 92, 92)
+                                    .addComponent(lStudentPresentationDate))
+                                .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lPresentationTime)
+                                        .addComponent(lStudentPresentationStatus))))
+                            .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(bAcceptPresentation)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bRejectPresentation)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                         .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1159,8 +1201,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                                 .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)))))
-                .addContainerGap(357, Short.MAX_VALUE))
+                                .addComponent(searchTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)))))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         pStudentSubmittedAssessmentLayout.setVerticalGroup(
             pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1180,9 +1222,22 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                         .addComponent(lStudentID)
                         .addGap(18, 18, 18)
                         .addComponent(lStudentName)))
-                .addGap(40, 40, 40)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(lStudentPresentationDate)
+                        .addGap(75, 75, 75)
+                        .addComponent(lPresentationTime)
+                        .addGap(33, 33, 33)
+                        .addComponent(lStudentPresentationStatus)
+                        .addGap(33, 33, 33)
+                        .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bAcceptPresentation)
+                            .addComponent(bRejectPresentation))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pHome.setBackground(new java.awt.Color(252, 247, 204));
@@ -1369,7 +1424,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addComponent(pAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, 1925, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 1919, Short.MAX_VALUE)
+                    .addComponent(pReportsMarking, javax.swing.GroupLayout.DEFAULT_SIZE, 1919, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 1925, Short.MAX_VALUE))
@@ -1385,7 +1440,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addComponent(pAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                    .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
+                    .addComponent(pReportsMarking, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
@@ -1409,7 +1464,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             }
         });
 
-        HomeSideButton.setText("HOME");
+        HomeSideButton.setText("Dashboard");
         HomeSideButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HomeSideButtonActionPerformed(evt);
@@ -1483,7 +1538,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pHome.setVisible(false);
         pAssignment.setVisible(false);
         pStudentSubmittedAssessment.setVisible(true);
-        pDashboard.setVisible(false);
+        pReportsMarking.setVisible(false);
     }//GEN-LAST:event_SuperviseeSideButtonActionPerformed
 
     private void bStudentClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudentClearActionPerformed
@@ -1503,8 +1558,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pHome.setVisible(true);
         pSupervisee.setVisible(false);
         pAssignment.setVisible(false);
-        pStudentSubmittedAssessment.setVisible(true);
-        pDashboard.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(false);
+        pReportsMarking.setVisible(false);
     }//GEN-LAST:event_HomeSideButtonActionPerformed
 
     private void AssignmentSideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignmentSideButtonActionPerformed
@@ -1513,7 +1568,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
         pStudentSubmittedAssessment.setVisible(true);
-        pDashboard.setVisible(false);
+        pReportsMarking.setVisible(false);
     }//GEN-LAST:event_AssignmentSideButtonActionPerformed
 
     private void bLecturerApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerApplyActionPerformed
@@ -1612,12 +1667,14 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         // TODO add your handling code here:
         createSupervisorAssessmentPanels();
         createSecondMarkerAssessmentPanels();
-        pDashboard.setVisible(true);
+        selectionID = "-1";
+        
+        pReportsMarking.setVisible(true);
         
         pAssignment.setVisible(false);
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
-        pStudentSubmittedAssessment.setVisible(true);
+        pStudentSubmittedAssessment.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadButtonActionPerformed
@@ -1630,7 +1687,6 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         String stuSubmiteedFileName = destFile.substring(destFile.lastIndexOf("\\"));
         String filePath = file.getAbsolutePath() + stuSubmiteedFileName;
         
-        System.out.println(destFile);
         
         
         
@@ -1647,7 +1703,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selectionID = studentTable.getModel().getValueAt(studentTable.getSelectedRow(), 1).toString();
         String line;
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
                 count = count + 1;
                 String[] record = line.split("\t");
@@ -1657,13 +1714,13 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 while ((assstudentLine = assessmentReader.readLine()) != null) {
                     String[] assstudentRecord = assstudentLine.split("\t");
                     if (assstudentRecord[0].equals(record[0])) {
-                        if (assstudentRecord[5].equals(ID)){
+                        if (assstudentRecord[5].equals(ID)) {
                             feedbackTextfield.setEditable(true);
                             markTextfield.setEditable(true);
                             tfSecondFB.setEditable(false);
                             tfSecondMark.setEditable(false);
-                            
-                        }else if (assstudentRecord[6].equals(ID)){
+
+                        } else if (assstudentRecord[6].equals(ID)) {
                             feedbackTextfield.setEditable(false);
                             markTextfield.setEditable(false);
                             tfSecondFB.setEditable(true);
@@ -1673,64 +1730,144 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                     }
                 }
 
-                if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])){
+                if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])) {
                     lStudentID.setText(record[1]);
                     lStudentName.setText(studentName);
                     lSubmittedFile.setText(record[2]);
-                    destFile = record[2];
                     feedbackTextfield.setText(record[6]);
                     markTextfield.setText(record[5]);
-                    
+
                     tfSecondFB.setText(record[8]);
                     tfSecondMark.setText(record[7]);
-                    
+
                     assessmentStudentRecord = record;
+
+                    if (record[2].equals("NA")) {
+                        downloadButton.setEnabled(false);
+                    } else {
+                        destFile = record[2];
+                    }
+
+                    if (record[11].equals("NA")) {
+                        lStudentPresentationDate.setText("NA");
+                        lPresentationTime.setText("NA");
+                        lStudentPresentationStatus.setText("Student Haven't book Presentation");
+                        bAcceptPresentation.setEnabled(false);
+                        bRejectPresentation.setEnabled(false);
+
+                    } else if (record[11].equals("PENDING")) {
+                        lStudentPresentationDate.setText(record[9]);
+                        lPresentationTime.setText(record[10]);
+                        lStudentPresentationStatus.setText("Waiting Approval");
+                        bAcceptPresentation.setEnabled(true);
+                        bRejectPresentation.setEnabled(true);
+                    } else if (record[11].equals("ACCEPT")) {
+                        lStudentPresentationDate.setText(record[9]);
+                        lPresentationTime.setText(record[10]);
+                        lStudentPresentationStatus.setText("You jave accept the Presentation");
+                        bAcceptPresentation.setEnabled(false);
+                        bRejectPresentation.setEnabled(false);
+                    } else if (record[11].equals("REJECT")) {
+                        lStudentPresentationDate.setText(record[9]);
+                        lPresentationTime.setText(record[10]);
+                        lStudentPresentationStatus.setText("Waiting the Student to re-select the presentation date and time.");
+                        bAcceptPresentation.setEnabled(false);
+                        bRejectPresentation.setEnabled(false);
+                    }
+
                     break;
                 }
-            
+
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.getMessage();
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_studentTableMouseReleased
 
     private void gradeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeButtonActionPerformed
         // TODO add your handling code here:
         assessmentStudentRecord[5] = markTextfield.getText();
         assessmentStudentRecord[6] = feedbackTextfield.getText();
-         assessmentStudentRecord[7] = tfSecondMark.getText();
-         assessmentStudentRecord[8] = tfSecondFB.getText();
-        
-        
+        assessmentStudentRecord[7] = tfSecondMark.getText();
+        assessmentStudentRecord[8] = tfSecondFB.getText();
+
         try {
-                List<String> lines = getAllAssessStuRecord();
-                //Write the information to the text file
-                String strAssStuRecord =  String.join("\t", assessmentStudentRecord);
-                lines.set(count, strAssStuRecord);
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
-                for (String updatedLine : lines) {
-                    writer.write(updatedLine);
-                    writer.newLine();
-                }
-                
-                writer.close();
-
-
-
-                } 
-            catch (Exception e) {
-                System.err.println(e.getMessage());
+            List<String> lines = getAllAssessStuRecord();
+            //Write the information to the text file
+            String strAssStuRecord = String.join("\t", assessmentStudentRecord);
+            lines.set(count, strAssStuRecord);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
             }
-        
+
+            writer.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
     }//GEN-LAST:event_gradeButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void bAcceptPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAcceptPresentationActionPerformed
+        // TODO add your handling code here:
+
+        assessmentStudentRecord[11] = "ACCEPT";
+        
+        try {
+            List<String> lines = getAllAssessStuRecord();
+            //Write the information to the text file
+            String strAssStuRecord = String.join("\t", assessmentStudentRecord);
+            lines.set(count, strAssStuRecord);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
+        
+        bAcceptPresentation.setEnabled(false);
+        bRejectPresentation.setEnabled(false);
+    }//GEN-LAST:event_bAcceptPresentationActionPerformed
+
+    private void bRejectPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRejectPresentationActionPerformed
+        // TODO add your handling code here:
+        assessmentStudentRecord[11] = "REJECT";
+        
+        try {
+            List<String> lines = getAllAssessStuRecord();
+            //Write the information to the text file
+            String strAssStuRecord = String.join("\t", assessmentStudentRecord);
+            lines.set(count, strAssStuRecord);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
+        bAcceptPresentation.setEnabled(false);
+        bRejectPresentation.setEnabled(false);
+    }//GEN-LAST:event_bRejectPresentationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1789,9 +1926,11 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JLabel TotalSuperviseeLabel;
     private javax.swing.JLabel TotalUngradedLB;
     private javax.swing.JLabel UpPresentationLB;
+    private javax.swing.JButton bAcceptPresentation;
     private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bLecturerApply;
     private javax.swing.JButton bLecturerClear;
+    private javax.swing.JButton bRejectPresentation;
     private javax.swing.JButton bStudentApply;
     private javax.swing.JButton bStudentClear;
     private javax.swing.JButton cancelButton;
@@ -1834,15 +1973,18 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lPresentationTime;
     private javax.swing.JLabel lStudentID;
     private javax.swing.JLabel lStudentName;
+    private javax.swing.JLabel lStudentPresentationDate;
+    private javax.swing.JLabel lStudentPresentationStatus;
     private javax.swing.JLabel lSubmittedFile;
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel markLabel;
     private javax.swing.JTextField markTextfield;
     private javax.swing.JPanel pAssignment;
-    private javax.swing.JPanel pDashboard;
     private javax.swing.JPanel pHome;
+    private javax.swing.JPanel pReportsMarking;
     private javax.swing.JPanel pSecondMarkerAssessment;
     private javax.swing.JPanel pStudentSubmittedAssessment;
     private javax.swing.JPanel pSupervisee;

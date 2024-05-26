@@ -28,12 +28,12 @@ public class StudentHome extends javax.swing.JFrame {
     private String strDesFile;
     private String[] studentRecord = new String[11];
     private int rowOfStudentRecord = -1;
-    
+
     private int rowOfAssignmentStudentSubmission = -1;
-    
+
     public List<String> getAllStudentRecord() {
         try {
-            
+
             List<String> lines = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
             String line;
@@ -43,13 +43,12 @@ public class StudentHome extends javax.swing.JFrame {
             }
             reader.close();
             return lines;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;
-    } 
-    
+    }
+
     private String calculateGrade(int mark) {
         if (mark >= 80) {
             return "(A+)";
@@ -75,151 +74,189 @@ public class StudentHome extends javax.swing.JFrame {
             return "(F-)";
         }
     }
-        
+
     public void refreshResult() {
-        DefaultTableModel model = (DefaultTableModel)tResult.getModel();
+        DefaultTableModel model = (DefaultTableModel) tResult.getModel();
         model.setRowCount(0);
-        
-         try {
+
+        try {
             BufferedReader assessmentStudentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
             BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
 
             String assessmentStudentLine, assessmentLine;
 
-           while ((assessmentStudentLine = assessmentStudentReader.readLine()) != null) {
-            String[] assessmentStudentRecord = assessmentStudentLine.split("\t");
+            while ((assessmentStudentLine = assessmentStudentReader.readLine()) != null) {
+                String[] assessmentStudentRecord = assessmentStudentLine.split("\t");
 
-            // Find assessment details
-            String assessmentName = "";
-            while ((assessmentLine = assessmentReader.readLine()) != null) {
-                String[] assessmentRecord = assessmentLine.split("\t");
-                if (assessmentRecord[0].equals(assessmentStudentRecord[0])) {
-                    assessmentName = assessmentRecord[1];
-                    break;
+                // Find assessment details
+                String assessmentName = "";
+                while ((assessmentLine = assessmentReader.readLine()) != null) {
+                    String[] assessmentRecord = assessmentLine.split("\t");
+                    if (assessmentRecord[0].equals(assessmentStudentRecord[0])) {
+                        assessmentName = assessmentRecord[1];
+                        break;
+                    }
                 }
-            }
-            
-            String strAverage;
-            
-            String firstMark;
-            String gradeA;
-            try {
-            firstMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[3]));
-            gradeA = calculateGrade(Integer.parseInt(firstMark));
-            }catch (Exception e) {
-                firstMark = "NA";
-                gradeA = "";
-            }
-            
-            String secondMark;
-            String gradeB;
-            
-            try {
-            secondMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[4]));
-            gradeB = calculateGrade(Integer.parseInt(secondMark));
-            }catch (Exception e) {
-                secondMark= "NA";
-                gradeB = "";
-            }
-            
-            
-            String average;
-            String gradeC;
-            
-            try {
-                average = Integer.toString((Integer.parseInt(firstMark) + Integer.parseInt(secondMark)) / 2);
-                gradeC = calculateGrade(Integer.parseInt(average));
-            }catch (Exception e) {
-                average = "NA";
-                gradeC = "";
-            }
-            
-            model.addRow(new Object[]{assessmentStudentRecord[0], assessmentName, firstMark + gradeA, secondMark+gradeB, average + gradeC});
-        }
 
-        assessmentStudentReader.close();
-        assessmentReader.close();
-    } catch (Exception e) {
-        e.printStackTrace(); // Print stack trace for any exceptions
+                String strAverage;
+
+                String firstMark;
+                String gradeA;
+                try {
+                    firstMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[3]));
+                    gradeA = calculateGrade(Integer.parseInt(firstMark));
+                } catch (Exception e) {
+                    firstMark = "NA";
+                    gradeA = "";
+                }
+
+                String secondMark;
+                String gradeB;
+
+                try {
+                    secondMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[4]));
+                    gradeB = calculateGrade(Integer.parseInt(secondMark));
+                } catch (Exception e) {
+                    secondMark = "NA";
+                    gradeB = "";
+                }
+
+                String average;
+                String gradeC;
+
+                try {
+                    average = Integer.toString((Integer.parseInt(firstMark) + Integer.parseInt(secondMark)) / 2);
+                    gradeC = calculateGrade(Integer.parseInt(average));
+                } catch (Exception e) {
+                    average = "NA";
+                    gradeC = "";
+                }
+
+                model.addRow(new Object[]{assessmentStudentRecord[0], assessmentName, firstMark + gradeA, secondMark + gradeB, average + gradeC});
+            }
+
+            assessmentStudentReader.close();
+            assessmentReader.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Print stack trace for any exceptions
+        }
     }
-    }
-    
-        
-    
-    
+
     public void setID(String ID) {
         this.ID = ID;
         createAssessmentPanels();
     }
-    
+
     public void refreshSubmissionPanel(String IDOfAssessment) {
         String line2;
         boolean isSubmittedFile = false;
         String submittedFile = "";
         rowOfAssignmentStudentSubmission = -1;
-        
-        try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt")); 
-                        while ((line2 = br2.readLine()) != null) {
-                            String[] record2 = line2.split("\t");
-                            rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
-                            if (record2[0].equals(assessmentID) && record2[1].equals(ID) && !record2[2].equals("NA")) {
-                                submittedFile = record2[2];
-                                isSubmittedFile = true;
-                                break;
-                            }
-                        }
-                        
-                    } catch (Exception e) {
-                        e.getMessage();
-                    }
-        
+
+        try {
+            BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            while ((line2 = br2.readLine()) != null) {
+                String[] record2 = line2.split("\t");
+                rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
+                if (record2[0].equals(assessmentID) && record2[1].equals(ID) && !record2[2].equals("NA")) {
+                    submittedFile = record2[2];
+                    isSubmittedFile = true;
+                }
+                
+                if (record2[0].equals(assessmentID) && record2[1].equals(ID) && record2[11].equals("PENDING")) {
+                    tfBookPresentationDate.setEditable(false);
+                    tfBookPresentationTime.setEditable(false);
+                    tfBookPresentationDate.setText(record2[9]);
+                    tfBookPresentationTime.setText(record2[10]);
+                    lPresentationStatus.setText("Pending");
+                    
+                    bBookPresentation.setEnabled(false);
+                }
+                
+                if (record2[0].equals(assessmentID) && record2[1].equals(ID) && record2[11].equals("ACCEPT")) {
+                    tfBookPresentationDate.setEditable(false);
+                    tfBookPresentationTime.setEditable(false);
+                    tfBookPresentationDate.setText(record2[9]);
+                    tfBookPresentationTime.setText(record2[10]);
+                    lPresentationStatus.setText("Accept");
+                    bBookPresentation.setEnabled(false);
+                }
+                
+                if (record2[0].equals(assessmentID) && record2[1].equals(ID) && record2[11].equals("REJECT")) {
+                    
+                    tfBookPresentationDate.setEditable(true);
+                    tfBookPresentationTime.setEditable(true);
+                    tfBookPresentationDate.setText(record2[9]);
+                    tfBookPresentationTime.setText(record2[10]);
+                    lPresentationStatus.setText("Reject(Please re-select your presentation date & time)");
+                    
+                    bBookPresentation.setEnabled(true);
+                }
+                
+                if (record2[0].equals(assessmentID) && record2[1].equals(ID) && record2[11].equals("NA")) {
+                    
+                    tfBookPresentationDate.setEditable(true);
+                    tfBookPresentationTime.setEditable(true);
+                    lPresentationStatus.setText("Haven't Book Any Presentation");
+                    
+                    bBookPresentation.setEnabled(true);
+                }
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
         String line;
         String[] assessInfo = new String[8];
-                
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
-                        while ((line = br.readLine()) != null) {
-                            String[] record = line.split("\t");
-                            if (record[0].equals(assessmentID)) {
-                                assessInfo = record;
-                                break;
-                            }
-                        }
-                        
-                    } catch (Exception e) {
-                        e.getMessage();
-                    }
-                    
-                    if (isSubmittedFile){
-                        String FileName = submittedFile.substring(submittedFile.lastIndexOf("\\")+1);
-                        lSubmissionStatus.setText("Submitted");
-                        lSubmittedFile.setText(submittedFile);
-                        
-                        lFileName.setText(submittedFile);
-                    } else {
-                        lSubmissionStatus.setText("Not Submitted");
-                        lSubmittedFile.setText("");
-                        lFileName.setText(submittedFile);
-                        rowOfAssignmentStudentSubmission = - 1;
-                    }
-                    moduleLabel.setText(assessInfo[1]);
-                    Description.setText(assessInfo[3]);
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].equals(assessmentID)) {
+                    assessInfo = record;
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+        if (isSubmittedFile) {
+            String FileName = submittedFile.substring(submittedFile.lastIndexOf("\\") + 1);
+            lSubmissionStatus.setText("Submitted");
+            lSubmittedFile.setText(submittedFile);
+
+            lFileName.setText(submittedFile);
+        } else {
+            lSubmissionStatus.setText("Not Submitted");
+            lSubmittedFile.setText("");
+            lFileName.setText(submittedFile);
+            rowOfAssignmentStudentSubmission = - 1;
+        }
+        moduleLabel.setText(assessInfo[1]);
+        Description.setText(assessInfo[3]);
     }
-    
+
     private void createAssessmentPanels() {
-        
+
         pAssessment.removeAll();
-        
+
         String line;
         String line2;
         int count = 0;
-        
-                try {BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt")); 
-                    while ((line2 = br2.readLine()) != null) {
-                        String[] record2 = line2.split("\t");
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
-            while ((line = br.readLine()) != null) {
-                String[] record = line.split("\t");
-                        if (ID.equals(record2[1]) && record2[0].equals(record[0])){
+
+        try {
+            BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            while ((line2 = br2.readLine()) != null) {
+                String[] record2 = line2.split("\t");
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+                    while ((line = br.readLine()) != null) {
+                        String[] record = line.split("\t");
+                        if (ID.equals(record2[1]) && record2[0].equals(record[0])) {
                             javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
                             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                             javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
@@ -230,22 +267,22 @@ public class StudentHome extends javax.swing.JFrame {
 
                             jPanel1.setLayout(jPanel1Layout);
                             jPanel1Layout.setHorizontalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addContainerGap(100, Short.MAX_VALUE))
+                                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addContainerGap()
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel1)
+                                                            .addComponent(jLabel2))
+                                                    .addContainerGap(100, Short.MAX_VALUE))
                             );
                             jPanel1Layout.setVerticalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2)
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addContainerGap()
+                                                    .addComponent(jLabel1)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jLabel2)
+                                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             );
 
                             jPanel1.setPreferredSize(new Dimension(450, 50));
@@ -257,36 +294,35 @@ public class StudentHome extends javax.swing.JFrame {
                                     // TODO add your handling code here:
                                     assessmentID = record[0];
                                     refreshSubmissionPanel(record[0]);
-                                    
-                                    pSubmittedAssign.setVisible(true);
+
+                                    pAssessmentStatus.setVisible(true);
                                     pDashboard.setVisible(false);
-                                    pAssignmentSubmission.setVisible(false);
+                                    pSubmitAssessment.setVisible(false);
                                     pProfile.setVisible(false);
                                     pResult.setVisible(false);
-                                    
+
                                     moduleLabel.setText(record[1]);
                                     ModuleLabel1.setText(record[1]);
-                                    }
+                                }
                             });
                             pAssessment.add(jPanel1);
                             count = count + 1;
                             break;
                         }
                     }
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.getMessage();
                 }
             }
-            
+
         } catch (Exception e) {
-        e.getMessage();
+            e.getMessage();
         }
-        pAssessment.setPreferredSize(new Dimension(350, count*55));
+        pAssessment.setPreferredSize(new Dimension(350, count * 55));
         jScrollPane1.setViewportView(pAssessment);
-        
-        
+
         pAssessment.revalidate();
-        pAssessment.repaint();  
+        pAssessment.repaint();
     }
     /**
      * Creates new form StudentHome
@@ -294,8 +330,8 @@ public class StudentHome extends javax.swing.JFrame {
     public StudentHome() {
         initComponents();
         pDashboard.setVisible(true);
-        pAssignmentSubmission.setVisible(false);
-        pSubmittedAssign.setVisible(false);
+        pSubmitAssessment.setVisible(false);
+        pAssessmentStatus.setVisible(false);
         pProfile.setVisible(false);
         pResult.setVisible(false);
     }
@@ -322,7 +358,7 @@ public class StudentHome extends javax.swing.JFrame {
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pAssessment = new javax.swing.JPanel();
-        pAssignmentSubmission = new javax.swing.JPanel();
+        pSubmitAssessment = new javax.swing.JPanel();
         AssessmentPanel = new javax.swing.JPanel();
         FileSubmissionLabel = new javax.swing.JLabel();
         FilePanel = new javax.swing.JPanel();
@@ -332,7 +368,7 @@ public class StudentHome extends javax.swing.JFrame {
         bRemoveSub = new javax.swing.JButton();
         bBackAssignmentSubmission = new javax.swing.JButton();
         moduleLabel = new javax.swing.JLabel();
-        pSubmittedAssign = new javax.swing.JPanel();
+        pAssessmentStatus = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -348,6 +384,10 @@ public class StudentHome extends javax.swing.JFrame {
         DescriptionTitle = new javax.swing.JLabel();
         lSubmissionStatus = new javax.swing.JLabel();
         ModuleLabel1 = new javax.swing.JLabel();
+        bBookPresentation = new javax.swing.JButton();
+        tfBookPresentationDate = new javax.swing.JTextField();
+        tfBookPresentationTime = new javax.swing.JTextField();
+        lPresentationStatus = new javax.swing.JLabel();
         pProfile = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -525,8 +565,8 @@ public class StudentHome extends javax.swing.JFrame {
                 .addContainerGap(140, Short.MAX_VALUE))
         );
 
-        pAssignmentSubmission.setBackground(new java.awt.Color(252, 247, 204));
-        pAssignmentSubmission.setPreferredSize(new java.awt.Dimension(1500, 780));
+        pSubmitAssessment.setBackground(new java.awt.Color(252, 247, 204));
+        pSubmitAssessment.setPreferredSize(new java.awt.Dimension(1500, 780));
 
         AssessmentPanel.setBackground(new java.awt.Color(255, 255, 255));
         AssessmentPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -636,20 +676,20 @@ public class StudentHome extends javax.swing.JFrame {
         moduleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         moduleLabel.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        javax.swing.GroupLayout pAssignmentSubmissionLayout = new javax.swing.GroupLayout(pAssignmentSubmission);
-        pAssignmentSubmission.setLayout(pAssignmentSubmissionLayout);
-        pAssignmentSubmissionLayout.setHorizontalGroup(
-            pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
+        javax.swing.GroupLayout pSubmitAssessmentLayout = new javax.swing.GroupLayout(pSubmitAssessment);
+        pSubmitAssessment.setLayout(pSubmitAssessmentLayout);
+        pSubmitAssessmentLayout.setHorizontalGroup(
+            pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pSubmitAssessmentLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
-        pAssignmentSubmissionLayout.setVerticalGroup(
-            pAssignmentSubmissionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pAssignmentSubmissionLayout.createSequentialGroup()
+        pSubmitAssessmentLayout.setVerticalGroup(
+            pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pSubmitAssessmentLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
@@ -657,8 +697,8 @@ public class StudentHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pSubmittedAssign.setBackground(new java.awt.Color(252, 247, 204));
-        pSubmittedAssign.setPreferredSize(new java.awt.Dimension(1500, 780));
+        pAssessmentStatus.setBackground(new java.awt.Color(252, 247, 204));
+        pAssessmentStatus.setPreferredSize(new java.awt.Dimension(1500, 780));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -787,7 +827,7 @@ public class StudentHome extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -822,25 +862,55 @@ public class StudentHome extends javax.swing.JFrame {
         ModuleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
 
-        javax.swing.GroupLayout pSubmittedAssignLayout = new javax.swing.GroupLayout(pSubmittedAssign);
-        pSubmittedAssign.setLayout(pSubmittedAssignLayout);
-        pSubmittedAssignLayout.setHorizontalGroup(
-            pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pSubmittedAssignLayout.createSequentialGroup()
+        bBookPresentation.setText("Book");
+        bBookPresentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBookPresentationActionPerformed(evt);
+            }
+        });
+
+        tfBookPresentationTime.setText("jTextField2");
+
+        lPresentationStatus.setText("jLabel17");
+
+        javax.swing.GroupLayout pAssessmentStatusLayout = new javax.swing.GroupLayout(pAssessmentStatus);
+        pAssessmentStatus.setLayout(pAssessmentStatusLayout);
+        pAssessmentStatusLayout.setHorizontalGroup(
+            pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pAssessmentStatusLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pAssessmentStatusLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(285, 285, 285)
+                        .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bBookPresentation)
+                            .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lPresentationStatus))))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
-        pSubmittedAssignLayout.setVerticalGroup(
-            pSubmittedAssignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pSubmittedAssignLayout.createSequentialGroup()
+        pAssessmentStatusLayout.setVerticalGroup(
+            pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pAssessmentStatusLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pAssessmentStatusLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pAssessmentStatusLayout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
+                        .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(lPresentationStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bBookPresentation)
+                        .addGap(144, 144, 144))))
         );
 
         pProfile.setBackground(new java.awt.Color(255, 255, 255));
@@ -1049,14 +1119,14 @@ public class StudentHome extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pSubmitAssessment, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(pSubmittedAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pAssessmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 1326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1071,12 +1141,12 @@ public class StudentHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
-                    .addComponent(pAssignmentSubmission, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE))
+                    .addComponent(pSubmitAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(pSubmittedAssign, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+                    .addComponent(pAssessmentStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1120,8 +1190,8 @@ public class StudentHome extends javax.swing.JFrame {
         pResult.setVisible(true);
         
         pDashboard.setVisible(false);
-        pAssignmentSubmission.setVisible(false);
-        pSubmittedAssign.setVisible(false);
+        pSubmitAssessment.setVisible(false);
+        pAssessmentStatus.setVisible(false);
         pProfile.setVisible(false);
     }//GEN-LAST:event_resultButtonActionPerformed
 
@@ -1131,8 +1201,8 @@ public class StudentHome extends javax.swing.JFrame {
         
         pResult.setVisible(false);
         pDashboard.setVisible(false);
-        pAssignmentSubmission.setVisible(false);
-        pSubmittedAssign.setVisible(false);
+        pSubmitAssessment.setVisible(false);
+        pAssessmentStatus.setVisible(false);
         
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
             String line;
@@ -1175,8 +1245,8 @@ public class StudentHome extends javax.swing.JFrame {
         
         lFileName.setText(lSubmittedFile.getText());
         
-        pAssignmentSubmission.setVisible(true);
-        pSubmittedAssign.setVisible(false);
+        pSubmitAssessment.setVisible(true);
+        pAssessmentStatus.setVisible(false);
         pDashboard.setVisible(false);
         pProfile.setVisible(false);
         pResult.setVisible(false);
@@ -1190,8 +1260,8 @@ public class StudentHome extends javax.swing.JFrame {
         
         
         pDashboard.setVisible(true);
-        pAssignmentSubmission.setVisible(false);
-        pSubmittedAssign.setVisible(false);
+        pSubmitAssessment.setVisible(false);
+        pAssessmentStatus.setVisible(false);
         pProfile.setVisible(false);
         pResult.setVisible(false);
     }//GEN-LAST:event_bCancelActionPerformed
@@ -1201,8 +1271,8 @@ public class StudentHome extends javax.swing.JFrame {
 
         refreshSubmissionPanel(assessmentID);
 
-        pSubmittedAssign.setVisible(true);
-        pAssignmentSubmission.setVisible(false);
+        pAssessmentStatus.setVisible(true);
+        pSubmitAssessment.setVisible(false);
         pDashboard.setVisible(false);
         pResult.setVisible(false);
         pProfile.setVisible(false);
@@ -1270,9 +1340,9 @@ public class StudentHome extends javax.swing.JFrame {
 
                 refreshSubmissionPanel(assessmentID);
 
-                pSubmittedAssign.setVisible(true);
+                pAssessmentStatus.setVisible(true);
                 pDashboard.setVisible(false);
-                pAssignmentSubmission.setVisible(false);
+                pSubmitAssessment.setVisible(false);
                 pProfile.setVisible(false);
                 pResult.setVisible(false);
 
@@ -1285,69 +1355,66 @@ public class StudentHome extends javax.swing.JFrame {
 
     private void bSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveFileActionPerformed
         // TODO add your handling code here:
-        if (rowOfAssignmentStudentSubmission != -1){
+        String[] oldRecord = null;
+        int actualRow = 0;
+
+        if (rowOfAssignmentStudentSubmission != -1) {
             JOptionPane.showMessageDialog(null, "Only can submit new file after remove old file.");
-        } else{
+        } else {
 
             if (sourceFile != null) {
-                String newRecord = "";
 
                 List<String> lines = new ArrayList<>();
                 try {
                     BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        rowOfAssignmentStudentSubmission= rowOfAssignmentStudentSubmission + 1;
+                        rowOfAssignmentStudentSubmission = rowOfAssignmentStudentSubmission + 1;
                         String[] record = line.split("\t");
-                        //Read and add all the lines in text file to variable line
                         lines.add(line);
+                        //Read and add all the lines in text file to variable line
                         if (record[0].equals(assessmentID) && record[1].equals(ID)) {
-                            String[] oldRecord = line.split("\t");
+                            oldRecord = line.split("\t");
                             oldRecord[2] = strDesFile;
-                            newRecord = oldRecord[0] + "\t" +oldRecord[1] +"\t" + oldRecord[2] +"\t" + oldRecord[3] + "\t" +oldRecord[4];
-                            break;
+                            actualRow = rowOfAssignmentStudentSubmission;
                         }
                     }
 
                     reader.close();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
 
-                lines.set(rowOfAssignmentStudentSubmission, newRecord);
+                lines.set(actualRow, String.join("\t", oldRecord));
 
                 try {
                     //Write the information to the text file
                     BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
-                    for (String line : lines){
-
+                    for (String line : lines) {
                         writer.write(line);
+                        writer.newLine();
                     }
                     writer.close();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
 
                 try {
                     //Copy the file to folder
                     Files.copy(sourceFile.toPath(), destinationFile.toPath());
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
 
                 refreshSubmissionPanel(assessmentID);
 
-                pSubmittedAssign.setVisible(true);
+                pAssessmentStatus.setVisible(true);
                 pDashboard.setVisible(false);
-                pAssignmentSubmission.setVisible(false);
+                pSubmitAssessment.setVisible(false);
                 pProfile.setVisible(false);
                 pResult.setVisible(false);
 
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Please at least select a file");
             }
         }
@@ -1383,8 +1450,8 @@ public class StudentHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         pDashboard.setVisible(true);
         
-        pAssignmentSubmission.setVisible(false);
-        pSubmittedAssign.setVisible(false);
+        pSubmitAssessment.setVisible(false);
+        pAssessmentStatus.setVisible(false);
         pResult.setVisible(false);
         pProfile.setVisible(false);
         
@@ -1426,8 +1493,8 @@ public class StudentHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Successfully Saved!");
             pDashboard.setVisible(true);
         
-            pAssignmentSubmission.setVisible(false);
-            pSubmittedAssign.setVisible(false);
+            pSubmitAssessment.setVisible(false);
+            pAssessmentStatus.setVisible(false);
             pResult.setVisible(false);
             pProfile.setVisible(false);
         }
@@ -1435,6 +1502,56 @@ public class StudentHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Password Wrong!");
         }
     }//GEN-LAST:event_bChangePasswordActionPerformed
+
+    private void bBookPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBookPresentationActionPerformed
+        // TODO add your handling code here:
+        int row = -1;
+        int actualRow = 0;
+        String[] oldRecord = null;
+        List<String> lines = new ArrayList<>();
+
+        if (tfBookPresentationDate.getText().isEmpty() || tfBookPresentationTime.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter a date and time.");
+        } else {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] record = line.split("\t");
+                    row = row + 1;
+                    //Read and add all the lines in text file to variable line
+                    lines.add(line);
+                    if (record[0].equals(assessmentID) && record[1].equals(ID)) {
+                        oldRecord = line.split("\t");
+                        oldRecord[9] = tfBookPresentationDate.getText();
+                        oldRecord[10] = tfBookPresentationTime.getText();
+                        oldRecord[11] = "PENDING";
+                        actualRow = row;
+                    }
+                }
+
+                reader.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            lines.set(actualRow, String.join("\t", oldRecord));
+
+            try {
+                //Write the information to the text file
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+                for (String line : lines) {
+                    writer.write(line);
+                    writer.write("\n");
+                }
+                writer.close();
+
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+            JOptionPane.showMessageDialog(null, "You successfully book the presentation!");
+        }
+    }//GEN-LAST:event_bBookPresentationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1496,6 +1613,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JLabel ModuleLabel1;
     private javax.swing.JButton UploadBtn;
     private javax.swing.JButton bBackAssignmentSubmission;
+    private javax.swing.JButton bBookPresentation;
     private javax.swing.JButton bCancel;
     private javax.swing.JButton bChangePassword;
     private javax.swing.JButton bDashboard;
@@ -1527,16 +1645,17 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lFileName;
+    private javax.swing.JLabel lPresentationStatus;
     private javax.swing.JLabel lSubmissionStatus;
     private javax.swing.JLabel lSubmittedFile;
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel moduleLabel;
     private javax.swing.JPanel pAssessment;
-    private javax.swing.JPanel pAssignmentSubmission;
+    private javax.swing.JPanel pAssessmentStatus;
     private javax.swing.JPanel pDashboard;
     private javax.swing.JPanel pProfile;
     private javax.swing.JPanel pResult;
-    private javax.swing.JPanel pSubmittedAssign;
+    private javax.swing.JPanel pSubmitAssessment;
     private javax.swing.JButton presentationButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JRadioButton rbFemale;
@@ -1545,6 +1664,8 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTable tResult;
     private javax.swing.JTextField tfAddress;
+    private javax.swing.JTextField tfBookPresentationDate;
+    private javax.swing.JTextField tfBookPresentationTime;
     private javax.swing.JTextField tfConfirmPassword;
     private javax.swing.JTextField tfContactNumber;
     private javax.swing.JTextField tfDoB;
