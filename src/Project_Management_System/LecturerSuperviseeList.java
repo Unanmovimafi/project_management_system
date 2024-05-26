@@ -30,11 +30,99 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     
     public void setID(String ID) {
         this.ID = ID;
+        countAssessments();
+        countSupervisees();
     }
     
-        public List<String> getAllAssessStuRecord() {
+    private void countAssessments() {
+        int assessmentCount = 0;
+        String filePath = "src\\Project_Management_System\\database\\assessment.txt";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record.length >= 6) {
+                    if (record[5].equals(ID) || record[6].equals(ID)) {
+                        assessmentCount++;
+                    }
+                } else {
+                    System.out.println("Invalid line format in assessment.txt: " + line);
+                }
+            }
+            jLabel13.setText(Integer.toString(assessmentCount));
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+    }
+
+    private void countSupervisees() {
+        int SuperviseesCount = 0;
+
+        try (BufferedReader reader2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"))) {
+            String line2;
+            while ((line2 = reader2.readLine()) != null) {
+                String[] record2 = line2.split("\t");
+                try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] record = line.split("\t");
+                        if (record[5].equals(ID) && record[0].equals(record2[0])) {
+                            SuperviseesCount++;
+                        }
+                    }
+
+                } catch (IOException e) {
+                    System.err.println("Error reading assessment.txt: " + e.getMessage());
+                }
+
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+
+        jLabel12.setText(Integer.toString(SuperviseesCount));
+
+    }
+
+    private void countUngradedReport() {
+        int UngradedReport = 0;
+
+        try (BufferedReader reader2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"))) {
+            String line2;
+            while ((line2 = reader2.readLine()) != null) {
+                String[] record2 = line2.split("\t");
+                try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] record = line.split("\t");
+                        if (record.length >= 6) {
+                            if (record[5].equals(ID) && record[0].equals(record2[0]) && record2[5].equals("NA")) {
+                                UngradedReport++;
+                            }
+                        } else if (record[6].equals(ID) && record[0].equals(record2[0]) && record2[7].equals("NA")) {
+                            UngradedReport++;
+                        }
+                    }
+
+                } catch (IOException e) {
+                    System.err.println("Error reading assessment.txt: " + e.getMessage());
+                }
+
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading assessment.txt: " + e.getMessage());
+        }
+
+        jLabel14.setText(Integer.toString(UngradedReport));
+
+    }
+
+    
+    
+    public List<String> getAllAssessStuRecord() {
         try {
-            
+
             List<String> lines = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
             String line;
@@ -44,12 +132,11 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             }
             reader.close();
             return lines;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;
-    } 
+    }
 
     
     private void refreshStudentListTable(String assessmentID){
@@ -89,218 +176,223 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     }
     
     private void createSupervisorAssessmentPanels() {
-        
+
         pSupervisorAssessment.removeAll();
-        
+
         String line;
         String line2;
         int count = 0;
-        
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
-                        if (ID.equals(record[5])){
-                            javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-                            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                            javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-                            javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+                if (ID.equals(record[5])) {
+                    javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                    javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                    javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
 
-                            jLabel1.setText(record[0]);
-                            jLabel2.setText(record[1]);
+                    jLabel1.setText(record[0]);
+                    jLabel2.setText(record[1]);
 
-                            jPanel1.setLayout(jPanel1Layout);
-                            jPanel1Layout.setHorizontalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addContainerGap(100, Short.MAX_VALUE))
-                            );
-                            jPanel1Layout.setVerticalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2)
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            );
+                    jPanel1.setLayout(jPanel1Layout);
+                    jPanel1Layout.setHorizontalGroup(
+                            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel1)
+                                                    .addComponent(jLabel2))
+                                            .addContainerGap(100, Short.MAX_VALUE))
+                    );
+                    jPanel1Layout.setVerticalGroup(
+                            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel2)
+                                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    );
 
-                            jPanel1.setPreferredSize(new Dimension(450, 50));
-                            jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
-                            jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    jPanel1.setPreferredSize(new Dimension(450, 50));
+                    jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                            jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-                                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                                    // TODO add your handling code here:
-                                    assessmentRecord = record;
-                                    refreshStudentListTable(record[0]);
-                                    pStudentSubmittedAssessment.setVisible(true);
-                                    pDashboard.setVisible(false);
-                                    pSupervisee.setVisible(false);
-                                    pAssignment.setVisible(false);
-                                    
-                                    ModuleLabel1.setText(record[1]);
-                                    Description.setText(record[3]);
-                                    }
-                            });
-                            pSupervisorAssessment.add(jPanel1);
-                            count = count + 1;
-                            break;
+                    jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseReleased(java.awt.event.MouseEvent evt) {
+                            // TODO add your handling code here:
+                            assessmentRecord = record;
+                            refreshStudentListTable(record[0]);
+                            pStudentSubmittedAssessment.setVisible(true);
+                            pDashboard.setVisible(false);
+                            pSupervisee.setVisible(false);
+                            pAssignment.setVisible(false);
+                            pHome.setVisible(false);
+
+                            ModuleLabel1.setText(record[1]);
+                            Description.setText(record[3]);
                         }
-                    }
-                }catch (Exception e) {
-                    e.getMessage();
+                    });
+                    pSupervisorAssessment.add(jPanel1);
+                    count = count + 1;
+                    break;
                 }
-        pSupervisorAssessment.setPreferredSize(new Dimension(350, count*55));
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        pSupervisorAssessment.setPreferredSize(new Dimension(350, count * 55));
         jScrollPane1.setViewportView(pSupervisorAssessment);
-        
-        
+
         pSupervisorAssessment.revalidate();
-        pSupervisorAssessment.repaint();  
+        pSupervisorAssessment.repaint();
     }
     
     private void createSecondMarkerAssessmentPanels() {
-        
+
         pSecondMarkerAssessment.removeAll();
-        
+
         String line;
         String line2;
         int count = 0;
-        
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt")); 
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
-                        if (ID.equals(record[6])){
-                            javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-                            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                            javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-                            javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+                if (ID.equals(record[6])) {
+                    javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                    javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                    javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
 
-                            jLabel1.setText(record[0]);
-                            jLabel2.setText(record[1]);
+                    jLabel1.setText(record[0]);
+                    jLabel2.setText(record[1]);
 
-                            jPanel1.setLayout(jPanel1Layout);
-                            jPanel1Layout.setHorizontalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addContainerGap(100, Short.MAX_VALUE))
-                            );
-                            jPanel1Layout.setVerticalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2)
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            );
+                    jPanel1.setLayout(jPanel1Layout);
+                    jPanel1Layout.setHorizontalGroup(
+                            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel1)
+                                                    .addComponent(jLabel2))
+                                            .addContainerGap(100, Short.MAX_VALUE))
+                    );
+                    jPanel1Layout.setVerticalGroup(
+                            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel2)
+                                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    );
 
-                            jPanel1.setPreferredSize(new Dimension(450, 50));
-                            jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
-                            jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    jPanel1.setPreferredSize(new Dimension(450, 50));
+                    jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                            jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-                                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                                    // TODO add your handling code here:
-                                    assessmentRecord = record;
-                                    
-                                    refreshStudentListTable(record[0]);
-                                    pStudentSubmittedAssessment.setVisible(true);
-                                    pDashboard.setVisible(false);
-                                    pSupervisee.setVisible(false);
-                                    pAssignment.setVisible(false);
-                                    
-                                    ModuleLabel1.setText(record[1]);
-                                    Description.setText(record[3]);
-                                    }
-                            });
-                            pSecondMarkerAssessment.add(jPanel1);
-                            count = count + 1;
-                            break;
+                    jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseReleased(java.awt.event.MouseEvent evt) {
+                            // TODO add your handling code here:
+                            assessmentRecord = record;
+
+                            refreshStudentListTable(record[0]);
+                            pStudentSubmittedAssessment.setVisible(true);
+                            pDashboard.setVisible(false);
+                            pSupervisee.setVisible(false);
+                            pAssignment.setVisible(false);
+                            pHome.setVisible(false);
+
+                            ModuleLabel1.setText(record[1]);
+                            Description.setText(record[3]);
                         }
-                    }
-                }catch (Exception e) {
-                    e.getMessage();
+                    });
+                    pSecondMarkerAssessment.add(jPanel1);
+                    count = count + 1;
+                    break;
                 }
-        pSecondMarkerAssessment.setPreferredSize(new Dimension(350, count*55));
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        pSecondMarkerAssessment.setPreferredSize(new Dimension(350, count * 55));
         jScrollPane2.setViewportView(pSecondMarkerAssessment);
-        
-        
+
         pSecondMarkerAssessment.revalidate();
-        pSecondMarkerAssessment.repaint();  
+        pSecondMarkerAssessment.repaint();
     }
     
 
     public void refreshSupverviseeTable() {
-        DefaultTableModel model = (DefaultTableModel)tLSuperviseeList.getModel();
+        DefaultTableModel model = (DefaultTableModel) tLSuperviseeList.getModel();
         model.setRowCount(0);
-        
-         try {
+
+        try {
             BufferedReader assessmentStudentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
 
             String assessmentStudentLine, assessmentLine;
 
-           while ((assessmentStudentLine = assessmentStudentReader.readLine()) != null) {
-            String[] assessmentStudentRecord = assessmentStudentLine.split("\t");
-            String studentID = assessmentStudentRecord[1];
-            String assessmentID = assessmentStudentRecord[0];
-            
-            // Find student details
-            String studentName = "";
-            String intake = "";
-            
-            BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
-            BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
-            
-            String studentLine;
-            while ((studentLine = studentReader.readLine()) != null) {
-                String[] studentRecord = studentLine.split("\t");
-                if (studentRecord[0].equalsIgnoreCase(studentID)) {
-                    studentName = studentRecord[1];
-                    intake = studentRecord[3];
-                    break;
+            while ((assessmentStudentLine = assessmentStudentReader.readLine()) != null) {
+                String[] assessmentStudentRecord = assessmentStudentLine.split("\t");
+                String studentID = assessmentStudentRecord[1];
+                String assessmentID = assessmentStudentRecord[0];
+
+                // Find student details
+                String studentName = "";
+                String intake = "";
+
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+
+                String studentLine;
+                while ((studentLine = studentReader.readLine()) != null) {
+                    String[] studentRecord = studentLine.split("\t");
+                    if (studentRecord[0].equalsIgnoreCase(studentID)) {
+                        studentName = studentRecord[1];
+                        intake = studentRecord[3];
+                        break;
+                    }
+                }
+
+                // Find assessment details
+                String assessmentType = "";
+                String assessmentName = "";
+                String assessmentSupervisorID = "";
+                String assessmentSecondMarkerID = "";
+                while ((assessmentLine = assessmentReader.readLine()) != null) {
+                    String[] assessmentRecord = assessmentLine.split("\t");
+                    if (assessmentRecord[0].equalsIgnoreCase(assessmentID)) {
+                        assessmentName = assessmentRecord[1];
+                        assessmentType = assessmentRecord[2];
+                        assessmentSupervisorID = assessmentRecord[5];
+                        assessmentSecondMarkerID = assessmentRecord[6];
+                        break;
+                    }
+                }
+
+                if (assessmentSupervisorID.equals(ID) || assessmentSecondMarkerID.equals(ID)) {
+                    model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
                 }
             }
 
-            // Find assessment details
-            String assessmentType = "";
-            String assessmentName = "";
-            String assessmentSupervisorID = "";
-            String assessmentSecondMarkerID = "";
-            while ((assessmentLine = assessmentReader.readLine()) != null) {
-                String[] assessmentRecord = assessmentLine.split("\t");
-                if (assessmentRecord[0].equalsIgnoreCase(assessmentID)) {
-                    assessmentName = assessmentRecord[1];
-                    assessmentType = assessmentRecord[2];
-                    assessmentSupervisorID = assessmentRecord[5];
-                    assessmentSecondMarkerID = assessmentRecord[6];
-                    break;
-                }
-            }
-            
-            if (assessmentSupervisorID.equals(ID) || assessmentSecondMarkerID.equals(ID)){
-                model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
-            }
+            assessmentStudentReader.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Print stack trace for any exceptions
         }
-
-        assessmentStudentReader.close();
-    } catch (Exception e) {
-        e.printStackTrace(); // Print stack trace for any exceptions
-    }
     }
     
     public LecturerSuperviseeList() {
         initComponents();
         pHome.setVisible(true);
+        
+        pDashboard.setVisible(false);
         pSupervisee.setVisible(false);
         pAssignment.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(false);
     }
 
     /**
@@ -319,14 +411,6 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pSupervisorAssessment = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pSecondMarkerAssessment = new javax.swing.JPanel();
-        pHome = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         pSupervisee = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -388,6 +472,24 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         searchTextfield = new javax.swing.JTextField();
         lStudentID = new javax.swing.JLabel();
         lStudentName = new javax.swing.JLabel();
+        pHome = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        presentationLB = new javax.swing.JLabel();
+        UpPresentationLB = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        TotalPresentationLabel = new javax.swing.JLabel();
+        TotalSuperviseeLabel = new javax.swing.JLabel();
+        TotalAssessmentLabel = new javax.swing.JLabel();
+        TotalUngradedLB = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         AssignmentSideButton = new javax.swing.JButton();
         SuperviseeSideButton = new javax.swing.JButton();
@@ -432,89 +534,6 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap(88, Short.MAX_VALUE))
-        );
-
-        pHome.setBackground(new java.awt.Color(252, 247, 204));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Lecturer Dashboard");
-
-        jButton3.setText("jButton3");
-
-        jButton4.setText("jButton4");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(109, Short.MAX_VALUE))
-        );
-
-        jButton5.setText("jButton5");
-
-        jButton6.setText("jButton6");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pHomeLayout = new javax.swing.GroupLayout(pHome);
-        pHome.setLayout(pHomeLayout);
-        pHomeLayout.setHorizontalGroup(
-            pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pHomeLayout.createSequentialGroup()
-                .addGroup(pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pHomeLayout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pHomeLayout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addGroup(pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(838, Short.MAX_VALUE))
-        );
-        pHomeLayout.setVerticalGroup(
-            pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pHomeLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1)
-                .addGap(59, 59, 59)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         pSupervisee.setBackground(new java.awt.Color(255, 255, 255));
@@ -1166,11 +1185,184 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addContainerGap(212, Short.MAX_VALUE))
         );
 
+        pHome.setBackground(new java.awt.Color(252, 247, 204));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel10.setText("Lecture Dashboard");
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("jButton4");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Quick Access");
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+
+        presentationLB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        presentationLB.setText("Upcoming Presentation:");
+
+        UpPresentationLB.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        UpPresentationLB.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(presentationLB)
+                    .addComponent(UpPresentationLB, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(presentationLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(UpPresentationLB, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel12.setForeground(new java.awt.Color(255, 255, 255));
+
+        TotalPresentationLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalPresentationLabel.setText("Total Pending Presentation Requests:");
+
+        TotalSuperviseeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalSuperviseeLabel.setText("Total Supervisees:");
+
+        TotalAssessmentLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalAssessmentLabel.setText("Total Assessment:");
+
+        TotalUngradedLB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalUngradedLB.setText("Total Ungraded Reports:");
+
+        jLabel1.setText("jLabel1");
+
+        jLabel12.setText("jLabel12");
+
+        jLabel13.setText("jLabel13");
+
+        jLabel14.setText("jLabel14");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TotalUngradedLB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TotalSuperviseeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TotalPresentationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(TotalAssessmentLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TotalPresentationLabel)
+                    .addComponent(jLabel1))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TotalSuperviseeLabel)
+                    .addComponent(jLabel12))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TotalAssessmentLabel)
+                    .addComponent(jLabel13))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TotalUngradedLB)
+                    .addComponent(jLabel14))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pHomeLayout = new javax.swing.GroupLayout(pHome);
+        pHome.setLayout(pHomeLayout);
+        pHomeLayout.setHorizontalGroup(
+            pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHomeLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addGroup(pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(799, Short.MAX_VALUE))
+        );
+        pHomeLayout.setVerticalGroup(
+            pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHomeLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel10)
+                .addGap(62, 62, 62)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 1925, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pSupervisee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1181,10 +1373,12 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                     .addContainerGap()))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 1925, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 939, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pSupervisee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1195,6 +1389,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                     .addContainerGap()))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 50, 79));
@@ -1286,6 +1482,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         refreshSupverviseeTable();
         pHome.setVisible(false);
         pAssignment.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(true);
+        pDashboard.setVisible(false);
     }//GEN-LAST:event_SuperviseeSideButtonActionPerformed
 
     private void bStudentClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudentClearActionPerformed
@@ -1305,6 +1503,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pHome.setVisible(true);
         pSupervisee.setVisible(false);
         pAssignment.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(true);
+        pDashboard.setVisible(false);
     }//GEN-LAST:event_HomeSideButtonActionPerformed
 
     private void AssignmentSideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignmentSideButtonActionPerformed
@@ -1312,6 +1512,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pAssignment.setVisible(true);
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(true);
+        pDashboard.setVisible(false);
     }//GEN-LAST:event_AssignmentSideButtonActionPerformed
 
     private void bLecturerApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerApplyActionPerformed
@@ -1415,6 +1617,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         pAssignment.setVisible(false);
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadButtonActionPerformed
@@ -1524,6 +1727,11 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         
     }//GEN-LAST:event_gradeButtonActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1574,8 +1782,13 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JLabel StudentNameLB;
     private javax.swing.JScrollPane StudentTableSP;
     private javax.swing.JButton SuperviseeSideButton;
+    private javax.swing.JLabel TotalAssessmentLabel;
     private javax.swing.JLabel TotalLB;
+    private javax.swing.JLabel TotalPresentationLabel;
     private javax.swing.JTextField TotalStudentTF;
+    private javax.swing.JLabel TotalSuperviseeLabel;
+    private javax.swing.JLabel TotalUngradedLB;
+    private javax.swing.JLabel UpPresentationLB;
     private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bLecturerApply;
     private javax.swing.JButton bLecturerClear;
@@ -1590,11 +1803,14 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1605,15 +1821,16 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1630,6 +1847,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JPanel pStudentSubmittedAssessment;
     private javax.swing.JPanel pSupervisee;
     private javax.swing.JPanel pSupervisorAssessment;
+    private javax.swing.JLabel presentationLB;
     private javax.swing.JLabel searchLabel;
     private javax.swing.JTextField searchTextfield;
     private javax.swing.JScrollPane studentScrollPane;
