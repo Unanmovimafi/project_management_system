@@ -348,7 +348,6 @@ public class StudentHome extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         sidePanel = new javax.swing.JPanel();
-        presentationButton = new javax.swing.JButton();
         resultButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         bDashboard = new javax.swing.JButton();
@@ -432,16 +431,6 @@ public class StudentHome extends javax.swing.JFrame {
         sidePanel.setBackground(new java.awt.Color(1, 51, 80));
         sidePanel.setPreferredSize(new java.awt.Dimension(244, 284));
 
-        presentationButton.setBackground(new java.awt.Color(255, 255, 204));
-        presentationButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        presentationButton.setText("Presentation Slot");
-        presentationButton.setPreferredSize(new java.awt.Dimension(184, 40));
-        presentationButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                presentationButtonActionPerformed(evt);
-            }
-        });
-
         resultButton.setBackground(new java.awt.Color(255, 255, 204));
         resultButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         resultButton.setText("Result");
@@ -479,7 +468,6 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(resultButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                    .addComponent(presentationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                     .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                     .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -487,11 +475,9 @@ public class StudentHome extends javax.swing.JFrame {
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(150, Short.MAX_VALUE)
                 .addComponent(bDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(presentationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(137, 137, 137)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -693,7 +679,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         pSubmitAssessmentLayout.setVerticalGroup(
             pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1210,13 +1196,6 @@ public class StudentHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void presentationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presentationButtonActionPerformed
-        // TODO add your handling code here:
-        new StudentPresentationSlot().setVisible(true);
-        dispose();
-       
-    }//GEN-LAST:event_presentationButtonActionPerformed
-
     private void resultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultButtonActionPerformed
         // TODO add your handling code here:
         refreshResult();
@@ -1711,7 +1690,6 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel pProfile;
     private javax.swing.JPanel pResult;
     private javax.swing.JPanel pSubmitAssessment;
-    private javax.swing.JButton presentationButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JRadioButton rbFemale;
     private javax.swing.JRadioButton rbMale;
