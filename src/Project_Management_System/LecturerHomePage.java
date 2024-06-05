@@ -28,12 +28,34 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private int count = -1;
     
     
+    public List<String> getAllLecturerRecord() {
+        try {
+
+            List<String> lines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                //Read and add all the lines in text file to variable line
+                lines.add(line);
+            }
+            reader.close();
+            return lines;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private String[] lecRecord;
+
+    int countOfLecRecord = -1;
+
     public void setID(String ID) {
         this.ID = ID;
         countAssessments();
         countSupervisees();
     }
-    
+
     private void countAssessments() {
         int assessmentCount = 0;
         String filePath = "src\\Project_Management_System\\database\\assessment.txt";
@@ -234,7 +256,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             pReportsMarking.setVisible(false);
                             pSupervisee.setVisible(false);
                             pHome.setVisible(false);
-
+                            pProfile.setVisible(false);
                             ModuleLabel1.setText(record[1]);
                             Description.setText(record[3]);
                         }
@@ -309,6 +331,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             pReportsMarking.setVisible(false);
                             pSupervisee.setVisible(false);
                             pHome.setVisible(false);
+                            pProfile.setVisible(false);
 
                             ModuleLabel1.setText(record[1]);
                             Description.setText(record[3]);
@@ -391,10 +414,11 @@ public class LecturerHomePage extends javax.swing.JFrame {
     public LecturerHomePage() {
         initComponents();
         pHome.setVisible(true);
-        
+
         pReportsMarking.setVisible(false);
         pSupervisee.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
+        pProfile.setVisible(false);
     }
 
     /**
@@ -427,8 +451,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         bLecturerClear = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         pStudentSubmittedAssessment = new javax.swing.JPanel();
@@ -488,11 +510,41 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        pProfile = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        tfID = new javax.swing.JTextField();
+        tfName = new javax.swing.JTextField();
+        tfContactNumber = new javax.swing.JTextField();
+        tfOldPassword = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
+        tfAddress = new javax.swing.JTextField();
+        rbMale = new javax.swing.JRadioButton();
+        rbFemale = new javax.swing.JRadioButton();
+        bChangePassword = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        tfRole = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        tfNationality = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        tfIC = new javax.swing.JTextField();
+        tfDoB = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        tfNewPassword = new javax.swing.JTextField();
+        tfConfirmPassword = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         SuperviseeSideButton = new javax.swing.JButton();
         HomeSideButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lecLogoutBtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
@@ -620,45 +672,21 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(252, 247, 204));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setText("Add New Lecturer");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setText("Edit Lecturer");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(154, 154, 154)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel4)
-                .addGap(174, 174, 174)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(517, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel15.setText("Intake code");
@@ -716,7 +744,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tSuperviseeScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -728,7 +756,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
             .addGroup(pSuperviseeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(642, Short.MAX_VALUE))
+                .addContainerGap(640, Short.MAX_VALUE))
         );
         pSuperviseeLayout.setVerticalGroup(
             pSuperviseeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1292,7 +1320,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addGroup(pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(799, Short.MAX_VALUE))
+                .addContainerGap(803, Short.MAX_VALUE))
         );
         pHomeLayout.setVerticalGroup(
             pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1302,6 +1330,207 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(236, Short.MAX_VALUE))
+        );
+
+        pProfile.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setText("ID:");
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setText("Name:");
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel23.setText("Contact Number:");
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel24.setText("Gender:");
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setText("Address:");
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setText("Email:");
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setText("Nationality:");
+
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel28.setText("Old Password:");
+
+        tfID.setEnabled(false);
+
+        tfName.setEnabled(false);
+
+        tfContactNumber.setEnabled(false);
+
+        tfEmail.setEnabled(false);
+
+        tfAddress.setEnabled(false);
+
+        rbMale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbMale.setText("Male");
+        rbMale.setEnabled(false);
+
+        rbFemale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbFemale.setText("Female");
+        rbFemale.setEnabled(false);
+
+        bChangePassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bChangePassword.setText("Change Password");
+        bChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bChangePasswordActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel29.setText("Role");
+
+        tfRole.setEnabled(false);
+        tfRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfRoleActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel30.setText("DOB:");
+
+        tfNationality.setEnabled(false);
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel31.setText("IC/Passport No.:");
+
+        tfIC.setEnabled(false);
+
+        tfDoB.setEnabled(false);
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel32.setText("New Password:");
+
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel33.setText("Confirm Password:");
+
+        javax.swing.GroupLayout pProfileLayout = new javax.swing.GroupLayout(pProfile);
+        pProfile.setLayout(pProfileLayout);
+        pProfileLayout.setHorizontalGroup(
+            pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pProfileLayout.createSequentialGroup()
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pProfileLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pProfileLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createSequentialGroup()
+                                            .addComponent(jLabel23)
+                                            .addGap(7, 7, 7))
+                                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pProfileLayout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfNationality))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pProfileLayout.createSequentialGroup()
+                                    .addGap(22, 22, 22)
+                                    .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                                        .addGroup(pProfileLayout.createSequentialGroup()
+                                            .addComponent(rbMale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(rbFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tfRole)
+                                        .addComponent(tfIC))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfDoB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfContactNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfOldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNewPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pProfileLayout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(bChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(941, Short.MAX_VALUE))
+        );
+        pProfileLayout.setVerticalGroup(
+            pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pProfileLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(tfIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addGap(34, 34, 34)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(rbMale)
+                    .addComponent(rbFemale))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(tfOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(tfNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33))
+                .addGap(45, 45, 45)
+                .addComponent(bChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1319,6 +1548,11 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 1929, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(pProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(307, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1333,6 +1567,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 50, 79));
@@ -1373,6 +1609,15 @@ public class LecturerHomePage extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 206));
+        jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        jButton2.setText("PROFILE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1386,7 +1631,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1398,7 +1644,9 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 560, Short.MAX_VALUE)
+                .addGap(215, 215, 215)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
                 .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -1435,6 +1683,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
         pHome.setVisible(false);
         pStudentSubmittedAssessment.setVisible(true);
         pReportsMarking.setVisible(false);
+        
+        pProfile.setVisible(false);
     }//GEN-LAST:event_SuperviseeSideButtonActionPerformed
 
     private void HomeSideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeSideButtonActionPerformed
@@ -1445,6 +1695,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
         pReportsMarking.setVisible(false);
+        
+        pProfile.setVisible(false);
     }//GEN-LAST:event_HomeSideButtonActionPerformed
 
     private void bLecturerApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerApplyActionPerformed
@@ -1460,44 +1712,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         tfLecturerName.setText("");
         refreshSupverviseeTable();
     }//GEN-LAST:event_bLecturerClearActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        
-        AddLecturerDetails addLec = new AddLecturerDetails();
-        
-        addLec.pack();
-        addLec.setLocationRelativeTo(null);
-        
-        addLec.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        
-//        
-//        
-//        
-//        
-//        
-//        EditLecturerDetails eld = new EditLecturerDetails();
-//        if (selectionID == "-1") {
-//            //If no selected then notify user to select
-//            JOptionPane.showMessageDialog(null, "Please select a product to edit!");
-//        }
-//        else{
-//            
-//            //Set and pass record and this page to EditProduct
-//            eld.setAdminPageInstance(this);
-//            eld.setRecordData(selectionID);
-//            
-//            //Open EditProduct page
-//            eld.setVisible(true);
-//        }
-//        
-//        
-        
-    }//GEN-LAST:event_jButton8ActionPerformed
 
     private void tLSuperviseeListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tLSuperviseeListMouseReleased
         // TODO add your handling code here:
@@ -1516,6 +1730,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
+        
+        pProfile.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadButtonActionPerformed
@@ -1720,6 +1936,90 @@ public class LecturerHomePage extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_lecLogoutBtnActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        pProfile.setVisible(true);
+        
+        pHome.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(false);
+        pReportsMarking.setVisible(false);
+        pSupervisee.setVisible(false);
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lecRecord = line.split("\t");
+                countOfLecRecord ++;
+                if (lecRecord[0].equals(ID)) {
+                    // reutrn the line of the line_num in text file
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        
+        tfID.setText(lecRecord[0]);
+        tfName.setText(lecRecord[1]);
+        tfIC.setText(lecRecord[2]);
+        tfRole.setText(lecRecord[3]);
+        
+        if (lecRecord[4].equals("MALE")){
+            rbMale.setSelected(true);
+        }
+        else if (lecRecord[4].equals("FEMALE")){
+            rbFemale.setSelected(true);
+        }
+        
+        tfNationality.setText(lecRecord[5]);
+        tfDoB.setText(lecRecord[6]);
+        tfContactNumber.setText(lecRecord[7]);
+        
+        tfEmail.setText(lecRecord[9]);
+        tfAddress.setText(lecRecord[10]);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bChangePasswordActionPerformed
+        // TODO add your handling code here:
+        if (tfOldPassword.getText().isEmpty() || tfNewPassword.getText().isEmpty() || tfConfirmPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter all fields.");
+        } else if (tfOldPassword.getText().equals(lecRecord[8]) && (tfNewPassword.getText().equals(tfConfirmPassword.getText()))) {
+            //Get the value from each text field
+            lecRecord[8] = tfNewPassword.getText();
+
+            try {
+                List<String> lines = getAllLecturerRecord();
+                //Write the information to the text file
+                String editedStudent = String.join("\t", lecRecord);
+
+                lines.set(countOfLecRecord, editedStudent);
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt"));
+                for (String updatedLine : lines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+
+                writer.close();
+
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            JOptionPane.showMessageDialog(null, "Successfully Saved!");
+            pHome.setVisible(true);
+            pProfile.setVisible(false);
+            pStudentSubmittedAssessment.setVisible(false);
+            pReportsMarking.setVisible(false);
+            pSupervisee.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Password Wrong!");
+        }
+    }//GEN-LAST:event_bChangePasswordActionPerformed
+
+    private void tfRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfRoleActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1774,6 +2074,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel TotalUngradedLB;
     private javax.swing.JLabel UpPresentationLB;
     private javax.swing.JButton bAcceptPresentation;
+    private javax.swing.JButton bChangePassword;
     private javax.swing.JButton bLecturerApply;
     private javax.swing.JButton bLecturerClear;
     private javax.swing.JButton bRejectPresentation;
@@ -1784,10 +2085,9 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel filePanel;
     private javax.swing.JButton gradeButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1801,7 +2101,20 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1832,20 +2145,35 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel markLabel;
     private javax.swing.JTextField markTextfield;
     private javax.swing.JPanel pHome;
+    private javax.swing.JPanel pProfile;
     private javax.swing.JPanel pReportsMarking;
     private javax.swing.JPanel pSecondMarkerAssessment;
     private javax.swing.JPanel pStudentSubmittedAssessment;
     private javax.swing.JPanel pSupervisee;
     private javax.swing.JPanel pSupervisorAssessment;
     private javax.swing.JLabel presentationLB;
+    private javax.swing.JRadioButton rbFemale;
+    private javax.swing.JRadioButton rbMale;
     private javax.swing.JLabel searchLabel;
     private javax.swing.JTextField searchTextfield;
     private javax.swing.JScrollPane studentScrollPane;
     private javax.swing.JTable studentTable;
     private javax.swing.JTable tLSuperviseeList;
     private javax.swing.JScrollPane tSuperviseeScrollPane2;
+    private javax.swing.JTextField tfAddress;
+    private javax.swing.JTextField tfConfirmPassword;
+    private javax.swing.JTextField tfContactNumber;
+    private javax.swing.JTextField tfDoB;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfIC;
+    private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfLecturerID;
     private javax.swing.JTextField tfLecturerName;
+    private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfNationality;
+    private javax.swing.JTextField tfNewPassword;
+    private javax.swing.JTextField tfOldPassword;
+    private javax.swing.JTextField tfRole;
     private javax.swing.JTextField tfSecondFB;
     private javax.swing.JTextField tfSecondMark;
     // End of variables declaration//GEN-END:variables

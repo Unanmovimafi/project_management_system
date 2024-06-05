@@ -1030,23 +1030,25 @@ public class StudentHome extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Old Password:");
 
-        tfID.setEditable(false);
+        tfID.setEnabled(false);
 
-        tfName.setEditable(false);
+        tfName.setEnabled(false);
 
-        tfContactNumber.setEditable(false);
+        tfContactNumber.setEnabled(false);
 
-        tfEmail.setEditable(false);
+        tfEmail.setEnabled(false);
 
-        tfAddress.setEditable(false);
+        tfAddress.setEnabled(false);
 
         buttonGroup1.add(rbMale);
         rbMale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbMale.setText("Male");
+        rbMale.setEnabled(false);
 
         buttonGroup1.add(rbFemale);
         rbFemale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbFemale.setText("Female");
+        rbFemale.setEnabled(false);
 
         bChangePassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bChangePassword.setText("Change Password");
@@ -1059,7 +1061,7 @@ public class StudentHome extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Intake Code:");
 
-        tfIntakeCode.setEditable(false);
+        tfIntakeCode.setEnabled(false);
         tfIntakeCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfIntakeCodeActionPerformed(evt);
@@ -1069,14 +1071,14 @@ public class StudentHome extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("DOB:");
 
-        tfNationality.setEditable(false);
+        tfNationality.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("IC/Passport No.:");
 
-        tfIC.setEditable(false);
+        tfIC.setEnabled(false);
 
-        tfDoB.setEditable(false);
+        tfDoB.setEnabled(false);
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setText("New Password:");
@@ -1111,7 +1113,7 @@ public class StudentHome extends javax.swing.JFrame {
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)

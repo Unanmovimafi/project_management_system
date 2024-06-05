@@ -1096,7 +1096,7 @@
                                   </Group>
                                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel16" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel15" alignment="1" pref="123" max="32767" attributes="0"/>
+                                      <Component id="jLabel15" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jLabel11" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1287,29 +1287,29 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfID">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfName">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfContactNumber">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfOldPassword">
             </Component>
             <Component class="javax.swing.JTextField" name="tfEmail">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfAddress">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbMale">
@@ -1321,6 +1321,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Male"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbFemale">
@@ -1332,6 +1333,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Female"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="bChangePassword">
@@ -1355,7 +1357,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfIntakeCode">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfIntakeCodeActionPerformed"/>
@@ -1371,7 +1373,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfNationality">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
@@ -1384,12 +1386,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfIC">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfDoB">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
