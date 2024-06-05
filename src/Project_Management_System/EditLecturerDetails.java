@@ -21,6 +21,8 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private String selectedID; 
     private AdminHomePage adminHomePage;
     int count = -1;
+    private String password;
+    private String[] record;
     
     public void setAdminPageInstance(AdminHomePage adminhomePage) {
         this.adminHomePage = adminhomePage;
@@ -63,7 +65,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
             e.getMessage();
         }
         
-        String[] record = getLecturerRecord(count);
+        record = getLecturerRecord(count);
         
         
         
@@ -87,9 +89,10 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         tfNationality.setText(record[5]);
         tfDoB.setText(record[6]);
         tfContactNumber.setText(record[7]);
-        tfPassword.setText(record[8]);
         tfEmail.setText(record[9]);
         tfAddress.setText(record[10]);
+        
+        password = record[8];
     }
     
     public List<String> getAllProductRecord() {
@@ -141,7 +144,6 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         tfID = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
         tfContactNumber = new javax.swing.JTextField();
-        tfPassword = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
         tfAddress = new javax.swing.JTextField();
         rbMale = new javax.swing.JRadioButton();
@@ -154,6 +156,8 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         tfIC = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -216,6 +220,15 @@ public class EditLecturerDetails extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Reset Password");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Defaul password: ID + @12345");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -240,28 +253,28 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel11))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(22, 22, 22)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(cbRole)
-                                                .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addComponent(rbMale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(rbFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(tfIC)))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(27, 27, 27)
-                                            .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(349, 349, 349)
-                        .addComponent(bSave)
-                        .addGap(72, 72, 72)
-                        .addComponent(jButton1))
+                                            .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(22, 22, 22)
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cbRole)
+                                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                            .addComponent(rbMale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(rbFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(tfIC)))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(27, 27, 27)
+                                                    .addComponent(jButton2)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabel12)))
+                                            .addGap(5, 5, 5)))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jLabel3)
@@ -270,7 +283,12 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                             .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(tfNationality)
-                                .addComponent(tfContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)))))
+                                .addComponent(tfContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(440, 440, 440)
+                        .addComponent(bSave)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton1)))
                 .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -312,8 +330,9 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel12))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -349,7 +368,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
         // less gender
-        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| tfDoB.getText().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfPassword.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
+        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| tfDoB.getText().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         }
         
@@ -375,7 +394,6 @@ public class EditLecturerDetails extends javax.swing.JFrame {
             String nationality = tfNationality.getText();
             String dob = tfDoB.getText();
             String contactNumber = tfContactNumber.getText();
-            String password = tfPassword.getText();
             String email = tfEmail.getText();
             String address = tfAddress.getText();
             
@@ -413,27 +431,31 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-         List<String> lines = getAllProductRecord();
-                //Write the information to the text file
-                
-                lines.set(count, "");
-                try {BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt"));
-                for (String updatedLine : lines) {
-                    writer.write(updatedLine);
-                    writer.newLine();
-                }
-                
-                
-                writer.close();
-                }catch (Exception e) {
-                System.err.println(e.getMessage());
+        List<String> lines = getAllProductRecord();
+        //Write the information to the text file
+        lines.remove(count);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt"));
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
             }
+
+            writer.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         JOptionPane.showMessageDialog(null, "Successfully Deleted!");
-            this.dispose();
-            adminHomePage.refreshLecturerTable("","");
-        
-        
+        this.dispose();
+        adminHomePage.refreshLecturerTable("", "");
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        password = record[0] + "@12345";
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,9 +497,11 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cbRole;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -497,6 +521,5 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfNationality;
-    private javax.swing.JTextField tfPassword;
     // End of variables declaration//GEN-END:variables
 }
