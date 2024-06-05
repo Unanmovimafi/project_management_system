@@ -5,6 +5,9 @@
 package Project_Management_System;
 
 import java.io.*;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -899,7 +902,11 @@ public class AdminHomePage extends javax.swing.JFrame {
             
             //Set and pass record and this page to EditProduct
             eld.setAdminPageInstance(this);
-            eld.setRecordData(selectionID);
+            try {
+                eld.setRecordData(selectionID);
+            } catch (ParseException ex) {
+                Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             //Open EditProduct page
             eld.setVisible(true);
@@ -944,7 +951,11 @@ public class AdminHomePage extends javax.swing.JFrame {
             
             //Set and pass record and this page to EditProduct
             editStu.setAdminPageInstance(this);
-            editStu.setRecordData(selectionID);
+            try {
+                editStu.setRecordData(selectionID);
+            } catch (ParseException ex) {
+                Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             //Open EditProduct page
             editStu.setVisible(true);

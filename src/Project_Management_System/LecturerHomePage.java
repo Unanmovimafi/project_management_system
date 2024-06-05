@@ -353,7 +353,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
     }
     
 
-    public void refreshSupverviseeTable() {
+    public void refreshSupverviseeTable(String StuID, String IntakeCode, String AssType) {
         DefaultTableModel model = (DefaultTableModel) tLSuperviseeList.getModel();
         model.setRowCount(0);
 
@@ -399,8 +399,10 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         break;
                     }
                 }
-
-                if (assessmentSupervisorID.equals(ID) || assessmentSecondMarkerID.equals(ID)) {
+                if(AssType.equals("ALL")){
+                    AssType = "";
+                }
+                if (assessmentSupervisorID.equals(ID) && studentID.toLowerCase().startsWith(StuID) && intake.toLowerCase().startsWith(IntakeCode) && assessmentType.toLowerCase().startsWith(AssType)) {
                     model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
                 }
             }
@@ -442,17 +444,17 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        tfLecturerName = new javax.swing.JTextField();
         tSuperviseeScrollPane2 = new javax.swing.JScrollPane();
         tLSuperviseeList = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        tfLecturerID = new javax.swing.JTextField();
+        tfSupStuID = new javax.swing.JTextField();
         bLecturerApply = new javax.swing.JButton();
         bLecturerClear = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        cbAssType = new javax.swing.JComboBox<>();
+        tfSupStuIntakeCode = new javax.swing.JTextField();
         pStudentSubmittedAssessment = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -603,7 +605,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 649, Short.MAX_VALUE))
+                .addGap(0, 708, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,7 +618,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Assessment Name:");
+        jLabel5.setText("Assessment Type:");
 
         tSuperviseeScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -691,7 +693,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
         jLabel15.setText("Intake code");
 
-        jLabel16.setText("Assess Type");
+        cbAssType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "INTERNSHIP", "INVESTIGATION REPORTS", "CP1", "CP2", "RMCP", "FYP" }));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -702,27 +704,22 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tSuperviseeScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfLecturerID, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel15)))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel16))
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfLecturerName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)
-                                .addComponent(bLecturerApply)
-                                .addGap(34, 34, 34)
-                                .addComponent(bLecturerClear)))))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfSupStuID, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(cbAssType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(241, 241, 241)
+                        .addComponent(bLecturerApply)
+                        .addGap(34, 34, 34)
+                        .addComponent(bLecturerClear))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfSupStuIntakeCode, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -730,21 +727,25 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfLecturerName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bLecturerApply)
-                    .addComponent(bLecturerClear)
-                    .addComponent(tfLecturerID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(4, 4, 4)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(bLecturerApply)
+                            .addComponent(bLecturerClear)
+                            .addComponent(jLabel6)
+                            .addComponent(cbAssType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tfSupStuID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tfSupStuIntakeCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addComponent(tSuperviseeScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -752,7 +753,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
         pSupervisee.setLayout(pSuperviseeLayout);
         pSuperviseeLayout.setHorizontalGroup(
             pSuperviseeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 1929, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 1984, Short.MAX_VALUE)
             .addGroup(pSuperviseeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1676,14 +1677,13 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
     private void SuperviseeSideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuperviseeSideButtonActionPerformed
         // TODO add your handling code here:
-        selectionID = "-1";
+        refreshSupverviseeTable("","","");
         
         pSupervisee.setVisible(true);
-        refreshSupverviseeTable();
         pHome.setVisible(false);
-        pStudentSubmittedAssessment.setVisible(true);
+
         pReportsMarking.setVisible(false);
-        
+        pStudentSubmittedAssessment.setVisible(false);
         pProfile.setVisible(false);
     }//GEN-LAST:event_SuperviseeSideButtonActionPerformed
 
@@ -1701,16 +1701,14 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
     private void bLecturerApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerApplyActionPerformed
         // TODO add your handling code here:
-        String lecturerID = tfLecturerID.getText().toLowerCase();
-        String lecturerName = tfLecturerName.getText().toLowerCase();
-        refreshSupverviseeTable();
+        refreshSupverviseeTable(tfSupStuID.getText(),tfSupStuIntakeCode.getText(),cbAssType.getSelectedItem().toString());
     }//GEN-LAST:event_bLecturerApplyActionPerformed
 
     private void bLecturerClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerClearActionPerformed
         // TODO add your handling code here:
-        tfLecturerID.setText("");
-        tfLecturerName.setText("");
-        refreshSupverviseeTable();
+        tfSupStuID.setText("");
+        tfSupStuIntakeCode.setText("");
+        refreshSupverviseeTable("","","");
     }//GEN-LAST:event_bLecturerClearActionPerformed
 
     private void tLSuperviseeListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tLSuperviseeListMouseReleased
@@ -2079,6 +2077,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bLecturerClear;
     private javax.swing.JButton bRejectPresentation;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JComboBox<String> cbAssType;
     private javax.swing.JButton downloadButton;
     private javax.swing.JLabel feedbackLabel;
     private javax.swing.JTextField feedbackTextfield;
@@ -2095,7 +2094,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -2167,8 +2165,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfIC;
     private javax.swing.JTextField tfID;
-    private javax.swing.JTextField tfLecturerID;
-    private javax.swing.JTextField tfLecturerName;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfNationality;
     private javax.swing.JTextField tfNewPassword;
@@ -2176,5 +2172,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField tfRole;
     private javax.swing.JTextField tfSecondFB;
     private javax.swing.JTextField tfSecondMark;
+    private javax.swing.JTextField tfSupStuID;
+    private javax.swing.JTextField tfSupStuIntakeCode;
     // End of variables declaration//GEN-END:variables
 }
