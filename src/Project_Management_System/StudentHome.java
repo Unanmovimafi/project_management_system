@@ -391,10 +391,14 @@ public class StudentHome extends javax.swing.JFrame {
         lSubmitFileDate = new javax.swing.JLabel();
         lSubmitFileTime = new javax.swing.JLabel();
         ModuleLabel1 = new javax.swing.JLabel();
-        bBookPresentation = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         tfBookPresentationDate = new javax.swing.JTextField();
         tfBookPresentationTime = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         lPresentationStatus = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        bBookPresentation = new javax.swing.JButton();
         pProfile = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -679,7 +683,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         pSubmitAssessmentLayout.setVerticalGroup(
             pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -711,8 +715,8 @@ public class StudentHome extends javax.swing.JFrame {
             filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lSubmittedFile, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(lSubmittedFile, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addContainerGap())
         );
         filePanelLayout.setVerticalGroup(
             filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,9 +736,9 @@ public class StudentHome extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -749,7 +753,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        bSubmitSubmission.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bSubmitSubmission.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bSubmitSubmission.setText("Submit/Edit Submission");
         bSubmitSubmission.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -757,7 +761,7 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
-        bCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bCancel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bCancel.setText("Cancel");
         bCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -766,7 +770,7 @@ public class StudentHome extends javax.swing.JFrame {
         });
 
         FileSubmissionLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        FileSubmissionLabel1.setText("Sv Grade");
+        FileSubmissionLabel1.setText("Grade:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Submission Status:");
@@ -780,19 +784,20 @@ public class StudentHome extends javax.swing.JFrame {
         lSubmissionStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lSubmissionStatus.setText("jLabel4");
 
-        svGrade.setText("jLabel17");
+        svGrade.setText("Grade");
 
-        jLabel18.setText("Sv Feedback:");
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel18.setText("Feedback:");
 
-        svFeedback.setText("jLabel19");
+        svFeedback.setText("Feedback");
 
-        smGrade.setText("jLabel20");
+        smGrade.setText("SecondMarker Grade");
 
-        smFeedback.setText("jLabel21");
+        smFeedback.setText("SecondMarker Feedback");
 
-        lSubmitFileDate.setText("jLabel17");
+        lSubmitFileDate.setText("Submission Date");
 
-        lSubmitFileTime.setText("jLabel19");
+        lSubmitFileTime.setText("Submission Time");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -805,61 +810,59 @@ public class StudentHome extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DescriptionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Description)
-                                    .addComponent(lSubmissionStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(DescriptionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lSubmissionStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(376, 376, 376)
+                        .addGap(287, 287, 287)
                         .addComponent(bSubmitSubmission)
                         .addGap(46, 46, 46)
                         .addComponent(bCancel))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addGap(41, 41, 41)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(FileSubmissionLabel1)
                             .addComponent(jLabel18))
-                        .addGap(71, 71, 71)
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(svFeedback)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(smFeedback))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(svGrade)
-                                .addGap(416, 416, 416)
-                                .addComponent(smGrade)))))
+                            .addComponent(svGrade)
+                            .addComponent(smFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                            .addComponent(svFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(smGrade)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lSubmitFileTime)
-                    .addComponent(lSubmitFileDate))
-                .addGap(467, 467, 467))
+                .addComponent(lSubmitFileDate)
+                .addGap(18, 18, 18)
+                .addComponent(lSubmitFileTime)
+                .addGap(400, 400, 400))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DescriptionTitle)
                     .addComponent(Description))
-                .addGap(42, 42, 42)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lSubmissionStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lSubmitFileDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lSubmitFileTime)
-                .addGap(8, 8, 8)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lSubmitFileDate)
+                    .addComponent(lSubmitFileTime))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -873,15 +876,36 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(svFeedback)
-                    .addComponent(smFeedback))
-                .addGap(46, 46, 46))
+                    .addComponent(svFeedback))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(smFeedback)
+                .addGap(18, 18, 18))
         );
 
         ModuleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         ModuleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        tfBookPresentationDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        tfBookPresentationTime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfBookPresentationTime.setText("jTextField2");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setText("Presentation Date:");
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel19.setText("Presentation Time:");
+
+        lPresentationStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lPresentationStatus.setText("jLabel17");
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel20.setText("Booking Status:");
+
+        bBookPresentation.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bBookPresentation.setText("Book");
         bBookPresentation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -889,9 +913,48 @@ public class StudentHome extends javax.swing.JFrame {
             }
         });
 
-        tfBookPresentationTime.setText("jTextField2");
-
-        lPresentationStatus.setText("jLabel17");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bBookPresentation)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lPresentationStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))))
+                .addGap(80, 80, 80))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lPresentationStatus)
+                    .addComponent(jLabel20))
+                .addGap(56, 56, 56)
+                .addComponent(bBookPresentation)
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout pAssessmentStatusLayout = new javax.swing.GroupLayout(pAssessmentStatus);
         pAssessmentStatus.setLayout(pAssessmentStatusLayout);
@@ -902,35 +965,21 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pAssessmentStatusLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(285, 285, 285)
-                        .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bBookPresentation)
-                            .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lPresentationStatus))))
-                .addContainerGap(302, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         pAssessmentStatusLayout.setVerticalGroup(
             pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pAssessmentStatusLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pAssessmentStatusLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pAssessmentStatusLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(lPresentationStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bBookPresentation)
-                        .addGap(144, 144, 144))))
+                .addGap(57, 57, 57)
+                .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pProfile.setBackground(new java.awt.Color(255, 255, 255));
@@ -1662,8 +1711,11 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1672,6 +1724,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
