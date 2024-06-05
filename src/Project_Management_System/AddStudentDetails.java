@@ -83,7 +83,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
         tfNationality = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tfIC = new javax.swing.JTextField();
-        tfDoB = new javax.swing.JTextField();
+        dcDoB = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +143,8 @@ public class AddStudentDetails extends javax.swing.JFrame {
 
         jLabel11.setText("IC/Passport No.:");
 
+        dcDoB.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,19 +188,17 @@ public class AddStudentDetails extends javax.swing.JFrame {
                                             .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(18, 18, 18)
-                                            .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(dcDoB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(tfNationality, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(302, 302, 302)
                         .addComponent(bSave, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -230,10 +230,10 @@ public class AddStudentDetails extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
-                    .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                    .addComponent(dcDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,7 +279,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
         // less gender
-        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| tfDoB.getText().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfPassword.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
+        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| dcDoB.getDateFormatString().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfPassword.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         }
         
@@ -298,7 +298,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
             //role
             //gender
             String nationality = tfNationality.getText();
-            String dob = tfDoB.getText();
+            String dob = dcDoB.getDateFormatString();
             String contactNumber = tfContactNumber.getText();
             String password = tfPassword.getText();
             String email = tfEmail.getText();
@@ -372,6 +372,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser dcDoB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -388,7 +389,6 @@ public class AddStudentDetails extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbMale;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfContactNumber;
-    private javax.swing.JTextField tfDoB;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfIC;
     private javax.swing.JTextField tfID;

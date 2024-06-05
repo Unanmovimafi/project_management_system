@@ -102,9 +102,9 @@
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="tfDoB" min="-2" pref="71" max="-2" attributes="0"/>
                                                   <Component id="tfContactNumber" min="-2" pref="491" max="-2" attributes="0"/>
                                                   <Component id="tfNationality" alignment="0" min="-2" pref="491" max="-2" attributes="0"/>
+                                                  <Component id="dcDoB" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -166,12 +166,12 @@
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfNationality" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="tfDoB" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="dcDoB" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfContactNumber" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -336,8 +336,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfNationality">
         </Component>
-        <Component class="javax.swing.JTextField" name="tfDoB">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -371,6 +369,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Defaul password: ID + @12345"/>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="dcDoB">
         </Component>
       </SubComponents>
     </Container>

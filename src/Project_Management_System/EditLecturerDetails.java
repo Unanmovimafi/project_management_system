@@ -87,7 +87,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         }
         
         tfNationality.setText(record[5]);
-        tfDoB.setText(record[6]);
+        dcDoB.setDateFormatString(record[6]);
         tfContactNumber.setText(record[7]);
         tfEmail.setText(record[9]);
         tfAddress.setText(record[10]);
@@ -152,12 +152,12 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         cbRole = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         tfNationality = new javax.swing.JTextField();
-        tfDoB = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tfIC = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        dcDoB = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -279,9 +279,9 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                                                     .addComponent(jButton2)
                                                     .addGap(18, 18, 18)
                                                     .addComponent(jLabel12))
-                                                .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                                .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(dcDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,11 +324,11 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(tfNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(48, 48, 48)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(dcDoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -371,7 +371,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
         // less gender
-        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| tfDoB.getText().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
+        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| dcDoB.getDateFormatString().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         }
         
@@ -395,7 +395,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
             //role
             //gender
             String nationality = tfNationality.getText();
-            String dob = tfDoB.getText();
+            String dob = dcDoB.getDateFormatString();
             String contactNumber = tfContactNumber.getText();
             String email = tfEmail.getText();
             String address = tfAddress.getText();
@@ -499,6 +499,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cbRole;
+    private com.toedter.calendar.JDateChooser dcDoB;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -518,7 +519,6 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbMale;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfContactNumber;
-    private javax.swing.JTextField tfDoB;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfIC;
     private javax.swing.JTextField tfID;

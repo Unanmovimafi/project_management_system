@@ -175,28 +175,28 @@ public class StudentHome extends javax.swing.JFrame {
                     }
 
                     if (record2[11].equals("PENDING")) {
-                        tfBookPresentationDate.setEditable(false);
+                        dcBookPresentation.setEnabled(false);
                         tfBookPresentationTime.setEditable(false);
-                        tfBookPresentationDate.setText(record2[9]);
+                        dcBookPresentation.setDateFormatString(record2[9]);
                         tfBookPresentationTime.setText(record2[10]);
                         lPresentationStatus.setText("Pending");
                         bBookPresentation.setEnabled(false);
                     } else if (record2[11].equals("ACCEPT")) {
-                        tfBookPresentationDate.setEditable(false);
+                        dcBookPresentation.setEnabled(false);
                         tfBookPresentationTime.setEditable(false);
-                        tfBookPresentationDate.setText(record2[9]);
+                        dcBookPresentation.setDateFormatString(record2[9]);
                         tfBookPresentationTime.setText(record2[10]);
                         lPresentationStatus.setText("Accept");
                         bBookPresentation.setEnabled(false);
                     } else if (record2[11].equals("REJECT")) {
-                        tfBookPresentationDate.setEditable(true);
+                        dcBookPresentation.setEnabled(true);
                         tfBookPresentationTime.setEditable(true);
-                        tfBookPresentationDate.setText(record2[9]);
+                        dcBookPresentation.setDateFormatString(record2[9]);
                         tfBookPresentationTime.setText(record2[10]);
                         lPresentationStatus.setText("Reject (Please re-select your presentation date & time)");
                         bBookPresentation.setEnabled(true);
                     } else if (record2[11].equals("NA")) {
-                        tfBookPresentationDate.setEditable(true);
+                        dcBookPresentation.setEnabled(true);
                         tfBookPresentationTime.setEditable(true);
                         lPresentationStatus.setText("Haven't Booked Any Presentation");
                         bBookPresentation.setEnabled(true);
@@ -393,7 +393,6 @@ public class StudentHome extends javax.swing.JFrame {
         lSubmitFileTime = new javax.swing.JLabel();
         ModuleLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        tfBookPresentationDate = new javax.swing.JTextField();
         tfBookPresentationTime = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -401,6 +400,7 @@ public class StudentHome extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         bBookPresentation = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        dcBookPresentation = new com.toedter.calendar.JDateChooser();
         pProfile = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -702,7 +702,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         pSubmitAssessmentLayout.setVerticalGroup(
             pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -907,8 +907,6 @@ public class StudentHome extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        tfBookPresentationDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         tfBookPresentationTime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfBookPresentationTime.setText("jTextField2");
 
@@ -943,18 +941,14 @@ public class StudentHome extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(60, 60, 60)
-                        .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lPresentationStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))))
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lPresentationStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(dcBookPresentation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(80, 80, 80))
             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -967,11 +961,11 @@ public class StudentHome extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel21)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel17)
-                    .addComponent(tfBookPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                    .addComponent(dcBookPresentation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(tfBookPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -996,7 +990,7 @@ public class StudentHome extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         pAssessmentStatusLayout.setVerticalGroup(
             pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1007,7 +1001,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pProfile.setBackground(new java.awt.Color(255, 255, 255));
@@ -1619,7 +1613,7 @@ public class StudentHome extends javax.swing.JFrame {
         String[] oldRecord = null;
         List<String> lines = new ArrayList<>();
 
-        if (tfBookPresentationDate.getText().isEmpty() || tfBookPresentationTime.getText().isEmpty()) {
+        if (dcBookPresentation.getDateFormatString().isEmpty() || tfBookPresentationTime.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter a date and time.");
         } else {
             try {
@@ -1632,7 +1626,7 @@ public class StudentHome extends javax.swing.JFrame {
                     lines.add(line);
                     if (record[0].equals(assessmentID) && record[1].equals(ID)) {
                         oldRecord = line.split("\t");
-                        oldRecord[9] = tfBookPresentationDate.getText();
+                        oldRecord[9] = dcBookPresentation.getDateFormatString();
                         oldRecord[10] = tfBookPresentationTime.getText();
                         oldRecord[11] = "PENDING";
                         actualRow = row;
@@ -1741,6 +1735,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JButton bSaveFile;
     private javax.swing.JButton bSubmitSubmission;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser dcBookPresentation;
     private javax.swing.JPanel filePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1795,7 +1790,6 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JLabel svGrade;
     private javax.swing.JTable tResult;
     private javax.swing.JTextField tfAddress;
-    private javax.swing.JTextField tfBookPresentationDate;
     private javax.swing.JTextField tfBookPresentationTime;
     private javax.swing.JTextField tfConfirmPassword;
     private javax.swing.JTextField tfContactNumber;

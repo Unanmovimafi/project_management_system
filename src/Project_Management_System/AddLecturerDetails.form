@@ -57,45 +57,66 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="tfEmail" min="-2" pref="491" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel8" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel9" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel5" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel10" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="tfEmail" min="-2" pref="491" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="tfNationality" max="32767" attributes="0"/>
+                                              <Component id="tfContactNumber" pref="491" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="tfID" min="-2" pref="207" max="-2" attributes="0"/>
-                                                  <Component id="cbRole" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="tfName" alignment="0" pref="491" max="32767" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="rbMale" min="-2" pref="98" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="rbFemale" min="-2" pref="98" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel8" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tfAddress" min="-2" pref="491" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="tfID" min="-2" pref="207" max="-2" attributes="0"/>
+                                                      <Component id="cbRole" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="tfName" alignment="0" pref="491" max="32767" attributes="0"/>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="rbMale" min="-2" pref="98" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="rbFemale" min="-2" pref="98" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="tfIC" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <Component id="tfIC" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                                  <Component id="tfPassword" min="-2" pref="491" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                                  <Component id="dcDoB" min="-2" pref="491" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Component id="tfPassword" min="-2" pref="491" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="tfAddress" min="-2" pref="491" max="-2" attributes="0"/>
-                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -105,18 +126,8 @@
                           <EmptySpace min="-2" pref="349" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="tfDoB" pref="491" max="32767" attributes="0"/>
-                              <Component id="tfNationality" max="32767" attributes="0"/>
-                              <Component id="tfContactNumber" pref="491" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
                   </Group>
-                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                  <EmptySpace pref="1129" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,12 +165,12 @@
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfNationality" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfDoB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="dcDoB" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfContactNumber" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -326,7 +337,10 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfIC">
         </Component>
-        <Component class="javax.swing.JTextField" name="tfDoB">
+        <Component class="com.toedter.calendar.JDateChooser" name="dcDoB">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
