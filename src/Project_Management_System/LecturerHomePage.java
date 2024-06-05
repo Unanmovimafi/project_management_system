@@ -1772,16 +1772,16 @@ public class LecturerHomePage extends javax.swing.JFrame {
                     String[] assstudentRecord = assstudentLine.split("\t");
                     if (assstudentRecord[0].equals(record[0])) {
                         if (assstudentRecord[5].equals(ID)) {
-                            feedbackTextfield.setEditable(true);
-                            markTextfield.setEditable(true);
-                            tfSecondFB.setEditable(false);
-                            tfSecondMark.setEditable(false);
+                            feedbackTextfield.setEnabled(true);
+                            markTextfield.setEnabled(true);
+                            tfSecondFB.setEnabled(false);
+                            tfSecondMark.setEnabled(false);
 
                         } else if (assstudentRecord[6].equals(ID)) {
-                            feedbackTextfield.setEditable(false);
-                            markTextfield.setEditable(false);
-                            tfSecondFB.setEditable(true);
-                            tfSecondMark.setEditable(true);
+                            feedbackTextfield.setEnabled(false);
+                            markTextfield.setEnabled(false);
+                            tfSecondFB.setEnabled(true);
+                            tfSecondMark.setEnabled(true);
                         }
                         break;
                     }

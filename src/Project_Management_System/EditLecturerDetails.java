@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,9 +49,10 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     }
     
     
-    public void setRecordData(String ID) {
+    public void setRecordData(String ID) throws ParseException {
         
         this.selectedID = ID;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         
         
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
@@ -87,7 +90,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         }
         
         tfNationality.setText(record[5]);
-        dcDoB.setDateFormatString(record[6]);
+        dcDoB.setDate(dateFormat.parse(record[6]));
         tfContactNumber.setText(record[7]);
         tfEmail.setText(record[9]);
         tfAddress.setText(record[10]);

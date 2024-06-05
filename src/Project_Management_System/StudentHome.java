@@ -153,6 +153,7 @@ public class StudentHome extends javax.swing.JFrame {
         boolean isSubmittedFile = false;
         String submittedFile = "";
         rowOfAssignmentStudentSubmission = -1;
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
             BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
@@ -176,28 +177,29 @@ public class StudentHome extends javax.swing.JFrame {
 
                     if (record2[11].equals("PENDING")) {
                         dcBookPresentation.setEnabled(false);
-                        tfBookPresentationTime.setEditable(false);
-                        dcBookPresentation.setDateFormatString(record2[9]);
+                        tfBookPresentationTime.setEnabled(false);
+                        dcBookPresentation.setDate(dateFormat.parse(record2[9]));
                         tfBookPresentationTime.setText(record2[10]);
                         lPresentationStatus.setText("Pending");
                         bBookPresentation.setEnabled(false);
                     } else if (record2[11].equals("ACCEPT")) {
                         dcBookPresentation.setEnabled(false);
-                        tfBookPresentationTime.setEditable(false);
-                        dcBookPresentation.setDateFormatString(record2[9]);
+                        tfBookPresentationTime.setEnabled(false);
+                        dcBookPresentation.setDate(dateFormat.parse(record2[9]));
+                        System.out.println(dcBookPresentation);
                         tfBookPresentationTime.setText(record2[10]);
                         lPresentationStatus.setText("Accept");
                         bBookPresentation.setEnabled(false);
                     } else if (record2[11].equals("REJECT")) {
                         dcBookPresentation.setEnabled(true);
-                        tfBookPresentationTime.setEditable(true);
-                        dcBookPresentation.setDateFormatString(record2[9]);
+                        tfBookPresentationTime.setEnabled(true);
+                        dcBookPresentation.setDate(dateFormat.parse(record2[9]));
                         tfBookPresentationTime.setText(record2[10]);
                         lPresentationStatus.setText("Reject (Please re-select your presentation date & time)");
                         bBookPresentation.setEnabled(true);
                     } else if (record2[11].equals("NA")) {
                         dcBookPresentation.setEnabled(true);
-                        tfBookPresentationTime.setEditable(true);
+                        tfBookPresentationTime.setEnabled(true);
                         lPresentationStatus.setText("Haven't Booked Any Presentation");
                         bBookPresentation.setEnabled(true);
                     }
@@ -934,6 +936,8 @@ public class StudentHome extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Presentation Booking");
 
+        dcBookPresentation.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -990,7 +994,7 @@ public class StudentHome extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pAssessmentStatusLayout.setVerticalGroup(
             pAssessmentStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
