@@ -153,6 +153,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         tfDoB = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tfIC = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -208,6 +209,13 @@ public class EditLecturerDetails extends javax.swing.JFrame {
 
         jLabel11.setText("IC/Passport No.:");
 
+        jButton1.setText("DELETE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -251,7 +259,9 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                                             .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(349, 349, 349)
-                        .addComponent(bSave))
+                        .addComponent(bSave)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jLabel3)
@@ -312,7 +322,9 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addComponent(bSave)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bSave)
+                    .addComponent(jButton1))
                 .addGap(32, 32, 32))
         );
 
@@ -398,6 +410,31 @@ public class EditLecturerDetails extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bSaveActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+         List<String> lines = getAllProductRecord();
+                //Write the information to the text file
+                
+                lines.set(count, "");
+                try {BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt"));
+                for (String updatedLine : lines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+                
+                
+                writer.close();
+                }catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        JOptionPane.showMessageDialog(null, "Successfully Deleted!");
+            this.dispose();
+            adminHomePage.refreshLecturerTable("","");
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -437,6 +474,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
     private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cbRole;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
