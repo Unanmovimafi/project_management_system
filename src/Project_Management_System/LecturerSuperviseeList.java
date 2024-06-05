@@ -492,6 +492,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         SuperviseeSideButton = new javax.swing.JButton();
         HomeSideButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lecLogoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
@@ -1336,6 +1337,8 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 50, 79));
 
+        SuperviseeSideButton.setBackground(new java.awt.Color(255, 255, 206));
+        SuperviseeSideButton.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         SuperviseeSideButton.setText("SUPERVISEE");
         SuperviseeSideButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1343,17 +1346,30 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
             }
         });
 
-        HomeSideButton.setText("Dashboard");
+        HomeSideButton.setBackground(new java.awt.Color(255, 255, 206));
+        HomeSideButton.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        HomeSideButton.setText("DASHBOARD");
         HomeSideButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HomeSideButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Reports Marking");
+        jButton1.setBackground(new java.awt.Color(255, 255, 206));
+        jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        jButton1.setText("GRADE REPORT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        lecLogoutBtn.setBackground(new java.awt.Color(255, 255, 206));
+        lecLogoutBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lecLogoutBtn.setText("LOGOUT");
+        lecLogoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lecLogoutBtnActionPerformed(evt);
             }
         });
 
@@ -1367,19 +1383,24 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(HomeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+                        .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(HomeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(663, Short.MAX_VALUE))
+                .addGap(105, 105, 105)
+                .addComponent(HomeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 560, Short.MAX_VALUE)
+                .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1689,6 +1710,10 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         bRejectPresentation.setEnabled(false);
     }//GEN-LAST:event_bRejectPresentationActionPerformed
 
+    private void lecLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lecLogoutBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lecLogoutBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1794,6 +1819,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
     private javax.swing.JLabel lStudentPresentationDate;
     private javax.swing.JLabel lStudentPresentationStatus;
     private javax.swing.JLabel lSubmittedFile;
+    private javax.swing.JButton lecLogoutBtn;
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel markLabel;
     private javax.swing.JTextField markTextfield;

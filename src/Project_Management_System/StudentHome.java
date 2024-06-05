@@ -351,6 +351,7 @@ public class StudentHome extends javax.swing.JFrame {
         resultButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         bDashboard = new javax.swing.JButton();
+        studentLogoutBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         pResult = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -437,8 +438,8 @@ public class StudentHome extends javax.swing.JFrame {
         sidePanel.setPreferredSize(new java.awt.Dimension(244, 284));
 
         resultButton.setBackground(new java.awt.Color(255, 255, 204));
-        resultButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        resultButton.setText("Result");
+        resultButton.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        resultButton.setText("RESULT");
         resultButton.setPreferredSize(new java.awt.Dimension(184, 40));
         resultButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -447,8 +448,8 @@ public class StudentHome extends javax.swing.JFrame {
         });
 
         profileButton.setBackground(new java.awt.Color(255, 255, 204));
-        profileButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        profileButton.setText("Profile");
+        profileButton.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        profileButton.setText("PROFILE");
         profileButton.setPreferredSize(new java.awt.Dimension(184, 40));
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,11 +458,21 @@ public class StudentHome extends javax.swing.JFrame {
         });
 
         bDashboard.setBackground(new java.awt.Color(255, 255, 204));
-        bDashboard.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        bDashboard.setText("Dashboard");
+        bDashboard.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        bDashboard.setText("DASHBOARD");
         bDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bDashboardActionPerformed(evt);
+            }
+        });
+
+        studentLogoutBtn.setBackground(new java.awt.Color(255, 255, 204));
+        studentLogoutBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        studentLogoutBtn.setText("LOGOUT");
+        studentLogoutBtn.setPreferredSize(new java.awt.Dimension(184, 40));
+        studentLogoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentLogoutBtnActionPerformed(evt);
             }
         });
 
@@ -470,23 +481,30 @@ public class StudentHome extends javax.swing.JFrame {
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(resultButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                    .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                    .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(resultButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137)
+                .addGap(35, 35, 35)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(39, 39, 39)
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(393, 393, 393))
+                .addGap(409, 409, 409)
+                .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         tResult.setModel(new javax.swing.table.DefaultTableModel(
@@ -1644,6 +1662,10 @@ public class StudentHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bBookPresentationActionPerformed
 
+    private void studentLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentLogoutBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentLogoutBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1761,6 +1783,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JPanel sidePanel;
     private javax.swing.JLabel smFeedback;
     private javax.swing.JLabel smGrade;
+    private javax.swing.JButton studentLogoutBtn;
     private javax.swing.JLabel svFeedback;
     private javax.swing.JLabel svGrade;
     private javax.swing.JTable tResult;

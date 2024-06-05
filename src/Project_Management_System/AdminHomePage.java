@@ -125,6 +125,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         bStudent = new javax.swing.JButton();
         bLecturer = new javax.swing.JButton();
         bHome = new javax.swing.JButton();
+        adminLogoutBtn = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         pHome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -178,6 +179,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 50, 79));
 
+        bStudent.setBackground(new java.awt.Color(255, 255, 206));
+        bStudent.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         bStudent.setText("STUDENT");
         bStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +188,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        bLecturer.setBackground(new java.awt.Color(255, 255, 206));
+        bLecturer.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         bLecturer.setText("LECTURER");
         bLecturer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,6 +197,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        bHome.setBackground(new java.awt.Color(255, 255, 206));
+        bHome.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         bHome.setText("HOME");
         bHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,29 +206,46 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        adminLogoutBtn.setBackground(new java.awt.Color(255, 255, 206));
+        adminLogoutBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        adminLogoutBtn.setText("LOGOUT");
+        adminLogoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminLogoutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(bHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bLecturer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
-                .addGap(17, 17, 17))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(adminLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(bHome, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
+                            .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(bHome, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bHome, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(bLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                .addComponent(adminLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         pHome.setBackground(new java.awt.Color(252, 247, 204));
@@ -979,6 +1003,10 @@ public class AdminHomePage extends javax.swing.JFrame {
         refreshStudentTable("","","");
     }//GEN-LAST:event_bImportStudentActionPerformed
 
+    private void adminLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLogoutBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminLogoutBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1025,6 +1053,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane StudentTableSP;
     private javax.swing.JLabel TotalLB;
     private javax.swing.JTextField TotalStudentTF;
+    private javax.swing.JButton adminLogoutBtn;
     private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bHome;
     private javax.swing.JButton bImportLecturer;
