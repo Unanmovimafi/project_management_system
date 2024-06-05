@@ -8,6 +8,7 @@ import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -152,6 +153,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         bImportLecturer = new javax.swing.JButton();
+        btnExportLecturer = new javax.swing.JButton();
         pStudent = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         StudentDetailsLabel = new javax.swing.JLabel();
@@ -172,6 +174,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         AddStudentBtn = new javax.swing.JButton();
         bEditStudentr = new javax.swing.JButton();
         bImportStudent = new javax.swing.JButton();
+        btnExportStudent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1500, 780));
@@ -439,6 +442,13 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        btnExportLecturer.setText("Export");
+        btnExportLecturer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportLecturerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -453,6 +463,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(btnExportLecturer))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,7 +478,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(btnExportLecturer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -506,7 +521,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -643,17 +658,29 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        btnExportStudent.setText("Export");
+        btnExportStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportStudentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(AddStudentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                        .addComponent(bEditStudentr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(bImportStudent))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(AddStudentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                .addComponent(bEditStudentr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(bImportStudent)))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnExportStudent)))
                 .addGap(0, 15, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -665,7 +692,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(AddStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bEditStudentr, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(476, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(btnExportStudent)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -1005,7 +1034,80 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void adminLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLogoutBtnActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        LoginPage lp = new LoginPage();
+
+        lp.pack();
+        lp.setLocationRelativeTo(null);
+        lp.setVisible(true);
+
     }//GEN-LAST:event_adminLogoutBtnActionPerformed
+
+    private void btnExportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportStudentActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.showOpenDialog(null);
+        File file = chooser.getSelectedFile();
+        String path = file.getAbsolutePath() + "//Report.csv";
+
+        try {
+            TableModel model = tStudentList.getModel();
+            FileWriter csv = new FileWriter(new File(path));
+
+            // Write column names
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                csv.write(model.getColumnName(i) + ",");
+            }
+            csv.write("\n");
+
+            // Write row data
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    csv.write(model.getValueAt(i, j).toString() + ",");
+                }
+                csv.write("\n");
+            }
+
+            csv.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }//GEN-LAST:event_btnExportStudentActionPerformed
+
+    private void btnExportLecturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportLecturerActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.showOpenDialog(null);
+        File file = chooser.getSelectedFile();
+        String path = file.getAbsolutePath() + "//Report.csv";
+
+        try {
+            TableModel model = tLecturerList.getModel();
+            FileWriter csv = new FileWriter(new File(path));
+
+            // Write column names
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                csv.write(model.getColumnName(i) + ",");
+            }
+            csv.write("\n");
+
+            // Write row data
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    csv.write(model.getValueAt(i, j).toString() + ",");
+                }
+                csv.write("\n");
+            }
+
+            csv.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }//GEN-LAST:event_btnExportLecturerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1064,6 +1166,8 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bStudent;
     private javax.swing.JButton bStudentApply;
     private javax.swing.JButton bStudentClear;
+    private javax.swing.JButton btnExportLecturer;
+    private javax.swing.JButton btnExportStudent;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

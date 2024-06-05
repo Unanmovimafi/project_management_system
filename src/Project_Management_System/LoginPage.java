@@ -210,7 +210,7 @@ public class LoginPage extends javax.swing.JFrame {
                     br.close();
                     this.dispose();
                     
-                    LecturerSuperviseeList lhp = new LecturerSuperviseeList();
+                    LecturerHomePage lhp = new LecturerHomePage();
                     
                     lhp.setID(username);
                     

@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class LecturerSuperviseeList extends javax.swing.JFrame {
+public class LecturerHomePage extends javax.swing.JFrame {
     private String ID;
     private String[] assessmentRecord;
     private String[] assessmentStudentRecord;
@@ -388,7 +388,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
         }
     }
     
-    public LecturerSuperviseeList() {
+    public LecturerHomePage() {
         initComponents();
         pHome.setVisible(true);
         
@@ -904,7 +904,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DescriptionTitle)
                     .addComponent(Description))
                 .addGap(13, 13, 13)
@@ -1214,7 +1214,7 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TotalUngradedLB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TotalSuperviseeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TotalPresentationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(TotalPresentationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addComponent(TotalAssessmentLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1712,6 +1712,12 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
 
     private void lecLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lecLogoutBtnActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        LoginPage lp = new LoginPage();
+
+        lp.pack();
+        lp.setLocationRelativeTo(null);
+        lp.setVisible(true);
     }//GEN-LAST:event_lecLogoutBtnActionPerformed
 
     /**
@@ -1731,21 +1737,23 @@ public class LecturerSuperviseeList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LecturerSuperviseeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LecturerSuperviseeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LecturerSuperviseeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LecturerSuperviseeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LecturerSuperviseeList().setVisible(true);
+                new LecturerHomePage().setVisible(true);
             }
         });
     }

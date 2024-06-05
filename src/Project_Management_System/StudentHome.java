@@ -1664,6 +1664,13 @@ public class StudentHome extends javax.swing.JFrame {
 
     private void studentLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentLogoutBtnActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        LoginPage lp = new LoginPage();
+
+        lp.pack();
+        lp.setLocationRelativeTo(null);
+        lp.setVisible(true);
+
     }//GEN-LAST:event_studentLogoutBtnActionPerformed
 
     /**
