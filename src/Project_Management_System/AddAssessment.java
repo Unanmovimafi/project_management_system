@@ -200,7 +200,7 @@ public class AddAssessment extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Type:");
 
-        tfID.setEditable(false);
+        tfID.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Supervisor:");
@@ -483,11 +483,9 @@ public class AddAssessment extends javax.swing.JFrame {
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
-        if (tfID.getText().isEmpty() ||tfName.getText().isEmpty() || tfDescription.getText().isEmpty()|| tfDueDate.getText().isEmpty()|| tfSupervisor.getText().isEmpty()|| tfSecondMarker.getText().isEmpty()) {
+        if (tfID.getText().isEmpty() || tfName.getText().isEmpty() || tfDescription.getText().isEmpty() || tfDueDate.getText().isEmpty() || tfSupervisor.getText().isEmpty() || tfSecondMarker.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
-        }
-        
-        else {
+        } else {
             //Get the value from each text field
             String newID = tfID.getText();
             String name = tfName.getText();
@@ -496,38 +494,35 @@ public class AddAssessment extends javax.swing.JFrame {
             String dueDate = tfDueDate.getText();
             String supervisor = tfSupervisor.getText();
             String secondMarker = tfSecondMarker.getText();
-            
-            
+
             try {
-                 
-            StringBuilder record = new StringBuilder();
+
+                StringBuilder record = new StringBuilder();
                 //Write the information to the text file
-                record.append(newID + "\t" + name + "\t" + type+ "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
+                record.append(newID + "\t" + name + "\t" + type + "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
                 writer.write(record + "\n");
                 writer.close();
-                } 
-             catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
-            
-             try {
-                 
-                 BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt", true));
-                 System.out.println(tAddedStudent.getRowCount());
-                 for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
-                     
-                StringBuilder record = new StringBuilder();
+
+            try {
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt", true));
+                System.out.println(tAddedStudent.getRowCount());
+                for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
+
+                    StringBuilder record = new StringBuilder();
                     //Write the information to the text file
-                    record.append(newID + "\t" + tAddedStudent.getValueAt(row, 0) + "\t" 
-                            + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" 
-                            + "NA"+ "\t" + "NA"+ "\t" + "NA"+ "\t" + "NA");
+                    record.append(newID + "\t" + tAddedStudent.getValueAt(row, 0) + "\t"
+                            + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t"
+                            + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA");
                     writer.write(record + "\n");
                 }
                 writer.close();
-                } 
-             catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
 

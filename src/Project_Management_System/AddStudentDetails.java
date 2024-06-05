@@ -113,6 +113,9 @@ public class AddStudentDetails extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Password:");
 
+        tfID.setEditable(false);
+        tfID.setEnabled(false);
+
         buttonGroup1.add(rbMale);
         rbMale.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbMale.setText("Male");
