@@ -305,8 +305,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         IntakeCodeLB = new javax.swing.JLabel();
         StudentIDLB = new javax.swing.JLabel();
         StudentNameLB = new javax.swing.JLabel();
-        TotalStudentTF = new javax.swing.JTextField();
-        TotalLB = new javax.swing.JLabel();
         tfIntakeCode = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         AddStudentBtn = new javax.swing.JButton();
@@ -888,9 +886,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         StudentNameLB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         StudentNameLB.setText("Student Name:");
 
-        TotalLB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        TotalLB.setText("Total:");
-
         jPanel14.setBackground(new java.awt.Color(249, 244, 202));
 
         AddStudentBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -958,7 +953,7 @@ public class AdminHomePage extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(bStudentApply, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -975,11 +970,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tfStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(StudentTableSP, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(TotalLB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TotalStudentTF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addComponent(bStudentClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143)))
                 .addGap(26, 26, 26)
@@ -989,7 +980,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addComponent(IntakeCodeLB)
@@ -1003,13 +994,10 @@ public class AdminHomePage extends javax.swing.JFrame {
                                 .addComponent(tfStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(StudentIDLB)))
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TotalStudentTF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bStudentClear)
-                        .addComponent(bStudentApply))
-                    .addComponent(TotalLB))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bStudentClear)
+                    .addComponent(bStudentApply))
+                .addGap(23, 23, 23)
                 .addComponent(StudentTableSP, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1365,8 +1353,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel StudentIDLB;
     private javax.swing.JLabel StudentNameLB;
     private javax.swing.JScrollPane StudentTableSP;
-    private javax.swing.JLabel TotalLB;
-    private javax.swing.JTextField TotalStudentTF;
     private javax.swing.JButton adminLogoutBtn;
     private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bHome;

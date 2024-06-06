@@ -642,9 +642,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pHome = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        presentationLB = new javax.swing.JLabel();
-        UpPresentationLB = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         TotalPresentationLabel = new javax.swing.JLabel();
         TotalSuperviseeLabel = new javax.swing.JLabel();
@@ -1488,14 +1485,16 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pStudentSubmittedAssessmentLayout.setHorizontalGroup(
             pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(lStudentID)
-                        .addGap(45, 45, 45)
+                        .addGap(55, 55, 55)
+                        .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
                         .addComponent(lStudentName))
-                    .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(lStudentID)))
                 .addGap(65, 65, 65)
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
@@ -1503,7 +1502,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(studentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(461, 779, Short.MAX_VALUE))
             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1518,11 +1517,11 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                         .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lStudentName)
-                            .addComponent(lStudentID))
-                        .addGap(29, 29, 29))
+                        .addGap(24, 24, 24)
+                        .addComponent(lStudentName)
+                        .addGap(18, 18, 18)
+                        .addComponent(lStudentID)
+                        .addGap(17, 17, 17))
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                         .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(searchLabel)
@@ -1533,7 +1532,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         pHome.setBackground(new java.awt.Color(252, 247, 204));
@@ -1542,37 +1541,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         jLabel10.setText("Project Manager Dashboard");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
-
-        presentationLB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        presentationLB.setText("Upcoming Presentation:");
-
-        UpPresentationLB.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        UpPresentationLB.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(presentationLB)
-                    .addComponent(UpPresentationLB, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(presentationLB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UpPresentationLB, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1649,17 +1617,13 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(528, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(78, Short.MAX_VALUE))
         );
 
@@ -2643,7 +2607,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel TotalPresentationLabel;
     private javax.swing.JLabel TotalSuperviseeLabel;
     private javax.swing.JLabel TotalUngradedLB;
-    private javax.swing.JLabel UpPresentationLB;
     private javax.swing.JButton bAcceptPresentation;
     private javax.swing.JButton bChangePassword;
     private javax.swing.JButton bLecturerApply;
@@ -2712,7 +2675,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2738,7 +2700,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel pStudentSubmittedAssessment;
     private javax.swing.JPanel pSupervisee;
     private javax.swing.JPanel pSupervisorAssessment;
-    private javax.swing.JLabel presentationLB;
     private javax.swing.JRadioButton rbFemale;
     private javax.swing.JRadioButton rbMale;
     private javax.swing.JLabel searchLabel;
