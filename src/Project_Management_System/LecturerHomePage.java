@@ -259,6 +259,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             pProfile.setVisible(false);
                             ModuleLabel1.setText(record[1]);
                             Description.setText(record[3]);
+                            bAcceptPresentation.setEnabled(false);
+                            bRejectPresentation.setEnabled(false);
                         }
                     });
                     pSupervisorAssessment.add(jPanel1);
@@ -869,7 +871,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jLabel9.setText("Mark:");
 
         tfSecondFB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfSecondFB.setText("jTextField1");
 
         tfSecondMark.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tfSecondMark.setText("jTextField2");
@@ -1538,15 +1539,15 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1929, Short.MAX_VALUE)
+            .addGap(0, 1984, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pSupervisee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                    .addComponent(pReportsMarking, javax.swing.GroupLayout.DEFAULT_SIZE, 1923, Short.MAX_VALUE)
+                    .addComponent(pReportsMarking, javax.swing.GroupLayout.DEFAULT_SIZE, 1978, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 1929, Short.MAX_VALUE))
+                .addComponent(pStudentSubmittedAssessment, javax.swing.GroupLayout.DEFAULT_SIZE, 1984, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1784,56 +1785,64 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         break;
                     }
                 }
+                
+                System.out.println(assessmentRecord[6]);
+                System.out.println(ID);
+                
+                if (assessmentRecord[6].equals(ID)) {
+                    if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])) {
+                        lStudentID.setText(record[1]);
+                        lStudentName.setText(studentName);
+                        lSubmittedFile.setText(record[2]);
+                        feedbackTextfield.setText(record[6]);
+                        markTextfield.setText(record[5]);
 
-                if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])) {
-                    lStudentID.setText(record[1]);
-                    lStudentName.setText(studentName);
-                    lSubmittedFile.setText(record[2]);
-                    feedbackTextfield.setText(record[6]);
-                    markTextfield.setText(record[5]);
+                        tfSecondFB.setText(record[8]);
+                        tfSecondMark.setText(record[7]);
 
-                    tfSecondFB.setText(record[8]);
-                    tfSecondMark.setText(record[7]);
+                        assessmentStudentRecord = record;
 
-                    assessmentStudentRecord = record;
+                        if (record[2].equals("NA")) {
+                            downloadButton.setEnabled(false);
+                        } else {
+                            destFile = record[2];
+                        }
 
-                    if (record[2].equals("NA")) {
-                        downloadButton.setEnabled(false);
-                    } else {
-                        destFile = record[2];
+                        if (record[11].equals("NA")) {
+                            lStudentPresentationDate.setText("NA");
+                            lPresentationTime.setText("NA");
+                            lStudentPresentationStatus.setText("Student Haven't book Presentation");
+                            bAcceptPresentation.setEnabled(false);
+                            bRejectPresentation.setEnabled(false);
+
+                        } else if (record[11].equals("PENDING")) {
+                            lStudentPresentationDate.setText(record[9]);
+                            lPresentationTime.setText(record[10]);
+                            lStudentPresentationStatus.setText("Waiting Approval");
+                            bAcceptPresentation.setEnabled(true);
+                            bRejectPresentation.setEnabled(true);
+                        } else if (record[11].equals("ACCEPT")) {
+                            lStudentPresentationDate.setText(record[9]);
+                            lPresentationTime.setText(record[10]);
+                            lStudentPresentationStatus.setText("You jave accept the Presentation");
+                            bAcceptPresentation.setEnabled(false);
+                            bRejectPresentation.setEnabled(false);
+                        } else if (record[11].equals("REJECT")) {
+                            lStudentPresentationDate.setText(record[9]);
+                            lPresentationTime.setText(record[10]);
+                            lStudentPresentationStatus.setText("Waiting the Student to re-select the presentation date and time.");
+                            bAcceptPresentation.setEnabled(false);
+                            bRejectPresentation.setEnabled(false);
+                        }
                     }
-
-                    if (record[11].equals("NA")) {
-                        lStudentPresentationDate.setText("NA");
-                        lPresentationTime.setText("NA");
-                        lStudentPresentationStatus.setText("Student Haven't book Presentation");
-                        bAcceptPresentation.setEnabled(false);
-                        bRejectPresentation.setEnabled(false);
-
-                    } else if (record[11].equals("PENDING")) {
-                        lStudentPresentationDate.setText(record[9]);
-                        lPresentationTime.setText(record[10]);
-                        lStudentPresentationStatus.setText("Waiting Approval");
-                        bAcceptPresentation.setEnabled(true);
-                        bRejectPresentation.setEnabled(true);
-                    } else if (record[11].equals("ACCEPT")) {
-                        lStudentPresentationDate.setText(record[9]);
-                        lPresentationTime.setText(record[10]);
-                        lStudentPresentationStatus.setText("You jave accept the Presentation");
-                        bAcceptPresentation.setEnabled(false);
-                        bRejectPresentation.setEnabled(false);
-                    } else if (record[11].equals("REJECT")) {
-                        lStudentPresentationDate.setText(record[9]);
-                        lPresentationTime.setText(record[10]);
-                        lStudentPresentationStatus.setText("Waiting the Student to re-select the presentation date and time.");
-                        bAcceptPresentation.setEnabled(false);
-                        bRejectPresentation.setEnabled(false);
-                    }
-
-                    break;
+                } else {
+                    System.out.println("1213");
+                    bAcceptPresentation.setEnabled(false);
+                    bRejectPresentation.setEnabled(false);
                 }
-
+                break;
             }
+
         } catch (Exception e) {
             e.getMessage();
         }
