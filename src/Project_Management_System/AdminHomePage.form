@@ -410,7 +410,7 @@
                                   <Component id="tfLecturerName" min="-2" pref="258" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                                   <Component id="bLecturerApply" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Component id="bLecturerClear" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane2" min="-2" pref="1042" max="-2" attributes="0"/>
@@ -425,19 +425,17 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfLecturerName" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="bLecturerApply" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="bLecturerClear" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfLecturerID" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfLecturerName" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="bLecturerApply" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="bLecturerClear" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="tfLecturerID" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="529" max="-2" attributes="0"/>
-                          <EmptySpace pref="54" max="32767" attributes="0"/>
+                          <EmptySpace pref="53" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -533,6 +531,9 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Lecturer ID:"/>
                   </Properties>
                 </Component>
@@ -540,6 +541,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="bLecturerApply">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Apply"/>
                   </Properties>
                   <Events>
@@ -548,6 +552,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="bLecturerClear">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Clear"/>
                   </Properties>
                   <Events>
@@ -978,7 +985,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="bEditStudentr" min="-2" pref="47" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnExportStudent" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="btnExportStudent" min="-2" pref="46" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
