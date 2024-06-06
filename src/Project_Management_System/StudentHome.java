@@ -1618,8 +1618,9 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         int actualRow = 0;
         String[] oldRecord = null;
         List<String> lines = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        if (dcBookPresentation.getDateFormatString().isEmpty() || tfBookPresentationTime.getText().isEmpty()) {
+        if (sdf.format(dcBookPresentation.getDate()).isEmpty() || tfBookPresentationTime.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter a date and time.");
         } else {
             try {
@@ -1632,7 +1633,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     lines.add(line);
                     if (record[0].equals(assessmentID) && record[1].equals(ID)) {
                         oldRecord = line.split("\t");
-                        oldRecord[9] = dcBookPresentation.getDateFormatString();
+                        oldRecord[9] = sdf.format(dcBookPresentation.getDate());
                         oldRecord[10] = tfBookPresentationTime.getText();
                         oldRecord[11] = "PENDING";
                         actualRow = row;

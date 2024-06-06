@@ -376,8 +376,8 @@ public class EditLecturerDetails extends javax.swing.JFrame {
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
-        // less gender
-        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| dcDoB.getDateFormatString().isEmpty()|| tfContactNumber.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| sdf.format(dcDoB.getDate()).isEmpty()|| tfContactNumber.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         }
         
@@ -401,7 +401,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
             //role
             //gender
             String nationality = tfNationality.getText();
-            String dob = dcDoB.getDateFormatString();
+            String dob = sdf.format(dcDoB.getDate());
             String contactNumber = tfContactNumber.getText();
             String email = tfEmail.getText();
             String address = tfAddress.getText();

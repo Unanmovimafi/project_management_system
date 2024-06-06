@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -145,7 +146,6 @@ public class AddAssessment extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         tfName = new javax.swing.JTextField();
         tfDescription = new javax.swing.JTextField();
-        tfDueDate = new javax.swing.JTextField();
         bSave = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -169,6 +169,7 @@ public class AddAssessment extends javax.swing.JFrame {
         bAddStudent = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         tfSearchStudent = new javax.swing.JTextField();
+        dcDueDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -367,16 +368,17 @@ public class AddAssessment extends javax.swing.JFrame {
                                     .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(tfSecondMarker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                                            .addComponent(tfSupervisor, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                                            .addComponent(tfSupervisorName)))
-                                    .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(dcDueDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(tfSecondMarker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                                .addComponent(tfSupervisor, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                                                .addComponent(tfSupervisorName))))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,10 +427,13 @@ public class AddAssessment extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(72, 72, 72)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(tfDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(dcDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -483,7 +488,8 @@ public class AddAssessment extends javax.swing.JFrame {
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         // TODO add your handling code here:
-        if (tfID.getText().isEmpty() || tfName.getText().isEmpty() || tfDescription.getText().isEmpty() || tfDueDate.getText().isEmpty() || tfSupervisor.getText().isEmpty() || tfSecondMarker.getText().isEmpty()) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (tfID.getText().isEmpty() || tfName.getText().isEmpty() || tfDescription.getText().isEmpty() || sdf.format(dcDueDate.getDate()).isEmpty() || tfSupervisor.getText().isEmpty() || tfSecondMarker.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         } else {
             //Get the value from each text field
@@ -491,7 +497,7 @@ public class AddAssessment extends javax.swing.JFrame {
             String name = tfName.getText();
             String type = cbType.getSelectedItem().toString();
             String description = tfDescription.getText();
-            String dueDate = tfDueDate.getText();
+            String dueDate = sdf.format(dcDueDate.getDate());
             String supervisor = tfSupervisor.getText();
             String secondMarker = tfSecondMarker.getText();
 
@@ -665,6 +671,7 @@ public class AddAssessment extends javax.swing.JFrame {
     private javax.swing.JButton bSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbType;
+    private com.toedter.calendar.JDateChooser dcDueDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -683,7 +690,6 @@ public class AddAssessment extends javax.swing.JFrame {
     private javax.swing.JTable tStudentList;
     private javax.swing.JTable tSupervisorList;
     private javax.swing.JTextField tfDescription;
-    private javax.swing.JTextField tfDueDate;
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfSearchSecondMarker;
