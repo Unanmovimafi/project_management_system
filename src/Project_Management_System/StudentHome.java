@@ -142,9 +142,31 @@ public class StudentHome extends javax.swing.JFrame {
             e.printStackTrace(); // Print stack trace for any exceptions
         }
     }
+    
+    
+    public void setHello() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
+            String line;
+            String[] record;
+            while ((line = reader.readLine()) != null) {
+                record = line.split("\t");
+                if (record[0].equals(ID)) {
+                    // reutrn the line of the line_num in text file
+                    lHelloWorld.setText("Hi " + record[1]);
+                    break;
+                }
+
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+    }
+   
 
     public void setID(String ID) {
         this.ID = ID;
+        setHello();
         createAssessmentPanels();
     }
 
@@ -153,7 +175,7 @@ public class StudentHome extends javax.swing.JFrame {
         boolean isSubmittedFile = false;
         String submittedFile = "";
         rowOfAssignmentStudentSubmission = -1;
-SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
             BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
@@ -354,6 +376,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         profileButton = new javax.swing.JButton();
         bDashboard = new javax.swing.JButton();
         studentLogoutBtn = new javax.swing.JButton();
+        lHelloWorld = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pResult = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -478,6 +501,8 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             }
         });
 
+        lHelloWorld.setText("jLabel22");
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -492,13 +517,18 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(sidePanelLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(lHelloWorld)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
+                .addComponent(lHelloWorld)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1772,6 +1802,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lFileName;
+    private javax.swing.JLabel lHelloWorld;
     private javax.swing.JLabel lPresentationStatus;
     private javax.swing.JLabel lSubmissionStatus;
     private javax.swing.JLabel lSubmitFileDate;

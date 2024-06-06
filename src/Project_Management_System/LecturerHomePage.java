@@ -45,6 +45,26 @@ public class LecturerHomePage extends javax.swing.JFrame {
         }
         return null;
     }
+    
+    
+    public void setHello() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
+            String line;
+            String[] record;
+            while ((line = reader.readLine()) != null) {
+                record = line.split("\t");
+                if (record[0].equals(ID)) {
+                    // reutrn the line of the line_num in text file
+                    lHelloWorld.setText("Hi " + record[1]);
+                    break;
+                }
+
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+    }
 
     private String[] lecRecord;
 
@@ -54,6 +74,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
         this.ID = ID;
         countAssessments();
         countSupervisees();
+        setHello();
     }
 
     private void countAssessments() {
@@ -549,6 +570,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         lecLogoutBtn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lHelloWorld = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
@@ -1620,6 +1642,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
             }
         });
 
+        lHelloWorld.setText("jLabel16");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1636,11 +1660,17 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(lHelloWorld)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(48, 48, 48)
+                .addComponent(lHelloWorld)
+                .addGap(41, 41, 41)
                 .addComponent(HomeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2141,6 +2171,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lHelloWorld;
     private javax.swing.JLabel lPresentationTime;
     private javax.swing.JLabel lStudentID;
     private javax.swing.JLabel lStudentName;
