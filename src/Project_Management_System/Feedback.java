@@ -16,21 +16,49 @@ import javax.swing.JOptionPane;
  */
 public class Feedback extends javax.swing.JFrame {
     
-    
-    private int getNewID(){
-        int count = 1;
-        String line;
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
-            while ((line = bufferedReader.readLine()) != null) {
-                count = count + 1;
+    class NewID {
+        public int getNewID() {
+            int maximumNumber = 0;
+            String line;
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] lineArray = line.split(",");
+                    int currentNumber = Integer.parseInt(lineArray[0]);
+                    if (currentNumber > maximumNumber) {
+                        //Get the maximum id in text file
+                        maximumNumber = currentNumber;
+                    }
+                }
+                //The maximum number plus one to be the id
+                maximumNumber = maximumNumber + 1;
+                bufferedReader.close();
+                return maximumNumber;
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
             }
-            bufferedReader.close();
-            return count;
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+            return 0;
         }
-        return 1;
+    }
+    
+    class getNewID extends NewID {
+        @Override
+        public int getNewID() {
+            int count = 1;
+            String line;
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+                while ((line = bufferedReader.readLine()) != null) {
+                    count = count + 1;
+                }
+                bufferedReader.close();
+                return count;
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+            return 1;
+        }
     }
 
     /**
@@ -110,11 +138,13 @@ public class Feedback extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        getNewID gnid= new getNewID();
+        
         if (tfTitle.getText().isEmpty() || taBodyContent.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         } else {
             try {
-                String newID = Integer.toString(getNewID());
+                String newID = Integer.toString(gnid.getNewID());
                 StringBuilder product = new StringBuilder();
                 //Write the information to the text file
                 product.append(newID + "\t" + tfTitle.getText() + "\t" + taBodyContent.getText());
