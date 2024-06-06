@@ -111,7 +111,7 @@ public class StudentHome extends javax.swing.JFrame {
                 String firstMark;
                 String gradeA;
                 try {
-                    firstMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[3]));
+                    firstMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[5]));
                     gradeA = calculateGrade(Integer.parseInt(firstMark));
                 } catch (Exception e) {
                     firstMark = "NA";
@@ -122,7 +122,7 @@ public class StudentHome extends javax.swing.JFrame {
                 String gradeB;
 
                 try {
-                    secondMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[4]));
+                    secondMark = Integer.toString(Integer.parseInt(assessmentStudentRecord[7]));
                     gradeB = calculateGrade(Integer.parseInt(secondMark));
                 } catch (Exception e) {
                     secondMark = "NA";
