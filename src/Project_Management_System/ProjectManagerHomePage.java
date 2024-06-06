@@ -696,6 +696,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         bViewStatus = new javax.swing.JButton();
+        bViewStatus1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
@@ -2042,6 +2043,15 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             }
         });
 
+        bViewStatus1.setBackground(new java.awt.Color(255, 255, 206));
+        bViewStatus1.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        bViewStatus1.setText("FEEDBACK");
+        bViewStatus1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bViewStatus1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -2057,7 +2067,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(lHelloWorld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bViewStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+                            .addComponent(bViewStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(bViewStatus1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2083,9 +2094,11 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bViewStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bViewStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
         );
@@ -2598,6 +2611,12 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exportModuleTableButtonActionPerformed
 
+    private void bViewStatus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bViewStatus1ActionPerformed
+        // TODO add your handling code here:
+        Feedback fb = new Feedback();
+        fb.setVisible(true);
+    }//GEN-LAST:event_bViewStatus1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2662,6 +2681,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bLecturerClear;
     private javax.swing.JButton bRejectPresentation;
     private javax.swing.JButton bViewStatus;
+    private javax.swing.JButton bViewStatus1;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> cbAssType;
     private javax.swing.JButton downloadButton;

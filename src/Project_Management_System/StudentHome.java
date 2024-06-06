@@ -451,6 +451,7 @@ public class StudentHome extends javax.swing.JFrame {
         studentLogoutBtn = new javax.swing.JButton();
         lHelloWorld = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        bFeedback = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         pResult = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -583,6 +584,16 @@ public class StudentHome extends javax.swing.JFrame {
 
         jLabel22.setIcon(scaledIcon);
 
+        bFeedback.setBackground(new java.awt.Color(255, 255, 204));
+        bFeedback.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        bFeedback.setText("FEEDBACK");
+        bFeedback.setPreferredSize(new java.awt.Dimension(184, 40));
+        bFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bFeedbackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -597,7 +608,8 @@ public class StudentHome extends javax.swing.JFrame {
                         .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(resultButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                             .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                            .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(bDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
                     .addGroup(sidePanelLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -619,6 +631,8 @@ public class StudentHome extends javax.swing.JFrame {
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(bFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(244, 244, 244)
                 .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79))
@@ -841,7 +855,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         pSubmitAssessmentLayout.setVerticalGroup(
             pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1831,6 +1845,13 @@ public class StudentHome extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void bFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFeedbackActionPerformed
+        // TODO add your handling code here:
+        
+        Feedback fb = new Feedback();
+        fb.setVisible(true);
+    }//GEN-LAST:event_bFeedbackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1895,6 +1916,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JButton bCancel;
     private javax.swing.JButton bChangePassword;
     private javax.swing.JButton bDashboard;
+    private javax.swing.JButton bFeedback;
     private javax.swing.JButton bRemoveSub;
     private javax.swing.JButton bSaveFile;
     private javax.swing.JButton bSubmitSubmission;

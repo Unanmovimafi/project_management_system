@@ -105,6 +105,29 @@ public class AdminHomePage extends javax.swing.JFrame {
         
         
     }
+    
+    public void refreshFeedbackTable(String Title) {
+        DefaultTableModel model = (DefaultTableModel)tFeedback.getModel();
+        model.setRowCount(0);
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].toLowerCase().startsWith(Title)) {
+                    String [] newRecord = new String[2];
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
+                }
+            br.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
+    
     public void refreshLecturerTable(String IDOfLecturer, String nameOfLecturer) {
         DefaultTableModel model = (DefaultTableModel)tLecturerList.getModel();
         model.setRowCount(0);
@@ -235,7 +258,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         bHome = new javax.swing.JButton();
         adminLogoutBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        bStudent1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tFeedback = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         pHome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -328,6 +356,15 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jLabel2.setIcon(scaledIcon);
 
+        bStudent1.setBackground(new java.awt.Color(255, 255, 206));
+        bStudent1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        bStudent1.setText("FEEDBACK");
+        bStudent1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bStudent1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -343,7 +380,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                             .addComponent(bLecturer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bStudent1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -357,9 +395,67 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(bLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(bStudent1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(adminLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
+        );
+
+        tFeedback.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Index", "Title"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tFeedback);
+
+        jButton1.setText("VIEW");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(jButton1)
+                .addContainerGap(896, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jButton1)))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pHome.setBackground(new java.awt.Color(252, 247, 204));
@@ -854,20 +950,19 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addComponent(IntakeCodeLB)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfIntakeCode, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(StudentIDLB)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(StudentNameLB))
+                            .addComponent(IntakeCodeLB)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addComponent(TotalLB)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TotalStudentTF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(112, 112, 112)
+                        .addComponent(tfIntakeCode, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(StudentIDLB)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(StudentNameLB)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
@@ -935,6 +1030,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(pLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 1886, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -943,6 +1040,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(pLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1188,6 +1287,29 @@ public class AdminHomePage extends javax.swing.JFrame {
         addStu.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void bStudent1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudent1ActionPerformed
+        // TODO add your handling code here:
+        
+        refreshFeedbackTable("");
+        jPanel1.setVisible(true);
+        pLecturer.setVisible(false);
+        pHome.setVisible(false);
+        pStudent.setVisible(false);
+    }//GEN-LAST:event_bStudent1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:\
+        ViewFeedback vf = new ViewFeedback();
+        try {
+            String selectID = tFeedback.getModel().getValueAt(tFeedback.getSelectedRow(), 0).toString();
+            vf.setRecordData(selectID);
+            //Open EditProduct page
+            vf.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please select a title to view!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1243,10 +1365,12 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bLecturerApply;
     private javax.swing.JButton bLecturerClear;
     private javax.swing.JButton bStudent;
+    private javax.swing.JButton bStudent1;
     private javax.swing.JButton bStudentApply;
     private javax.swing.JButton bStudentClear;
     private javax.swing.JButton btnExportLecturer;
     private javax.swing.JButton btnExportStudent;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1260,6 +1384,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
@@ -1270,10 +1395,12 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pHome;
     private javax.swing.JPanel pLecturer;
     private javax.swing.JPanel pStudent;
+    private javax.swing.JTable tFeedback;
     private javax.swing.JTable tLecturerList;
     private javax.swing.JTable tStudentList;
     private javax.swing.JTextField tfIntakeCode;
