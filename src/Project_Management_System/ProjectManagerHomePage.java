@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.io.*;
 import java.nio.file.Files;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -571,10 +573,11 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        editModuleButton = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
+        moduleLabel = new javax.swing.JLabel();
+        exportModuleTableButton = new javax.swing.JButton();
         pReportsMarking = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -827,11 +830,11 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton11.setText("Edit Module");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        editModuleButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editModuleButton.setText("Edit Module");
+        editModuleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                editModuleButtonActionPerformed(evt);
             }
         });
 
@@ -841,25 +844,27 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel35.setText("Assessment Name:");
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
-        jLabel36.setText("Module");
+        moduleLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
+        moduleLabel.setText("Module");
+
+        exportModuleTableButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        exportModuleTableButton.setText("EXPORT PDF");
+        exportModuleTableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportModuleTableButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pModuleLayout = new javax.swing.GroupLayout(pModule);
         pModule.setLayout(pModuleLayout);
         pModuleLayout.setHorizontalGroup(
             pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pModuleLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1062, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                .addGap(64, 64, 64))
             .addGroup(pModuleLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pModuleLayout.createSequentialGroup()
+                        .addComponent(moduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pModuleLayout.createSequentialGroup()
                         .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pModuleLayout.createSequentialGroup()
@@ -873,21 +878,33 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addGap(130, 130, 130)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(652, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pModuleLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(exportModuleTableButton)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1062, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(editModuleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
         pModuleLayout.setVerticalGroup(
             pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pModuleLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jLabel36)
+                .addComponent(moduleLabel)
                 .addGap(28, 28, 28)
                 .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pModuleLayout.createSequentialGroup()
                         .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65))
+                        .addGap(30, 30, 30)
+                        .addComponent(exportModuleTableButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(pModuleLayout.createSequentialGroup()
                         .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34)
@@ -901,7 +918,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     .addGroup(pModuleLayout.createSequentialGroup()
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(editModuleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
@@ -1524,7 +1541,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pHome.setBackground(new java.awt.Color(252, 247, 204));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel10.setText("Lecture Dashboard");
+        jLabel10.setText("Project Manager Dashboard");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1680,9 +1697,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             .addGroup(pHomeLayout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addGroup(pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(803, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(856, Short.MAX_VALUE))
         );
         pHomeLayout.setVerticalGroup(
             pHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2526,7 +2543,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         aa.setPMPageInstance(this);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void editModuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editModuleButtonActionPerformed
         // TODO add your handling code here:
         if (selectionAssessID == "-1") {
             //If no selected then notify user to select
@@ -2541,7 +2558,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             }
             ea.setVisible(true);
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_editModuleButtonActionPerformed
 
     private void bViewStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bViewStatusActionPerformed
         // TODO add your handling code here:
@@ -2567,6 +2584,19 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         tfStudentID.setText("");
         refreshStuStatusTable("", "");
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void exportModuleTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportModuleTableButtonActionPerformed
+        // TODO add your handling code here:
+        MessageFormat header = new MessageFormat("Total Modules Report");
+        MessageFormat footer =new MessageFormat("Cream Soda Vending Machine");
+        try {
+            tAssessment.print(JTable.PrintMode.FIT_WIDTH,header,footer);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Printing Not Available!" +e.getMessage());
+            
+        }
+    }//GEN-LAST:event_exportModuleTableButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2635,13 +2665,14 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> cbAssType;
     private javax.swing.JButton downloadButton;
+    private javax.swing.JButton editModuleButton;
+    private javax.swing.JButton exportModuleTableButton;
     private javax.swing.JLabel feedbackLabel;
     private javax.swing.JTextField feedbackTextfield;
     private javax.swing.JPanel filePanel;
     private javax.swing.JButton gradeButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2679,7 +2710,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2713,6 +2743,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel markLabel;
     private javax.swing.JTextField markTextfield;
+    private javax.swing.JLabel moduleLabel;
     private javax.swing.JPanel pHome;
     private javax.swing.JPanel pModule;
     private javax.swing.JPanel pProfile;
