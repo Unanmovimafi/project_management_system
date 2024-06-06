@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.*;
 import java.io.*;
 import java.nio.file.Files;
@@ -33,6 +34,10 @@ public class StudentHome extends javax.swing.JFrame {
     private int rowOfStudentRecord = -1;
 
     private int rowOfAssignmentStudentSubmission = -1;
+    
+    ImageIcon icon = new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png");
+    private Image scaledLogo = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+    ImageIcon scaledIcon = new ImageIcon(scaledLogo);
 
     public List<String> getAllStudentRecord() {
         try {
@@ -442,6 +447,7 @@ public class StudentHome extends javax.swing.JFrame {
         bDashboard = new javax.swing.JButton();
         studentLogoutBtn = new javax.swing.JButton();
         lHelloWorld = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pResult = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -569,6 +575,9 @@ public class StudentHome extends javax.swing.JFrame {
 
         lHelloWorld.setText("jLabel22");
 
+        jLabel22.setIcon(scaledIcon);
+        jLabel22.setText("jLabel22");
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -585,16 +594,21 @@ public class StudentHome extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(sidePanelLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(lHelloWorld)))
+                        .addGap(81, 81, 81)
+                        .addComponent(lHelloWorld))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addContainerGap()
                 .addComponent(lHelloWorld)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(resultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1878,6 +1892,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
