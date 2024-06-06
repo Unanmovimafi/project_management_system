@@ -1895,6 +1895,25 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         }
                     }
                 } else {
+                    if (record[11].equals("NA")) {
+                        lStudentPresentationDate.setText("NA");
+                        lPresentationTime.setText("NA");
+                        lStudentPresentationStatus.setText("Student Haven't book Presentation");
+
+                    } else if (record[11].equals("PENDING")) {
+                        lStudentPresentationDate.setText(record[9]);
+                        lPresentationTime.setText(record[10]);
+                        lStudentPresentationStatus.setText("Waiting Approval");
+                    } else if (record[11].equals("ACCEPT")) {
+                        lStudentPresentationDate.setText(record[9]);
+                        lPresentationTime.setText(record[10]);
+                        lStudentPresentationStatus.setText("Second Marker accept the Presentation");
+                    } else if (record[11].equals("REJECT")) {
+                        lStudentPresentationDate.setText(record[9]);
+                        lPresentationTime.setText(record[10]);
+                        lStudentPresentationStatus.setText("Waiting the Student to re-select the presentation date and time.");
+                    }
+
                     bAcceptPresentation.setEnabled(false);
                     bRejectPresentation.setEnabled(false);
                 }

@@ -1,0 +1,8 @@
+UnderBodyWash	1	5
+BugRemover	1	5
+Pre-Soak	2	5
+HighPressureWash	2	5
+LowPressureWax	2	5
+SpotFreeRinse	2	5
+TireShineFoam	3	5
+AirDry	3	5
