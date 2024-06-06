@@ -282,6 +282,18 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             Description.setText(record[3]);
                             bAcceptPresentation.setEnabled(false);
                             bRejectPresentation.setEnabled(false);
+                            
+                            lStudentID.setText("");
+                            lStudentName.setText("");
+                            lSubmittedFile.setText("");
+                            feedbackTextfield.setEnabled(false);
+                            markTextfield.setEnabled(false);
+                            tfSecondFB.setEnabled(false);
+                            tfSecondMark.setEnabled(false);
+                            downloadButton.setEnabled(false);
+                            bAcceptPresentation.setEnabled(false);
+                            bRejectPresentation.setEnabled(false);
+                            gradeButton.setEnabled(false);
                         }
                     });
                     pSupervisorAssessment.add(jPanel1);
@@ -348,7 +360,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         public void mouseReleased(java.awt.event.MouseEvent evt) {
                             // TODO add your handling code here:
                             assessmentRecord = record;
-
                             refreshStudentListTable(record[0]);
                             pStudentSubmittedAssessment.setVisible(true);
                             pReportsMarking.setVisible(false);
@@ -358,6 +369,19 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
                             ModuleLabel1.setText(record[1]);
                             Description.setText(record[3]);
+                            
+                            
+                            lStudentID.setText("");
+                            lStudentName.setText("");
+                            lSubmittedFile.setText("");
+                            feedbackTextfield.setEnabled(false);
+                            markTextfield.setEnabled(false);
+                            tfSecondFB.setEnabled(false);
+                            tfSecondMark.setEnabled(false);
+                            downloadButton.setEnabled(false);
+                            bAcceptPresentation.setEnabled(false);
+                            bRejectPresentation.setEnabled(false);
+                            gradeButton.setEnabled(false);
                         }
                     });
                     pSecondMarkerAssessment.add(jPanel1);
@@ -885,6 +909,11 @@ public class LecturerHomePage extends javax.swing.JFrame {
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Feedback:");
@@ -1789,6 +1818,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selectionID = studentTable.getModel().getValueAt(studentTable.getSelectedRow(), 1).toString();
         String line;
+
+        gradeButton.setEnabled(true);
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
@@ -1815,28 +1846,26 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         break;
                     }
                 }
-                
-                System.out.println(assessmentRecord[6]);
-                System.out.println(ID);
-                
+                lStudentID.setText(record[1]);
+                lStudentName.setText(studentName);
+                lSubmittedFile.setText(record[2]);
+                feedbackTextfield.setText(record[6]);
+                markTextfield.setText(record[5]);
+
+                tfSecondFB.setText(record[8]);
+                tfSecondMark.setText(record[7]);
+
+                assessmentStudentRecord = record;
+
+                if (record[2].equals("NA")) {
+                    downloadButton.setEnabled(false);
+                } else {
+                    downloadButton.setEnabled(true);
+                    destFile = record[2];
+                }
+
                 if (assessmentRecord[6].equals(ID)) {
                     if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])) {
-                        lStudentID.setText(record[1]);
-                        lStudentName.setText(studentName);
-                        lSubmittedFile.setText(record[2]);
-                        feedbackTextfield.setText(record[6]);
-                        markTextfield.setText(record[5]);
-
-                        tfSecondFB.setText(record[8]);
-                        tfSecondMark.setText(record[7]);
-
-                        assessmentStudentRecord = record;
-
-                        if (record[2].equals("NA")) {
-                            downloadButton.setEnabled(false);
-                        } else {
-                            destFile = record[2];
-                        }
 
                         if (record[11].equals("NA")) {
                             lStudentPresentationDate.setText("NA");
@@ -1854,7 +1883,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         } else if (record[11].equals("ACCEPT")) {
                             lStudentPresentationDate.setText(record[9]);
                             lPresentationTime.setText(record[10]);
-                            lStudentPresentationStatus.setText("You jave accept the Presentation");
+                            lStudentPresentationStatus.setText("Second Marker accept the Presentation");
                             bAcceptPresentation.setEnabled(false);
                             bRejectPresentation.setEnabled(false);
                         } else if (record[11].equals("REJECT")) {
@@ -1866,7 +1895,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
                         }
                     }
                 } else {
-                    System.out.println("1213");
                     bAcceptPresentation.setEnabled(false);
                     bRejectPresentation.setEnabled(false);
                 }
@@ -2056,6 +2084,16 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private void tfRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRoleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfRoleActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        pReportsMarking.setVisible(true);
+        
+        pSupervisee.setVisible(false);
+        pHome.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(false);
+        pProfile.setVisible(false);
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
