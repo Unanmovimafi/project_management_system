@@ -25,7 +25,86 @@ public class AdminHomePage extends javax.swing.JFrame {
     ImageIcon icon = new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png");
     private Image scaledLogo = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
     ImageIcon scaledIcon = new ImageIcon(scaledLogo);
+    
+    private void ImportLecCSV(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        if (file != null){
+            String filePath = file.getAbsolutePath();
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line2;
 
+                while ((line2 = br.readLine()) != null){
+                    String[] values = line2.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+                    String newID = getLecNewID();
+                    try {
+                    StringBuilder product = new StringBuilder();
+                    String password = newID + "@" + values[5];
+                    
+                    values[9] = values[9].replaceAll("^\"|\"$", "");
+                    
+                    //Write the information to the text file
+                    product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt", true));
+                    writer.write(product + "\n");
+                    writer.close();
+                    } 
+                     catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Successfully Import!");
+            }
+            catch (Exception e) {
+                e.getMessage();
+                JOptionPane.showMessageDialog(null, "Invalid File or Format Wrong in CSV File!");
+            }
+        }
+        refreshLecturerTable("","");
+    }
+
+    private void ImportStuCSV(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        if (file != null){
+            String filePath = file.getAbsolutePath();
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line2;
+
+                while ((line2 = br.readLine()) != null){
+                    String[] values = line2.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+                    String newID = getStuNewID();
+                    try {
+                    StringBuilder product = new StringBuilder();
+                    String password = newID + "@" + values[5];
+                    
+                    values[9] = values[9].replaceAll("^\"|\"$", "");
+                    
+                    //Write the information to the text file
+                    product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
+                    writer.write(product + "\n");
+                    writer.close();
+                    }
+                    
+                     catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Successfully Import!");
+            }
+            catch (Exception e) {
+                e.getMessage();
+                JOptionPane.showMessageDialog(null, "Invalid File or Format Wrong in CSV File!");
+            }
+        }
+        refreshStudentTable("","","");
+        
+        
+        
+    }
     public void refreshLecturerTable(String IDOfLecturer, String nameOfLecturer) {
         DefaultTableModel model = (DefaultTableModel)tLecturerList.getModel();
         model.setRowCount(0);
@@ -287,9 +366,19 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel1.setText("Admin Dashboard");
 
-        jButton3.setText("jButton3");
+        jButton3.setText("IMPORT LECTURER CSV");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("jButton4");
+        jButton4.setText("ADD LECTURER");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -312,9 +401,19 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addContainerGap(109, Short.MAX_VALUE))
         );
 
-        jButton5.setText("jButton5");
+        jButton5.setText("IMPORT STUDENT CSV");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("jButton6");
+        jButton6.setText("ADD STUDENT");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -992,86 +1091,17 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void bImportLecturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bImportLecturerActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File file=chooser.getSelectedFile();
-        if (file != null){
-            String filePath = file.getAbsolutePath();
-            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                String line2;
-
-                while ((line2 = br.readLine()) != null){
-                    String[] values = line2.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-                    String newID = getLecNewID();
-                    try {
-                    StringBuilder product = new StringBuilder();
-                    String password = newID + "@" + values[5];
-                    
-                    values[9] = values[9].replaceAll("^\"|\"$", "");
-                    
-                    //Write the information to the text file
-                    product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt", true));
-                    writer.write(product + "\n");
-                    writer.close();
-                    } 
-                     catch (Exception e) {
-                        System.err.println(e.getMessage());
-                    }
-                }
-                JOptionPane.showMessageDialog(null, "Successfully Import!");
-            }
-            catch (Exception e) {
-                e.getMessage();
-                JOptionPane.showMessageDialog(null, "Invalid File or Format Wrong in CSV File!");
-            }
-        }
-        refreshLecturerTable("","");
-        
+        ImportLecCSV();
     }//GEN-LAST:event_bImportLecturerActionPerformed
 
     private void bImportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bImportStudentActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File file=chooser.getSelectedFile();
-        if (file != null){
-            String filePath = file.getAbsolutePath();
-            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                String line2;
-
-                while ((line2 = br.readLine()) != null){
-                    String[] values = line2.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-                    String newID = getStuNewID();
-                    try {
-                    StringBuilder product = new StringBuilder();
-                    String password = newID + "@" + values[5];
-                    
-                    values[9] = values[9].replaceAll("^\"|\"$", "");
-                    
-                    //Write the information to the text file
-                    product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
-                    writer.write(product + "\n");
-                    writer.close();
-                    }
-                    
-                     catch (Exception e) {
-                        System.err.println(e.getMessage());
-                    }
-                }
-                JOptionPane.showMessageDialog(null, "Successfully Import!");
-            }
-            catch (Exception e) {
-                e.getMessage();
-                JOptionPane.showMessageDialog(null, "Invalid File or Format Wrong in CSV File!");
-            }
-        }
-        refreshStudentTable("","","");
+        ImportStuCSV();
     }//GEN-LAST:event_bImportStudentActionPerformed
 
     private void adminLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLogoutBtnActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Logged Out Successfully!");
         this.dispose();
         LoginPage lp = new LoginPage();
 
@@ -1081,35 +1111,6 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void btnExportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportStudentActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.showOpenDialog(null);
-        File file = chooser.getSelectedFile();
-        String path = file.getAbsolutePath() + "//Report.csv";
-
-        try {
-            TableModel model = tStudentList.getModel();
-            FileWriter csv = new FileWriter(new File(path));
-
-            // Write column names
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                csv.write(model.getColumnName(i) + ",");
-            }
-            csv.write("\n");
-
-            // Write row data
-            for (int i = 0; i < model.getRowCount(); i++) {
-                for (int j = 0; j < model.getColumnCount(); j++) {
-                    csv.write(model.getValueAt(i, j).toString() + ",");
-                }
-                csv.write("\n");
-            }
-
-            csv.close();
-        } catch (Exception e) {
-            e.getMessage();
-        }
     }//GEN-LAST:event_btnExportStudentActionPerformed
 
     private void btnExportLecturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportLecturerActionPerformed
@@ -1144,6 +1145,31 @@ public class AdminHomePage extends javax.swing.JFrame {
             e.getMessage();
         }
     }//GEN-LAST:event_btnExportLecturerActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        ImportStuCSV();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ImportLecCSV();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        AddLecturerDetails addLec = new AddLecturerDetails();
+        addLec.setAdminPageInstance(this);
+        
+        addLec.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        AddStudentDetails addStu = new AddStudentDetails();
+        addStu.setAdminPageInstance(this);
+        addStu.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

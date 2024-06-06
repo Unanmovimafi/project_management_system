@@ -1809,6 +1809,7 @@ public class StudentHome extends javax.swing.JFrame {
 
     private void studentLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentLogoutBtnActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Logged Out Successfully!");
         this.dispose();
         LoginPage lp = new LoginPage();
 
