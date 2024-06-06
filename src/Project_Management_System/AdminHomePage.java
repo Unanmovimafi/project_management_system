@@ -877,7 +877,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         AddLecturerDetails addLec = new AddLecturerDetails();
-        
+        addLec.setAdminPageInstance(this);
         
         addLec.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -922,8 +922,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void AddStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStudentBtnActionPerformed
         // TODO add your handling code here:
         AddStudentDetails addStu = new AddStudentDetails();
-        
-        
+        addStu.setAdminPageInstance(this);
         addStu.setVisible(true);
         
     }//GEN-LAST:event_AddStudentBtnActionPerformed

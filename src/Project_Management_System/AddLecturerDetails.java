@@ -17,6 +17,11 @@ public class AddLecturerDetails extends javax.swing.JFrame {
     private AdminHomePage adminHomePage;
     
     
+    public void setAdminPageInstance(AdminHomePage adminhomePage) {
+        this.adminHomePage = adminhomePage;
+    }
+    
+    
     private void getNewID(){
         int maximumNumber = 0;
         String line;

@@ -619,14 +619,13 @@ public class AddAssessment extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tAddedStudent.getModel();
         int[] rows = tAddedStudent.getSelectedRows();
-        if (rows.length > 0){
+        if (rows.length > 0) {
             for (int i = 0; i < rows.length; i++) {
                 model.removeRow(rows[i] - i);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No student be selected to removed!");
         }
-        else{
-                JOptionPane.showMessageDialog(null, "No student be selected to removed!");
-                }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
