@@ -79,6 +79,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
         this.ID = ID;
         countAssessments();
         countSupervisees();
+        countUngradedReport();
         setHello();
     }
 
@@ -149,10 +150,8 @@ public class LecturerHomePage extends javax.swing.JFrame {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         String[] record = line.split("\t");
-                        if (record.length >= 6) {
-                            if (record[5].equals(ID) && record[0].equals(record2[0]) && record2[5].equals("NA")) {
-                                UngradedReport++;
-                            }
+                        if (record[5].equals(ID) && record[0].equals(record2[0]) && record2[5].equals("NA")) {
+                            UngradedReport++;
                         } else if (record[6].equals(ID) && record[0].equals(record2[0]) && record2[7].equals("NA")) {
                             UngradedReport++;
                         }
@@ -289,7 +288,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             bRejectPresentation.setEnabled(false);
                             
                             lStudentID.setText("");
-                            lStudentName.setText("");
                             lSubmittedFile.setText("");
                             feedbackTextfield.setEnabled(false);
                             markTextfield.setEnabled(false);
@@ -377,7 +375,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             
                             
                             lStudentID.setText("");
-                            lStudentName.setText("");
                             lSubmittedFile.setText("");
                             feedbackTextfield.setEnabled(false);
                             markTextfield.setEnabled(false);
@@ -454,7 +451,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 if(AssType.equals("ALL")){
                     AssType = "";
                 }
-                if (assessmentSupervisorID.equals(ID) && studentID.toLowerCase().startsWith(StuID) && intake.toLowerCase().startsWith(IntakeCode) && assessmentType.toLowerCase().startsWith(AssType)) {
+                if (assessmentSupervisorID.equals(ID) && studentID.startsWith(StuID.toUpperCase()) && intake.startsWith(IntakeCode.toUpperCase()) && assessmentType.startsWith(AssType.toUpperCase())) {
                     model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
                 }
             }
@@ -535,7 +532,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         searchLabel = new javax.swing.JLabel();
         searchTextfield = new javax.swing.JTextField();
         lStudentID = new javax.swing.JLabel();
-        lStudentName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lStudentPresentationDate = new javax.swing.JLabel();
         lPresentationTime = new javax.swing.JLabel();
@@ -1080,9 +1076,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         lStudentID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lStudentID.setText("Student ID");
 
-        lStudentName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lStudentName.setText("Student Name");
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lStudentPresentationDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1200,9 +1193,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                             .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                                 .addGap(186, 186, 186)
-                                .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lStudentID)
-                                    .addComponent(lStudentName))))
+                                .addComponent(lStudentID)))
                         .addGap(69, 69, 69)
                         .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
@@ -1226,9 +1217,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(lStudentName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(56, 56, 56)
                         .addComponent(lStudentID)))
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
@@ -1819,29 +1808,27 @@ public class LecturerHomePage extends javax.swing.JFrame {
                 count = count + 1;
                 String[] record = line.split("\t");
                 String assstudentLine;
-                String studentName = "";
                 BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
                 while ((assstudentLine = assessmentReader.readLine()) != null) {
                     String[] assstudentRecord = assstudentLine.split("\t");
-                    if (assstudentRecord[0].equals(record[0])) {
-                        if (assstudentRecord[5].equals(ID)) {
-                            feedbackTextfield.setEnabled(true);
-                            markTextfield.setEnabled(true);
-                            tfSecondFB.setEnabled(false);
-                            tfSecondMark.setEnabled(false);
-
-                        } else if (assstudentRecord[6].equals(ID)) {
-                            feedbackTextfield.setEnabled(false);
-                            markTextfield.setEnabled(false);
-                            tfSecondFB.setEnabled(true);
-                            tfSecondMark.setEnabled(true);
-                        }
+                    if (assstudentRecord[0].equals(record[0]) && assstudentRecord[5].equals(ID) && assessmentRecord[0].equals(assstudentRecord[0])) {
+                        feedbackTextfield.setEnabled(true);
+                        markTextfield.setEnabled(true);
+                        tfSecondFB.setEnabled(false);
+                        tfSecondMark.setEnabled(false);
+                        break;
+                    } else if (assstudentRecord[0].equals(record[0]) && assstudentRecord[6].equals(ID)&& assessmentRecord[0].equals(assstudentRecord[0])) {
+                        feedbackTextfield.setEnabled(false);
+                        markTextfield.setEnabled(false);
+                        tfSecondFB.setEnabled(true);
+                        tfSecondMark.setEnabled(true);
                         break;
                     }
                 }
                 lStudentID.setText(record[1]);
-                lStudentName.setText(studentName);
                 lSubmittedFile.setText(record[2]);
+                SubmissionDateLabel.setText(record[3]);
+                SubmissionTimeLabel.setText(record[4]);
                 feedbackTextfield.setText(record[6]);
                 markTextfield.setText(record[5]);
 
@@ -1910,7 +1897,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
                     bAcceptPresentation.setEnabled(false);
                     bRejectPresentation.setEnabled(false);
                 }
-                break;
             }
 
         } catch (Exception e) {
@@ -2231,7 +2217,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel lHelloWorld;
     private javax.swing.JLabel lPresentationTime;
     private javax.swing.JLabel lStudentID;
-    private javax.swing.JLabel lStudentName;
     private javax.swing.JLabel lStudentPresentationDate;
     private javax.swing.JLabel lStudentPresentationStatus;
     private javax.swing.JLabel lSubmittedFile;

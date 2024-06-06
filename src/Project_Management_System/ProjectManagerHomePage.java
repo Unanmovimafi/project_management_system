@@ -45,7 +45,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 String[] record = line.split("\t");
                 String studentID = record[1];
                 String studentLine;
+                String assessLine;
                 String studentName = "";
+                String assessName = "";
                 String status = "";
 
                 if (record[2].equals("NA")) {
@@ -62,9 +64,18 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         break;
                     }
                 }
+                
+                BufferedReader assessReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+                while ((assessLine = assessReader.readLine()) != null) {
+                    String[] assessRecord = assessLine.split("\t");
+                    if (assessRecord[0].equals(record[0])) {
+                        assessName = assessRecord[1];
+                        break;
+                    }
+                }
 
-                if (record[0].startsWith(AssessID) && record[1].startsWith(StuID)) {
-                    model.addRow(new Object[]{record[0], record[1], studentID, studentName, status});
+                if (record[0].startsWith(AssessID.toUpperCase()) && record[1].startsWith(StuID.toUpperCase())) {
+                    model.addRow(new Object[]{record[0], assessName, studentID, studentName, status});
                 }
 
             }
@@ -144,6 +155,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         this.ID = ID;
         countAssessments();
         countSupervisees();
+        countUngradedReport();
         setHello();
     }
 
@@ -214,10 +226,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         String[] record = line.split("\t");
-                        if (record.length >= 6) {
-                            if (record[5].equals(ID) && record[0].equals(record2[0]) && record2[5].equals("NA")) {
-                                UngradedReport++;
-                            }
+                        if (record[5].equals(ID) && record[0].equals(record2[0]) && record2[5].equals("NA")) {
+                            UngradedReport++;
                         } else if (record[6].equals(ID) && record[0].equals(record2[0]) && record2[7].equals("NA")) {
                             UngradedReport++;
                         }
@@ -235,6 +245,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         jLabel14.setText(Integer.toString(UngradedReport));
 
     }
+
+
 
     
     
@@ -357,7 +369,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             bRejectPresentation.setEnabled(false);
                             
                             lStudentID.setText("");
-                            lStudentName.setText("");
                             lSubmittedFile.setText("");
                             feedbackTextfield.setEnabled(false);
                             markTextfield.setEnabled(false);
@@ -448,7 +459,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             
                             
                             lStudentID.setText("");
-                            lStudentName.setText("");
                             lSubmittedFile.setText("");
                             feedbackTextfield.setEnabled(false);
                             markTextfield.setEnabled(false);
@@ -525,7 +535,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 if(AssType.equals("ALL")){
                     AssType = "";
                 }
-                if (assessmentSupervisorID.equals(ID) && studentID.toLowerCase().startsWith(StuID) && intake.toLowerCase().startsWith(IntakeCode) && assessmentType.toLowerCase().startsWith(AssType)) {
+                if (assessmentSupervisorID.equals(ID) && studentID.toLowerCase().startsWith(StuID.toLowerCase()) && intake.toLowerCase().startsWith(IntakeCode.toLowerCase()) && assessmentType.toLowerCase().startsWith(AssType.toLowerCase())) {
                     model.addRow(new Object[]{intake, studentID, studentName, assessmentID, assessmentType, assessmentName});
                 }
             }
@@ -628,7 +638,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         searchLabel = new javax.swing.JLabel();
         searchTextfield = new javax.swing.JTextField();
         lStudentID = new javax.swing.JLabel();
-        lStudentName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lStudentPresentationDate = new javax.swing.JLabel();
         lPresentationTime = new javax.swing.JLabel();
@@ -1379,9 +1388,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         lStudentID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lStudentID.setText("Student ID");
 
-        lStudentName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lStudentName.setText("Student Name");
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lStudentPresentationDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1490,9 +1496,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(lStudentName))
-                    .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                         .addGap(194, 194, 194)
                         .addComponent(lStudentID)))
                 .addGap(65, 65, 65)
@@ -1502,7 +1505,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(studentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(461, 779, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1517,9 +1520,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
                         .addComponent(ModuleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(lStudentName)
-                        .addGap(18, 18, 18)
+                        .addGap(62, 62, 62)
                         .addComponent(lStudentID)
                         .addGap(17, 17, 17))
                     .addGroup(pStudentSubmittedAssessmentLayout.createSequentialGroup()
@@ -1532,7 +1533,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGroup(pStudentSubmittedAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pHome.setBackground(new java.awt.Color(252, 247, 204));
@@ -2161,29 +2162,27 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 count = count + 1;
                 String[] record = line.split("\t");
                 String assstudentLine;
-                String studentName = "";
                 BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
                 while ((assstudentLine = assessmentReader.readLine()) != null) {
                     String[] assstudentRecord = assstudentLine.split("\t");
-                    if (assstudentRecord[0].equals(record[0])) {
-                        if (assstudentRecord[5].equals(ID)) {
-                            feedbackTextfield.setEnabled(true);
-                            markTextfield.setEnabled(true);
-                            tfSecondFB.setEnabled(false);
-                            tfSecondMark.setEnabled(false);
-
-                        } else if (assstudentRecord[6].equals(ID)) {
-                            feedbackTextfield.setEnabled(false);
-                            markTextfield.setEnabled(false);
-                            tfSecondFB.setEnabled(true);
-                            tfSecondMark.setEnabled(true);
-                        }
+                    if (assstudentRecord[0].equals(record[0]) && assstudentRecord[5].equals(ID) && assessmentRecord[0].equals(assstudentRecord[0])) {
+                        feedbackTextfield.setEnabled(true);
+                        markTextfield.setEnabled(true);
+                        tfSecondFB.setEnabled(false);
+                        tfSecondMark.setEnabled(false);
+                        break;
+                    } else if (assstudentRecord[0].equals(record[0]) && assstudentRecord[6].equals(ID)&& assessmentRecord[0].equals(assstudentRecord[0])) {
+                        feedbackTextfield.setEnabled(false);
+                        markTextfield.setEnabled(false);
+                        tfSecondFB.setEnabled(true);
+                        tfSecondMark.setEnabled(true);
                         break;
                     }
                 }
                 lStudentID.setText(record[1]);
-                lStudentName.setText(studentName);
                 lSubmittedFile.setText(record[2]);
+                SubmissionDateLabel.setText(record[3]);
+                SubmissionTimeLabel.setText(record[4]);
                 feedbackTextfield.setText(record[6]);
                 markTextfield.setText(record[5]);
 
@@ -2252,7 +2251,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     bAcceptPresentation.setEnabled(false);
                     bRejectPresentation.setEnabled(false);
                 }
-                break;
             }
 
         } catch (Exception e) {
@@ -2683,7 +2681,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel lHelloWorld;
     private javax.swing.JLabel lPresentationTime;
     private javax.swing.JLabel lStudentID;
-    private javax.swing.JLabel lStudentName;
     private javax.swing.JLabel lStudentPresentationDate;
     private javax.swing.JLabel lStudentPresentationStatus;
     private javax.swing.JLabel lSubmittedFile;
