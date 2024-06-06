@@ -32,6 +32,46 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private String destFile;
     private int count = -1;
     
+    public void refreshStuStatusTable(String AssessID, String StuID) {
+        DefaultTableModel model = (DefaultTableModel)tStatusReport.getModel();
+        model.setRowCount(0);
+        String line;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                String studentID = record[1];
+                String studentLine;
+                String studentName = "";
+                String status = "";
+
+                if (record[2].equals("NA")) {
+                    status = "Not Submitted";
+                } else {
+                    status = "Submitted";
+                }
+
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                while ((studentLine = studentReader.readLine()) != null) {
+                    String[] studentRecord = studentLine.split("\t");
+                    if (studentRecord[0].equals(studentID)) {
+                        studentName = studentRecord[1];
+                        break;
+                    }
+                }
+
+                if (record[0].startsWith(AssessID) && record[1].startsWith(StuID)) {
+                    model.addRow(new Object[]{record[0], record[1], studentID, studentName, status});
+                }
+
+            }
+            br.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
     public void refreshAssessTable(String ID, String name) {
         DefaultTableModel model = (DefaultTableModel)tAssessment.getModel();
         model.setRowCount(0);
@@ -306,8 +346,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             pSupervisee.setVisible(false);
                             pHome.setVisible(false);
                             pProfile.setVisible(false);
-                            
-        pModule.setVisible(false);
+                            jPanel3.setVisible(false);
+
+                            pModule.setVisible(false);
                             ModuleLabel1.setText(record[1]);
                             Description.setText(record[3]);
                             bAcceptPresentation.setEnabled(false);
@@ -396,8 +437,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             pSupervisee.setVisible(false);
                             pHome.setVisible(false);
                             pProfile.setVisible(false);
-                            
-        pModule.setVisible(false);
+
+                            jPanel3.setVisible(false);
+                            pModule.setVisible(false);
 
                             ModuleLabel1.setText(record[1]);
                             Description.setText(record[3]);
@@ -500,7 +542,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
         pProfile.setVisible(false);
-        
+        jPanel3.setVisible(false);
         pModule.setVisible(false);
     }
 
@@ -514,6 +556,13 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tStatusReport = new javax.swing.JTable();
+        tfAssessmentID = new javax.swing.JTextField();
+        tfStudentID = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         pModule = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tAssessment = new javax.swing.JTable();
@@ -643,9 +692,83 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         lHelloWorld = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        bViewStatus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1500, 780));
+
+        tStatusReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Assessment ID", "Assessment Name", "Student ID", "Student Name", "Report Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tStatusReport);
+
+        jButton8.setText("APPLY");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("CLEAR");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(tfAssessmentID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117)
+                        .addComponent(tfStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(201, 201, 201)
+                        .addComponent(jButton8)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton9)))
+                .addContainerGap(967, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfAssessmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
+        );
 
         pModule.setBackground(new java.awt.Color(255, 255, 204));
         pModule.setForeground(new java.awt.Color(255, 255, 204));
@@ -806,9 +929,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pReportsMarkingLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
+                        .addGap(244, 244, 244)
                         .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addContainerGap(968, Short.MAX_VALUE))
         );
         pReportsMarkingLayout.setVerticalGroup(
             pReportsMarkingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -819,7 +942,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGroup(pReportsMarkingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         pSupervisee.setBackground(new java.awt.Color(255, 255, 255));
@@ -1802,6 +1925,10 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addComponent(pModule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 646, Short.MAX_VALUE)))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1820,6 +1947,10 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addComponent(pProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pModule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 50, 79));
@@ -1885,6 +2016,15 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             }
         });
 
+        bViewStatus.setBackground(new java.awt.Color(255, 255, 206));
+        bViewStatus.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        bViewStatus.setText("VIEW STATUS");
+        bViewStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bViewStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1899,7 +2039,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             .addComponent(SuperviseeSideButton, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(lHelloWorld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lHelloWorld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bViewStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1924,8 +2065,10 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(bViewStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(lecLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
         );
@@ -1964,7 +2107,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pReportsMarking.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
         pProfile.setVisible(false);
-        
+        jPanel3.setVisible(false);
         pModule.setVisible(false);
     }//GEN-LAST:event_SuperviseeSideButtonActionPerformed
 
@@ -1976,9 +2119,10 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
         pReportsMarking.setVisible(false);
-        
+
         pProfile.setVisible(false);
-        
+
+        jPanel3.setVisible(false);
         pModule.setVisible(false);
     }//GEN-LAST:event_HomeSideButtonActionPerformed
 
@@ -2011,9 +2155,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
-        
+
         pProfile.setVisible(false);
-        
+        jPanel3.setVisible(false);
         pModule.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2252,6 +2396,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pReportsMarking.setVisible(false);
         pSupervisee.setVisible(false);
         pModule.setVisible(false);
+        jPanel3.setVisible(false);
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -2319,7 +2464,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             pStudentSubmittedAssessment.setVisible(false);
             pReportsMarking.setVisible(false);
             pSupervisee.setVisible(false);
-        pModule.setVisible(false);
+            pModule.setVisible(false);
+            jPanel3.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Password Wrong!");
         }
@@ -2337,7 +2483,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pHome.setVisible(false);
         pStudentSubmittedAssessment.setVisible(false);
         pProfile.setVisible(false);
-        
+        jPanel3.setVisible(false);
         pModule.setVisible(false);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -2347,7 +2493,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         
         pModule.setVisible(true);
         
-        
+        jPanel3.setVisible(false);
         pReportsMarking.setVisible(false);
         pSupervisee.setVisible(false);
         pHome.setVisible(false);
@@ -2396,6 +2542,31 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             ea.setVisible(true);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void bViewStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bViewStatusActionPerformed
+        // TODO add your handling code here:
+        refreshStuStatusTable("","");
+        jPanel3.setVisible(true);
+        
+        pModule.setVisible(false);
+        pReportsMarking.setVisible(false);
+        pSupervisee.setVisible(false);
+        pHome.setVisible(false);
+        pStudentSubmittedAssessment.setVisible(false);
+        pProfile.setVisible(false);
+    }//GEN-LAST:event_bViewStatusActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        refreshStuStatusTable(tfAssessmentID.getText(), tfStudentID.getText());
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        tfAssessmentID.setText("");
+        tfStudentID.setText("");
+        refreshStuStatusTable("", "");
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2460,6 +2631,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JButton bLecturerApply;
     private javax.swing.JButton bLecturerClear;
     private javax.swing.JButton bRejectPresentation;
+    private javax.swing.JButton bViewStatus;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> cbAssType;
     private javax.swing.JButton downloadButton;
@@ -2476,6 +2648,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2517,6 +2691,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -2526,6 +2701,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lHelloWorld;
     private javax.swing.JLabel lPresentationTime;
     private javax.swing.JLabel lStudentID;
@@ -2554,10 +2730,12 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JTable studentTable;
     private javax.swing.JTable tAssessment;
     private javax.swing.JTable tLSuperviseeList;
+    private javax.swing.JTable tStatusReport;
     private javax.swing.JScrollPane tSuperviseeScrollPane2;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfAssessID;
     private javax.swing.JTextField tfAssessName;
+    private javax.swing.JTextField tfAssessmentID;
     private javax.swing.JTextField tfConfirmPassword;
     private javax.swing.JTextField tfContactNumber;
     private javax.swing.JTextField tfDoB;
@@ -2571,6 +2749,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField tfRole;
     private javax.swing.JTextField tfSecondFB;
     private javax.swing.JTextField tfSecondMark;
+    private javax.swing.JTextField tfStudentID;
     private javax.swing.JTextField tfSupStuID;
     private javax.swing.JTextField tfSupStuIntakeCode;
     // End of variables declaration//GEN-END:variables
