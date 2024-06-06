@@ -1174,7 +1174,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     .addComponent(DescriptionTitle)
                     .addComponent(Description))
                 .addGap(13, 13, 13)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SubmissionDateLabel)
                     .addComponent(SubmissionTimeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
