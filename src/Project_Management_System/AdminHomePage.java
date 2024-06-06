@@ -40,7 +40,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                     String newID = getLecNewID();
                     try {
                     StringBuilder product = new StringBuilder();
-                    String password = newID + "@" + values[5];
+                    String password = newID + "@12345";
                     
                     values[9] = values[9].replaceAll("^\"|\"$", "");
                     
@@ -78,7 +78,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                     String newID = getStuNewID();
                     try {
                     StringBuilder product = new StringBuilder();
-                    String password = newID + "@" + values[5];
+                    String password = newID +  "@12345";
                     
                     values[9] = values[9].replaceAll("^\"|\"$", "");
                     
