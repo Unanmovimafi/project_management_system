@@ -65,11 +65,11 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tfPassword" min="-2" pref="491" max="-2" attributes="0"/>
                                       <Component id="tfContactNumber" min="-2" pref="491" max="-2" attributes="0"/>
                                       <Component id="tfEmail" alignment="0" min="-2" pref="491" max="-2" attributes="0"/>
                                       <Component id="tfAddress" alignment="0" min="-2" pref="491" max="-2" attributes="0"/>
                                       <Component id="dcDoB" alignment="0" min="-2" pref="491" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
@@ -165,9 +165,9 @@
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -267,8 +267,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfContactNumber">
         </Component>
-        <Component class="javax.swing.JTextField" name="tfPassword">
-        </Component>
         <Component class="javax.swing.JTextField" name="tfEmail">
         </Component>
         <Component class="javax.swing.JTextField" name="tfAddress">
@@ -337,6 +335,11 @@
         <Component class="com.toedter.calendar.JDateChooser" name="dcDoB">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel12">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID + &quot;@12345&quot;"/>
           </Properties>
         </Component>
       </SubComponents>

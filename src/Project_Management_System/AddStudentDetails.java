@@ -76,7 +76,6 @@ public class AddStudentDetails extends javax.swing.JFrame {
         tfID = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
         tfContactNumber = new javax.swing.JTextField();
-        tfPassword = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
         tfAddress = new javax.swing.JTextField();
         rbMale = new javax.swing.JRadioButton();
@@ -89,6 +88,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         tfIC = new javax.swing.JTextField();
         dcDoB = new com.toedter.calendar.JDateChooser();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -160,6 +160,8 @@ public class AddStudentDetails extends javax.swing.JFrame {
 
         dcDoB.setDateFormatString("dd/MM/yyyy");
 
+        jLabel12.setText("ID + \"@12345\"");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -170,12 +172,10 @@ public class AddStudentDetails extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,7 +208,10 @@ public class AddStudentDetails extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(83, 83, 83)))))
+                                .addGap(83, 83, 83))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addComponent(jLabel12)))))
                 .addContainerGap(163, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,8 +257,8 @@ public class AddStudentDetails extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -295,7 +298,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| sdf.format(dcDoB.getDate()).isEmpty()|| tfContactNumber.getText().isEmpty()|| tfPassword.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
+        if (tfName.getText().isEmpty() ||tfIC.getText().isEmpty() || tfNationality.getText().isEmpty()|| sdf.format(dcDoB.getDate()).isEmpty()|| tfContactNumber.getText().isEmpty()|| tfEmail.getText().isEmpty()|| tfAddress.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter all fields.");
         }
         
@@ -317,7 +320,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
             
             String dob = sdf.format(dcDoB.getDate());
             String contactNumber = tfContactNumber.getText();
-            String password = tfPassword.getText();
+            String password = newID + "@12345";
             String email = tfEmail.getText();
             String address = tfAddress.getText();
             StringBuilder product = new StringBuilder();
@@ -397,6 +400,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -416,6 +420,5 @@ public class AddStudentDetails extends javax.swing.JFrame {
     private javax.swing.JTextField tfIntakeCode;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfNationality;
-    private javax.swing.JTextField tfPassword;
     // End of variables declaration//GEN-END:variables
 }
