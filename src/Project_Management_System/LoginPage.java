@@ -206,7 +206,7 @@ public class LoginPage extends javax.swing.JFrame {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
-                if (record[0].equals(username) && record[8].equals(password)) {
+                if (record[0].equals(username) && record[8].equals(password)&& record[3].equals("LEC")) {
                     br.close();
                     this.dispose();
                     
@@ -215,8 +215,17 @@ public class LoginPage extends javax.swing.JFrame {
                     lhp.setID(username);
                     
                     lhp.setVisible(true);
-                    lhp.pack();
-                    lhp.setLocationRelativeTo(null);
+                    return;
+                }
+                else if (record[0].equals(username) && record[8].equals(password)&& record[3].equals("PM")) {
+                    br.close();
+                    this.dispose();
+                    
+                    ProjectManagerHomePage pmh = new ProjectManagerHomePage();
+                    
+                    pmh.setID(username);
+                    
+                    pmh.setVisible(true);
                     return;
                 }
             }
