@@ -24,11 +24,17 @@ import javax.swing.table.TableModel;
  */
 public class EditAssessment extends javax.swing.JFrame {
     
-    private EditAssessment addAssessment;
     int count = -1;
     private String selectedAssessID;
     
     private String[] Assessrecord;
+    
+    private ProjectManagerHomePage ProjectManagerHomePage;
+    
+    
+    public void setPMPageInstance(ProjectManagerHomePage PMhomePage) {
+        this.ProjectManagerHomePage = PMhomePage;
+    }
     
     public String[] getAssessRecord(int line_num) {
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
@@ -87,10 +93,6 @@ public class EditAssessment extends javax.swing.JFrame {
         }
         
         Assessrecord = getAssessRecord(count);
-        
-        
-        
-        
         //Get the value from text field
         
         tfID.setText(Assessrecord[0]);
@@ -99,14 +101,26 @@ public class EditAssessment extends javax.swing.JFrame {
         tfDescription.setText(Assessrecord[3]);
         dcDueDate.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(Assessrecord[4]));
         
+        tfSupervisor.setText(Assessrecord[5]);
+        tfSecondMarker.setText(Assessrecord[6]);
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] lineArray = line.split("\t");
+                if (Assessrecord[5].equals(lineArray[0])) {
+                    tfSupervisorName.setText(lineArray[1]);
+                }
+                
+                if (Assessrecord[6].equals(lineArray[0])) {
+                    tfSecondMarkerName.setText(lineArray[1]);
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
         
     }
-    
-    
-    
-    
-    
-    
     
     public void refreshSupervisorListTable(String IDOrNameOfLecturer) {
         DefaultTableModel model = (DefaultTableModel)tSupervisorList.getModel();
@@ -312,6 +326,8 @@ public class EditAssessment extends javax.swing.JFrame {
 
         cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INTERNSHIP", "INVESTIGATION REPORTS", "CP1", "CP2", "RMCP", "FYP" }));
 
+        dcDueDate.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -455,8 +471,9 @@ public class EditAssessment extends javax.swing.JFrame {
                 StringBuilder record = new StringBuilder();
                 //Write the information to the text file
                 record.append(newID + "\t" + name + "\t" + type + "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
+                
                 lines.set(count, record.toString());
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt"));
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);
                     writer.newLine();
@@ -468,6 +485,7 @@ public class EditAssessment extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Successfully Save!");
             this.dispose();
+            ProjectManagerHomePage.refreshAssessTable("","");
         }
     }//GEN-LAST:event_bSaveActionPerformed
 

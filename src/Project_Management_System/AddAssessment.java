@@ -23,7 +23,12 @@ import javax.swing.table.TableModel;
  */
 public class AddAssessment extends javax.swing.JFrame {
     
-    private AddAssessment addAssessment;
+    private ProjectManagerHomePage ProjectManagerHomePage;
+    
+    
+    public void setPMPageInstance(ProjectManagerHomePage PMhomePage) {
+        this.ProjectManagerHomePage = PMhomePage;
+    }
     
     public void refreshStudentTable(String IDNameInCoOfStudent) {
         DefaultTableModel model = (DefaultTableModel)tStudentList.getModel();
@@ -533,6 +538,7 @@ public class AddAssessment extends javax.swing.JFrame {
                 System.err.println(e.getMessage());
             }
 
+            ProjectManagerHomePage.refreshAssessTable("","");
             JOptionPane.showMessageDialog(null, "Successfully Added!");
             this.dispose();
         }
