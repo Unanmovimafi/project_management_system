@@ -553,7 +553,7 @@ public class AddAssessment extends javax.swing.JFrame {
                     //Write the information to the text file
                     record.append(newID + "\t" + tAddedStudent.getValueAt(row, 0) + "\t"
                             + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t"
-                            + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA");
+                            + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA");
                     writer.write(record + "\n");
                 }
                 writer.close();
