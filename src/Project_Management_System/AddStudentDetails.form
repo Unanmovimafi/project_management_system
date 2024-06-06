@@ -27,10 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -56,12 +53,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="95" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
@@ -74,39 +66,48 @@
                               <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="tfAddress" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tfEmail" min="-2" pref="497" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tfID" min="-2" pref="489" max="-2" attributes="0"/>
                                       <Component id="dcDoB" min="-2" pref="497" max="-2" attributes="0"/>
-                                      <Component id="tfID" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Component id="rbMale" min="-2" pref="98" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="rbFemale" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="tfName" max="32767" attributes="0"/>
-                                      <Component id="tfIC" max="32767" attributes="0"/>
-                                      <Component id="tfIntakeCode" max="32767" attributes="0"/>
-                                      <Component id="tfNationality" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfNationality" alignment="0" min="-2" pref="489" max="-2" attributes="0"/>
+                                      <Component id="tfIntakeCode" alignment="0" min="-2" pref="489" max="-2" attributes="0"/>
+                                      <Component id="tfIC" alignment="0" min="-2" pref="489" max="-2" attributes="0"/>
+                                      <Component id="tfName" alignment="0" min="-2" pref="489" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tfAddress" min="-2" pref="497" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="tfEmail" alignment="1" min="-2" pref="497" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="tfPassword" min="-2" pref="497" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tfPassword" alignment="0" min="-2" pref="497" max="-2" attributes="0"/>
-                              <Component id="tfContactNumber" min="-2" pref="497" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" pref="95" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tfContactNumber" min="-2" pref="497" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="127" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
