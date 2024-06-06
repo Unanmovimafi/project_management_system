@@ -4,10 +4,12 @@
  */
 package Project_Management_System;
 
+import java.awt.Image;
 import java.io.*;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +20,11 @@ import javax.swing.table.TableModel;
  * @author User
  */
 public class AdminHomePage extends javax.swing.JFrame {
+    
+    
+    ImageIcon icon = new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png");
+    private Image scaledLogo = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+    ImageIcon scaledIcon = new ImageIcon(scaledLogo);
 
     public void refreshLecturerTable(String IDOfLecturer, String nameOfLecturer) {
         DefaultTableModel model = (DefaultTableModel)tLecturerList.getModel();
@@ -70,17 +77,26 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
     }
     
-    private String getLecNewID(){
-        int count = 1;
+    private String getLecNewID() {
+        int maximumNumber = 0;
         String line;
         String newID;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+
             while ((line = bufferedReader.readLine()) != null) {
-                count = count + 1;
+                String[] lineArray = line.split("\t");
+                String numberOfID = lineArray[0].substring(2);
+                int currentNumber = Integer.parseInt(numberOfID);
+                if (currentNumber > maximumNumber) {
+                    //Get the maximum id in text file
+                    maximumNumber = currentNumber;
+                }
             }
+            //The maximum number plus one to be the id
+            maximumNumber = maximumNumber + 1;
             bufferedReader.close();
-            String newLecturerID = String.format("%05d", count);
+            String newLecturerID = String.format("%05d", maximumNumber);
             return newID = "LR" + newLecturerID;
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -89,17 +105,26 @@ public class AdminHomePage extends javax.swing.JFrame {
     }
     
     private String getStuNewID(){
-        int count = 1;
+        int maximumNumber = 0;
         String line;
         String newID;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+
             while ((line = bufferedReader.readLine()) != null) {
-                count = count + 1;
+                String[] lineArray = line.split("\t");
+                String numberOfID = lineArray[0].substring(2);
+                int currentNumber = Integer.parseInt(numberOfID);
+                if (currentNumber > maximumNumber) {
+                    //Get the maximum id in text file
+                    maximumNumber = currentNumber;
+                }
             }
+            //The maximum number plus one to be the id
+            maximumNumber = maximumNumber + 1;
             bufferedReader.close();
-            String newLecturerID = String.format("%05d", count);
-            return newID = "TP" + newLecturerID;
+            String newLecturerID = String.format("%05d", maximumNumber);
+            return newID = "LR" + newLecturerID;
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -130,6 +155,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         bLecturer = new javax.swing.JButton();
         bHome = new javax.swing.JButton();
         adminLogoutBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         pHome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -220,6 +246,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(scaledIcon);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -231,24 +259,25 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(adminLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(bHome, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1))
-                            .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bLecturer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bHome, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(39, 39, 39)
                 .addComponent(bLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(bStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(adminLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -1182,6 +1211,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
