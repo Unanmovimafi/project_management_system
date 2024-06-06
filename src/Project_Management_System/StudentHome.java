@@ -198,7 +198,7 @@ public class StudentHome extends javax.swing.JFrame {
                         submittedFile = record2[2];
                         isSubmittedFile = true;
                     }
-
+                    System.out.println("212");
                     if (record2[11].equals("PENDING")) {
                         dcBookPresentation.setEnabled(false);
                         tfBookPresentationTime.setEnabled(false);
@@ -335,6 +335,8 @@ public class StudentHome extends javax.swing.JFrame {
 
                                         moduleLabel.setText(record[1]);
                                         ModuleLabel1.setText(record[1]);
+                                        
+                                        bSubmitSubmission.setEnabled(true);
                                     }
                                 });
                                 pAssessment.add(jPanel1);
@@ -386,9 +388,10 @@ public class StudentHome extends javax.swing.JFrame {
                                         pSubmitAssessment.setVisible(false);
                                         pProfile.setVisible(false);
                                         pResult.setVisible(false);
-
+                                        
                                         moduleLabel.setText(record[1]);
                                         ModuleLabel1.setText(record[1]);
+                                        bSubmitSubmission.setEnabled(false);
                                     }
                                 });
                                 pAssessment.add(jPanel1);
@@ -1528,13 +1531,13 @@ public class StudentHome extends javax.swing.JFrame {
                     e.getMessage();
                 }
 
-//                try {
-//                    //Delete the old file
-//                    File oldFile = new File (oldFilePath);
-//                    oldFile.delete();
-//                } catch (Exception e) {
-//                    System.out.println(e.getMessage());
-//                }
+                try {
+                    //Delete the old file
+                    File oldFile = new File (oldFilePath);
+                    oldFile.delete();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
 
                 refreshSubmissionPanel(assessmentID);
 
