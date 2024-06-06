@@ -427,7 +427,7 @@ public class EditLecturerDetails extends javax.swing.JFrame {
                 System.err.println(e.getMessage());
             }
 
-            JOptionPane.showMessageDialog(null, "Successfully Added!");
+            JOptionPane.showMessageDialog(null, "Successfully Saved!");
             this.dispose();
             adminHomePage.refreshLecturerTable("","");
         }
