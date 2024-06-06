@@ -879,8 +879,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         
         AddLecturerDetails addLec = new AddLecturerDetails();
         
-        addLec.pack();
-        addLec.setLocationRelativeTo(null);
         
         addLec.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -926,8 +924,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddStudentDetails addStu = new AddStudentDetails();
         
-        addStu.pack();
-        addStu.setLocationRelativeTo(null);
         
         addStu.setVisible(true);
         
@@ -1048,8 +1044,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         this.dispose();
         LoginPage lp = new LoginPage();
 
-        lp.pack();
-        lp.setLocationRelativeTo(null);
         lp.setVisible(true);
 
     }//GEN-LAST:event_adminLogoutBtnActionPerformed

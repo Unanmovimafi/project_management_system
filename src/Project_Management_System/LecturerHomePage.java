@@ -1733,6 +1733,7 @@ public class LecturerHomePage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SuperviseeSideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuperviseeSideButtonActionPerformed
