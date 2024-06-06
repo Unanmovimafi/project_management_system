@@ -140,7 +140,10 @@ public class StudentHome extends javax.swing.JFrame {
                     gradeC = "";
                 }
 
-                model.addRow(new Object[]{assessmentStudentRecord[0], assessmentName, firstMark + gradeA, secondMark + gradeB, average + gradeC});
+                
+                if (assessmentStudentRecord[1].equals(ID)) {
+                    model.addRow(new Object[]{assessmentStudentRecord[0], assessmentName, firstMark + gradeA, secondMark + gradeB, average + gradeC});
+                }
             }
 
             assessmentStudentReader.close();
