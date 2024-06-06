@@ -12,6 +12,8 @@ import java.awt.event.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -167,7 +169,7 @@ public class StudentHome extends javax.swing.JFrame {
     public void setID(String ID) {
         this.ID = ID;
         setHello();
-        createAssessmentPanels();
+        createAssessmentPanels("IN PROGRESS");
     }
 
     public void refreshSubmissionPanel(String IDOfAssessment) {
@@ -266,14 +268,15 @@ public class StudentHome extends javax.swing.JFrame {
         Description.setText(assessInfo[3]);
     }
 
-    private void createAssessmentPanels() {
+    private void createAssessmentPanels(String PassOrPresent) {
 
         pAssessment.removeAll();
-
+        LocalDateTime presentDate = LocalDateTime.now();
+        Date presentDateAsDate = Date.from(presentDate.atZone(ZoneId.systemDefault()).toInstant());
         String line;
         String line2;
         int count = 0;
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             BufferedReader br2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
             while ((line2 = br2.readLine()) != null) {
@@ -282,58 +285,117 @@ public class StudentHome extends javax.swing.JFrame {
                     BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
                     while ((line = br.readLine()) != null) {
                         String[] record = line.split("\t");
-                        if (ID.equals(record2[1]) && record2[0].equals(record[0])) {
-                            javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-                            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                            javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-                            javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+                        Date dueDate = dateFormat.parse(record[4]);
+                        if (dueDate.compareTo(presentDateAsDate) >= 0 && PassOrPresent.equals("IN PROGRESS")) {
 
-                            jLabel1.setText(record[0]);
-                            jLabel2.setText(record[1]);
+                            if (ID.equals(record2[1]) && record2[0].equals(record[0])) {
+                                javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                                javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                                javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
 
-                            jPanel1.setLayout(jPanel1Layout);
-                            jPanel1Layout.setHorizontalGroup(
-                                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addContainerGap()
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLabel1)
-                                                            .addComponent(jLabel2))
-                                                    .addContainerGap(100, Short.MAX_VALUE))
-                            );
-                            jPanel1Layout.setVerticalGroup(
-                                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addContainerGap()
-                                                    .addComponent(jLabel1)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jLabel2)
-                                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            );
+                                jLabel1.setText(record[0]);
+                                jLabel2.setText(record[1]);
 
-                            jPanel1.setPreferredSize(new Dimension(450, 50));
-                            jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
-                            jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                                jPanel1.setLayout(jPanel1Layout);
+                                jPanel1Layout.setHorizontalGroup(
+                                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addContainerGap()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(jLabel1)
+                                                                .addComponent(jLabel2))
+                                                        .addContainerGap(100, Short.MAX_VALUE))
+                                );
+                                jPanel1Layout.setVerticalGroup(
+                                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addContainerGap()
+                                                        .addComponent(jLabel1)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel2)
+                                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                );
 
-                            jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-                                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                                    // TODO add your handling code here:
-                                    assessmentID = record[0];
-                                    refreshSubmissionPanel(record[0]);
+                                jPanel1.setPreferredSize(new Dimension(450, 50));
+                                jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                                    pAssessmentStatus.setVisible(true);
-                                    pDashboard.setVisible(false);
-                                    pSubmitAssessment.setVisible(false);
-                                    pProfile.setVisible(false);
-                                    pResult.setVisible(false);
+                                jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                                    public void mouseReleased(java.awt.event.MouseEvent evt) {
+                                        // TODO add your handling code here:
+                                        assessmentID = record[0];
+                                        refreshSubmissionPanel(record[0]);
 
-                                    moduleLabel.setText(record[1]);
-                                    ModuleLabel1.setText(record[1]);
-                                }
-                            });
-                            pAssessment.add(jPanel1);
-                            count = count + 1;
-                            break;
+                                        pAssessmentStatus.setVisible(true);
+                                        pDashboard.setVisible(false);
+                                        pSubmitAssessment.setVisible(false);
+                                        pProfile.setVisible(false);
+                                        pResult.setVisible(false);
+
+                                        moduleLabel.setText(record[1]);
+                                        ModuleLabel1.setText(record[1]);
+                                    }
+                                });
+                                pAssessment.add(jPanel1);
+                                count = count + 1;
+                                break;
+                            }
+                        } else if (dueDate.compareTo(presentDateAsDate) < 0&& PassOrPresent.equals("PAST")) {
+                            if (ID.equals(record2[1]) && record2[0].equals(record[0])) {
+                                javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+                                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                                javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+                                javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+
+                                jLabel1.setText(record[0]);
+                                jLabel2.setText(record[1]);
+
+                                jPanel1.setLayout(jPanel1Layout);
+                                jPanel1Layout.setHorizontalGroup(
+                                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addContainerGap()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(jLabel1)
+                                                                .addComponent(jLabel2))
+                                                        .addContainerGap(100, Short.MAX_VALUE))
+                                );
+                                jPanel1Layout.setVerticalGroup(
+                                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addContainerGap()
+                                                        .addComponent(jLabel1)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel2)
+                                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                );
+
+                                jPanel1.setPreferredSize(new Dimension(450, 50));
+                                jPanel1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                jPanel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                                jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+                                    public void mouseReleased(java.awt.event.MouseEvent evt) {
+                                        // TODO add your handling code here:
+                                        assessmentID = record[0];
+                                        refreshSubmissionPanel(record[0]);
+
+                                        pAssessmentStatus.setVisible(true);
+                                        pDashboard.setVisible(false);
+                                        pSubmitAssessment.setVisible(false);
+                                        pProfile.setVisible(false);
+                                        pResult.setVisible(false);
+
+                                        moduleLabel.setText(record[1]);
+                                        ModuleLabel1.setText(record[1]);
+                                    }
+                                });
+                                pAssessment.add(jPanel1);
+                                count = count + 1;
+                                break;
+                            }
+
                         }
                     }
                 } catch (Exception e) {
@@ -385,6 +447,7 @@ public class StudentHome extends javax.swing.JFrame {
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pAssessment = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         pSubmitAssessment = new javax.swing.JPanel();
         AssessmentPanel = new javax.swing.JPanel();
         FileSubmissionLabel = new javax.swing.JLabel();
@@ -593,6 +656,13 @@ public class StudentHome extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(pAssessment);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IN PROGRESS", "PAST" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pDashboardLayout = new javax.swing.GroupLayout(pDashboard);
         pDashboard.setLayout(pDashboardLayout);
         pDashboardLayout.setHorizontalGroup(
@@ -600,6 +670,7 @@ public class StudentHome extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDashboardLayout.createSequentialGroup()
                 .addContainerGap(122, Short.MAX_VALUE)
                 .addGroup(pDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(736, 736, 736))
@@ -610,8 +681,10 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pSubmitAssessment.setBackground(new java.awt.Color(252, 247, 204));
@@ -1704,6 +1777,18 @@ public class StudentHome extends javax.swing.JFrame {
 
     }//GEN-LAST:event_studentLogoutBtnActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        String AssessPreorPass = (String) jComboBox1.getSelectedItem();
+        if (AssessPreorPass.equals("IN PROGRESS")) {
+            createAssessmentPanels("IN PROGRESS");
+        } else if (AssessPreorPass.equals("PAST")) {
+
+            createAssessmentPanels("PAST");
+        }
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1774,6 +1859,7 @@ public class StudentHome extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser dcBookPresentation;
     private javax.swing.JPanel filePanel;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
