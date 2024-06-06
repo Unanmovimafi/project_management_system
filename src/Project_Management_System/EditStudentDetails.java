@@ -225,7 +225,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setText("Default Passowrd: ID + @");
+        jLabel12.setText("Default Passowrd: ID + @12345");
 
         jButton3.setText("Reset Password");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
