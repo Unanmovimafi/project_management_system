@@ -241,6 +241,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         pHome.setVisible(true);
         pLecturer.setVisible(false);
         pStudent.setVisible(false);
+        jPanel1.setVisible(false);
     }
 
     /**
@@ -1069,6 +1070,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         refreshLecturerTable("","");
         pHome.setVisible(false);
         pStudent.setVisible(false);
+        jPanel1.setVisible(false);
     }//GEN-LAST:event_bLecturerActionPerformed
 
     private void bStudentClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudentClearActionPerformed
@@ -1088,6 +1090,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         pHome.setVisible(true);
         pLecturer.setVisible(false);
         pStudent.setVisible(false);
+        jPanel1.setVisible(false);
     }//GEN-LAST:event_bHomeActionPerformed
 
     private void bStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStudentActionPerformed
@@ -1096,6 +1099,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         refreshStudentTable("","","");
         pLecturer.setVisible(false);
         pHome.setVisible(false);
+        jPanel1.setVisible(false);
     }//GEN-LAST:event_bStudentActionPerformed
 
     private void bLecturerApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLecturerApplyActionPerformed
