@@ -1417,7 +1417,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        ModuleLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        ModuleLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         ModuleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ModuleLabel1.setPreferredSize(new java.awt.Dimension(200, 160));
 

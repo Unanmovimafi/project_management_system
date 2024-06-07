@@ -101,7 +101,7 @@ public class Feedback extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabel1.setText("Annoymous Feedback Form");
+        jLabel1.setText("Anonymous Feedback Form");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Title:");
