@@ -1131,19 +1131,13 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
+
         EditLecturerDetails eld = new EditLecturerDetails();
         if (selectionID == "-1") {
             //If no selected then notify user to select
             JOptionPane.showMessageDialog(null, "Please select a product to edit!");
-        }
-        else{
-            
+        } else {
+
             //Set and pass record and this page to EditProduct
             eld.setAdminPageInstance(this);
             try {
@@ -1151,13 +1145,12 @@ public class AdminHomePage extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             //Open EditProduct page
             eld.setVisible(true);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void tLecturerListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tLecturerListMouseReleased
@@ -1226,6 +1219,35 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void btnExportStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportStudentActionPerformed
         // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.showOpenDialog(null);
+        File file = chooser.getSelectedFile();
+        String path = file.getAbsolutePath() + "//ReportStudent.csv";
+
+        try {
+            TableModel model = tStudentList.getModel();
+            FileWriter csv = new FileWriter(new File(path));
+
+            // Write column names
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                csv.write(model.getColumnName(i) + ",");
+            }
+            csv.write("\n");
+
+            // Write row data
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    csv.write(model.getValueAt(i, j).toString() + ",");
+                }
+                csv.write("\n");
+            }
+
+            csv.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }//GEN-LAST:event_btnExportStudentActionPerformed
 
     private void btnExportLecturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportLecturerActionPerformed
@@ -1235,7 +1257,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
-        String path = file.getAbsolutePath() + "//Report.csv";
+        String path = file.getAbsolutePath() + "//ReportLecturer.csv";
 
         try {
             TableModel model = tLecturerList.getModel();
