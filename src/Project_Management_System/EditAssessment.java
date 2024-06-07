@@ -72,6 +72,24 @@ public class EditAssessment extends javax.swing.JFrame {
         }
         return null;
     } 
+    public List<String> getAllAssessStudentRecord() {
+        try {
+            
+            List<String> lines = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                //Read and add all the lines in text file to variable line
+                lines.add(line);
+            }
+            reader.close();
+            return lines;
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    } 
     
     public void setRecordData(String ID) throws ParseException {
         
@@ -564,7 +582,8 @@ public class EditAssessment extends javax.swing.JFrame {
 
     private void deleteAssessmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAssessmentBtnActionPerformed
         // TODO add your handling code here:
-         List<String> lines = getAllAssessRecord();
+        List<String> lines = getAllAssessRecord();
+        List<String> lines2 = getAllAssessStudentRecord();
         //Write the information to the text file
         lines.remove(count);
 
@@ -579,9 +598,42 @@ public class EditAssessment extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+
+        try {
+            //Get the new stock number
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            String line;
+            ArrayList<String[]> newRecord = new ArrayList<>();
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].equals(tfID.getText())) {
+                    continue;
+                } else {
+                    newRecord.add(record);
+                }
+
+            }
+            br.close();
+
+            //Write the new lines to the text file
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            for (String[] record : newRecord) {
+                String lineToWrite = String.join("\t", record);
+                writer.write(lineToWrite);
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
         JOptionPane.showMessageDialog(null, "Successfully Deleted!");
+
         this.dispose();
-        ProjectManagerHomePage.refreshAssessTable("","");
+
+        ProjectManagerHomePage.refreshAssessTable("", "");
     }//GEN-LAST:event_deleteAssessmentBtnActionPerformed
 
     /**
