@@ -222,9 +222,6 @@ public class LecturerHomePage extends javax.swing.JFrame {
         }catch (Exception e) {
             e.getMessage();
         }
-        
-        
-        
     }
     
     private void createSupervisorAssessmentPanels() {

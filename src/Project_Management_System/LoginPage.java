@@ -179,7 +179,7 @@ public class LoginPage extends javax.swing.JFrame {
         String username = tfUsername.getText();
         String password = pfPassword.getText();
         
-        //Check if the username and password match the text file contain username and password
+        //Check if the username and password match the admin text file contain username and password
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\admin.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
@@ -192,8 +192,6 @@ public class LoginPage extends javax.swing.JFrame {
                     AdminHomePage ap = new AdminHomePage();
                     
                     ap.setVisible(true);
-                    ap.pack();
-                    ap.setLocationRelativeTo(null);
                     return;
                 }
             }
@@ -202,11 +200,13 @@ public class LoginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid username or password.");
         }
         
+        //Check if the username and password match the lecturer text file contain username and password
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].equals(username) && record[8].equals(password)&& record[3].equals("LEC")) {
+                    //Username and password match and role is lecturer then proceed to Lecturer Page
                     br.close();
                     this.dispose();
                     
@@ -218,6 +218,7 @@ public class LoginPage extends javax.swing.JFrame {
                     return;
                 }
                 else if (record[0].equals(username) && record[8].equals(password)&& record[3].equals("PM")) {
+                    //Username and password match and role is PM then proceed to PM Page
                     br.close();
                     this.dispose();
                     
@@ -234,12 +235,13 @@ public class LoginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid username or password.");
         }
         
+        //Check if the username and password match the student text file contain username and password
         try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].equals(username) && record[8].equals(password)) {
-                    //Username and password match then proceed to Admin Page
+                    //Username and password match then proceed to Student Page
                     br.close();
                     this.dispose();
 
@@ -248,8 +250,6 @@ public class LoginPage extends javax.swing.JFrame {
                     shp.setID(username);
                     
                     shp.setVisible(true);
-                    shp.pack();
-                    shp.setLocationRelativeTo(null);
                     return;
                 }
             }

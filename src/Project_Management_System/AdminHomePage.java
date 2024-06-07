@@ -288,7 +288,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         bLecturerClear = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
+        bAddNewLecturer = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         bImportLecturer = new javax.swing.JButton();
         btnExportLecturer = new javax.swing.JButton();
@@ -674,11 +674,11 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(252, 247, 204));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setText("Add New Lecturer");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        bAddNewLecturer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bAddNewLecturer.setText("Add New Lecturer");
+        bAddNewLecturer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                bAddNewLecturerActionPerformed(evt);
             }
         });
 
@@ -719,7 +719,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bImportLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bAddNewLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnExportLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -732,7 +732,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addComponent(bImportLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bAddNewLecturer, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1120,14 +1120,17 @@ public class AdminHomePage extends javax.swing.JFrame {
         refreshStudentTable(studentID, studentName, intakeCode);
     }//GEN-LAST:event_bStudentApplyActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void bAddNewLecturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddNewLecturerActionPerformed
         // TODO add your handling code here:
-        
+        //Open AddLecturerDetails
         AddLecturerDetails addLec = new AddLecturerDetails();
+        
+        //Set admin Page in AddLecturerDetails.java
         addLec.setAdminPageInstance(this);
         
+        //Set to visible
         addLec.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_bAddNewLecturerActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -1376,6 +1379,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel StudentNameLB;
     private javax.swing.JScrollPane StudentTableSP;
     private javax.swing.JButton adminLogoutBtn;
+    private javax.swing.JButton bAddNewLecturer;
     private javax.swing.JButton bEditStudentr;
     private javax.swing.JButton bHome;
     private javax.swing.JButton bImportLecturer;
@@ -1394,7 +1398,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -50,15 +50,14 @@ public class EditStudentDetails extends javax.swing.JFrame {
     
     
     public void setRecordData(String ID) throws ParseException {
-        
+
         this.selectedID = ID;
-        
-        
+
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
-                    count = count + 1;
+                count = count + 1;
                 if (selectedID.equals(lineArray[0])) {
                     break;
                 }
@@ -66,32 +65,29 @@ public class EditStudentDetails extends javax.swing.JFrame {
         } catch (Exception e) {
             e.getMessage();
         }
-        
+
         record = getStudentRecord(count);
-        
-        
-        
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //Get the value from text field
-        
+
         tfID.setText(record[0]);
         tfName.setText(record[1]);
         tfIC.setText(record[2]);
         tfIntakeCode.setText(record[3]);
-        
-        if (record[4].equals("MALE")){
+
+        if (record[4].equals("MALE")) {
             rbMale.setSelected(true);
-        }
-        else if (record[4].equals("FEMALE")){
+        } else if (record[4].equals("FEMALE")) {
             rbFemale.setSelected(true);
         }
-        
+
         tfNationality.setText(record[5]);
         dcDoB.setDate(dateFormat.parse(record[6]));
         tfContactNumber.setText(record[7]);
         tfEmail.setText(record[9]);
         tfAddress.setText(record[10]);
-        
+
         password = record[8];
     }
     
