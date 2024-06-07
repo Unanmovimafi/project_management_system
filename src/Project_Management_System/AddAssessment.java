@@ -215,8 +215,9 @@ public class AddAssessment extends javax.swing.JFrame {
         jLabel9.setText("Supervisor:");
 
         tfSupervisor.setEditable(false);
+        tfSupervisor.setEnabled(false);
 
-        tfSecondMarker.setEditable(false);
+        tfSecondMarker.setEnabled(false);
 
         tSupervisorList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,9 +288,9 @@ public class AddAssessment extends javax.swing.JFrame {
             }
         });
 
-        tfSupervisorName.setEditable(false);
+        tfSupervisorName.setEnabled(false);
 
-        tfSecondMarkerName.setEditable(false);
+        tfSecondMarkerName.setEnabled(false);
 
         cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INTERNSHIP", "INVESTIGATION REPORTS", "CP1", "CP2", "RMCP", "FYP" }));
 

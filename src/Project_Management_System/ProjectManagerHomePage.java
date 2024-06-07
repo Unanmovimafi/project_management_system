@@ -591,6 +591,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         moduleLabel = new javax.swing.JLabel();
         exportModuleTableButton = new javax.swing.JButton();
+        editModuleButton1 = new javax.swing.JButton();
         pReportsMarking = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -894,6 +895,14 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             }
         });
 
+        editModuleButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editModuleButton1.setText("Edit Participant");
+        editModuleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editModuleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pModuleLayout = new javax.swing.GroupLayout(pModule);
         pModule.setLayout(pModuleLayout);
         pModuleLayout.setHorizontalGroup(
@@ -930,7 +939,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addGroup(pModuleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editModuleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editModuleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(64, 64, 64))
         );
         pModuleLayout.setVerticalGroup(
@@ -960,7 +970,9 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     .addGroup(pModuleLayout.createSequentialGroup()
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(editModuleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(editModuleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editModuleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
@@ -1494,8 +1506,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lPresentationTime, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lStudentPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lStudentPresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(157, 157, 157))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -2594,6 +2605,19 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         fb.setVisible(true);
     }//GEN-LAST:event_bViewStatus1ActionPerformed
 
+    private void editModuleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editModuleButton1ActionPerformed
+        // TODO add your handling code here:
+        if (selectionAssessID == "-1") {
+            //If no selected then notify user to select
+            JOptionPane.showMessageDialog(null, "Please select a assessment to edit!");
+        } else {
+            EditAssessmentParticipant eap = new EditAssessmentParticipant();
+            eap.setPMPageInstance(this);
+            eap.setRecordData(selectionAssessID);
+            eap.setVisible(true);
+        }
+    }//GEN-LAST:event_editModuleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2662,6 +2686,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAssType;
     private javax.swing.JButton downloadButton;
     private javax.swing.JButton editModuleButton;
+    private javax.swing.JButton editModuleButton1;
     private javax.swing.JButton exportModuleTableButton;
     private javax.swing.JLabel feedbackLabel;
     private javax.swing.JTextField feedbackTextfield;
