@@ -370,6 +370,16 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             
                             lStudentID.setText("");
                             lSubmittedFile.setText("");
+                            SubmissionDateLabel.setText("");
+                            SubmissionTimeLabel.setText("");
+                            lStudentPresentationStatus.setText("");
+                            feedbackTextfield.setText("");
+                            markTextfield.setText("");
+                            tfSecondFB.setText("");
+                            tfSecondMark.setText("");
+                            lStudentPresentationDate.setText("");
+                            lPresentationTime.setText("");
+                            
                             feedbackTextfield.setEnabled(false);
                             markTextfield.setEnabled(false);
                             tfSecondFB.setEnabled(false);
@@ -460,6 +470,16 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                             
                             lStudentID.setText("");
                             lSubmittedFile.setText("");
+                            SubmissionDateLabel.setText("");
+                            SubmissionTimeLabel.setText("");
+                            lStudentPresentationStatus.setText("");
+                            feedbackTextfield.setText("");
+                            markTextfield.setText("");
+                            tfSecondFB.setText("");
+                            tfSecondMark.setText("");
+                            lStudentPresentationDate.setText("");
+                            lPresentationTime.setText("");
+                            
                             feedbackTextfield.setEnabled(false);
                             markTextfield.setEnabled(false);
                             tfSecondFB.setEnabled(false);
@@ -1304,7 +1324,6 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         tfSecondFB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         tfSecondMark.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfSecondMark.setText("jTextField2");
 
         SubmissionDateLabel.setText("Submission Date");
 
@@ -2211,7 +2230,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selectionID = studentTable.getModel().getValueAt(studentTable.getSelectedRow(), 1).toString();
         String line;
-
+        String[] realRecord = null;
         gradeButton.setEnabled(true);
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
@@ -2219,6 +2238,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 count = count + 1;
                 String[] record = line.split("\t");
                 String assstudentLine;
+                
+                
                 BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
                 while ((assstudentLine = assessmentReader.readLine()) != null) {
                     String[] assstudentRecord = assstudentLine.split("\t");
@@ -2255,60 +2276,67 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     destFile = record[2];
                 }
 
-                if (assessmentRecord[6].equals(ID)) {
-                    if (assessmentRecord[0].equals(record[0]) && selectionID.equals(record[1])) {
+                if (record[1].equals(selectionID) && record[0].equals(assessmentRecord[0])) {
+                    realRecord = record;
+                    break;
+                }
+            }
+            
+            
 
-                        if (record[11].equals("NA")) {
+                if (assessmentRecord[6].equals(ID)) {
+                    if (assessmentRecord[0].equals(realRecord[0]) && selectionID.equals(realRecord[1])) {
+
+                        if (realRecord[11].equals("NA")) {
                             lStudentPresentationDate.setText("NA");
                             lPresentationTime.setText("NA");
                             lStudentPresentationStatus.setText("Student Haven't book Presentation");
                             bAcceptPresentation.setEnabled(false);
                             bRejectPresentation.setEnabled(false);
 
-                        } else if (record[11].equals("PENDING")) {
-                            lStudentPresentationDate.setText(record[9]);
-                            lPresentationTime.setText(record[10]);
+                        } else if (realRecord[11].equals("PENDING")) {
+                            lStudentPresentationDate.setText(realRecord[9]);
+                            lPresentationTime.setText(realRecord[10]);
                             lStudentPresentationStatus.setText("Waiting Approval");
                             bAcceptPresentation.setEnabled(true);
                             bRejectPresentation.setEnabled(true);
-                        } else if (record[11].equals("ACCEPT")) {
-                            lStudentPresentationDate.setText(record[9]);
-                            lPresentationTime.setText(record[10]);
+                        } else if (realRecord[11].equals("ACCEPT")) {
+                            lStudentPresentationDate.setText(realRecord[9]);
+                            lPresentationTime.setText(realRecord[10]);
                             lStudentPresentationStatus.setText("Second Marker accept the Presentation");
                             bAcceptPresentation.setEnabled(false);
                             bRejectPresentation.setEnabled(false);
-                        } else if (record[11].equals("REJECT")) {
-                            lStudentPresentationDate.setText(record[9]);
-                            lPresentationTime.setText(record[10]);
+                        } else if (realRecord[11].equals("REJECT")) {
+                            lStudentPresentationDate.setText(realRecord[9]);
+                            lPresentationTime.setText(realRecord[10]);
                             lStudentPresentationStatus.setText("Waiting the Student to re-select the presentation date and time.");
                             bAcceptPresentation.setEnabled(false);
                             bRejectPresentation.setEnabled(false);
                         }
                     }
                 } else {
-                    if (record[11].equals("NA")) {
+                    if (realRecord[11].equals("NA")) {
                         lStudentPresentationDate.setText("NA");
                         lPresentationTime.setText("NA");
                         lStudentPresentationStatus.setText("Student Haven't book Presentation");
 
-                    } else if (record[11].equals("PENDING")) {
-                        lStudentPresentationDate.setText(record[9]);
-                        lPresentationTime.setText(record[10]);
+                    } else if (realRecord[11].equals("PENDING")) {
+                        lStudentPresentationDate.setText(realRecord[9]);
+                        lPresentationTime.setText(realRecord[10]);
                         lStudentPresentationStatus.setText("Waiting Approval");
-                    } else if (record[11].equals("ACCEPT")) {
-                        lStudentPresentationDate.setText(record[9]);
-                        lPresentationTime.setText(record[10]);
+                    } else if (realRecord[11].equals("ACCEPT")) {
+                        lStudentPresentationDate.setText(realRecord[9]);
+                        lPresentationTime.setText(realRecord[10]);
                         lStudentPresentationStatus.setText("Second Marker accept the Presentation");
-                    } else if (record[11].equals("REJECT")) {
-                        lStudentPresentationDate.setText(record[9]);
-                        lPresentationTime.setText(record[10]);
+                    } else if (realRecord[11].equals("REJECT")) {
+                        lStudentPresentationDate.setText(realRecord[9]);
+                        lPresentationTime.setText(realRecord[10]);
                         lStudentPresentationStatus.setText("Waiting the Student to re-select the presentation date and time.");
                     }
 
                     bAcceptPresentation.setEnabled(false);
                     bRejectPresentation.setEnabled(false);
                 }
-            }
 
         } catch (Exception e) {
             e.getMessage();
