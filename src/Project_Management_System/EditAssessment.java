@@ -218,6 +218,7 @@ public class EditAssessment extends javax.swing.JFrame {
         dcDueDate = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        deleteAssessmentBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -336,6 +337,14 @@ public class EditAssessment extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Search:");
 
+        deleteAssessmentBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteAssessmentBtn.setText("DELETE");
+        deleteAssessmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAssessmentBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -396,7 +405,9 @@ public class EditAssessment extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(263, 263, 263)
-                        .addComponent(bSave)))
+                        .addComponent(bSave)
+                        .addGap(51, 51, 51)
+                        .addComponent(deleteAssessmentBtn)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -449,7 +460,9 @@ public class EditAssessment extends javax.swing.JFrame {
                             .addComponent(tfSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51)
-                        .addComponent(bSave))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bSave)
+                            .addComponent(deleteAssessmentBtn)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
@@ -549,6 +562,28 @@ public class EditAssessment extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tSecondMarkerListMouseReleased
 
+    private void deleteAssessmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAssessmentBtnActionPerformed
+        // TODO add your handling code here:
+         List<String> lines = getAllAssessRecord();
+        //Write the information to the text file
+        lines.remove(count);
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt"));
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        JOptionPane.showMessageDialog(null, "Successfully Deleted!");
+        this.dispose();
+        ProjectManagerHomePage.refreshAssessTable("","");
+    }//GEN-LAST:event_deleteAssessmentBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -596,6 +631,7 @@ public class EditAssessment extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbType;
     private com.toedter.calendar.JDateChooser dcDueDate;
+    private javax.swing.JButton deleteAssessmentBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

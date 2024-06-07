@@ -614,7 +614,7 @@ public class StudentHome extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(sidePanelLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(63, 63, 63)
                         .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -624,7 +624,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addComponent(lHelloWorld)
                 .addGap(46, 46, 46)
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
                 .addComponent(bDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -633,9 +633,9 @@ public class StudentHome extends javax.swing.JFrame {
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(bFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(244, 244, 244)
+                .addGap(158, 158, 158)
                 .addComponent(studentLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addGap(165, 165, 165))
         );
 
         pResult.setBackground(new java.awt.Color(255, 255, 204));
@@ -855,7 +855,7 @@ public class StudentHome extends javax.swing.JFrame {
                 .addGroup(pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AssessmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         pSubmitAssessmentLayout.setVerticalGroup(
             pSubmitAssessmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
