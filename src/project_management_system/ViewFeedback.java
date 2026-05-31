@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,7 +23,7 @@ public class ViewFeedback extends javax.swing.JFrame {
         int count = 1;
         String line;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\feedback.txt"));
             while ((line = bufferedReader.readLine()) != null) {
                 count = count + 1;
             }
@@ -39,7 +39,7 @@ public class ViewFeedback extends javax.swing.JFrame {
         
         
         String[] lineArray = null;
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\feedback.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lineArray = line.split("\t");

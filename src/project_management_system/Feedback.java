@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +21,7 @@ public class Feedback extends javax.swing.JFrame {
             int maximumNumber = 0;
             String line;
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\feedback.txt"));
 
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] lineArray = line.split(",");
@@ -48,7 +48,7 @@ public class Feedback extends javax.swing.JFrame {
             int count = 1;
             String line;
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\feedback.txt"));
                 while ((line = bufferedReader.readLine()) != null) {
                     count = count + 1;
                 }
@@ -173,7 +173,7 @@ public class Feedback extends javax.swing.JFrame {
                 //Write the information to the text file
                 product.append(newID + "\t" + tfTitle.getText() + "\t" + taBodyContent.getText());
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\feedback.txt", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\feedback.txt", true));
                 writer.write(product + "\n");
                 writer.close();
             } catch (Exception e) {

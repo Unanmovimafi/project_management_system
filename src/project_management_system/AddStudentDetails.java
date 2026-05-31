@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
         int maximumNumber = 0;
         String line;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
@@ -330,7 +330,7 @@ public class AddStudentDetails extends javax.swing.JFrame {
                 //Write the information to the text file
                 product.append(newID + "\t" + name + "\t" +IC+ "\t" + intakeCode + "\t" + gender + "\t" + nationality + "\t" +dob + "\t" + contactNumber + "\t" + password + "\t" + email + "\t" + address);
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\student.txt", true));
                 writer.write(product + "\n");
                 writer.close();
 

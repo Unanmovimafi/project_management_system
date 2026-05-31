@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -37,7 +37,7 @@ public class EditAssessment extends javax.swing.JFrame {
     }
     
     public String[] getAssessRecord(int line_num) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"))) {
             String line;
             int count = -1;
             while ((line = reader.readLine()) != null) {
@@ -58,7 +58,7 @@ public class EditAssessment extends javax.swing.JFrame {
         try {
             
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 //Read and add all the lines in text file to variable line
@@ -76,7 +76,7 @@ public class EditAssessment extends javax.swing.JFrame {
         try {
             
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 //Read and add all the lines in text file to variable line
@@ -97,7 +97,7 @@ public class EditAssessment extends javax.swing.JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         
         
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
@@ -122,7 +122,7 @@ public class EditAssessment extends javax.swing.JFrame {
         tfSupervisor.setText(Assessrecord[5]);
         tfSecondMarker.setText(Assessrecord[6]);
         
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
@@ -146,7 +146,7 @@ public class EditAssessment extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
@@ -170,7 +170,7 @@ public class EditAssessment extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
@@ -539,7 +539,7 @@ public class EditAssessment extends javax.swing.JFrame {
                 record.append(newID + "\t" + name + "\t" + type + "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
                 
                 lines.set(count, record.toString());
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment.txt"));
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);
                     writer.newLine();
@@ -603,7 +603,7 @@ public class EditAssessment extends javax.swing.JFrame {
         lines.remove(count);
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment.txt"));
             for (String updatedLine : lines) {
                 writer.write(updatedLine);
                 writer.newLine();
@@ -616,7 +616,7 @@ public class EditAssessment extends javax.swing.JFrame {
 
         try {
             //Get the new stock number
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
             String line;
             ArrayList<String[]> newRecord = new ArrayList<>();
             while ((line = br.readLine()) != null) {
@@ -631,7 +631,7 @@ public class EditAssessment extends javax.swing.JFrame {
             br.close();
 
             //Write the new lines to the text file
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt"));
             for (String[] record : newRecord) {
                 String lineToWrite = String.join("\t", record);
                 writer.write(lineToWrite);

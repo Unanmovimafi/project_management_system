@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,7 +31,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
     }
     
     public String[] getStudentRecord(int line_num) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"))) {
             String line;
             int count = -1;
             while ((line = reader.readLine()) != null) {
@@ -53,7 +53,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
 
         this.selectedID = ID;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
@@ -95,7 +95,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
         try {
             
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 //Read and add all the lines in text file to variable line
@@ -416,7 +416,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
                 String editedLecturer = newID + "\t" + name + "\t" +IC+ "\t" + intakeCode + "\t" + gender + "\t" + nationality + "\t" +dob + "\t" + contactNumber + "\t" + password + "\t" + email + "\t" + address;
                 
                 lines.set(count, editedLecturer);
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\student.txt"));
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);
                     writer.newLine();
@@ -448,7 +448,7 @@ public class EditStudentDetails extends javax.swing.JFrame {
         lines.remove(count);
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\student.txt"));
             for (String updatedLine : lines) {
                 writer.write(updatedLine);
                 writer.newLine();

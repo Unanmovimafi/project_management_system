@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -37,7 +37,7 @@ public class EditAssessmentParticipant extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 
@@ -65,12 +65,12 @@ public class EditAssessmentParticipant extends javax.swing.JFrame {
         String intake = "";
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
 
                 if (record[0].equals(ID)) {
-                    BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                    BufferedReader studentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
 
                     String studentLine;
                     while ((studentLine = studentReader.readLine()) != null) {
@@ -313,7 +313,7 @@ public class EditAssessmentParticipant extends javax.swing.JFrame {
 
                 try {
 
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt", true));
                     System.out.println(tAddedStudent.getRowCount());
                     for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
 
@@ -346,7 +346,7 @@ public class EditAssessmentParticipant extends javax.swing.JFrame {
             }
 
             try {
-                BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+                BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
                 String line;
                 ArrayList<String[]> newRecord = new ArrayList<>();
                 while ((line = br.readLine()) != null) {
@@ -361,7 +361,7 @@ public class EditAssessmentParticipant extends javax.swing.JFrame {
                 br.close();
 
                 //Write the new lines to the text file
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt"));
                 for (String[] record : newRecord) {
                     String lineToWrite = String.join("\t", record);
                     writer.write(lineToWrite);

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -40,7 +40,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         String line;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 String studentID = record[1];
@@ -56,7 +56,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     status = "Submitted";
                 }
 
-                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
                 while ((studentLine = studentReader.readLine()) != null) {
                     String[] studentRecord = studentLine.split("\t");
                     if (studentRecord[0].equals(studentID)) {
@@ -65,7 +65,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                     }
                 }
                 
-                BufferedReader assessReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+                BufferedReader assessReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
                 while ((assessLine = assessReader.readLine()) != null) {
                     String[] assessRecord = assessLine.split("\t");
                     if (assessRecord[0].equals(record[0])) {
@@ -91,7 +91,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(ID) && record[1].toLowerCase().startsWith(name) ) {
@@ -105,7 +105,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         }
     }
     
-    ImageIcon icon = new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png");
+    ImageIcon icon = new ImageIcon("src\\project_management_system\\logo\\University_Logo.png");
     private Image scaledLogo = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
     ImageIcon scaledIcon = new ImageIcon(scaledLogo);
     
@@ -113,7 +113,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         try {
 
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 //Read and add all the lines in text file to variable line
@@ -129,7 +129,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     
     
     public void setHello() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"))) {
             String line;
             String[] record;
             while ((line = reader.readLine()) != null) {
@@ -161,7 +161,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
 
     private void countAssessments() {
         int assessmentCount = 0;
-        String filePath = "src\\Project_Management_System\\database\\assessment.txt";
+        String filePath = "src\\project_management_system\\database\\assessment.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -185,11 +185,11 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         int SuperviseesCount = 0;
         int PendingPresentationCount = 0;
 
-        try (BufferedReader reader2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"))) {
+        try (BufferedReader reader2 = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"))) {
             String line2;
             while ((line2 = reader2.readLine()) != null) {
                 String[] record2 = line2.split("\t");
-                try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+                try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         String[] record = line.split("\t");
@@ -218,11 +218,11 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
     private void countUngradedReport() {
         int UngradedReport = 0;
 
-        try (BufferedReader reader2 = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"))) {
+        try (BufferedReader reader2 = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"))) {
             String line2;
             while ((line2 = reader2.readLine()) != null) {
                 String[] record2 = line2.split("\t");
-                try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"))) {
+                try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         String[] record = line.split("\t");
@@ -254,7 +254,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         try {
 
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 //Read and add all the lines in text file to variable line
@@ -274,7 +274,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         model.setRowCount(0);
         
         String line;
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 
@@ -282,7 +282,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 String studentLine;
                 String studentName = "";
                 String intake = "";
-                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
                 while ((studentLine = studentReader.readLine()) != null) {
                     String[] studentRecord = studentLine.split("\t");
                     if (studentRecord[0].equals(studentID)) {
@@ -314,7 +314,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         int count = 0;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (ID.equals(record[5])) {
@@ -414,7 +414,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         int count = 0;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (ID.equals(record[6])) {
@@ -511,7 +511,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         model.setRowCount(0);
 
         try {
-            BufferedReader assessmentStudentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader assessmentStudentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
 
             String assessmentStudentLine, assessmentLine;
 
@@ -524,8 +524,8 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 String studentName = "";
                 String intake = "";
 
-                BufferedReader studentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
-                BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+                BufferedReader studentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
+                BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
 
                 String studentLine;
                 while ((studentLine = studentReader.readLine()) != null) {
@@ -2233,14 +2233,14 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         String[] realRecord = null;
         gradeButton.setEnabled(true);
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment_student.txt"));
             while ((line = br.readLine()) != null) {
                 count = count + 1;
                 String[] record = line.split("\t");
                 String assstudentLine;
                 
                 
-                BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+                BufferedReader assessmentReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
                 while ((assstudentLine = assessmentReader.readLine()) != null) {
                     String[] assstudentRecord = assstudentLine.split("\t");
                     if (assstudentRecord[0].equals(record[0]) && assstudentRecord[5].equals(ID) && assessmentRecord[0].equals(assstudentRecord[0])) {
@@ -2357,7 +2357,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             //Write the information to the text file
             String strAssStuRecord = String.join("\t", assessmentStudentRecord);
             lines.set(count, strAssStuRecord);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt"));
             for (String updatedLine : lines) {
                 writer.write(updatedLine);
                 writer.newLine();
@@ -2381,7 +2381,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             //Write the information to the text file
             String strAssStuRecord = String.join("\t", assessmentStudentRecord);
             lines.set(count, strAssStuRecord);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt"));
             for (String updatedLine : lines) {
                 writer.write(updatedLine);
                 writer.newLine();
@@ -2407,7 +2407,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
             //Write the information to the text file
             String strAssStuRecord = String.join("\t", assessmentStudentRecord);
             lines.set(count, strAssStuRecord);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt"));
             for (String updatedLine : lines) {
                 writer.write(updatedLine);
                 writer.newLine();
@@ -2443,7 +2443,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
         pSupervisee.setVisible(false);
         pModule.setVisible(false);
         jPanel3.setVisible(false);
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lecRecord = line.split("\t");
@@ -2492,7 +2492,7 @@ public class ProjectManagerHomePage extends javax.swing.JFrame {
                 String editedStudent = String.join("\t", lecRecord);
 
                 lines.set(countOfLecRecord, editedStudent);
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\lecturer.txt"));
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);
                     writer.newLine();

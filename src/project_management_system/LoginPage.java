@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -48,7 +48,7 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(24, 34, 63));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png"));
+        jLabel3.setIcon(new ImageIcon("src\\project_management_system\\logo\\University_Logo.png"));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,7 +180,7 @@ public class LoginPage extends javax.swing.JFrame {
         String password = pfPassword.getText();
         
         //Check if the username and password match the admin text file contain username and password
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\admin.txt")); 
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\admin.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
@@ -201,7 +201,7 @@ public class LoginPage extends javax.swing.JFrame {
         }
         
         //Check if the username and password match the lecturer text file contain username and password
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt")); 
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
@@ -236,7 +236,7 @@ public class LoginPage extends javax.swing.JFrame {
         }
         
         //Check if the username and password match the student text file contain username and password
-        try {BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt")); 
+        try {BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt")); 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");

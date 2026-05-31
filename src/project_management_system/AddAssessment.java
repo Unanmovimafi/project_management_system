@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -36,7 +36,7 @@ public class AddAssessment extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 
@@ -61,7 +61,7 @@ public class AddAssessment extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
@@ -85,7 +85,7 @@ public class AddAssessment extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
@@ -106,7 +106,7 @@ public class AddAssessment extends javax.swing.JFrame {
         int count = 1;
         String line;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\assessment.txt"));
 
             while ((line = bufferedReader.readLine()) != null) {
                 count = count +1;
@@ -560,7 +560,7 @@ public class AddAssessment extends javax.swing.JFrame {
                 //Write the information to the text file
                 record.append(newID + "\t" + name + "\t" + type + "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment.txt", true));
                 writer.write(record + "\n");
                 writer.close();
             } catch (Exception e) {
@@ -569,7 +569,7 @@ public class AddAssessment extends javax.swing.JFrame {
 
             try {
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt", true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\assessment_student.txt", true));
                 System.out.println(tAddedStudent.getRowCount());
                 for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
 

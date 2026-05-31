@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Project_Management_System;
+package project_management_system;
 
 import java.awt.Image;
 import java.io.*;
@@ -22,7 +22,7 @@ import javax.swing.table.TableModel;
 public class AdminHomePage extends javax.swing.JFrame {
     
     
-    ImageIcon icon = new ImageIcon("src\\Project_Management_System\\logo\\University_Logo.png");
+    ImageIcon icon = new ImageIcon("src\\project_management_system\\logo\\University_Logo.png");
     private Image scaledLogo = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
     ImageIcon scaledIcon = new ImageIcon(scaledLogo);
     
@@ -46,7 +46,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                     
                     //Write the information to the text file
                     product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\lecturer.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\lecturer.txt", true));
                     writer.write(product + "\n");
                     writer.close();
                     } 
@@ -84,7 +84,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                     
                     //Write the information to the text file
                     product.append(newID + "\t" + values[1] + "\t" +values[2]+ "\t" + values[3] + "\t" + values[4] + "\t" + values[5] + "\t" +values[6] + "\t" + values[7] + "\t" + password + "\t" + values[8] + "\t" + values[9]);
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\student.txt", true));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\project_management_system\\database\\student.txt", true));
                     writer.write(product + "\n");
                     writer.close();
                     }
@@ -111,7 +111,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         model.setRowCount(0);
         String line;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\feedback.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\feedback.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(Title)) {
@@ -134,7 +134,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 if (record[0].toLowerCase().startsWith(IDOfLecturer) && record[1].toLowerCase().startsWith(nameOfLecturer) ) {
@@ -159,7 +159,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         String line;
         
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
             while ((line = br.readLine()) != null) {
                 String[] record = line.split("\t");
                 
@@ -184,7 +184,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         String line;
         String newID;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\lecturer.txt"));
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
@@ -211,7 +211,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         String line;
         String newID;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\project_management_system\\database\\student.txt"));
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] lineArray = line.split("\t");
