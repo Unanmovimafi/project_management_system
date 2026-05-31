@@ -1,0 +1,2 @@
+AS00001	INTRODUCTION TO NETWORKING	INVESTIGATION REPORTS	This assessment consists of cisco networking	06/01/2023	LR00001	LR00004
+AS00002	JAVA PROGRAMMING	CP1	This assessment consists of object oriented concept programming	02/06/2025	LR00002	LR00003

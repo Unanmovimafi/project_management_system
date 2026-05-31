@@ -1,0 +1,766 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package Project_Management_System;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+/**
+ *
+ * @author User
+ */
+public class AddAssessment extends javax.swing.JFrame {
+    
+    private ProjectManagerHomePage ProjectManagerHomePage;
+    
+    
+    public void setPMPageInstance(ProjectManagerHomePage PMhomePage) {
+        this.ProjectManagerHomePage = PMhomePage;
+    }
+    
+    public void refreshStudentTable(String IDNameInCoOfStudent) {
+        DefaultTableModel model = (DefaultTableModel)tStudentList.getModel();
+        model.setRowCount(0);
+        String line;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\student.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                
+                if (record[0].toLowerCase().startsWith(IDNameInCoOfStudent) || record[1].toLowerCase().startsWith(IDNameInCoOfStudent)|| record[3].toLowerCase().startsWith(IDNameInCoOfStudent)) {
+                    String [] newRecord = new String[3];
+                    //Skip IC, Password, Address
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    System.arraycopy(record, 3, newRecord, 2, 1);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
+                }
+            br.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
+    public void refreshSupervisorListTable(String IDOrNameOfLecturer) {
+        DefaultTableModel model = (DefaultTableModel)tSupervisorList.getModel();
+        model.setRowCount(0);
+        String line;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
+                    String [] newRecord = new String[2];
+                    //Skip IC, Password, Address
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
+                }
+            br.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
+    
+    public void refreshSecondMarkerListTable(String IDOrNameOfLecturer) {
+        DefaultTableModel model = (DefaultTableModel)tSecondMarkerList.getModel();
+        model.setRowCount(0);
+        String line;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\lecturer.txt"));
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split("\t");
+                if (record[0].toLowerCase().startsWith(IDOrNameOfLecturer) || record[1].toLowerCase().startsWith(IDOrNameOfLecturer) ) {
+                    String [] newRecord = new String[2];
+                    //Skip IC, Password, Address
+                    System.arraycopy(record, 0, newRecord, 0, 2);
+                    //Add the record to Table
+                    model.addRow(newRecord);
+                    }
+                }
+            br.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
+    private void getNewID(){
+        int count = 1;
+        String line;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\Project_Management_System\\database\\assessment.txt"));
+
+            while ((line = bufferedReader.readLine()) != null) {
+                count = count +1;
+            }
+            bufferedReader.close();
+            String newAssessmentID = String.format("%05d", count);
+            newAssessmentID = "AS" + newAssessmentID;
+            tfID.setText(newAssessmentID);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    
+    
+
+    /**
+     * Creates new form EditLecturerDetails
+     */
+    public AddAssessment() {
+        initComponents();
+        getNewID();
+        refreshSupervisorListTable("");
+        refreshSecondMarkerListTable("");
+        refreshStudentTable("");
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tfName = new javax.swing.JTextField();
+        tfDescription = new javax.swing.JTextField();
+        bSave = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tfID = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        tfSupervisor = new javax.swing.JTextField();
+        tfSecondMarker = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tSupervisorList = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tSecondMarkerList = new javax.swing.JTable();
+        tfSearchSupervisor = new javax.swing.JTextField();
+        tfSearchSecondMarker = new javax.swing.JTextField();
+        tfSupervisorName = new javax.swing.JTextField();
+        tfSecondMarkerName = new javax.swing.JTextField();
+        cbType = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tStudentList = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tAddedStudent = new javax.swing.JTable();
+        bAddStudent = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        tfSearchStudent = new javax.swing.JTextField();
+        dcDueDate = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Name:");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Description:");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Due Date:");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Second Marker:");
+
+        bSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bSave.setText("ADD");
+        bSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSaveActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("ID:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Type:");
+
+        tfID.setEnabled(false);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Supervisor:");
+
+        tfSupervisor.setEditable(false);
+        tfSupervisor.setEnabled(false);
+
+        tfSecondMarker.setEnabled(false);
+
+        tSupervisorList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tSupervisorList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tSupervisorListMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tSupervisorList);
+
+        tSecondMarkerList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tSecondMarkerList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tSecondMarkerListMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tSecondMarkerList);
+
+        tfSearchSupervisor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSearchSupervisorActionPerformed(evt);
+            }
+        });
+        tfSearchSupervisor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchSupervisorKeyReleased(evt);
+            }
+        });
+
+        tfSearchSecondMarker.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchSecondMarkerKeyReleased(evt);
+            }
+        });
+
+        tfSupervisorName.setEnabled(false);
+
+        tfSecondMarkerName.setEnabled(false);
+
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INTERNSHIP", "INVESTIGATION REPORTS", "CP1", "CP2", "RMCP", "FYP" }));
+
+        tStudentList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Intake Code"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tStudentList);
+
+        tAddedStudent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Intake Code"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tAddedStudent);
+
+        bAddStudent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bAddStudent.setText("ADD<");
+        bAddStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAddStudentActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("REMOVE>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tfSearchStudent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchStudentKeyReleased(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Search:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Search:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setText("Search:");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setText("Choose Supervisor:");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setText("Choose Second Marker:");
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setText("Choose Student:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(dcDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(tfSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfSupervisorName, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bAddStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(bSave)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSearchSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSearchSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSearchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSearchSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dcDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(46, 46, 46))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(tfSearchSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(tfSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSupervisorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSecondMarkerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(bSave)
+                                .addGap(16, 16, 16))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(bAddStudent)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton1)
+                                    .addComponent(jLabel13))
+                                .addGap(7, 7, 7)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(tfSearchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (tfID.getText().isEmpty() || tfName.getText().isEmpty() || tfDescription.getText().isEmpty() || sdf.format(dcDueDate.getDate()).isEmpty() || tfSupervisor.getText().isEmpty() || tfSecondMarker.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter all fields.");
+        } else {
+            //Get the value from each text field
+            String newID = tfID.getText();
+            String name = tfName.getText();
+            String type = cbType.getSelectedItem().toString();
+            String description = tfDescription.getText();
+            String dueDate = sdf.format(dcDueDate.getDate());
+            String supervisor = tfSupervisor.getText();
+            String secondMarker = tfSecondMarker.getText();
+
+            try {
+
+                StringBuilder record = new StringBuilder();
+                //Write the information to the text file
+                record.append(newID + "\t" + name + "\t" + type + "\t" + description + "\t" + dueDate + "\t" + supervisor + "\t" + secondMarker);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment.txt", true));
+                writer.write(record + "\n");
+                writer.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            try {
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Project_Management_System\\database\\assessment_student.txt", true));
+                System.out.println(tAddedStudent.getRowCount());
+                for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
+
+                    StringBuilder record = new StringBuilder();
+                    //Write the information to the text file
+                    record.append(newID + "\t" + tAddedStudent.getValueAt(row, 0) + "\t"
+                            + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t"
+                            + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA" + "\t" + "NA");
+                    writer.write(record + "\n");
+                }
+                writer.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            ProjectManagerHomePage.refreshAssessTable("","");
+            JOptionPane.showMessageDialog(null, "Successfully Added!");
+            this.dispose();
+        }
+    }//GEN-LAST:event_bSaveActionPerformed
+
+    private void tfSearchSupervisorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchSupervisorKeyReleased
+        // TODO add your handling code here:
+        String nameID = tfSearchSupervisor.getText().toLowerCase();
+        refreshSupervisorListTable(nameID);
+    }//GEN-LAST:event_tfSearchSupervisorKeyReleased
+
+    private void tfSearchSecondMarkerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchSecondMarkerKeyReleased
+        // TODO add your handling code here:
+        String nameID = tfSearchSecondMarker.getText().toLowerCase();
+        refreshSecondMarkerListTable(nameID);
+    }//GEN-LAST:event_tfSearchSecondMarkerKeyReleased
+
+    private void tSupervisorListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tSupervisorListMouseReleased
+        // TODO add your handling code here:
+        String selectionID = tSupervisorList.getModel().getValueAt(tSupervisorList.getSelectedRow(), 0).toString();
+        String selectionName = tSupervisorList.getModel().getValueAt(tSupervisorList.getSelectedRow(), 1).toString();
+        
+        if (tfSecondMarker.getText().equals(selectionID))
+        {
+            JOptionPane.showMessageDialog(null, "Supervisor and Second Marker cannot be the same person!");
+        } else {
+            tfSupervisor.setText(selectionID);
+            tfSupervisorName.setText(selectionName);
+        }
+    }//GEN-LAST:event_tSupervisorListMouseReleased
+
+    private void tSecondMarkerListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tSecondMarkerListMouseReleased
+        // TODO add your handling code here:
+        String selectionID = tSecondMarkerList.getModel().getValueAt(tSecondMarkerList.getSelectedRow(), 0).toString();
+        String selectionName = tSecondMarkerList.getModel().getValueAt(tSecondMarkerList.getSelectedRow(), 1).toString();
+        
+        if (tfSupervisor.getText().equals(selectionID))
+        {
+            JOptionPane.showMessageDialog(null, "Supervisor and Second Marker cannot be the same person!");
+        } else {
+        tfSecondMarker.setText(selectionID);
+        tfSecondMarkerName.setText(selectionName);
+        }
+    }//GEN-LAST:event_tSecondMarkerListMouseReleased
+
+    private void tfSearchStudentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchStudentKeyReleased
+        // TODO add your handling code here:
+        refreshStudentTable(tfSearchStudent.getText().toLowerCase());
+    }//GEN-LAST:event_tfSearchStudentKeyReleased
+
+    private void bAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddStudentActionPerformed
+        // TODO add your handling code here:
+        if (tStudentList.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "No Selected Student");
+        }
+        else {
+            String selectionID = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 0).toString();
+            String selectionName = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 1).toString();
+            String intakeCode = tStudentList.getModel().getValueAt(tStudentList.getSelectedRow(), 2).toString();
+            String[] studentRecord = new String[]{selectionID, selectionName, intakeCode};
+        
+            TableModel dataModel = tAddedStudent.getModel();
+            boolean isDuplicated = false;
+
+            for (int row = 0; row < tAddedStudent.getRowCount(); row++) {
+                if(studentRecord[0].equals(dataModel.getValueAt(row, 0))){
+                    isDuplicated = true;
+                    break;
+                }
+            }
+            
+            if(isDuplicated) {
+            JOptionPane.showMessageDialog(null, "This student already be added");
+            }
+            else{
+                DefaultTableModel model = (DefaultTableModel)tAddedStudent.getModel();
+                model.addRow(studentRecord);
+                studentRecord = null;
+            }
+        }
+    }//GEN-LAST:event_bAddStudentActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tAddedStudent.getModel();
+        int[] rows = tAddedStudent.getSelectedRows();
+        if (rows.length > 0) {
+            for (int i = 0; i < rows.length; i++) {
+                model.removeRow(rows[i] - i);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No student be selected to removed!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tfSearchSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchSupervisorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSearchSupervisorActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddAssessment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AddAssessment().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAddStudent;
+    private javax.swing.JButton bSave;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbType;
+    private com.toedter.calendar.JDateChooser dcDueDate;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable tAddedStudent;
+    private javax.swing.JTable tSecondMarkerList;
+    private javax.swing.JTable tStudentList;
+    private javax.swing.JTable tSupervisorList;
+    private javax.swing.JTextField tfDescription;
+    private javax.swing.JTextField tfID;
+    private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfSearchSecondMarker;
+    private javax.swing.JTextField tfSearchStudent;
+    private javax.swing.JTextField tfSearchSupervisor;
+    private javax.swing.JTextField tfSecondMarker;
+    private javax.swing.JTextField tfSecondMarkerName;
+    private javax.swing.JTextField tfSupervisor;
+    private javax.swing.JTextField tfSupervisorName;
+    // End of variables declaration//GEN-END:variables
+}
